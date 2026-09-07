@@ -1,0 +1,24 @@
+[
+  {
+    "file": "ES2004a_0324-0344_Headset-0.wav",
+    "sha256": "8f504006e2aab2d7206457650cea3994da728f75c058fb65317bc29fa7e9dfad",
+    "original_url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2004a/audio/ES2004a.Headset-0.wav",
+    "original_sha256": "abb4917719c6e033b066fbd400b6d37fe46ddd62c89b513f77016a51f54e2ad1",
+    "start_seconds": 324,
+    "end_seconds": 344,
+    "sample_rate": 16000,
+    "license": "CC-BY-4.0",
+    "changes": "Excerpt only; original mono 16 kHz PCM16 samples preserved, WAV metadata removed."
+  },
+  {
+    "file": "ES2004a_0324-0344_Lapel-0.wav",
+    "sha256": "be163f51dadfe905612e2471a0f6810f9f55d19d1ac91cbdf162ce6233944ce2",
+    "original_url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2004a/audio/ES2004a.Lapel-0.wav",
+    "original_sha256": "373f8668517731f43af3d380c647fce5dc934011664adc61bd3f7e2f30ee75c3",
+    "start_seconds": 324,
+    "end_seconds": 344,
+    "sample_rate": 16000,
+    "license": "CC-BY-4.0",
+    "changes": "Excerpt only; original mono 16 kHz PCM16 samples preserved, WAV metadata removed."
+  }
+]
