@@ -176,12 +176,14 @@ Routes: GET/POST `/projects`, GET/PATCH/DELETE `/projects/{id}`, POST `/projects
 - [x] Create accurate README with usable quickstart, audible demonstration, actual screenshots, recovery/source-map explanation, supported media/setup and honest limitations. Link real turnchunk integration example.
 - [x] Produce demo from actual exported result, label injected faults and any manual intervention, include licensing and reproducibility. Prepare release assets/checksums and concise launch copy without fabricated adoption or endorsements.
 - [x] Review license obligations for dependencies and any shipped binaries/media. No secret/local path/private research in built artifacts or public history.
-- [ ] Publish repository and verified release under pavangupta352. Repository/commits are authorized; unrelated external messaging requires concrete user direction.
+- [x] Publish repository and verified release under pavangupta352. Repository/commits are authorized; unrelated external messaging requires concrete user direction.
 
 ## Task 10: Independent final review and completion audit
 
 - [x] Fresh reviewer checks product contract, code, tests, package and outstanding material risks across final branch.
 - [x] Address material findings in one coordinated fix batch, verify targeted regressions and re-review fixes.
 - [x] Run complete meaningful checks once after final changes, inspect GitHub workflow outcomes and release artifacts.
-- [ ] Reconcile every roadmap gate, update memory/progress and public status to actual evidence. Leave goal active if required work remains. Do not use 'perfect', benchmark preference or production-ready as substitutes for measured evidence.
+- [x] Reconcile every roadmap gate, update memory/progress and public status to actual evidence. Leave goal active if required work remains. Do not use 'perfect', benchmark preference or production-ready as substitutes for measured evidence.
 
+
+Release outcome: [CleanTake 0.1.0](https://github.com/pavangupta352/cleantake/releases/tag/v0.1.0) includes the complete workflow and verified distributions. The independent listening/editor claim gate in Task 8 remains future evidence work; this release makes no preference or time-saving claim. Exact native and browser results are in [the validation record](../VALIDATION.md).
