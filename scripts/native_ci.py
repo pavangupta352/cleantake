@@ -15,6 +15,7 @@ import os
 import platform
 import plistlib
 import re
+import selectors
 import shutil
 import struct
 import subprocess
@@ -393,6 +394,94 @@ def app_smoke(executable: Path, workspace: Path, evidence: Path, desktop: Path) 
     }
 
 
+def portable_launch_diagnostic(executable: Path, directory: Path, seconds=10) -> dict:
+    """Capture a failed portable launch without changing sandbox or trust policy."""
+    import psutil
+
+    if os.name != "posix" or not 2 <= seconds <= 10:
+        raise ValueError("portable launch diagnostic requires POSIX and a 2–10 second bound")
+    directory.mkdir(parents=True, exist_ok=False)
+    env = os.environ.copy()
+    env["PATH"] = ""
+    for key in (
+        "ELECTRON_RUN_AS_NODE", "NODE_OPTIONS", "PYTHONHOME", "PYTHONPATH",
+        "VIRTUAL_ENV", "CONDA_PREFIX",
+    ):
+        env.pop(key, None)
+    started = time.monotonic()
+    process = psutil.Popen(
+        [str(executable), f"--user-data-dir={directory / 'Preferences café'}",
+         "--workspace", str(directory / "Workspace café")],
+        env=env, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
+        stderr=subprocess.PIPE, start_new_session=True,
+    )
+    assert process.stderr is not None
+    os.set_blocking(process.stderr.fileno(), False)
+    captured = bytearray()
+    observed = {process.pid: process}
+    selector = selectors.DefaultSelector()
+    selector.register(process.stderr, selectors.EVENT_READ)
+
+    def inspect_children():
+        try:
+            observed.update({child.pid: child for child in process.children(recursive=True)})
+        except psutil.NoSuchProcess:
+            pass
+
+    def drain():
+        for key, _ in selector.select(timeout=0):
+            block = os.read(key.fd, 65536)
+            if block:
+                captured.extend(block[: max(0, 12000 - len(captured))])
+            else:
+                selector.unregister(key.fileobj)
+
+    timed_out = False
+    try:
+        while time.monotonic() - started < seconds - 1:
+            inspect_children()
+            drain()
+            if process.poll() is not None:
+                drain()
+                break
+            time.sleep(0.02)
+        else:
+            timed_out = True
+    finally:
+        inspect_children()
+        # Include children reparented after a very early probe exit. The private
+        # session's process group cannot contain an unrelated application.
+        for candidate in psutil.process_iter():
+            try:
+                if os.getpgid(candidate.pid) == process.pid:
+                    observed[candidate.pid] = candidate
+            except (ProcessLookupError, PermissionError, psutil.NoSuchProcess):
+                pass
+        for child in reversed(list(observed.values())):
+            try:
+                child.kill()
+            except psutil.NoSuchProcess:
+                pass
+        psutil.wait_procs(list(observed.values()), timeout=0.8)
+        drain()
+        selector.close()
+        process.stderr.close()
+    survivors = []
+    for child in observed.values():
+        try:
+            if child.is_running() and child.status() != psutil.STATUS_ZOMBIE:
+                survivors.append(child.pid)
+        except psutil.NoSuchProcess:
+            pass
+    return {
+        "exit_code": process.poll(), "timed_out": timed_out,
+        "elapsed_seconds": time.monotonic() - started,
+        "stderr": redact(captured.decode("utf-8", errors="replace"))[:12000],
+        "observed_processes": sorted(observed), "surviving_processes": survivors,
+        "sandbox_bypass": False,
+    }
+
+
 def signature_status(executable: Path, required: bool) -> dict:
     if platform.system() == "Darwin":
         bundle = executable.parents[2]
@@ -629,15 +718,44 @@ def install_smoke(args) -> dict:
                         "portable archive does not have exactly one application executable"
                     )
                 report["portable_dependency_audit"] = audit(candidates[0].parent, args.arch)
+                try:
+                    portable_result = app_smoke(
+                        candidates[0], temp / "Portable workspace café",
+                        evidence / "portable-app", args.desktop.resolve(),
+                    )
+                except Exception:
+                    try:
+                        report["portable_launch_diagnostic"] = portable_launch_diagnostic(
+                            candidates[0], temp / "Portable diagnostic café"
+                        )
+                    except Exception as diagnostic_error:
+                        report["portable_launch_diagnostic"] = {
+                            "error": redact(str(diagnostic_error))
+                        }
+                    journal = shutil.which("journalctl")
+                    if journal:
+                        try:
+                            kernel = run(
+                                [journal, "--kernel", "--since=-2min", "--no-pager", "-n", "80"],
+                                check=False, timeout=3,
+                            )
+                            report["portable_kernel_diagnostic"] = {
+                                "exit_code": kernel.returncode,
+                                "denials": redact("\n".join(
+                                    line for line in kernel.stdout.splitlines()
+                                    if "cleantake" in line.lower() and "denied" in line.lower()
+                                ))[:12000],
+                                "stderr": redact(kernel.stderr)[:2000],
+                            }
+                        except Exception as journal_error:
+                            report["portable_kernel_diagnostic"] = {
+                                "error": redact(str(journal_error))
+                            }
+                    raise
                 report["checks"].append(
                     {
                         "name": "portable-desktop",
-                        **app_smoke(
-                            candidates[0],
-                            temp / "Portable workspace café",
-                            evidence / "portable-app",
-                            args.desktop.resolve(),
-                        ),
+                        **portable_result,
                     }
                 )
             report["success"] = True

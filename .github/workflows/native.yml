@@ -96,7 +96,7 @@ jobs:
       - name: Install locked native build dependencies
         run: uv sync --locked --group bundle
       - name: Verify native installer helper behavior
-        run: uv run pytest packaging/ci packaging/python -q
+        run: uv run --group bundle pytest packaging/ci packaging/python -q
       - name: Build signed-source media tools (Unix)
         if: runner.os != 'Windows'
         run: uv run --group bundle python scripts/build_media_tools.py --output build/native/media --work-dir build/native/media-work
@@ -226,4 +226,5 @@ jobs:
             build/native/soundfile/licenses/
             build/native/soundfile/manifest.json
           if-no-files-found: warn
+          include-hidden-files: true
           retention-days: 14

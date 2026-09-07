@@ -7,7 +7,9 @@ import platform
 import shutil
 import struct
 import subprocess
+import sys
 import tarfile
+import time
 from pathlib import Path
 
 import pytest
@@ -139,6 +141,62 @@ def test_safe_archive_rejects_traversal_and_extracts_regular_files(tmp_path):
 def test_diagnostic_redaction_preserves_errors_without_private_handshake():
     text = "failed http://127.0.0.1:1234/#token=abc_DEF-123 in request"
     assert ci.redact(text) == "failed http://127.0.0.1:1234/#token=[redacted] in request"
+
+
+@pytest.mark.skipif(os.name != "posix", reason="Linux launch diagnostic uses POSIX processes")
+def test_portable_launch_diagnostic_captures_failure_without_runtime_environment(tmp_path):
+    executable = tmp_path / "failed app"
+    executable.write_text(
+        f"#!{sys.executable}\n"
+        "import os, sys\n"
+        "assert os.environ['PATH'] == ''\n"
+        "assert 'PYTHONPATH' not in os.environ\n"
+        "assert '--no-sandbox' not in sys.argv\n"
+        "assert '--workspace' in sys.argv\n"
+        "sys.stderr.write('sandbox denied http://127.0.0.1/#token=private-token\\n')\n"
+        "sys.stderr.write('x' * 20000)\n"
+        "sys.exit(23)\n",
+        encoding="utf-8",
+    )
+    executable.chmod(0o700)
+    result = ci.portable_launch_diagnostic(executable, tmp_path / "probe", seconds=3)
+    assert result["exit_code"] == 23
+    assert result["timed_out"] is False
+    assert "sandbox denied" in result["stderr"]
+    assert "private-token" not in result["stderr"]
+    assert len(result["stderr"]) <= 12000
+    assert result["surviving_processes"] == []
+
+
+@pytest.mark.skipif(os.name != "posix", reason="Linux launch diagnostic uses POSIX processes")
+def test_portable_launch_diagnostic_stops_only_its_own_tree(tmp_path):
+    import psutil
+
+    executable = tmp_path / "waiting app"
+    executable.write_text(
+        f"#!{sys.executable}\n"
+        "import subprocess, sys, time\n"
+        "subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(60)'])\n"
+        "time.sleep(60)\n",
+        encoding="utf-8",
+    )
+    executable.chmod(0o700)
+    unrelated = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(60)"])
+    try:
+        started = time.monotonic()
+        result = ci.portable_launch_diagnostic(executable, tmp_path / "probe", seconds=3)
+        assert time.monotonic() - started < 5
+        assert result["timed_out"] is True
+        assert len(result["observed_processes"]) >= 2
+        assert result["surviving_processes"] == []
+        assert unrelated.poll() is None
+        for pid in result["observed_processes"]:
+            assert (
+                not psutil.pid_exists(pid) or psutil.Process(pid).status() == psutil.STATUS_ZOMBIE
+            )
+    finally:
+        unrelated.terminate()
+        unrelated.wait(timeout=5)
 
 
 def test_artifact_selection_requires_exactly_one_matching_architecture(tmp_path):

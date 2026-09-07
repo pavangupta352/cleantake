@@ -203,6 +203,20 @@ def shell_path(path: Path) -> str:
     return str(path.resolve())
 
 
+def windows_build_program(name: str, env: dict) -> str:
+    """Use the selected MSYS2 installation, never Windows' bare bash/WSL shim."""
+    converter = shutil.which("cygpath.exe", path=env.get("PATH", ""))
+    if converter is None or name not in {"bash", "make"}:
+        raise BuildError("MSYS2 build tools were not found on the build shell's PATH")
+    directory = Path(converter).resolve().parent
+    # Git for Windows also provides cygpath/bash. pacman identifies the MSYS2
+    # installation whose compiler environment native_target() has required.
+    required = (directory / "msys-2.0.dll", directory / "pacman.exe", directory / f"{name}.exe")
+    if not all(path.is_file() for path in required):
+        raise BuildError(f"The selected cygpath is not an MSYS2 installation with {name}")
+    return str(required[-1].resolve())
+
+
 def verify_signature(archive: Path, pin: dict, env: dict) -> dict:
     for name, hash_key in (("key", "key_sha256"), ("signature", "signature_sha256")):
         if digest(CONFIG / pin[name]) != pin[hash_key]:
@@ -284,7 +298,8 @@ def toolchain(
     family: str, arch: str, work: Path, env: dict, pins: dict, cache: Path, jobs: int
 ) -> tuple[list[str], dict, Path | None]:
     ffarch = "aarch64" if arch == "arm64" else "x86_64"
-    info: dict = {"make": run(["make", "--version"], env=env).splitlines()[0]}
+    make = windows_build_program("make", env) if family == "windows" else "make"
+    info: dict = {"make": run([make, "--version"], env=env).splitlines()[0]}
     if arch == "x64":
         info["nasm"] = run(["nasm", "-v"], env=env).strip()
     if family == "macos":
@@ -307,6 +322,9 @@ def toolchain(
         info["linker"] = run(["xcrun", "ld", "-v"], env=env).strip()
         return args, info, None
     if family == "windows":
+        info["shell"] = run(
+            [windows_build_program("bash", env), "--version"], env=env
+        ).splitlines()[0]
         cc = "clang" if arch == "arm64" else "gcc"
         args = [
             "--target-os=mingw32",
@@ -837,16 +855,18 @@ def build(output: Path, cache: Path, supplied: Path | None, jobs: int, work: Pat
     source = safe_extract(archive, work / "ffmpeg-source", pins["ffmpeg"]["root"])
     platform_flags, compiler, musl_archive = toolchain(family, arch, work, env, pins, cache, jobs)
     flags = [*COMMON_FLAGS, *platform_flags]
+    shell = windows_build_program("bash", env) if family == "windows" else "sh"
     run(
-        ["bash" if family == "windows" else "sh", "configure", *flags],
+        [shell, "configure", *flags],
         cwd=source,
         env=env,
         log=work / "logs/ffmpeg-configure.txt",
         timeout=600,
     )
     suffix = ".exe" if family == "windows" else ""
+    make = windows_build_program("make", env) if family == "windows" else "make"
     run(
-        ["make", f"-j{jobs}", f"ffmpeg{suffix}", f"ffprobe{suffix}"],
+        [make, f"-j{jobs}", f"ffmpeg{suffix}", f"ffprobe{suffix}"],
         cwd=source,
         env=env,
         log=work / "logs/ffmpeg-build.txt",

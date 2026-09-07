@@ -236,3 +236,32 @@ def test_macos_bundle_includes_its_static_compiler_runtime_notice(tmp_path):
     target = tmp_path / "licenses"
     media_build.copy_licenses(source, target, "macos", "arm64", tmp_path)
     assert "Apache License" in (target / "LLVM-compiler-rt-LICENSE.txt").read_text(encoding="utf-8")
+
+
+@pytest.mark.parametrize("program", ["bash", "make"])
+def test_windows_build_program_uses_msys2_even_when_unrelated_tools_precede_it(tmp_path, program):
+    windows = tmp_path / "Windows/System32"
+    msys = tmp_path / "MSYS2 installation/usr/bin"
+    windows.mkdir(parents=True)
+    msys.mkdir(parents=True)
+    unrelated = windows / f"{program}.exe"
+    unrelated.write_bytes(b"unrelated Windows launcher")
+    unrelated.chmod(0o755)
+    for name in ("cygpath.exe", "bash.exe", "make.exe", "pacman.exe", "msys-2.0.dll"):
+        path = msys / name
+        path.write_bytes(b"test installation marker")
+        path.chmod(0o755)
+    environment = {"PATH": str(windows) + os.pathsep + str(msys)}
+    selected = media_build.windows_build_program(program, environment)
+    assert Path(selected) == (msys / f"{program}.exe").resolve()
+    assert Path(selected).is_absolute()
+    assert Path(selected) != unrelated
+
+
+def test_git_bash_without_an_msys2_installation_is_rejected(tmp_path):
+    for name in ("cygpath.exe", "bash.exe", "msys-2.0.dll"):
+        path = tmp_path / name
+        path.write_bytes(b"test Git installation marker")
+        path.chmod(0o755)
+    with pytest.raises(media_build.BuildError, match="MSYS2"):
+        media_build.windows_build_program("bash", {"PATH": str(tmp_path)})
