@@ -1,2 +1,9 @@
+* text=auto eol=lf
+# Pinned signatures, upstream notices, and provenance keep their original bytes.
+packaging/** -text
+packaging/**/licenses/** -whitespace
+packaging/python/targets/** -whitespace
+packaging/soundfile/upstream-recipes/** -whitespace
+packaging/soundfile/vcpkg-recipes/** -whitespace
 src/cleantake/static/** linguist-generated=true
 src/cleantake/static/THIRD_PARTY_NOTICES.txt -whitespace

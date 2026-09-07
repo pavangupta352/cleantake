@@ -54,7 +54,7 @@ packages = ["src/cleantake"]
 include = [
   "/src", "/tests", "/scripts", "/packaging",
   "/desktop/main.cjs", "/desktop/lib", "/desktop/scripts", "/desktop/test",
-  "/desktop/resources", "/desktop/launch.html", "/desktop/launch.css",
+  "/desktop/resources", "/desktop/launch.html", "/desktop/launch.css", "/desktop/README.md",
   "/desktop/package.json", "/desktop/package-lock.json", "/desktop/electron-builder.cjs", "/docs", "/examples", "/eval", "/.github",
   "/.gitattributes", "/.gitignore",
   "/studio/src", "/studio/e2e", "/studio/package.json", "/studio/package-lock.json",

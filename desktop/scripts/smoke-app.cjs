@@ -44,6 +44,14 @@ function passed(name, details = {}) {
   process.stdout.write(`Passed: ${name}\n`);
 }
 async function visible(locator) { await locator.waitFor({ state: "visible", timeout: 90000 }); }
+async function menuHistory(direction) {
+  await application.evaluate(({ Menu, BrowserWindow }, direction) => {
+    const edit = Menu.getApplicationMenu().items.find(item => item.label === "Edit");
+    const command = edit.submenu.items.find(item => item.role === direction || item.id === `edit-${direction}`);
+    if (!command) throw new Error("Native history command is missing");
+    command.click(command, BrowserWindow.getAllWindows()[0], {});
+  }, direction);
+}
 async function api(route, body, method = body === undefined ? "GET" : "POST") {
   return page.evaluate(async ({ route, body, method }) => {
     const response = await fetch(route, { method, headers: { "X-CleanTake-Token": sessionStorage.getItem("cleantake-session"), ...(body === undefined ? {} : { "Content-Type": "application/json" }) }, ...(body === undefined ? {} : { body: JSON.stringify(body) }) });
@@ -162,6 +170,22 @@ async function download(button, name) {
     await page.getByRole("button", { name: "Redo last edit", exact: true }).click();
     await until(async () => (await api(route)).repairs[0].status === "accepted", "Redo was not saved");
     passed("repair_undo_redo");
+    await menuHistory("undo");
+    await until(async () => (await api(route)).repairs[0].status === "proposed", "Native Edit → Undo did not reverse the repair", 5000);
+    await menuHistory("redo");
+    await until(async () => (await api(route)).repairs[0].status === "accepted", "Native Edit → Redo did not restore the repair", 5000);
+    await page.getByRole("button", { name: "Transcript", exact: true }).click();
+    const text = page.getByRole("textbox", { name: "Transcript text", exact: true });
+    await text.fill("Keep this line.");
+    await text.selectText();
+    await page.keyboard.insertText("A replacement line.");
+    await menuHistory("undo");
+    await until(async () => (await text.inputValue()) === "Keep this line.", "Native Undo did not preserve text editing", 5000);
+    await menuHistory("redo");
+    await until(async () => (await text.inputValue()) === "A replacement line.", "Native Redo did not preserve text editing", 5000);
+    assert.equal((await api(route)).repairs[0].status, "accepted");
+    await page.getByRole("button", { name: "Close panel", exact: true }).click();
+    passed("native_history_and_text_editing");
     await page.screenshot({ path: path.join(directory, "editing.png"), fullPage: true });
     await page.getByRole("button", { name: "Export", exact: true }).click();
     await page.getByRole("button", { name: "Prepare export", exact: true }).click();

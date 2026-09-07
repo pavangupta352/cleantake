@@ -104,12 +104,33 @@ async function startStudio() {
   } finally { opening = false; }
 }
 
+async function history(direction) {
+  if (!window || window.isDestroyed() || !origin) return;
+  const label = direction === "undo" ? "Undo last edit" : "Redo last edit";
+  try {
+    const textEditing = await window.webContents.executeJavaScript(`(() => {
+      const active = document.activeElement;
+      if (active && (active.isContentEditable || active.matches('input, textarea, select'))) return true;
+      if (document.querySelector('dialog[open]')) return false;
+      const button = document.querySelector('button[aria-label="${label}"]');
+      if (button && !button.disabled) button.click();
+      return false;
+    })()`);
+    if (textEditing && !window.isDestroyed()) window.webContents[direction]();
+  } catch (error) { log(`History command: ${error.message}`); }
+}
+
 function installMenu() {
   const mac = process.platform === "darwin";
   const template = [
     ...(mac ? [{ label: "CleanTake", submenu: [{ role: "about" }, { type: "separator" }, { role: "services" }, { type: "separator" }, { role: "hide" }, { role: "hideOthers" }, { role: "unhide" }, { type: "separator" }, { role: "quit" }] }] : []),
     { label: "File", submenu: [{ role: "close" }, ...(!mac ? [{ role: "quit" }] : [])] },
-    { label: "Edit", submenu: [{ role: "undo" }, { role: "redo" }, { type: "separator" }, { role: "cut" }, { role: "copy" }, { role: "paste" }, { role: "selectAll" }] },
+    { label: "Edit", submenu: [
+      { id: "edit-undo", label: "Undo", accelerator: "CmdOrCtrl+Z", click: () => void history("undo") },
+      { id: "edit-redo", label: "Redo", accelerator: "CmdOrCtrl+Shift+Z", click: () => void history("redo") },
+      ...(!mac ? [{ label: "Redo", accelerator: "Ctrl+Y", visible: false, click: () => void history("redo") }] : []),
+      { type: "separator" }, { role: "cut" }, { role: "copy" }, { role: "paste" }, { role: "selectAll" },
+    ] },
     { label: "View", submenu: [{ label: "Reload studio", accelerator: "CmdOrCtrl+R", click: () => { if (window && origin) window.reload(); } }, { type: "separator" }, { role: "resetZoom" }, { role: "zoomIn" }, { role: "zoomOut" }, { type: "separator" }, { role: "togglefullscreen" }] },
     { label: "Window", submenu: [{ role: "minimize" }, { role: "zoom" }, ...(mac ? [{ type: "separator" }, { role: "front" }] : [])] },
     { label: "Help", submenu: [

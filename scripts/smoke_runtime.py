@@ -155,11 +155,20 @@ class Session:
                 self.process.stdin.flush()
             self.process.stdin.close()
         assert self.process.wait(timeout=15) == 0
+        self.wait_children()
+        assert self.token not in "".join(self.errors), "Private token appeared in diagnostics"
+        return {
+            "shutdown_seconds": time.monotonic() - started,
+            "peak_tree_rss_bytes": self.peak_rss,
+            "observed_children": len(self.observed),
+        }
+
+    def wait_children(self):
         deadline = time.monotonic() + 5
         survivors = []
         while time.monotonic() < deadline:
             survivors = []
-            for process in self.observed.values():
+            for process in list(self.observed.values()):
                 try:
                     if process.is_running() and process.status() != psutil.STATUS_ZOMBIE:
                         survivors.append(process)
@@ -170,12 +179,20 @@ class Session:
             time.sleep(0.05)
         self.monitoring = False
         assert not survivors, f"Owned children survived shutdown: {[p.pid for p in survivors]}"
-        assert self.token not in "".join(self.errors), "Private token appeared in diagnostics"
-        return {
-            "shutdown_seconds": time.monotonic() - started,
-            "peak_tree_rss_bytes": self.peak_rss,
-            "observed_children": len(self.observed),
-        }
+
+    def media_child(self):
+        deadline = time.monotonic() + 15
+        while time.monotonic() < deadline:
+            children = psutil.Process(self.process.pid).children(recursive=True)
+            for child in children:
+                self.observed[child.pid] = child
+                try:
+                    if child.name().lower() in {"ffmpeg", "ffmpeg.exe"}:
+                        return child
+                except psutil.Error:
+                    pass
+            time.sleep(0.005)
+        raise AssertionError("No actual FFmpeg child observed")
 
     def cleanup(self):
         self.monitoring = False
@@ -185,7 +202,8 @@ class Session:
                 self.process.wait(timeout=10)
             except (OSError, subprocess.TimeoutExpired):
                 self.process.kill()
-        for process in self.observed.values():
+                self.process.wait(timeout=5)
+        for process in list(self.observed.values()):
             try:
                 process.kill()
             except psutil.Error:
@@ -355,19 +373,7 @@ def run(runtime: Path, report: dict):
                 route + "/exports",
                 {"format": "wav", "finish": True, "expected_revision": project["revision"]},
             )
-            deadline = time.monotonic() + 15
-            media_child = None
-            while time.monotonic() < deadline and media_child is None:
-                for child in psutil.Process(session.process.pid).children(recursive=True):
-                    try:
-                        if child.name().lower() in {"ffmpeg", "ffmpeg.exe"}:
-                            media_child = child
-                            session.observed[child.pid] = child
-                            break
-                    except psutil.Error:
-                        pass
-                time.sleep(0.005)
-            assert media_child is not None, "No actual FFmpeg child observed for cancellation"
+            media_child = session.media_child()
             cancel_started = time.monotonic()
             session.request(f"/api/jobs/{media_job['id']}/cancel", {})
             session.wait_job(media_job, expected="cancelled")
@@ -412,6 +418,38 @@ def run(runtime: Path, report: dict):
         try:
             session.ready()
             assert len(session.request("/api/projects")["projects"]) == 3
+            crash_job = session.request(
+                route + "/exports",
+                {"format": "wav", "finish": True, "expected_revision": project["revision"]},
+            )
+            session.media_child()
+            crashed = session
+            crash_started = time.monotonic()
+            crashed.process.kill()
+            crashed.process.wait(timeout=5)
+            # Reopen immediately; do not clean up the old worker tree on behalf
+            # of the application or delay reopening until it exits.
+            session = Session(executable, workspace)
+            try:
+                crashed.wait_children()
+                crash_cleanup_seconds = time.monotonic() - crash_started
+                session.ready()
+                assert session.request(route)["revision"] == project["revision"]
+                recovered = session.request(f"/api/jobs/{crash_job['id']}")
+                assert recovered["status"] == "interrupted", recovered
+                assert not list((workspace / "pending").iterdir())
+                report["checks"].append(
+                    {
+                        "name": "crashed_backend_stops_worker_media_and_reopens",
+                        "status": "passed",
+                        "cleanup_seconds": crash_cleanup_seconds,
+                        "reopen_seconds": time.monotonic() - crash_started,
+                        "peak_tree_rss_bytes": crashed.peak_rss,
+                        "observed_children": len(crashed.observed),
+                    }
+                )
+            finally:
+                crashed.cleanup()
             for item in session.request("/api/projects")["projects"]:
                 session.request(
                     f"/api/projects/{item['id']}",

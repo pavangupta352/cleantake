@@ -4,6 +4,7 @@ import hashlib
 import importlib.util
 import io
 import json
+import os
 import tarfile
 from pathlib import Path
 
@@ -90,7 +91,8 @@ def test_valid_source_extracts_executable_without_world_write_bits(tmp_path):
     result = media_build.safe_extract(archive, target, "ffmpeg-9.0.1")
     assert result == target / "ffmpeg-9.0.1"
     assert (result / "configure").read_bytes() == b"ok"
-    assert (result / "configure").stat().st_mode & 0o7777 == 0o755
+    if os.name == "posix":
+        assert (result / "configure").stat().st_mode & 0o7777 == 0o755
 
 
 def manifest_at(directory):

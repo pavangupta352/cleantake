@@ -62,6 +62,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff # v6
         with:
+          version: '0.11.11'
           python-version: '3.12.13'
           enable-cache: true
           cache-dependency-glob: uv.lock
@@ -95,7 +96,7 @@ jobs:
       - name: Install locked native build dependencies
         run: uv sync --locked --group bundle
       - name: Verify native installer helper behavior
-        run: uv run pytest packaging/ci -q
+        run: uv run pytest packaging/ci packaging/python -q
       - name: Build signed-source media tools (Unix)
         if: runner.os != 'Windows'
         run: uv run --group bundle python scripts/build_media_tools.py --output build/native/media --work-dir build/native/media-work
@@ -103,7 +104,10 @@ jobs:
         if: runner.os == 'Windows'
         shell: msys2 {0}
         run: uv run --group bundle python scripts/build_media_tools.py --output build/native/media --work-dir build/native/media-work
+      - name: Stage exact SoundFile corresponding source and notices
+        run: uv run --group bundle python scripts/stage_soundfile_sources.py --output build/native/soundfile
       - name: Freeze the native backend and required resources
+        # The runtime builder verifies this sibling stage before collecting notices.
         run: uv run --group bundle python scripts/build_runtime.py --media-dir build/native/media --output build/native/runtime
       - name: Exercise relocated frozen processes without developer tools on PATH
         run: uv run --group bundle python scripts/smoke_runtime.py --runtime build/native/runtime/cleantake-runtime --report build/native/evidence/runtime.json
@@ -200,6 +204,7 @@ jobs:
           path: |
             build/native/evidence/
             build/native/media/manifest.json
+            build/native/soundfile/manifest.json
             build/native/media-work/logs/
           if-no-files-found: warn
           retention-days: 14
@@ -216,5 +221,8 @@ jobs:
             build/native/media/source/
             build/native/media/licenses/
             build/native/media/manifest.json
+            build/native/soundfile/source/
+            build/native/soundfile/licenses/
+            build/native/soundfile/manifest.json
           if-no-files-found: warn
           retention-days: 14

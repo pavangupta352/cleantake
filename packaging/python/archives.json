@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "python_version": "3.12.13",
+  "build": "20260504",
+  "uv_version": "0.11.11",
+  "metadata_source": "https://api.github.com/repos/astral-sh/python-build-standalone/releases/tags/20260504",
+  "targets": {
+    "aarch64-apple-darwin": {
+      "name": "cpython-3.12.13+20260504-aarch64-apple-darwin-pgo+lto-full.tar.zst",
+      "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-aarch64-apple-darwin-pgo%2Blto-full.tar.zst",
+      "mirror_url": "https://releases.astral.sh/github/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-aarch64-apple-darwin-pgo%2Blto-full.tar.zst",
+      "sha256": "916b237e4e0ebea6ae4a86fa15a6ad6a17167c8c3b5f4811c0007cc96fed0d2c",
+      "size": 54581431
+    },
+    "aarch64-pc-windows-msvc": {
+      "name": "cpython-3.12.13+20260504-aarch64-pc-windows-msvc-pgo-full.tar.zst",
+      "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-aarch64-pc-windows-msvc-pgo-full.tar.zst",
+      "mirror_url": "https://releases.astral.sh/github/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-aarch64-pc-windows-msvc-pgo-full.tar.zst",
+      "sha256": "5a20e0de45d1576a0bde21dff1c581b15eb6c9b7bf944959c500ac921b9374f6",
+      "size": 41432562
+    },
+    "aarch64-unknown-linux-gnu": {
+      "name": "cpython-3.12.13+20260504-aarch64-unknown-linux-gnu-pgo+lto-full.tar.zst",
+      "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-aarch64-unknown-linux-gnu-pgo%2Blto-full.tar.zst",
+      "mirror_url": "https://releases.astral.sh/github/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-aarch64-unknown-linux-gnu-pgo%2Blto-full.tar.zst",
+      "sha256": "052337c37166b6c75e64c1971525bacfd50f690ff3fd1f78129d796733f4e171",
+      "size": 90691550
+    },
+    "x86_64-apple-darwin": {
+      "name": "cpython-3.12.13+20260504-x86_64-apple-darwin-pgo+lto-full.tar.zst",
+      "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-x86_64-apple-darwin-pgo%2Blto-full.tar.zst",
+      "mirror_url": "https://releases.astral.sh/github/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-x86_64-apple-darwin-pgo%2Blto-full.tar.zst",
+      "sha256": "94ae14ccb7d4cac8b64b3c0992572778de4d763d8a26752338e20364915ec136",
+      "size": 54213858
+    },
+    "x86_64-pc-windows-msvc": {
+      "name": "cpython-3.12.13+20260504-x86_64-pc-windows-msvc-pgo-full.tar.zst",
+      "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-x86_64-pc-windows-msvc-pgo-full.tar.zst",
+      "mirror_url": "https://releases.astral.sh/github/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-x86_64-pc-windows-msvc-pgo-full.tar.zst",
+      "sha256": "4b1af1acfbe470251a13b3cd1665a48f13ebb152fbe15ae7d33ed01c1f9413ff",
+      "size": 43494822
+    },
+    "x86_64-unknown-linux-gnu": {
+      "name": "cpython-3.12.13+20260504-x86_64-unknown-linux-gnu-pgo+lto-full.tar.zst",
+      "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-x86_64-unknown-linux-gnu-pgo%2Blto-full.tar.zst",
+      "mirror_url": "https://releases.astral.sh/github/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-x86_64-unknown-linux-gnu-pgo%2Blto-full.tar.zst",
+      "sha256": "0eb8c79eaf3b595ad22c50eb6b2daf0e99825b0c0beb9afcbe51e23e30266978",
+      "size": 111591541
+    }
+  },
+  "upstream_commit": "20f6240400c4c5b9f8cbf115e022f1e92042c575",
+  "supplements": {
+    "licenses/LICENSE.zlib-ng.txt": {
+      "url": "https://github.com/python/cpython-source-deps/blob/a502e047655c31db29601def76ad6539acacf43d/LICENSE.md",
+      "sha256": "6c9f0d975b41afaa34d22f55bb8986ce69e5cb7ad327cb2b28820cd425edf5ee",
+      "size": 867,
+      "source_archive": {
+        "url": "https://github.com/python/cpython-source-deps/archive/refs/tags/zlib-ng-2.2.4.tar.gz",
+        "sha256": "00bbd88709bc416cb96160ab61d3e1c8f76e106799af7328d0fe434dc7dd5004",
+        "size": 2415819
+      },
+      "selection_provenance": "https://github.com/astral-sh/python-build-standalone/blob/20f6240400c4c5b9f8cbf115e022f1e92042c575/pythonbuild/downloads.py",
+      "reason": "Unix PYTHON.json references zlib-ng and zlib notices together; this notice is missing from that full archive and its build repository. Supplied from the exact source pin in the matching build repository. Inclusion is not a claim that this optional alternative is linked on every target."
+    }
+  }
+}

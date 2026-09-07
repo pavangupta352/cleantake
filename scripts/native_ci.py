@@ -99,7 +99,12 @@ def dependency_origin(path: Path, root: Path, system: str) -> str:
     if RUNTIME_LIB.match(resolved.name):
         raise ValueError(f"external application runtime: {path}")
     allowed = {
-        "Darwin": ("/usr/lib/", "/System/Library/"),
+        "Darwin": (
+            "/usr/lib/",
+            "/System/Library/",
+            "/System/Volumes/Preboot/Cryptexes/OS/System/Library/",
+            "/System/Volumes/Preboot/Cryptexes/OS/usr/lib/",
+        ),
         "Linux": ("/lib/", "/lib64/", "/usr/lib/", "/usr/lib64/"),
     }
     if system == "Windows":
@@ -134,10 +139,20 @@ def extract_portable(archive: Path, destination: Path) -> None:
 
 
 def artifact(directory: Path, arch: str, suffix: str) -> Path:
-    matches = sorted(directory.glob(f"CleanTake-*-{arch}{suffix}"))
+    artifact_arch = "amd64" if suffix == ".deb" and arch == "x64" else arch
+    matches = sorted(directory.glob(f"CleanTake-*-{artifact_arch}{suffix}"))
     if len(matches) != 1:
         raise ValueError(f"expected exactly one {arch}{suffix} artifact, found {len(matches)}")
     return matches[0].resolve()
+
+
+def elf_dependency_paths(output: str) -> list[Path]:
+    paths = []
+    for line in output.splitlines():
+        match = re.fullmatch(r"\s*(?:.+?\s+=>\s+)?(/.*?)\s+\(0x[0-9a-fA-F]+\)\s*", line)
+        if match:
+            paths.append(Path(match.group(1)))
+    return paths
 
 
 def pe_imports(data: bytes) -> set[str]:
@@ -316,18 +331,16 @@ def audit(root: Path, arch: str) -> dict:
             for line in output.splitlines():
                 if "not found" in line:
                     raise ValueError(f"missing ELF dependency of {binary.name}: {line.strip()}")
-                match = re.search(r"(?:=>\s*)?(/\S+)\s+\(", line)
-                if match:
-                    resolved = Path(match.group(1))
-                    dependencies.append(
-                        {
-                            "name": resolved.name,
-                            "origin": dependency_origin(resolved, root, system),
-                            "resolved": str(resolved.relative_to(root))
-                            if resolved.is_relative_to(root)
-                            else str(resolved),
-                        }
-                    )
+            for resolved in elf_dependency_paths(output):
+                dependencies.append(
+                    {
+                        "name": resolved.name,
+                        "origin": dependency_origin(resolved, root, system),
+                        "resolved": str(resolved.relative_to(root))
+                        if resolved.is_relative_to(root)
+                        else str(resolved),
+                    }
+                )
             version_text = run(["readelf", "--version-info", binary], check=False).stdout
             versions = sorted(set(re.findall(r"\b(?:GLIBC|GLIBCXX|CXXABI)_[\d.]+", version_text)))
         records.append(

@@ -83,10 +83,16 @@ def test_finishing_missing_frozen_tool_cannot_use_host_ffmpeg(tmp_path, monkeypa
 
 
 def test_missing_frozen_decoder_does_not_leave_a_partial_cache(tmp_path, monkeypatch):
-    tools = tmp_path / "media"
-    tools.mkdir()
-    name = "ffprobe.exe" if sys.platform == "win32" else "ffprobe"
-    shutil.copy2(shutil.which("ffprobe"), tools / name)
+    import cleantake.media as media
+
+    installed_probe = _binary("ffprobe")
+    resolver = media.media_binary
+    # Keep a package-manager launcher beside its installation. This regression
+    # targets missing decoder cleanup; the separate frozen lookup tests cover
+    # probe isolation and missing-tool refusal.
+    monkeypatch.setattr(
+        media, "media_binary", lambda name: installed_probe if name == "ffprobe" else resolver(name)
+    )
     source = tmp_path / "source.wav"
     sf.write(source, np.zeros(4800), 48_000)
     cache = tmp_path / "cache" / "audio.f32le"
@@ -99,15 +105,23 @@ def test_missing_frozen_decoder_does_not_leave_a_partial_cache(tmp_path, monkeyp
 
 
 def _windows_child_tree(pid_file):
+    from cleantake.server.jobs import _guard_worker_lifetime
+
+    _guard_worker_lifetime()
     child = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(60)"])
     from pathlib import Path
 
-    Path(pid_file).write_text(str(child.pid))
+    temporary = Path(pid_file).with_suffix(".tmp")
+    temporary.write_text(str(child.pid))
+    temporary.replace(pid_file)
     child.wait()
 
 
 @pytest.mark.skipif(sys.platform != "win32", reason="Requires the actual Windows process APIs")
-def test_windows_hidden_helpers_and_empty_path_tree_cancellation(tmp_path, monkeypatch):
+@pytest.mark.parametrize("helper_failure", [None, "unavailable", "timeout"])
+def test_windows_hidden_helpers_and_empty_path_tree_cancellation(
+    tmp_path, monkeypatch, helper_failure
+):
     import ctypes
     import multiprocessing
 
@@ -140,6 +154,14 @@ def test_windows_hidden_helpers_and_empty_path_tree_cancellation(tmp_path, monke
         assert handle
         try:
             monkeypatch.setenv("PATH", "")
+            if helper_failure:
+
+                def unavailable(*args, **kwargs):
+                    if helper_failure == "timeout":
+                        raise subprocess.TimeoutExpired("taskkill", 5)
+                    raise OSError("taskkill unavailable")
+
+                monkeypatch.setattr("cleantake.server.jobs.subprocess.run", unavailable)
             JobManager._stop(None, worker)
             assert not worker.is_alive()
             assert kernel.WaitForSingleObject(ctypes.c_void_p(handle), 5000) == 0

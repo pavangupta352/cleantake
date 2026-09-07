@@ -1,0 +1,656 @@
+{
+  "schema_version": 1,
+  "python_version": "3.12.13",
+  "build": "20260504",
+  "uv_version": "0.11.11",
+  "metadata_source": "https://api.github.com/repos/astral-sh/python-build-standalone/releases/tags/20260504",
+  "upstream_commit": "20f6240400c4c5b9f8cbf115e022f1e92042c575",
+  "supplements": {
+    "licenses/LICENSE.zlib-ng.txt": {
+      "url": "https://github.com/python/cpython-source-deps/blob/a502e047655c31db29601def76ad6539acacf43d/LICENSE.md",
+      "sha256": "6c9f0d975b41afaa34d22f55bb8986ce69e5cb7ad327cb2b28820cd425edf5ee",
+      "size": 867,
+      "source_archive": {
+        "url": "https://github.com/python/cpython-source-deps/archive/refs/tags/zlib-ng-2.2.4.tar.gz",
+        "sha256": "00bbd88709bc416cb96160ab61d3e1c8f76e106799af7328d0fe434dc7dd5004",
+        "size": 2415819
+      },
+      "selection_provenance": "https://github.com/astral-sh/python-build-standalone/blob/20f6240400c4c5b9f8cbf115e022f1e92042c575/pythonbuild/downloads.py",
+      "reason": "Unix PYTHON.json references zlib-ng and zlib notices together; this notice is missing from that full archive and its build repository. Supplied from the exact source pin in the matching build repository. Inclusion is not a claim that this optional alternative is linked on every target."
+    }
+  },
+  "targets": {
+    "aarch64-apple-darwin": {
+      "source": {
+        "name": "cpython-3.12.13+20260504-aarch64-apple-darwin-pgo+lto-full.tar.zst",
+        "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-aarch64-apple-darwin-pgo%2Blto-full.tar.zst",
+        "mirror_url": "https://releases.astral.sh/github/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-aarch64-apple-darwin-pgo%2Blto-full.tar.zst",
+        "sha256": "916b237e4e0ebea6ae4a86fa15a6ad6a17167c8c3b5f4811c0007cc96fed0d2c",
+        "size": 54581431
+      },
+      "build_options": "pgo+lto",
+      "notice_selection": "All original full-archive license files and all metadata license references",
+      "supplements": {
+        "licenses/LICENSE.zlib-ng.txt": {
+          "url": "https://github.com/python/cpython-source-deps/blob/a502e047655c31db29601def76ad6539acacf43d/LICENSE.md",
+          "sha256": "6c9f0d975b41afaa34d22f55bb8986ce69e5cb7ad327cb2b28820cd425edf5ee",
+          "size": 867,
+          "source_archive": {
+            "url": "https://github.com/python/cpython-source-deps/archive/refs/tags/zlib-ng-2.2.4.tar.gz",
+            "sha256": "00bbd88709bc416cb96160ab61d3e1c8f76e106799af7328d0fe434dc7dd5004",
+            "size": 2415819
+          },
+          "selection_provenance": "https://github.com/astral-sh/python-build-standalone/blob/20f6240400c4c5b9f8cbf115e022f1e92042c575/pythonbuild/downloads.py",
+          "reason": "Unix PYTHON.json references zlib-ng and zlib notices together; this notice is missing from that full archive and its build repository. Supplied from the exact source pin in the matching build repository. Inclusion is not a claim that this optional alternative is linked on every target."
+        }
+      },
+      "files": {
+        "PYTHON.json": {
+          "sha256": "db6fb222a27180baa088648f72496026db7e6e3b66b180f13811ce3d505f1559",
+          "size": 117652
+        },
+        "licenses/LICENSE.bdb.txt": {
+          "sha256": "3bdff06e69991c94664f2ef5c5f8096f60b7dbec071756ea6cc26b445e06ec5b",
+          "size": 7293
+        },
+        "licenses/LICENSE.bzip2.txt": {
+          "sha256": "1f38bbc7caacafd65169276d759c0d88c991b753b643ce35d0e45ea1971dd441",
+          "size": 1743
+        },
+        "licenses/LICENSE.cpython.txt": {
+          "sha256": "86e61415828a8b5b06ec8d024e6f086ce155a8b85fd0c419c0ba4dc004e74fdd",
+          "size": 36164
+        },
+        "licenses/LICENSE.expat.txt": {
+          "sha256": "122f2c27000472a201d337b9b31f7eb2b52d091b02857061a8880371612d9534",
+          "size": 1144
+        },
+        "licenses/LICENSE.libX11.txt": {
+          "sha256": "2daec087a88e7c9b8082557cdeebad5bbb8155a4137472f0b22e269cd99d0c1e",
+          "size": 47018
+        },
+        "licenses/LICENSE.libXau.txt": {
+          "sha256": "56abe29bb1d9806a9e04fa9f80fed2c0f18027594df3f098148d814aef6bddfa",
+          "size": 1148
+        },
+        "licenses/LICENSE.libedit.txt": {
+          "sha256": "29cea33c32bbc9785142386377915612a2fa786482c46843383384aded2e09b1",
+          "size": 1614
+        },
+        "licenses/LICENSE.libffi.txt": {
+          "sha256": "deaf3a42effb551a5b140fa9afefed183a27f1341c6d1bf430d106a5e6931fc0",
+          "size": 1132
+        },
+        "licenses/LICENSE.liblzma.txt": {
+          "sha256": "9a4062de0a2c388a98cf35a35d348b62fa97c838a71c3c28ee1a2d7d0a565b02",
+          "size": 660
+        },
+        "licenses/LICENSE.libuuid.txt": {
+          "sha256": "122ee1f7e258f2c3c0e538a75c037684f420454bf3850ddc74ce750bbf5fe86b",
+          "size": 1432
+        },
+        "licenses/LICENSE.libxcb.txt": {
+          "sha256": "c5ffbfeaa501071ceeb97b7de2c0d703fdaa35de01c0fb6cbac1c28453a3e9fd",
+          "size": 1337
+        },
+        "licenses/LICENSE.mpdecimal.txt": {
+          "sha256": "669512af7219f58be03a398766d7c9da11a3b3df9d3f05cb74c5ceca25c8da3b",
+          "size": 1284
+        },
+        "licenses/LICENSE.ncurses.txt": {
+          "sha256": "87a4c4442337b8968ef956031c406b74f9cb7149b7ba87311bdaba534816201c",
+          "size": 1447
+        },
+        "licenses/LICENSE.openssl-1.1.txt": {
+          "sha256": "9c04cce50c4989d5601dd8b07f6ab922c40388b66ac736c9007cb1ed9d9dd560",
+          "size": 6120
+        },
+        "licenses/LICENSE.openssl-3.txt": {
+          "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a",
+          "size": 10175
+        },
+        "licenses/LICENSE.sqlite.txt": {
+          "sha256": "38bef3d28b24f145ea293bd3b6eb4b20396982abc8303128fb493986ea5bc719",
+          "size": 1481
+        },
+        "licenses/LICENSE.tcl.txt": {
+          "sha256": "c0a69a2bfd757361ec7e6143973b103c90409316b49e9c88db26ad6388e79f16",
+          "size": 2255
+        },
+        "licenses/LICENSE.tix.txt": {
+          "sha256": "3ac5cdd0bef6c43ce34c6a7ced452081d9e5a0bf94082b9f9147d23ec9e214f5",
+          "size": 2826
+        },
+        "licenses/LICENSE.zlib-ng.txt": {
+          "sha256": "6c9f0d975b41afaa34d22f55bb8986ce69e5cb7ad327cb2b28820cd425edf5ee",
+          "size": 867
+        },
+        "licenses/LICENSE.zlib.txt": {
+          "sha256": "818922b2620f12801a12bf78e399644a30990e66824abd8ca8ec24d451d6f92c",
+          "size": 995
+        }
+      }
+    },
+    "aarch64-pc-windows-msvc": {
+      "source": {
+        "name": "cpython-3.12.13+20260504-aarch64-pc-windows-msvc-pgo-full.tar.zst",
+        "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-aarch64-pc-windows-msvc-pgo-full.tar.zst",
+        "mirror_url": "https://releases.astral.sh/github/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-aarch64-pc-windows-msvc-pgo-full.tar.zst",
+        "sha256": "5a20e0de45d1576a0bde21dff1c581b15eb6c9b7bf944959c500ac921b9374f6",
+        "size": 41432562
+      },
+      "build_options": "pgo",
+      "notice_selection": "All original full-archive license files and all metadata license references",
+      "supplements": {},
+      "files": {
+        "PYTHON.json": {
+          "sha256": "95e8ce19846b9b992f889cde6ad0bfdebee4a7bfbe996bdd6277d1b79d07fae0",
+          "size": 61761
+        },
+        "licenses/LICENSE.bdb.txt": {
+          "sha256": "8f2d533ab34899499d5b07f209854b101b17dba2c69f3251860aecf3e4005faa",
+          "size": 7419
+        },
+        "licenses/LICENSE.bzip2.txt": {
+          "sha256": "bd5628cc76fb0ebf9c657d1dd4d1a240a1a7b216c31663e7bbf1131c0b70a910",
+          "size": 1780
+        },
+        "licenses/LICENSE.cpython.txt": {
+          "sha256": "8fe98bf9822926d854f56ffd8d97877d8b942617aa44eb7ea77fd99e22f2537e",
+          "size": 36935
+        },
+        "licenses/LICENSE.expat.txt": {
+          "sha256": "8a9cfe4b5924f4b25881aa0c9f5e4561c5f31065d0c4a13cdcdbcf917edf39aa",
+          "size": 1165
+        },
+        "licenses/LICENSE.libX11.txt": {
+          "sha256": "f353accfe2976df31ea297a77d1d454bd51ef6be8c3df39bd6aca95901579357",
+          "size": 47960
+        },
+        "licenses/LICENSE.libXau.txt": {
+          "sha256": "cec808cd2163fccdc8de4a91d526490777afbaeea060e1168c40a804694b7444",
+          "size": 1169
+        },
+        "licenses/LICENSE.libedit.txt": {
+          "sha256": "d9932ccdd42eccf6cdded7bcb35b088e64cfc7c24d355af2cc0d02edb6b637d3",
+          "size": 1643
+        },
+        "licenses/LICENSE.libffi.txt": {
+          "sha256": "9afb8970cd29fc1031fa647278e4bef613399e2e3468a1e3a397f4d158c6101c",
+          "size": 1153
+        },
+        "licenses/LICENSE.liblzma.txt": {
+          "sha256": "d87d218dd908b3243ec4cbc72af400e5b7437513ea9d9229291d0812b8464fec",
+          "size": 673
+        },
+        "licenses/LICENSE.libuuid.txt": {
+          "sha256": "cbccaa3efe07a9a602751375085be572d4410a250b996716fbe8c5255c7ec6f2",
+          "size": 1459
+        },
+        "licenses/LICENSE.libxcb.txt": {
+          "sha256": "29a9539190e6de1af5fd06a9139c7103137cd1f9290b08c7b11bce89c01c14d2",
+          "size": 1367
+        },
+        "licenses/LICENSE.mpdecimal.txt": {
+          "sha256": "f094277cd46e1f6e4d87916cc4b51e22f613d45eb81f48231c3cb7caf8fc8a6a",
+          "size": 1308
+        },
+        "licenses/LICENSE.ncurses.txt": {
+          "sha256": "4f571cad3ea6c888bf0a7092e5b215dddb3142e9e3f1857fd5fac6cf13d345d7",
+          "size": 1476
+        },
+        "licenses/LICENSE.openssl-1.1.txt": {
+          "sha256": "ad89e3fed746413af1d34d5353978ee1520cedd361c853f8022e7bb210ac6b31",
+          "size": 6244
+        },
+        "licenses/LICENSE.openssl-3.txt": {
+          "sha256": "ed72ce2b51ee58f117e5a021e2e04af158857f40269fbc03491f0b2a99dbcc96",
+          "size": 10352
+        },
+        "licenses/LICENSE.sqlite.txt": {
+          "sha256": "d8eb9aba7ef6b5ed06cb3ec19a7242316af2e5933c638eb67fb781c13884e01d",
+          "size": 1504
+        },
+        "licenses/LICENSE.tcl.txt": {
+          "sha256": "41613eabfc08921a7da9c4bfd7f3ce5d5406f55214b253d89f392ed86eebeb8f",
+          "size": 2295
+        },
+        "licenses/LICENSE.tix.txt": {
+          "sha256": "8cdff3addb9e9eb108c78e2cf5e05f26b216c098304945733bbec382b2eaef66",
+          "size": 2880
+        },
+        "licenses/LICENSE.zlib.txt": {
+          "sha256": "365e36720db366054863235aea5d6f440142ab968834bfaf81fa9d187c99b9b8",
+          "size": 1016
+        }
+      }
+    },
+    "aarch64-unknown-linux-gnu": {
+      "source": {
+        "name": "cpython-3.12.13+20260504-aarch64-unknown-linux-gnu-pgo+lto-full.tar.zst",
+        "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-aarch64-unknown-linux-gnu-pgo%2Blto-full.tar.zst",
+        "mirror_url": "https://releases.astral.sh/github/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-aarch64-unknown-linux-gnu-pgo%2Blto-full.tar.zst",
+        "sha256": "052337c37166b6c75e64c1971525bacfd50f690ff3fd1f78129d796733f4e171",
+        "size": 90691550
+      },
+      "build_options": "pgo+lto",
+      "notice_selection": "All original full-archive license files and all metadata license references",
+      "supplements": {
+        "licenses/LICENSE.zlib-ng.txt": {
+          "url": "https://github.com/python/cpython-source-deps/blob/a502e047655c31db29601def76ad6539acacf43d/LICENSE.md",
+          "sha256": "6c9f0d975b41afaa34d22f55bb8986ce69e5cb7ad327cb2b28820cd425edf5ee",
+          "size": 867,
+          "source_archive": {
+            "url": "https://github.com/python/cpython-source-deps/archive/refs/tags/zlib-ng-2.2.4.tar.gz",
+            "sha256": "00bbd88709bc416cb96160ab61d3e1c8f76e106799af7328d0fe434dc7dd5004",
+            "size": 2415819
+          },
+          "selection_provenance": "https://github.com/astral-sh/python-build-standalone/blob/20f6240400c4c5b9f8cbf115e022f1e92042c575/pythonbuild/downloads.py",
+          "reason": "Unix PYTHON.json references zlib-ng and zlib notices together; this notice is missing from that full archive and its build repository. Supplied from the exact source pin in the matching build repository. Inclusion is not a claim that this optional alternative is linked on every target."
+        }
+      },
+      "files": {
+        "PYTHON.json": {
+          "sha256": "552b6f6e7e657dffa9a52c24497bbf52cfd0566574c8fb95f1f822624fe3cb30",
+          "size": 114485
+        },
+        "licenses/LICENSE.bdb.txt": {
+          "sha256": "3bdff06e69991c94664f2ef5c5f8096f60b7dbec071756ea6cc26b445e06ec5b",
+          "size": 7293
+        },
+        "licenses/LICENSE.bzip2.txt": {
+          "sha256": "1f38bbc7caacafd65169276d759c0d88c991b753b643ce35d0e45ea1971dd441",
+          "size": 1743
+        },
+        "licenses/LICENSE.cpython.txt": {
+          "sha256": "86e61415828a8b5b06ec8d024e6f086ce155a8b85fd0c419c0ba4dc004e74fdd",
+          "size": 36164
+        },
+        "licenses/LICENSE.expat.txt": {
+          "sha256": "122f2c27000472a201d337b9b31f7eb2b52d091b02857061a8880371612d9534",
+          "size": 1144
+        },
+        "licenses/LICENSE.libX11.txt": {
+          "sha256": "2daec087a88e7c9b8082557cdeebad5bbb8155a4137472f0b22e269cd99d0c1e",
+          "size": 47018
+        },
+        "licenses/LICENSE.libXau.txt": {
+          "sha256": "56abe29bb1d9806a9e04fa9f80fed2c0f18027594df3f098148d814aef6bddfa",
+          "size": 1148
+        },
+        "licenses/LICENSE.libedit.txt": {
+          "sha256": "29cea33c32bbc9785142386377915612a2fa786482c46843383384aded2e09b1",
+          "size": 1614
+        },
+        "licenses/LICENSE.libffi.txt": {
+          "sha256": "deaf3a42effb551a5b140fa9afefed183a27f1341c6d1bf430d106a5e6931fc0",
+          "size": 1132
+        },
+        "licenses/LICENSE.liblzma.txt": {
+          "sha256": "9a4062de0a2c388a98cf35a35d348b62fa97c838a71c3c28ee1a2d7d0a565b02",
+          "size": 660
+        },
+        "licenses/LICENSE.libuuid.txt": {
+          "sha256": "122ee1f7e258f2c3c0e538a75c037684f420454bf3850ddc74ce750bbf5fe86b",
+          "size": 1432
+        },
+        "licenses/LICENSE.libxcb.txt": {
+          "sha256": "c5ffbfeaa501071ceeb97b7de2c0d703fdaa35de01c0fb6cbac1c28453a3e9fd",
+          "size": 1337
+        },
+        "licenses/LICENSE.mpdecimal.txt": {
+          "sha256": "669512af7219f58be03a398766d7c9da11a3b3df9d3f05cb74c5ceca25c8da3b",
+          "size": 1284
+        },
+        "licenses/LICENSE.ncurses.txt": {
+          "sha256": "87a4c4442337b8968ef956031c406b74f9cb7149b7ba87311bdaba534816201c",
+          "size": 1447
+        },
+        "licenses/LICENSE.openssl-1.1.txt": {
+          "sha256": "9c04cce50c4989d5601dd8b07f6ab922c40388b66ac736c9007cb1ed9d9dd560",
+          "size": 6120
+        },
+        "licenses/LICENSE.openssl-3.txt": {
+          "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a",
+          "size": 10175
+        },
+        "licenses/LICENSE.sqlite.txt": {
+          "sha256": "38bef3d28b24f145ea293bd3b6eb4b20396982abc8303128fb493986ea5bc719",
+          "size": 1481
+        },
+        "licenses/LICENSE.tcl.txt": {
+          "sha256": "c0a69a2bfd757361ec7e6143973b103c90409316b49e9c88db26ad6388e79f16",
+          "size": 2255
+        },
+        "licenses/LICENSE.tix.txt": {
+          "sha256": "3ac5cdd0bef6c43ce34c6a7ced452081d9e5a0bf94082b9f9147d23ec9e214f5",
+          "size": 2826
+        },
+        "licenses/LICENSE.zlib-ng.txt": {
+          "sha256": "6c9f0d975b41afaa34d22f55bb8986ce69e5cb7ad327cb2b28820cd425edf5ee",
+          "size": 867
+        },
+        "licenses/LICENSE.zlib.txt": {
+          "sha256": "818922b2620f12801a12bf78e399644a30990e66824abd8ca8ec24d451d6f92c",
+          "size": 995
+        }
+      }
+    },
+    "x86_64-apple-darwin": {
+      "source": {
+        "name": "cpython-3.12.13+20260504-x86_64-apple-darwin-pgo+lto-full.tar.zst",
+        "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-x86_64-apple-darwin-pgo%2Blto-full.tar.zst",
+        "mirror_url": "https://releases.astral.sh/github/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-x86_64-apple-darwin-pgo%2Blto-full.tar.zst",
+        "sha256": "94ae14ccb7d4cac8b64b3c0992572778de4d763d8a26752338e20364915ec136",
+        "size": 54213858
+      },
+      "build_options": "pgo+lto",
+      "notice_selection": "All original full-archive license files and all metadata license references",
+      "supplements": {
+        "licenses/LICENSE.zlib-ng.txt": {
+          "url": "https://github.com/python/cpython-source-deps/blob/a502e047655c31db29601def76ad6539acacf43d/LICENSE.md",
+          "sha256": "6c9f0d975b41afaa34d22f55bb8986ce69e5cb7ad327cb2b28820cd425edf5ee",
+          "size": 867,
+          "source_archive": {
+            "url": "https://github.com/python/cpython-source-deps/archive/refs/tags/zlib-ng-2.2.4.tar.gz",
+            "sha256": "00bbd88709bc416cb96160ab61d3e1c8f76e106799af7328d0fe434dc7dd5004",
+            "size": 2415819
+          },
+          "selection_provenance": "https://github.com/astral-sh/python-build-standalone/blob/20f6240400c4c5b9f8cbf115e022f1e92042c575/pythonbuild/downloads.py",
+          "reason": "Unix PYTHON.json references zlib-ng and zlib notices together; this notice is missing from that full archive and its build repository. Supplied from the exact source pin in the matching build repository. Inclusion is not a claim that this optional alternative is linked on every target."
+        }
+      },
+      "files": {
+        "PYTHON.json": {
+          "sha256": "5b81478d7c7f4a4891c61b11fd9b6f59c25d6135a3b1adbe542a915dff6669bc",
+          "size": 127296
+        },
+        "licenses/LICENSE.bdb.txt": {
+          "sha256": "3bdff06e69991c94664f2ef5c5f8096f60b7dbec071756ea6cc26b445e06ec5b",
+          "size": 7293
+        },
+        "licenses/LICENSE.bzip2.txt": {
+          "sha256": "1f38bbc7caacafd65169276d759c0d88c991b753b643ce35d0e45ea1971dd441",
+          "size": 1743
+        },
+        "licenses/LICENSE.cpython.txt": {
+          "sha256": "86e61415828a8b5b06ec8d024e6f086ce155a8b85fd0c419c0ba4dc004e74fdd",
+          "size": 36164
+        },
+        "licenses/LICENSE.expat.txt": {
+          "sha256": "122f2c27000472a201d337b9b31f7eb2b52d091b02857061a8880371612d9534",
+          "size": 1144
+        },
+        "licenses/LICENSE.libX11.txt": {
+          "sha256": "2daec087a88e7c9b8082557cdeebad5bbb8155a4137472f0b22e269cd99d0c1e",
+          "size": 47018
+        },
+        "licenses/LICENSE.libXau.txt": {
+          "sha256": "56abe29bb1d9806a9e04fa9f80fed2c0f18027594df3f098148d814aef6bddfa",
+          "size": 1148
+        },
+        "licenses/LICENSE.libedit.txt": {
+          "sha256": "29cea33c32bbc9785142386377915612a2fa786482c46843383384aded2e09b1",
+          "size": 1614
+        },
+        "licenses/LICENSE.libffi.txt": {
+          "sha256": "deaf3a42effb551a5b140fa9afefed183a27f1341c6d1bf430d106a5e6931fc0",
+          "size": 1132
+        },
+        "licenses/LICENSE.liblzma.txt": {
+          "sha256": "9a4062de0a2c388a98cf35a35d348b62fa97c838a71c3c28ee1a2d7d0a565b02",
+          "size": 660
+        },
+        "licenses/LICENSE.libuuid.txt": {
+          "sha256": "122ee1f7e258f2c3c0e538a75c037684f420454bf3850ddc74ce750bbf5fe86b",
+          "size": 1432
+        },
+        "licenses/LICENSE.libxcb.txt": {
+          "sha256": "c5ffbfeaa501071ceeb97b7de2c0d703fdaa35de01c0fb6cbac1c28453a3e9fd",
+          "size": 1337
+        },
+        "licenses/LICENSE.mpdecimal.txt": {
+          "sha256": "669512af7219f58be03a398766d7c9da11a3b3df9d3f05cb74c5ceca25c8da3b",
+          "size": 1284
+        },
+        "licenses/LICENSE.ncurses.txt": {
+          "sha256": "87a4c4442337b8968ef956031c406b74f9cb7149b7ba87311bdaba534816201c",
+          "size": 1447
+        },
+        "licenses/LICENSE.openssl-1.1.txt": {
+          "sha256": "9c04cce50c4989d5601dd8b07f6ab922c40388b66ac736c9007cb1ed9d9dd560",
+          "size": 6120
+        },
+        "licenses/LICENSE.openssl-3.txt": {
+          "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a",
+          "size": 10175
+        },
+        "licenses/LICENSE.sqlite.txt": {
+          "sha256": "38bef3d28b24f145ea293bd3b6eb4b20396982abc8303128fb493986ea5bc719",
+          "size": 1481
+        },
+        "licenses/LICENSE.tcl.txt": {
+          "sha256": "c0a69a2bfd757361ec7e6143973b103c90409316b49e9c88db26ad6388e79f16",
+          "size": 2255
+        },
+        "licenses/LICENSE.tix.txt": {
+          "sha256": "3ac5cdd0bef6c43ce34c6a7ced452081d9e5a0bf94082b9f9147d23ec9e214f5",
+          "size": 2826
+        },
+        "licenses/LICENSE.zlib-ng.txt": {
+          "sha256": "6c9f0d975b41afaa34d22f55bb8986ce69e5cb7ad327cb2b28820cd425edf5ee",
+          "size": 867
+        },
+        "licenses/LICENSE.zlib.txt": {
+          "sha256": "818922b2620f12801a12bf78e399644a30990e66824abd8ca8ec24d451d6f92c",
+          "size": 995
+        }
+      }
+    },
+    "x86_64-pc-windows-msvc": {
+      "source": {
+        "name": "cpython-3.12.13+20260504-x86_64-pc-windows-msvc-pgo-full.tar.zst",
+        "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-x86_64-pc-windows-msvc-pgo-full.tar.zst",
+        "mirror_url": "https://releases.astral.sh/github/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-x86_64-pc-windows-msvc-pgo-full.tar.zst",
+        "sha256": "4b1af1acfbe470251a13b3cd1665a48f13ebb152fbe15ae7d33ed01c1f9413ff",
+        "size": 43494822
+      },
+      "build_options": "pgo",
+      "notice_selection": "All original full-archive license files and all metadata license references",
+      "supplements": {},
+      "files": {
+        "PYTHON.json": {
+          "sha256": "2556318b1ef7d553ef2b9d6ab0f3e7316faf9e328a19820253fb7351acea0669",
+          "size": 62407
+        },
+        "licenses/LICENSE.bdb.txt": {
+          "sha256": "8f2d533ab34899499d5b07f209854b101b17dba2c69f3251860aecf3e4005faa",
+          "size": 7419
+        },
+        "licenses/LICENSE.bzip2.txt": {
+          "sha256": "bd5628cc76fb0ebf9c657d1dd4d1a240a1a7b216c31663e7bbf1131c0b70a910",
+          "size": 1780
+        },
+        "licenses/LICENSE.cpython.txt": {
+          "sha256": "8fe98bf9822926d854f56ffd8d97877d8b942617aa44eb7ea77fd99e22f2537e",
+          "size": 36935
+        },
+        "licenses/LICENSE.expat.txt": {
+          "sha256": "8a9cfe4b5924f4b25881aa0c9f5e4561c5f31065d0c4a13cdcdbcf917edf39aa",
+          "size": 1165
+        },
+        "licenses/LICENSE.libX11.txt": {
+          "sha256": "f353accfe2976df31ea297a77d1d454bd51ef6be8c3df39bd6aca95901579357",
+          "size": 47960
+        },
+        "licenses/LICENSE.libXau.txt": {
+          "sha256": "cec808cd2163fccdc8de4a91d526490777afbaeea060e1168c40a804694b7444",
+          "size": 1169
+        },
+        "licenses/LICENSE.libedit.txt": {
+          "sha256": "d9932ccdd42eccf6cdded7bcb35b088e64cfc7c24d355af2cc0d02edb6b637d3",
+          "size": 1643
+        },
+        "licenses/LICENSE.libffi.txt": {
+          "sha256": "9afb8970cd29fc1031fa647278e4bef613399e2e3468a1e3a397f4d158c6101c",
+          "size": 1153
+        },
+        "licenses/LICENSE.liblzma.txt": {
+          "sha256": "d87d218dd908b3243ec4cbc72af400e5b7437513ea9d9229291d0812b8464fec",
+          "size": 673
+        },
+        "licenses/LICENSE.libuuid.txt": {
+          "sha256": "cbccaa3efe07a9a602751375085be572d4410a250b996716fbe8c5255c7ec6f2",
+          "size": 1459
+        },
+        "licenses/LICENSE.libxcb.txt": {
+          "sha256": "29a9539190e6de1af5fd06a9139c7103137cd1f9290b08c7b11bce89c01c14d2",
+          "size": 1367
+        },
+        "licenses/LICENSE.mpdecimal.txt": {
+          "sha256": "f094277cd46e1f6e4d87916cc4b51e22f613d45eb81f48231c3cb7caf8fc8a6a",
+          "size": 1308
+        },
+        "licenses/LICENSE.ncurses.txt": {
+          "sha256": "4f571cad3ea6c888bf0a7092e5b215dddb3142e9e3f1857fd5fac6cf13d345d7",
+          "size": 1476
+        },
+        "licenses/LICENSE.openssl-1.1.txt": {
+          "sha256": "ad89e3fed746413af1d34d5353978ee1520cedd361c853f8022e7bb210ac6b31",
+          "size": 6244
+        },
+        "licenses/LICENSE.openssl-3.txt": {
+          "sha256": "ed72ce2b51ee58f117e5a021e2e04af158857f40269fbc03491f0b2a99dbcc96",
+          "size": 10352
+        },
+        "licenses/LICENSE.sqlite.txt": {
+          "sha256": "d8eb9aba7ef6b5ed06cb3ec19a7242316af2e5933c638eb67fb781c13884e01d",
+          "size": 1504
+        },
+        "licenses/LICENSE.tcl.txt": {
+          "sha256": "41613eabfc08921a7da9c4bfd7f3ce5d5406f55214b253d89f392ed86eebeb8f",
+          "size": 2295
+        },
+        "licenses/LICENSE.tix.txt": {
+          "sha256": "8cdff3addb9e9eb108c78e2cf5e05f26b216c098304945733bbec382b2eaef66",
+          "size": 2880
+        },
+        "licenses/LICENSE.zlib.txt": {
+          "sha256": "365e36720db366054863235aea5d6f440142ab968834bfaf81fa9d187c99b9b8",
+          "size": 1016
+        }
+      }
+    },
+    "x86_64-unknown-linux-gnu": {
+      "source": {
+        "name": "cpython-3.12.13+20260504-x86_64-unknown-linux-gnu-pgo+lto-full.tar.zst",
+        "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-x86_64-unknown-linux-gnu-pgo%2Blto-full.tar.zst",
+        "mirror_url": "https://releases.astral.sh/github/python-build-standalone/releases/download/20260504/cpython-3.12.13%2B20260504-x86_64-unknown-linux-gnu-pgo%2Blto-full.tar.zst",
+        "sha256": "0eb8c79eaf3b595ad22c50eb6b2daf0e99825b0c0beb9afcbe51e23e30266978",
+        "size": 111591541
+      },
+      "build_options": "pgo+lto",
+      "notice_selection": "All original full-archive license files and all metadata license references",
+      "supplements": {
+        "licenses/LICENSE.zlib-ng.txt": {
+          "url": "https://github.com/python/cpython-source-deps/blob/a502e047655c31db29601def76ad6539acacf43d/LICENSE.md",
+          "sha256": "6c9f0d975b41afaa34d22f55bb8986ce69e5cb7ad327cb2b28820cd425edf5ee",
+          "size": 867,
+          "source_archive": {
+            "url": "https://github.com/python/cpython-source-deps/archive/refs/tags/zlib-ng-2.2.4.tar.gz",
+            "sha256": "00bbd88709bc416cb96160ab61d3e1c8f76e106799af7328d0fe434dc7dd5004",
+            "size": 2415819
+          },
+          "selection_provenance": "https://github.com/astral-sh/python-build-standalone/blob/20f6240400c4c5b9f8cbf115e022f1e92042c575/pythonbuild/downloads.py",
+          "reason": "Unix PYTHON.json references zlib-ng and zlib notices together; this notice is missing from that full archive and its build repository. Supplied from the exact source pin in the matching build repository. Inclusion is not a claim that this optional alternative is linked on every target."
+        }
+      },
+      "files": {
+        "PYTHON.json": {
+          "sha256": "12f12ee8e4c1e15206209951a2a7f291748aa9bd1314f576d325304cf6b84905",
+          "size": 114666
+        },
+        "licenses/LICENSE.bdb.txt": {
+          "sha256": "3bdff06e69991c94664f2ef5c5f8096f60b7dbec071756ea6cc26b445e06ec5b",
+          "size": 7293
+        },
+        "licenses/LICENSE.bzip2.txt": {
+          "sha256": "1f38bbc7caacafd65169276d759c0d88c991b753b643ce35d0e45ea1971dd441",
+          "size": 1743
+        },
+        "licenses/LICENSE.cpython.txt": {
+          "sha256": "86e61415828a8b5b06ec8d024e6f086ce155a8b85fd0c419c0ba4dc004e74fdd",
+          "size": 36164
+        },
+        "licenses/LICENSE.expat.txt": {
+          "sha256": "122f2c27000472a201d337b9b31f7eb2b52d091b02857061a8880371612d9534",
+          "size": 1144
+        },
+        "licenses/LICENSE.libX11.txt": {
+          "sha256": "2daec087a88e7c9b8082557cdeebad5bbb8155a4137472f0b22e269cd99d0c1e",
+          "size": 47018
+        },
+        "licenses/LICENSE.libXau.txt": {
+          "sha256": "56abe29bb1d9806a9e04fa9f80fed2c0f18027594df3f098148d814aef6bddfa",
+          "size": 1148
+        },
+        "licenses/LICENSE.libedit.txt": {
+          "sha256": "29cea33c32bbc9785142386377915612a2fa786482c46843383384aded2e09b1",
+          "size": 1614
+        },
+        "licenses/LICENSE.libffi.txt": {
+          "sha256": "deaf3a42effb551a5b140fa9afefed183a27f1341c6d1bf430d106a5e6931fc0",
+          "size": 1132
+        },
+        "licenses/LICENSE.liblzma.txt": {
+          "sha256": "9a4062de0a2c388a98cf35a35d348b62fa97c838a71c3c28ee1a2d7d0a565b02",
+          "size": 660
+        },
+        "licenses/LICENSE.libuuid.txt": {
+          "sha256": "122ee1f7e258f2c3c0e538a75c037684f420454bf3850ddc74ce750bbf5fe86b",
+          "size": 1432
+        },
+        "licenses/LICENSE.libxcb.txt": {
+          "sha256": "c5ffbfeaa501071ceeb97b7de2c0d703fdaa35de01c0fb6cbac1c28453a3e9fd",
+          "size": 1337
+        },
+        "licenses/LICENSE.mpdecimal.txt": {
+          "sha256": "669512af7219f58be03a398766d7c9da11a3b3df9d3f05cb74c5ceca25c8da3b",
+          "size": 1284
+        },
+        "licenses/LICENSE.ncurses.txt": {
+          "sha256": "87a4c4442337b8968ef956031c406b74f9cb7149b7ba87311bdaba534816201c",
+          "size": 1447
+        },
+        "licenses/LICENSE.openssl-1.1.txt": {
+          "sha256": "9c04cce50c4989d5601dd8b07f6ab922c40388b66ac736c9007cb1ed9d9dd560",
+          "size": 6120
+        },
+        "licenses/LICENSE.openssl-3.txt": {
+          "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a",
+          "size": 10175
+        },
+        "licenses/LICENSE.sqlite.txt": {
+          "sha256": "38bef3d28b24f145ea293bd3b6eb4b20396982abc8303128fb493986ea5bc719",
+          "size": 1481
+        },
+        "licenses/LICENSE.tcl.txt": {
+          "sha256": "c0a69a2bfd757361ec7e6143973b103c90409316b49e9c88db26ad6388e79f16",
+          "size": 2255
+        },
+        "licenses/LICENSE.tix.txt": {
+          "sha256": "3ac5cdd0bef6c43ce34c6a7ced452081d9e5a0bf94082b9f9147d23ec9e214f5",
+          "size": 2826
+        },
+        "licenses/LICENSE.zlib-ng.txt": {
+          "sha256": "6c9f0d975b41afaa34d22f55bb8986ce69e5cb7ad327cb2b28820cd425edf5ee",
+          "size": 867
+        },
+        "licenses/LICENSE.zlib.txt": {
+          "sha256": "818922b2620f12801a12bf78e399644a30990e66824abd8ca8ec24d451d6f92c",
+          "size": 995
+        }
+      }
+    }
+  }
+}

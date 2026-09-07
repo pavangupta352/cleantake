@@ -1,0 +1,129 @@
+name: Compile Libraries
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-libs-macos-intel:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ["macos-13"]
+      fail-fast: true
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Compile library
+        run: ./mac_build.sh
+      - uses: actions/upload-artifact@v3
+        with:
+          name: lib-macos-intel
+          path: "libsndfile.dylib"
+          retention-days: 7
+          if-no-files-found: error
+
+  build-libs-macos-arm64:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ["macos-14"]
+      fail-fast: true
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Compile library
+        run: ./mac_build.sh arm64
+      - uses: actions/upload-artifact@v3
+        with:
+          name: lib-macos-arm64
+          path: "libsndfile_arm64.dylib"
+          retention-days: 7
+          if-no-files-found: error
+
+  build-libs-linux-x86_64:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ["ubuntu-20.04"]
+      fail-fast: true
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Compile library
+        run: ./linux_build.sh
+      - uses: actions/upload-artifact@v3
+        with:
+          name: lib-linux-x86_64
+          path: "libsndfile.so"
+
+  build-libs-linux-x86_64-glibc2_28:
+    runs-on: "ubuntu-latest"
+    strategy:
+      fail-fast: true
+    container:
+      image: quay.io/pypa/manylinux_2_28_x86_64
+    steps:
+      - uses: actions/checkout@v3
+      - name: Compile library
+        run: ./linux_build.sh
+      - uses: actions/upload-artifact@v3
+        with:
+          name: lib-linux-x86_64-glibc2_28
+          path: "libsndfile.so"
+
+  build-libs-linux-arm64:
+    runs-on: ${{ matrix.os }}
+    container: debian:10
+    strategy:
+      matrix:
+        os: ["ubuntu-20.04"]
+      fail-fast: true
+
+    steps:
+      - name: Install aarch64-linux-gnu cross-compiler
+        run: |
+          apt-get update
+          apt-get install -y build-essential \
+                             curl \
+                             python3 \
+                             g++-aarch64-linux-gnu \
+                             pkg-config
+      - uses: actions/checkout@v3
+      - name: Compile library
+        run: |
+          export CONFIGURE_FLAGS="--host=aarch64-linux-gnu --build=x86_64-linux-gnu"
+          ./linux_build.sh
+      - uses: actions/upload-artifact@v3
+        with:
+          name: lib-linux-arm64
+          path: "libsndfile.so"
+
+  build-libs-windows:
+    runs-on: windows-2019
+    strategy:
+      matrix:
+        include:
+          # see ./triplets/README.md for info on "custom" triplets:
+          - triplet: "x64-windows-custom"
+            libname: "libsndfile_x64.dll"
+          - triplet: "x86-windows-custom"
+            libname: "libsndfile_x86.dll"
+          - triplet: "arm64-windows-custom"
+            libname: "libsndfile_arm64.dll"
+      fail-fast: true
+    steps:
+      - uses: actions/checkout@v3
+      - name: Update VCPKG
+        run: "vcpkg update"
+      - name: Build library
+        run: "vcpkg install libsndfile:${{ matrix.triplet }} --overlay-triplets=triplets"
+      - name: Copy library
+        run: "Copy-Item c:/vcpkg/installed/${{ matrix.triplet }}/bin/sndfile.dll -Destination ${{ matrix.libname }}"
+      - uses: actions/upload-artifact@v3
+        with:
+          name: lib-windows
+          path: ${{ matrix.libname }}
+          retention-days: 7
+          if-no-files-found: error

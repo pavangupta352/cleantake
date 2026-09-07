@@ -27,7 +27,7 @@ def digest(path):
     return value.hexdigest()
 
 
-def build(media: Path, output: Path) -> Path:
+def build(media: Path, output: Path, soundfile: Path | None = None) -> Path:
     media, output = media.resolve(), output.resolve()
     suffix = ".exe" if sys.platform == "win32" else ""
     target = output / "cleantake-runtime"
@@ -49,9 +49,37 @@ def build(media: Path, output: Path) -> Path:
     if not (ROOT / "src/cleantake/static/index.html").is_file():
         raise ValueError("Build the studio before freezing the runtime")
     output.mkdir(parents=True, exist_ok=True)
+    soundfile_stage = soundfile.resolve() if soundfile is not None else output.parent / "soundfile"
+    subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "scripts/stage_soundfile_sources.py"),
+            "--output",
+            str(soundfile_stage),
+            *(["--verify"] if soundfile_stage.exists() else []),
+        ],
+        cwd=ROOT,
+        check=True,
+    )
     with tempfile.TemporaryDirectory(prefix=".runtime-build-", dir=output) as work:
         work = Path(work)
-        env = dict(os.environ, CLEANTAKE_MEDIA_DIR=str(media))
+        python_notices = work / "python-components"
+        subprocess.run(
+            [
+                sys.executable,
+                str(ROOT / "packaging/python/stage_notices.py"),
+                "--output",
+                str(python_notices),
+            ],
+            cwd=ROOT,
+            check=True,
+        )
+        env = dict(
+            os.environ,
+            CLEANTAKE_MEDIA_DIR=str(media),
+            CLEANTAKE_PYTHON_NOTICES_DIR=str(python_notices),
+            CLEANTAKE_SOUNDFILE_STAGE_DIR=str(soundfile_stage),
+        )
         subprocess.run(
             [
                 sys.executable,
@@ -89,6 +117,12 @@ def build(media: Path, output: Path) -> Path:
             "pyinstaller": metadata.version("pyinstaller"),
             "hooks_contrib": metadata.version("pyinstaller-hooks-contrib"),
             "media_manifest": media_manifest,
+            "python_component_manifest": json.loads(
+                (python_notices / "manifest.json").read_text(encoding="utf-8")
+            ),
+            "soundfile_component_manifest": json.loads(
+                (soundfile_stage / "manifest.json").read_text(encoding="utf-8")
+            ),
             "source_sha256": {
                 str(p.relative_to(ROOT)): digest(p)
                 for p in sorted(
@@ -97,6 +131,10 @@ def build(media: Path, output: Path) -> Path:
                         ROOT / "pyproject.toml",
                         ROOT / "packaging/cleantake.spec",
                         ROOT / "packaging/runtime_entry.py",
+                        ROOT / "packaging/python/stage_notices.py",
+                        ROOT / "packaging/python/manifest.json",
+                        ROOT / "scripts/build_runtime.py",
+                        ROOT / "scripts/stage_soundfile_sources.py",
                         *ROOT.glob("src/cleantake/**/*.py"),
                     ]
                 )
@@ -122,9 +160,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--media-dir", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--soundfile-dir", type=Path, help="Existing or new matching source stage")
     args = parser.parse_args()
     try:
-        result = build(args.media_dir, args.output)
+        result = build(args.media_dir, args.output, args.soundfile_dir)
     except (BuildError, ValueError, OSError, subprocess.CalledProcessError) as error:
         parser.exit(1, f"Runtime build failed: {error}\n")
     print(result)

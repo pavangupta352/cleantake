@@ -1,0 +1,568 @@
+{
+  "binaries_commit": "a3e6f9769d0c7e91d2d036cf0fdbe5b4bbf18b87",
+  "libsndfile_version": "1.2.2",
+  "recipe_files": {
+    "upstream-license-notes.md": {
+      "bytes": 2631,
+      "sha256": "35630e1f59b5c54b0bcbe2ec173bcf5a63b727a6e2f7834ca6d35a1af91a2b5f"
+    },
+    "upstream-recipes/.github/workflows/build-libs.yml": {
+      "bytes": 3606,
+      "sha256": "909b4a795b35f8465cce613852af63a2fcc6e91eb4aed0e079db43bc149206a9"
+    },
+    "upstream-recipes/COPYING": {
+      "bytes": 26518,
+      "sha256": "ad01ea5cd2755f6048383c8d54c88459cd6fcb17757c5c8892f8c5ea060f6140"
+    },
+    "upstream-recipes/README.md": {
+      "bytes": 1004,
+      "sha256": "d96dff5f03de7e5370d9541d4d26dce2759787ddaa076df3b6eb9d7b7a8f3f96"
+    },
+    "upstream-recipes/__init__.py": {
+      "bytes": 125,
+      "sha256": "3723e81d0145341d5ae3c67a745373192a70c7f672ad028f76c95129339aafe9"
+    },
+    "upstream-recipes/darwin.cmake": {
+      "bytes": 627,
+      "sha256": "cfd44bf9311ec70076638eb08c4ca95fcfa11e1821ec1ed2db91707cc6270c89"
+    },
+    "upstream-recipes/linux_build.sh": {
+      "bytes": 3879,
+      "sha256": "90709951b06174c4eebc201419e3671e65ec4ef38a279c34a1e9d3dd2bf33bde"
+    },
+    "upstream-recipes/mac_build.sh": {
+      "bytes": 4415,
+      "sha256": "8074171e8dc00433e69d78f2191f28ae4f1815a2e7f1a5cff4d71ce4f09b4172"
+    },
+    "upstream-recipes/triplets/README.md": {
+      "bytes": 402,
+      "sha256": "e14ce4bb2df2f8245d54296a4e98f736436c3b69d5bcacd73dc384387ec77c60"
+    },
+    "upstream-recipes/triplets/arm64-windows-custom.cmake": {
+      "bytes": 178,
+      "sha256": "d152dcd632142acfdd30fe782cf03a27e1583bf8b522bd20e5c07a898b9871b7"
+    },
+    "upstream-recipes/triplets/x64-windows-custom.cmake": {
+      "bytes": 275,
+      "sha256": "b23f8932cbcb326a520d30897fbaf03d0260be3dc356a1e34d481dde5f8cce15"
+    },
+    "upstream-recipes/triplets/x86-windows-custom.cmake": {
+      "bytes": 175,
+      "sha256": "2f2599e3636e08098cbf228c2fa29e3a5109384f046e93941c9a67771bf45837"
+    },
+    "vcpkg-recipes/ports/libflac/fix-compile-options.patch": {
+      "bytes": 622,
+      "sha256": "02e10f5f2ac9f3ed601c8ca74454b33cccabdc833e4f72ec2a73887e3d066873"
+    },
+    "vcpkg-recipes/ports/libflac/portfile.cmake": {
+      "bytes": 2371,
+      "sha256": "bf46ab2345a3862f489f599683baf53dbdf3a0f9568f6585941871cbca104eec"
+    },
+    "vcpkg-recipes/ports/libflac/usage": {
+      "bytes": 257,
+      "sha256": "89fa7950a9e5c2a1c2183605f5e9be620b5e6c0a9e981ac172687b4a10bb112a"
+    },
+    "vcpkg-recipes/ports/libflac/vcpkg.json": {
+      "bytes": 717,
+      "sha256": "621410a807acb488709c09e48f9ad9797e70ba010a72d94082bb2839f939ee93"
+    },
+    "vcpkg-recipes/ports/libogg/portfile.cmake": {
+      "bytes": 832,
+      "sha256": "6da25d70a617bd4c7fd18cb2a8acd8d40c1fcc671846195a02ef2dc74a6b463e"
+    },
+    "vcpkg-recipes/ports/libogg/vcpkg.json": {
+      "bytes": 422,
+      "sha256": "4d651ca89f0f8d155e659450304e65c168febe7cee7739b30eccda7ac70ebebb"
+    },
+    "vcpkg-recipes/ports/libsndfile/001-avoid-installing-find-modules.patch": {
+      "bytes": 592,
+      "sha256": "6e8c7d220fbb0e9dffc0041dac9acc5ed7dfd0fb4678aca728f1905ba2168e70"
+    },
+    "vcpkg-recipes/ports/libsndfile/portfile.cmake": {
+      "bytes": 1667,
+      "sha256": "6a6a26ef01472207db1dd22a456997340915af63061be1d186d4f92f5419c1b6"
+    },
+    "vcpkg-recipes/ports/libsndfile/vcpkg.json": {
+      "bytes": 1014,
+      "sha256": "e06b7e373ba2e4f9c48007a8a51169a0cba8626e9eb36897216f8d0cb8e63434"
+    },
+    "vcpkg-recipes/ports/libvorbis/0001-Dont-export-vorbisenc-functions.patch": {
+      "bytes": 383,
+      "sha256": "f0166ffd98153f2b04124caae3b5e6ee9f98a3204c5419e0a7a7690fea44590f"
+    },
+    "vcpkg-recipes/ports/libvorbis/0002-Fixup-pkgconfig-libs.patch": {
+      "bytes": 375,
+      "sha256": "01267e7be79a1a6034c2fea8f1221e3d44c71ac6995be1a76fe2bb9872954659"
+    },
+    "vcpkg-recipes/ports/libvorbis/0003-def-mingw-compat.patch": {
+      "bytes": 627,
+      "sha256": "44c998bdbc4bc8f581d25fbe81d006b68c243485eec826caf1716ad335a7f888"
+    },
+    "vcpkg-recipes/ports/libvorbis/0004-ogg-find-dependency.patch": {
+      "bytes": 360,
+      "sha256": "5007ec749c29f63e4f9ac3acaa2b09ecb569d108ed01c028790efe6fe44ec6a0"
+    },
+    "vcpkg-recipes/ports/libvorbis/portfile.cmake": {
+      "bytes": 899,
+      "sha256": "44fee180bae8a6a84f71f2a3153653ba5e8f4cd4b8e45c1323940284e7f3ecc2"
+    },
+    "vcpkg-recipes/ports/libvorbis/usage": {
+      "bytes": 530,
+      "sha256": "9131092ab8cdc9994318607cf888aff9601f1688a918a28d68c0704942c902d4"
+    },
+    "vcpkg-recipes/ports/libvorbis/vcpkg.json": {
+      "bytes": 443,
+      "sha256": "778b527895e90377c58f41d658619de5fad1561d2ad864aeae4cfffcfd47c6fd"
+    },
+    "vcpkg-recipes/ports/mp3lame/00001-msvc-upgrade-solution-up-to-vc11.patch": {
+      "bytes": 47070,
+      "sha256": "a75204e3f5c8d94deba46101794b1ed08e373a8de7935e13e8a9cad5803f7291"
+    },
+    "vcpkg-recipes/ports/mp3lame/Config.cmake.in": {
+      "bytes": 2356,
+      "sha256": "bc6aeae2067107636041524983e54aa44f552db9b14ef7d9a941b0fb54676bd6"
+    },
+    "vcpkg-recipes/ports/mp3lame/add-macos-universal-config.patch": {
+      "bytes": 344,
+      "sha256": "e50e5bd9a3a41b6374f45b8fdbe7bce062f967cafd1e5c7090735953fbc2f8fa"
+    },
+    "vcpkg-recipes/ports/mp3lame/fix-mingw-w64-compatibility.patch": {
+      "bytes": 3369,
+      "sha256": "020c74f7683d511a14ddf25a7148a4cc15fb5fd5ff38d3cfb76f5ef3ee7ddfd9"
+    },
+    "vcpkg-recipes/ports/mp3lame/portfile.cmake": {
+      "bytes": 5807,
+      "sha256": "f57a65b7e77cb251cb22f492035b92b4740e1551e2a71fe321492f6a41700163"
+    },
+    "vcpkg-recipes/ports/mp3lame/remove_lame_init_old_from_symbol_list.patch": {
+      "bytes": 325,
+      "sha256": "ae9d1ca1781a329fe1fa932752eba9617b5a1ee98c1975759e18b18c3b482db5"
+    },
+    "vcpkg-recipes/ports/mp3lame/usage": {
+      "bytes": 144,
+      "sha256": "54d86a353e4cd5c1f76c5ea348bc6b28647fe176b63bd0bdb41d102c1a41a589"
+    },
+    "vcpkg-recipes/ports/mp3lame/vcpkg.json": {
+      "bytes": 596,
+      "sha256": "04ed65b0b00afb7fc37f5c0ba8f47f75440dc242ad4e7713e815e6095f627b00"
+    },
+    "vcpkg-recipes/ports/mpg123/fix-dllexport.diff": {
+      "bytes": 665,
+      "sha256": "7ef49d04ac4d19c946b7e1f9d65006ca88bee107340218984e86c2b1af776b57"
+    },
+    "vcpkg-recipes/ports/mpg123/have-fpu.diff": {
+      "bytes": 499,
+      "sha256": "9eb6c504ccb0577854a7af6b64efbb9575631bbd589afad5a4aa6f014634212b"
+    },
+    "vcpkg-recipes/ports/mpg123/pkgconfig.diff": {
+      "bytes": 2452,
+      "sha256": "f615aa6de8c86fc9741e39fe5346a2d541d80daf45bcb75d31b3b4f81baf29f2"
+    },
+    "vcpkg-recipes/ports/mpg123/portfile.cmake": {
+      "bytes": 1281,
+      "sha256": "1387d7eefdc648e983346dcded90c3e10794f5aef2ed490c460946edd63539a7"
+    },
+    "vcpkg-recipes/ports/mpg123/vcpkg.json": {
+      "bytes": 612,
+      "sha256": "a6d42bf47e06c405057af98b66ffa80b43fcce09a8cf4d9b0440a36789e20f3e"
+    },
+    "vcpkg-recipes/ports/opus/fix-pkgconfig-version.patch": {
+      "bytes": 571,
+      "sha256": "b1998186940daff04e5c332fbb7f27f756cf5c2227f6e8c3f37f2fb2e8222286"
+    },
+    "vcpkg-recipes/ports/opus/portfile.cmake": {
+      "bytes": 1991,
+      "sha256": "ae5184241049d4134b91b67a747d54e2084ea7fe9f170136d4a59fc02c99167d"
+    },
+    "vcpkg-recipes/ports/opus/vcpkg.json": {
+      "bytes": 457,
+      "sha256": "024bb3bdbf503bebb3033149127cff008e83de347efb17534ece30dfa2f10690"
+    },
+    "vcpkg-recipes/scripts/cmake/vcpkg_extract_source_archive.cmake": {
+      "bytes": 6284,
+      "sha256": "9c733832f8b58b05e6c329ae8b6ad1cfa858224fdc06d4a2d08b428e31de1a51"
+    }
+  },
+  "schema_version": 1,
+  "soundfile_commit": "3162358d0315be769b97f3e4c12545fe18a676bc",
+  "soundfile_version": "0.14.0",
+  "sources": [
+    {
+      "bytes": 593071,
+      "license_members": [
+        "libogg-1.3.5/COPYING",
+        "libogg-1.3.5/AUTHORS"
+      ],
+      "mirrors": [
+        "https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.5.tar.gz"
+      ],
+      "name": "libogg-1.3.5.tar.gz",
+      "sha256": "0eb4b4b9420a0f51db142ba3f9c64b333f826532dc0f48c6410ae51f4799b664",
+      "sha512": "e4d798621bb04a62dcb831e58a444357635ab3bcb9efbdffa009cb0be1cafb5e72bf71cbcad5305aa5268a92076a03a7e564a19c0c8d54b93a05d9b03ad2da6b",
+      "targets": [
+        "macos",
+        "linux"
+      ],
+      "url": "https://downloads.xiph.org/releases/ogg/libogg-1.3.5.tar.gz"
+    },
+    {
+      "bytes": 1658963,
+      "license_members": [
+        "libvorbis-1.3.7/COPYING",
+        "libvorbis-1.3.7/AUTHORS"
+      ],
+      "mirrors": [
+        "https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.7.tar.gz"
+      ],
+      "name": "libvorbis-1.3.7.tar.gz",
+      "sha256": "0e982409a9c3fc82ee06e08205b1355e5c6aa4c36bca58146ef399621b0ce5ab",
+      "sha512": "8a83ac9e9197f32fad4430946dba3927921320492f9e96cda546e8eb3981e2664da97f77e43cb197577ec056437785168ca7c4138f8bf7f2ba93899846932eb2",
+      "targets": [
+        "macos",
+        "linux"
+      ],
+      "url": "https://downloads.xiph.org/releases/vorbis/libvorbis-1.3.7.tar.gz"
+    },
+    {
+      "bytes": 1006728,
+      "license_members": [
+        "flac-1.4.3/AUTHORS",
+        "flac-1.4.3/COPYING.FDL",
+        "flac-1.4.3/COPYING.GPL",
+        "flac-1.4.3/COPYING.LGPL",
+        "flac-1.4.3/COPYING.Xiph"
+      ],
+      "name": "flac-1.4.3.tar.xz",
+      "sha256": "6c58e69cd22348f441b861092b825e591d0b822e106de6eb0ee4d05d27205b70",
+      "sha512": "3cf095720bd590a588be8ccbe187d22e7a1c60ab85b1d510ce5e8a22ab0a51827b9acfeaad59bbd645a17d1f200f559255a640101b0330709a164306c0e9709e",
+      "targets": [
+        "macos",
+        "linux"
+      ],
+      "url": "https://downloads.xiph.org/releases/flac/flac-1.4.3.tar.xz"
+    },
+    {
+      "bytes": 1063408,
+      "license_members": [
+        "opus-1.4/COPYING",
+        "opus-1.4/AUTHORS"
+      ],
+      "mirrors": [
+        "https://ftp.osuosl.org/pub/xiph/releases/opus/opus-1.4.tar.gz"
+      ],
+      "name": "opus-1.4.tar.gz",
+      "sha256": "c9b32b4253be5ae63d1ff16eea06b94b5f0f2951b7a02aceef58e3a3ce49c51f",
+      "sha512": "1ecd39e0add24de12823bf7c936bb67441228721e2cdae0edbfcf3cee0894bcc6edf2a1d0ca5cdfdad1565803bf39cc4c985ad32710c2a9582f850adeb5ca631",
+      "targets": [
+        "macos",
+        "linux"
+      ],
+      "url": "https://downloads.xiph.org/releases/opus/opus-1.4.tar.gz"
+    },
+    {
+      "bytes": 1111054,
+      "license_members": [
+        "mpg123-1.32.3/AUTHORS",
+        "mpg123-1.32.3/COPYING"
+      ],
+      "name": "mpg123-1.32.3.tar.bz2",
+      "sha256": "2d9913a57d4ee8f497a182c6e82582602409782a4fb481e989feebf4435867b4",
+      "sha512": "946c1073b6eebfd65333ec543df1caeea25864479e9c8e153fb53d8b636cc756d8d81947f7b5cbedbbfb1ea664d3fb27562ed36e7726d95e80591bd2ad622afc",
+      "targets": [
+        "macos",
+        "linux"
+      ],
+      "url": "https://www.mpg123.de/download/mpg123-1.32.3.tar.bz2"
+    },
+    {
+      "bytes": 730760,
+      "license_members": [
+        "libsndfile-1.2.2/AUTHORS",
+        "libsndfile-1.2.2/COPYING",
+        "libsndfile-1.2.2/src/GSM610/COPYRIGHT"
+      ],
+      "name": "libsndfile-1.2.2.tar.xz",
+      "sha256": "3799ca9924d3125038880367bf1468e53a1b7e3686a934f098b7e1d286cdb80e",
+      "sha512": "a6e3ea3ac5d91befaa99f6a31a3fac44e7b7c11f1de4698167317a461d5a19a2651d47486a920b34400f18367b4f6173bf0c1c9ba80eb682cece1b5beee352a0",
+      "targets": [
+        "macos",
+        "linux"
+      ],
+      "url": "https://github.com/libsndfile/libsndfile/releases/download/1.2.2/libsndfile-1.2.2.tar.xz"
+    },
+    {
+      "bytes": 1524133,
+      "license_members": [
+        "lame-3.100/COPYING",
+        "lame-3.100/LICENSE"
+      ],
+      "name": "lame-3.100.tar.gz",
+      "sha256": "ddfe36cab873794038ae2c1210557ad34857a4b6bdc515785d1da9e175b1da1e",
+      "sha512": "0844b9eadb4aacf8000444621451277de365041cc1d97b7f7a589da0b7a23899310afd4e4d81114b9912aa97832621d20588034715573d417b2923948c08634b",
+      "targets": [
+        "macos",
+        "linux",
+        "windows"
+      ],
+      "url": "https://downloads.sourceforge.net/project/lame/lame/3.100/lame-3.100.tar.gz"
+    },
+    {
+      "bytes": 1118388,
+      "license_members": [
+        "mpg123-1.32.9/AUTHORS",
+        "mpg123-1.32.9/COPYING"
+      ],
+      "name": "mpg123-1.32.9.tar.bz2",
+      "sha256": "03b61e4004e960bacf2acdada03ed94d376e6aab27a601447bd4908d8407b291",
+      "sha512": "dccb640b0845061811cb41bf145587e7093556d686d49a748232b079659b46284b6cc40db42d14febceac11277c58edf2b69d1b4c46c223829a3d15478e2e26c",
+      "targets": [
+        "windows"
+      ],
+      "url": "https://www.mpg123.de/download/mpg123-1.32.9.tar.bz2"
+    },
+    {
+      "bytes": 684875,
+      "license_members": [
+        "libsndfile-1.2.2/AUTHORS",
+        "libsndfile-1.2.2/COPYING",
+        "libsndfile-1.2.2/src/GSM610/COPYRIGHT"
+      ],
+      "name": "libsndfile-vcpkg-1.2.2.tar.gz",
+      "sha256": "ffe12ef8add3eaca876f04087734e6e8e029350082f3251f565fa9da55b52121",
+      "sha512": "fb8b4d367240a8ac9d55be6f053cb19419890691c56a8552d1600d666257992b6e8e41a413a444c9f2d6c5d71406013222c92a3bfa67228944a26475444240a1",
+      "targets": [
+        "windows"
+      ],
+      "url": "https://codeload.github.com/libsndfile/libsndfile/tar.gz/refs/tags/1.2.2"
+    },
+    {
+      "bytes": 914427,
+      "license_members": [
+        "flac-1.4.3/AUTHORS",
+        "flac-1.4.3/COPYING.FDL",
+        "flac-1.4.3/COPYING.GPL",
+        "flac-1.4.3/COPYING.LGPL",
+        "flac-1.4.3/COPYING.Xiph"
+      ],
+      "name": "flac-vcpkg-1.4.3.tar.gz",
+      "sha256": "0a4bb82a30609b606650d538a804a7b40205366ce8fc98871b0ecf3fbb0611ee",
+      "sha512": "3571467a1d557bc03eade2ae9bb1a72fd94a89222e6ad9563078d646aac0b65ed1c3d829fb45dd3a6cdca806f7ba3b6393f0ce6571b43651959acaa1c2106396",
+      "targets": [
+        "windows"
+      ],
+      "url": "https://codeload.github.com/xiph/flac/tar.gz/refs/tags/1.4.3"
+    },
+    {
+      "bytes": 251771,
+      "license_members": [
+        "ogg-v1.3.5/AUTHORS",
+        "ogg-v1.3.5/COPYING"
+      ],
+      "name": "ogg-vcpkg-1.3.5.tar.gz",
+      "sha256": "769ed632a71bfa8bdd3439ac7c712b74e12affdaeae2852c6a859bbbba424e68",
+      "sha512": "72bfad534a459bfca534eae9b209fa630ac20364a82e82f2707b210a40deaf9a7dc9031532a8b27120a9dd66f804655ddce79875758ef14b109bf869e57fb747",
+      "targets": [
+        "windows"
+      ],
+      "url": "https://gitlab.xiph.org/xiph/ogg/-/archive/v1.3.5/ogg-v1.3.5.tar.gz"
+    },
+    {
+      "bytes": 1234573,
+      "license_members": [
+        "vorbis-1.3.7/AUTHORS",
+        "vorbis-1.3.7/COPYING"
+      ],
+      "name": "vorbis-vcpkg-1.3.7.tar.gz",
+      "sha256": "270c76933d0934e42c5ee0a54a36280e2d87af1de3cc3e584806357e237afd13",
+      "sha512": "bfb6f5dbfd49ed38b2b08b3667c06d02e68f649068a050f21a3cc7e1e56b27afd546aaa3199c4f6448f03f6e66a82f9a9dc2241c826d3d1d4acbd38339b9e9fb",
+      "targets": [
+        "windows"
+      ],
+      "url": "https://codeload.github.com/xiph/vorbis/tar.gz/refs/tags/v1.3.7"
+    },
+    {
+      "bytes": 4183352,
+      "license_members": [
+        "opus-1.5.2/AUTHORS",
+        "opus-1.5.2/COPYING",
+        "opus-1.5.2/LICENSE_PLEASE_READ.txt"
+      ],
+      "name": "opus-vcpkg-1.5.2.tar.gz",
+      "sha256": "9480e329e989f70d69886ded470c7f8cfe6c0667cc4196d4837ac9e668fb7404",
+      "sha512": "4ffefd9c035671024f9720c5129bfe395dea04f0d6b730041c2804e89b1db6e4d19633ad1ae58855afc355034233537361e707f26dc53adac916554830038fab",
+      "targets": [
+        "windows"
+      ],
+      "url": "https://codeload.github.com/xiph/opus/tar.gz/refs/tags/v1.5.2"
+    },
+    {
+      "bytes": 47842,
+      "license_members": [
+        "soundfile-0.14.0/LICENSE"
+      ],
+      "name": "soundfile-0.14.0.tar.gz",
+      "sha256": "ba1c1a2d618bca5c406647c83b89f07cc8810fa506a50622a6993ba130c1de11",
+      "sha512": "7895855686ca110d05693f43a63ad499f46e6a5710523ff20d0164b6add3615ec2316bfbb3ec46582c04c612df61dc5b70a8bb99f6bb47aec90e22f5e95e7260",
+      "targets": [
+        "macos",
+        "linux",
+        "windows"
+      ],
+      "url": "https://files.pythonhosted.org/packages/d2/db/949331952a6fb1c5b12e9de80fd08747966c2039d1a61db4764fbd3981c2/soundfile-0.14.0.tar.gz"
+    },
+    {
+      "bytes": 4480825,
+      "license_members": [
+        "vcpkg-80d54ff62d528339c626a6fbc3489a7f25956ade/LICENSE.txt"
+      ],
+      "name": "vcpkg-80d54ff62d528339c626a6fbc3489a7f25956ade.tar.gz",
+      "sha256": "48896b1bf869dcf3b4873cb2ef1e00e467704b247bdefa77836d1ec287ca2583",
+      "sha512": "a410f24e57ca124a25044c2494dcec5dd94ce4bde6a79f77c1b884a521b56f2db1244f5dd36048f1e7a42d4ed2a3a7aa83dc1e32d604e81a33875311e0c2f3b7",
+      "targets": [
+        "windows"
+      ],
+      "url": "https://codeload.github.com/microsoft/vcpkg/tar.gz/80d54ff62d528339c626a6fbc3489a7f25956ade"
+    }
+  ],
+  "targets": {
+    "linux-arm64": {
+      "binary": {
+        "bytes": 3385792,
+        "git_blob_sha1": "36ee3b11635c14263e127d952ad337fbb7a5e913",
+        "matches_upstream_git_blob": true,
+        "name": "libsndfile_arm64.so",
+        "sha256": "e17f0ffff6d9469069bc71539f90cc1bfbcbbd87ad4a4fdb9507fd9627076493"
+      },
+      "components": {
+        "LAME": "3.100",
+        "Opus": "1.4",
+        "libFLAC": "1.4.3",
+        "libogg": "1.3.5",
+        "libsndfile": "1.2.2",
+        "libvorbis": "1.3.7",
+        "mpg123": "1.32.3"
+      },
+      "wheel": {
+        "bytes": 1238050,
+        "sha256": "e85724a90bc99a6e8062c0b4ddf725f53b2a3b70afd4da875e9d2cfc4e92f377",
+        "url": "https://files.pythonhosted.org/packages/4a/f8/fc39fad6f879633461d27394cd1ddaf1f769ffa0597dca35872f51b16461/soundfile-0.14.0-py2.py3-none-manylinux_2_28_aarch64.whl"
+      }
+    },
+    "linux-x64": {
+      "binary": {
+        "bytes": 3639184,
+        "git_blob_sha1": "911c72a4dedd19d27fa6ad2bf5ceaa2ea2e131db",
+        "matches_upstream_git_blob": true,
+        "name": "libsndfile_x86_64.so",
+        "sha256": "c872fb84af2afc0e96b603e0000f0f407af86c49ad1126f2785e5722c7bb27d7"
+      },
+      "components": {
+        "LAME": "3.100",
+        "Opus": "1.4",
+        "libFLAC": "1.4.3",
+        "libogg": "1.3.5",
+        "libsndfile": "1.2.2",
+        "libvorbis": "1.3.7",
+        "mpg123": "1.32.3"
+      },
+      "wheel": {
+        "bytes": 1315963,
+        "sha256": "1e38bac1853412871318e82a1ba69a8be677619b56025bbfcccdb41b6cafe82d",
+        "url": "https://files.pythonhosted.org/packages/7b/a2/70fd4432b924684c372df8b0a45708c36c057ef3596c9eb53e0a806b980b/soundfile-0.14.0-py2.py3-none-manylinux_2_28_x86_64.whl"
+      }
+    },
+    "macos-arm64": {
+      "binary": {
+        "bytes": 3048520,
+        "git_blob_sha1": "6312ba719c68a76b43beb369dceada056dd17bf9",
+        "matches_upstream_git_blob": true,
+        "name": "libsndfile_arm64.dylib",
+        "sha256": "e9fd4d76bc457dcfb956617e8d467df85087ce069747fccd78e1e702d8629c14"
+      },
+      "components": {
+        "LAME": "3.100",
+        "Opus": "1.4",
+        "libFLAC": "1.4.3",
+        "libogg": "1.3.5",
+        "libsndfile": "1.2.2",
+        "libvorbis": "1.3.7",
+        "mpg123": "1.32.3"
+      },
+      "wheel": {
+        "bytes": 1103726,
+        "sha256": "d828d35a059626da52f1415b5faee610aeab393319cb3fc4a9aef47b619fc14c",
+        "url": "https://files.pythonhosted.org/packages/63/7a/dfdd6f8c748988427119f75eb860a3cedd858d1aea1fe28f39ad8559ef22/soundfile-0.14.0-py2.py3-none-macosx_11_0_arm64.whl"
+      }
+    },
+    "macos-x64": {
+      "binary": {
+        "bytes": 3192848,
+        "git_blob_sha1": "1d270e22e00f06c43be57c84cffb46a171ffbb37",
+        "matches_upstream_git_blob": true,
+        "name": "libsndfile_x86_64.dylib",
+        "sha256": "f3097d29afc013525c8106a576a4828ede508ac36011fa51ed1c59d16e2eae6f"
+      },
+      "components": {
+        "LAME": "3.100",
+        "Opus": "1.4",
+        "libFLAC": "1.4.3",
+        "libogg": "1.3.5",
+        "libsndfile": "1.2.2",
+        "libvorbis": "1.3.7",
+        "mpg123": "1.32.3"
+      },
+      "wheel": {
+        "bytes": 1144568,
+        "sha256": "19be05428da76ed61a4cad29b8e4bcf43a3e5c100089d2ec81dc961eed1b0dd4",
+        "url": "https://files.pythonhosted.org/packages/7e/72/c6b21e58d3113596e7e8de0a08d6f1d95173492cfbca0a4db14148cbba2a/soundfile-0.14.0-py2.py3-none-macosx_10_9_x86_64.whl"
+      }
+    },
+    "windows-arm64": {
+      "binary": {
+        "bytes": 2021376,
+        "git_blob_sha1": "674f76fd0d1f65cf7fe888e869583679b91288c1",
+        "matches_upstream_git_blob": true,
+        "name": "libsndfile_arm64.dll",
+        "sha256": "09df6b16d7095ed00bc1fd2d38c3aa291b3da78214f33360a021f2fc442e9540"
+      },
+      "components": {
+        "LAME": "3.100",
+        "Opus": "1.5.2",
+        "libFLAC": "1.4.3",
+        "libogg": "1.3.5",
+        "libsndfile": "1.2.2",
+        "libvorbis": "1.3.7",
+        "mpg123": "1.32.9"
+      },
+      "wheel": {
+        "bytes": 888858,
+        "sha256": "e090704718e124e7c844695236f1fce8d18a5e761eaf7c82dfcd124620805f98",
+        "url": "https://files.pythonhosted.org/packages/f4/83/55c65e61cf457805ce2ec157c1c6ae17715d0851aa2374422de0538838ca/soundfile-0.14.0-py2.py3-none-win_arm64.whl"
+      }
+    },
+    "windows-x64": {
+      "binary": {
+        "bytes": 2364416,
+        "git_blob_sha1": "698263ffc2d2b3fee0c68973d35c057459688228",
+        "matches_upstream_git_blob": true,
+        "name": "libsndfile_x64.dll",
+        "sha256": "22518c16f9d13eda5ae5adf999c4740d7d16cc2d6b178b36dd4ac2f759a38559"
+      },
+      "components": {
+        "LAME": "3.100",
+        "Opus": "1.5.2",
+        "libFLAC": "1.4.3",
+        "libogg": "1.3.5",
+        "libsndfile": "1.2.2",
+        "libvorbis": "1.3.7",
+        "mpg123": "1.32.9"
+      },
+      "wheel": {
+        "bytes": 1021480,
+        "sha256": "299491d3499460fb1b74bb4bd78b57ffc2d243a5fafa7b6ec1b264875c78453e",
+        "url": "https://files.pythonhosted.org/packages/ed/97/b39c18ac1df45e755ca22b8b00e872929da5d107998a207a5e4ac831bfda/soundfile-0.14.0-py2.py3-none-win_amd64.whl"
+      }
+    }
+  },
+  "windows_vcpkg_source_snapshot": "80d54ff62d528339c626a6fbc3489a7f25956ade"
+}

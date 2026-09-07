@@ -122,6 +122,101 @@ def _clone_project(source: Path, destination: Path) -> None:
     shutil.copytree(source, destination, copy_function=link_or_copy)
 
 
+def _windows_worker_job():
+    """Contain this worker and its future children even if taskkill is unavailable."""
+    import ctypes
+    from ctypes import wintypes
+
+    class BasicLimits(ctypes.Structure):
+        _fields_ = [
+            ("process_time", ctypes.c_int64),
+            ("job_time", ctypes.c_int64),
+            ("flags", wintypes.DWORD),
+            ("minimum_working_set", ctypes.c_size_t),
+            ("maximum_working_set", ctypes.c_size_t),
+            ("active_processes", wintypes.DWORD),
+            ("affinity", ctypes.c_size_t),
+            ("priority", wintypes.DWORD),
+            ("scheduling", wintypes.DWORD),
+        ]
+
+    class ExtendedLimits(ctypes.Structure):
+        _fields_ = [
+            ("basic", BasicLimits),
+            ("io_counters", ctypes.c_uint64 * 6),
+            ("process_memory", ctypes.c_size_t),
+            ("job_memory", ctypes.c_size_t),
+            ("peak_process_memory", ctypes.c_size_t),
+            ("peak_job_memory", ctypes.c_size_t),
+        ]
+
+    kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+    kernel.CreateJobObjectW.argtypes = [ctypes.c_void_p, wintypes.LPCWSTR]
+    kernel.CreateJobObjectW.restype = wintypes.HANDLE
+    kernel.SetInformationJobObject.argtypes = [
+        wintypes.HANDLE,
+        ctypes.c_int,
+        ctypes.c_void_p,
+        wintypes.DWORD,
+    ]
+    kernel.SetInformationJobObject.restype = wintypes.BOOL
+    kernel.AssignProcessToJobObject.argtypes = [wintypes.HANDLE, wintypes.HANDLE]
+    kernel.AssignProcessToJobObject.restype = wintypes.BOOL
+    kernel.TerminateJobObject.argtypes = [wintypes.HANDLE, wintypes.UINT]
+    kernel.TerminateJobObject.restype = wintypes.BOOL
+    kernel.CloseHandle.argtypes = [wintypes.HANDLE]
+    kernel.CloseHandle.restype = wintypes.BOOL
+    kernel.GetCurrentProcess.restype = wintypes.HANDLE
+    handle = kernel.CreateJobObjectW(None, None)
+    if not handle:
+        raise OSError("Could not contain background processing")
+    limits = ExtendedLimits()
+    limits.basic.flags = 0x2000  # JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE
+    if not kernel.SetInformationJobObject(handle, 9, ctypes.byref(limits), ctypes.sizeof(limits)):
+        kernel.CloseHandle(handle)
+        raise OSError("Could not contain background processing")
+    if not kernel.AssignProcessToJobObject(handle, kernel.GetCurrentProcess()):
+        kernel.CloseHandle(handle)
+        raise OSError("Could not contain background processing")
+
+    # The unnamed, non-inheritable handle stays open until process exit. The OS
+    # then closes it and kills remaining children, including after a forced kill.
+    return lambda: kernel.TerminateJobObject(handle, 1)
+
+
+def _guard_worker_lifetime():
+    """Stop owned processing when the multiprocessing parent's actual sentinel closes."""
+    from multiprocessing.connection import wait
+
+    parent = multiprocessing.parent_process()
+    if parent is None:
+        raise RuntimeError("Background processing requires its workspace server")
+    if os.name == "posix":
+        os.setsid()
+
+        def terminate_tree():
+            os.killpg(os.getpgrp(), signal.SIGKILL)
+    else:
+        terminate_tree = _windows_worker_job()
+
+    def parent_exited():
+        try:
+            terminate_tree()
+        finally:
+            os._exit(1)
+
+    # Check before cloning files or starting media tools, including when the
+    # backend died during multiprocessing's module/bootstrap imports.
+    if wait([parent.sentinel], timeout=0):
+        parent_exited()
+
+    def watch():
+        wait([parent.sentinel])
+        parent_exited()
+
+    threading.Thread(target=watch, name="cleantake-parent-lifetime", daemon=True).start()
+
+
 def _worker(
     workspace_text: str,
     jid: str,
@@ -130,12 +225,10 @@ def _worker(
     params: dict,
     limits: dict,
 ):
-    # The process group includes FFprobe/FFmpeg children, allowing bounded cancellation.
-    if os.name == "posix":
-        os.setsid()
     workspace = Path(workspace_text)
     pending = workspace / "pending" / jid
     try:
+        _guard_worker_lifetime()
         store = ProjectStore(workspace / "projects")
         staged_store = None
         if operation in {"import", "analyze"}:
@@ -379,13 +472,18 @@ class JobManager:
             taskkill = (
                 Path(os.environ.get("SystemRoot", r"C:\Windows")) / "System32" / "taskkill.exe"
             )
-            subprocess.run(
-                [str(taskkill), "/PID", str(process.pid), "/T", "/F"],
-                capture_output=True,
-                check=False,
-                timeout=5,
-                **subprocess_options(),
-            )
+            try:
+                subprocess.run(
+                    [str(taskkill), "/PID", str(process.pid), "/T", "/F"],
+                    capture_output=True,
+                    check=False,
+                    timeout=5,
+                    **subprocess_options(),
+                )
+            except (OSError, subprocess.TimeoutExpired):
+                # Worker-owned Windows Job Objects also contain its children
+                # when the OS helper cannot run and the direct kill is needed.
+                pass
             if process.is_alive():
                 process.kill()
         process.join(timeout=5)

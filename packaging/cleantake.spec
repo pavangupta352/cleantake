@@ -8,6 +8,10 @@ from PyInstaller.utils.hooks import collect_data_files, copy_metadata
 
 root = Path(SPECPATH).parent
 media = Path(os.environ["CLEANTAKE_MEDIA_DIR"])
+python_components = Path(os.environ["CLEANTAKE_PYTHON_NOTICES_DIR"])
+soundfile_components = Path(os.environ["CLEANTAKE_SOUNDFILE_STAGE_DIR"])
+if not (python_components / "manifest.json").is_file():
+    raise RuntimeError("Exact embedded Python component notices must be staged before freezing")
 suffix = ".exe" if sys.platform == "win32" else ""
 datas = collect_data_files("cleantake", includes=["static/**", "assets/**"])
 datas += copy_metadata("cleantake", recursive=True)
@@ -17,6 +21,9 @@ datas += [
     (str(media / "manifest.json"), "media"),
     (str(root / "LICENSE"), "licenses/cleantake"),
     (str(root / "THIRD_PARTY_NOTICES.md"), "licenses/cleantake"),
+    (str(python_components), "licenses/python-components"),
+    (str(soundfile_components / "licenses"), "licenses/soundfile-components"),
+    (str(soundfile_components / "manifest.json"), "licenses/soundfile-components"),
 ]
 python_license = next(
     (

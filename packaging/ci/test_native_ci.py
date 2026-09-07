@@ -83,6 +83,14 @@ def test_dependency_boundary_rejects_external_runtime_and_checkout(tmp_path):
         ci.dependency_origin(tmp_path / "checkout/libcustom.so", bundle, system)
 
 
+@pytest.mark.skipif(platform.system() != "Darwin", reason="Uses a real Apple system framework")
+def test_system_framework_can_resolve_into_the_os_cryptex(tmp_path):
+    framework = Path(
+        "/System/Library/Frameworks/AuthenticationServices.framework/Versions/A/AuthenticationServices"
+    )
+    assert ci.dependency_origin(framework, tmp_path, "Darwin") == "os"
+
+
 def test_bundle_symlink_cannot_disguise_an_external_dependency(tmp_path):
     bundle = tmp_path / "bundle"
     bundle.mkdir()
@@ -140,6 +148,32 @@ def test_artifact_selection_requires_exactly_one_matching_architecture(tmp_path)
     (tmp_path / "CleanTake-0.3.0-mac-arm64.dmg").touch()
     with pytest.raises(ValueError, match="exactly one"):
         ci.artifact(tmp_path, "arm64", ".dmg")
+
+
+def test_debian_artifact_uses_its_amd64_architecture_name(tmp_path):
+    deb = tmp_path / "CleanTake-0.2.0-linux-amd64.deb"
+    deb.touch()
+    archive = tmp_path / "CleanTake-0.2.0-linux-x64.tar.xz"
+    archive.touch()
+    assert ci.artifact(tmp_path, "x64", ".deb") == deb
+    assert ci.artifact(tmp_path, "x64", ".tar.xz") == archive
+    with pytest.raises(ValueError, match="exactly one"):
+        ci.artifact(tmp_path, "arm64", ".deb")
+
+
+def test_elf_dependencies_keep_complete_spaced_unicode_paths(tmp_path):
+    bundle = tmp_path / "CleanTake CI café" / "Portable café (test)"
+    library = bundle / "resources/backend/_internal/libgcc_s.so.1"
+    library.parent.mkdir(parents=True)
+    library.touch()
+    output = (
+        "\tlinux-vdso.so.1 (0x0000ffffabc00000)\n"
+        f"\tlibgcc_s.so.1 => {library} (0x0000ffffabc01000)\n"
+        "\t/lib/ld-linux-aarch64.so.1 (0x0000ffffabc02000)\n"
+    )
+    paths = ci.elf_dependency_paths(output)
+    assert paths == [library, Path("/lib/ld-linux-aarch64.so.1")]
+    assert ci.dependency_origin(paths[0], bundle, "Linux") == "bundled"
 
 
 @pytest.mark.skipif(platform.system() != "Darwin", reason="Exercises the real macOS loader")
