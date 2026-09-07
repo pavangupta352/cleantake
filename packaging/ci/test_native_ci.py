@@ -2,6 +2,7 @@
 
 import importlib.util
 import io
+import os
 import platform
 import shutil
 import struct
@@ -17,6 +18,21 @@ SPEC = importlib.util.spec_from_file_location(
 assert SPEC and SPEC.loader
 ci = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(ci)
+
+
+def test_mount_verification_uses_filesystem_identity(tmp_path):
+    owned = tmp_path / "Mounted café"
+    owned.mkdir()
+    alias = tmp_path / "Equivalent path"
+    try:
+        alias.symlink_to(owned, target_is_directory=True)
+    except OSError:
+        pytest.skip("This Windows test account cannot create symlinks")
+    ci.require_mountpoint([{"mount-point": str(alias)}], owned)
+    other = tmp_path / "Not the installed image"
+    other.mkdir()
+    with pytest.raises(ValueError, match="owned test location"):
+        ci.require_mountpoint([{"mount-point": str(other)}], owned)
 
 
 @pytest.mark.parametrize("machine,expected", [(62, "x64"), (183, "arm64")])
@@ -48,16 +64,23 @@ def test_identifies_mach_universal_binary():
 
 
 def test_dependency_boundary_rejects_external_runtime_and_checkout(tmp_path):
+    system = platform.system()
     bundle = tmp_path / "bundle"
     bundle.mkdir()
     lib = bundle / "libpython3.12.so"
     lib.touch()
-    assert ci.dependency_origin(lib, bundle, "Linux") == "bundled"
-    assert ci.dependency_origin(Path("/usr/lib/libc.so.6"), bundle, "Linux") == "os"
+    assert ci.dependency_origin(lib, bundle, system) == "bundled"
+    os_directory = (
+        Path(os.environ["SystemRoot"]) / "System32" if system == "Windows" else Path("/usr/lib")
+    )
+    os_library = {"Windows": "kernel32.dll", "Darwin": "libSystem.B.dylib", "Linux": "libc.so.6"}[
+        system
+    ]
+    assert ci.dependency_origin(os_directory / os_library, bundle, system) == "os"
     with pytest.raises(ValueError, match="runtime"):
-        ci.dependency_origin(Path("/usr/lib/libpython3.12.so"), bundle, "Linux")
+        ci.dependency_origin(os_directory / "libpython3.12.so", bundle, system)
     with pytest.raises(ValueError, match="outside"):
-        ci.dependency_origin(tmp_path / "checkout/libcustom.so", bundle, "Linux")
+        ci.dependency_origin(tmp_path / "checkout/libcustom.so", bundle, system)
 
 
 def test_bundle_symlink_cannot_disguise_an_external_dependency(tmp_path):
@@ -133,7 +156,7 @@ def test_real_macos_binary_must_bundle_its_non_system_library(tmp_path):
     subprocess.run(
         [compiler, "-dynamiclib", source, "-install_name", outside, "-o", outside], check=True
     )
-    executable = bundle / "application"
+    executable = bundle / "application (GPU)"
     subprocess.run([compiler, main, outside, "-o", executable], check=True)
     arch = "arm64" if platform.machine() == "arm64" else "x64"
     with pytest.raises(ValueError, match="outside"):

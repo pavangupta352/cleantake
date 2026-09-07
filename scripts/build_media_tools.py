@@ -336,7 +336,7 @@ def toolchain(
     info["compiler"] = run(["gcc", "--version"], env=env).strip()
     info["linker"] = run(["ld", "--version"], env=env).splitlines()[0]
     run(
-        ["sh", "configure", f"--prefix={prefix}", "--disable-shared", "CC=gcc"],
+        ["sh", "./configure", f"--prefix={prefix}", "--disable-shared", "CC=gcc"],
         cwd=source,
         env=env,
         log=work / "logs/musl-configure.txt",

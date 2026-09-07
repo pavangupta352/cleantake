@@ -187,8 +187,13 @@ def pe_imports(data: bytes) -> set[str]:
 
 
 def mac_dependencies(binary: Path, root: Path, binaries: list[Path]) -> list[dict]:
-    listing = run(["otool", "-L", binary]).stdout.splitlines()[1:]
-    loads = run(["otool", "-l", binary]).stdout
+    # otool interprets a trailing '(GPU)' as an archive-member selector. Inspect
+    # through a plain alias while resolving loader paths against the real file.
+    with tempfile.TemporaryDirectory(prefix="cleantake-inspect-") as temporary:
+        alias = Path(temporary) / "binary"
+        alias.symlink_to(binary.resolve())
+        listing = run(["otool", "-L", alias]).stdout.splitlines()[1:]
+        loads = run(["otool", "-l", alias]).stdout
     rpaths = re.findall(r"cmd LC_RPATH\s+cmdsize \d+\s+path (.*?) \(offset", loads)
     self_names = set(re.findall(r"cmd LC_ID_DYLIB\s+cmdsize \d+\s+name (.*?) \(offset", loads))
     executable_dirs = [binary.parent] + [
@@ -424,6 +429,19 @@ def signature_status(executable: Path, required: bool) -> dict:
     return {"status": "unsigned-package", "note": "No Linux package signing key configured"}
 
 
+def require_mountpoint(entities: list[dict], expected: Path):
+    # hdiutil can return /private/var and decomposed Unicode for the same inode.
+    for entity in entities:
+        actual = entity.get("mount-point")
+        if actual:
+            try:
+                if Path(actual).samefile(expected):
+                    return
+            except OSError:
+                pass
+    raise ValueError("DMG did not mount at the owned test location")
+
+
 def install_smoke(args) -> dict:
     system = platform.system()
     if system in ("Windows", "Linux") and os.environ.get("GITHUB_ACTIONS") != "true":
@@ -480,8 +498,7 @@ def install_smoke(args) -> dict:
                 )
                 mounted = True
                 entities = plistlib.loads(attached.stdout.encode())["system-entities"]
-                if str(mountpoint) not in {item.get("mount-point") for item in entities}:
-                    raise ValueError("DMG did not mount at the owned test location")
+                require_mountpoint(entities, mountpoint)
                 source = mountpoint / "CleanTake.app"
                 if not source.is_dir():
                     raise ValueError("DMG does not contain CleanTake.app")
