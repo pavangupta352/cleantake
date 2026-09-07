@@ -11,6 +11,33 @@ import soundfile as sf
 from cleantake.media import MediaError, decode_to_cache, inspect_media, sha256_file
 
 
+def test_decoded_cache_is_synced_with_a_writable_handle_before_publication(tmp_path, monkeypatch):
+    import os
+    import stat
+
+    source, cache = tmp_path / "source.wav", tmp_path / "cache.f32le"
+    samples = np.linspace(-0.2, 0.2, 4800, dtype=np.float32)
+    sf.write(source, samples, 48_000, subtype="FLOAT")
+    original = source.read_bytes()
+    sync = os.fsync
+    synchronized_files = []
+
+    def require_writable_file(descriptor):
+        if stat.S_ISREG(os.fstat(descriptor).st_mode):
+            # Windows flushing needs a writable descriptor; a zero-byte write
+            # verifies the same requirement on every platform without changing PCM.
+            os.write(descriptor, b"")
+            synchronized_files.append(descriptor)
+        sync(descriptor)
+
+    monkeypatch.setattr(os, "fsync", require_writable_file)
+    decoded = decode_to_cache(source, cache)
+    assert synchronized_files
+    assert decoded.frames == len(samples)
+    assert np.array_equal(np.fromfile(cache, dtype="<f4"), samples)
+    assert source.read_bytes() == original
+
+
 def test_playlist_cannot_import_external_local_recordings(tmp_path):
     private = tmp_path / "private.ts"
     subprocess.run(

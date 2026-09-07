@@ -288,7 +288,7 @@ def decode_to_cache(
                     raise MediaError("audio decode produced non-finite PCM samples")
         finally:
             del decoded_samples
-        with temporary.open("rb") as handle:
+        with temporary.open("r+b") as handle:
             os.fsync(handle.fileno())
         os.replace(temporary, destination)
     except subprocess.TimeoutExpired as error:
