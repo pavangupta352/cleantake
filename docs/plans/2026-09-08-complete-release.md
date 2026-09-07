@@ -171,17 +171,17 @@ Routes: GET/POST `/projects`, GET/PATCH/DELETE `/projects/{id}`, POST `/projects
 
 **Files:** `.github/workflows/`, issue templates, CONTRIBUTING.md, SECURITY.md, CHANGELOG.md, README.md, docs installation/user guides, scripts/build-release, third-party notices.
 
-- [ ] Build studio, copy into package assets in release build, build wheel/sdist, install in a fresh environment and complete real repair plus packaged studio smoke.
-- [ ] Configure Linux/macOS/Windows Python checks, frontend check/build and real-media tests; run Actions and inspect actual results. Pin action revisions and lock files.
+- [x] Build studio, copy into package assets in release build, build wheel/sdist, install in a fresh environment and complete real repair plus packaged studio smoke.
+- [x] Configure Linux/macOS/Windows Python checks, frontend check/build and real-media tests; run Actions and inspect actual results. Pin action revisions and lock files.
 - [x] Create accurate README with usable quickstart, audible demonstration, actual screenshots, recovery/source-map explanation, supported media/setup and honest limitations. Link real turnchunk integration example.
 - [x] Produce demo from actual exported result, label injected faults and any manual intervention, include licensing and reproducibility. Prepare release assets/checksums and concise launch copy without fabricated adoption or endorsements.
-- [ ] Review license obligations for dependencies and any shipped binaries/media. No secret/local path/private research in built artifacts or public history.
+- [x] Review license obligations for dependencies and any shipped binaries/media. No secret/local path/private research in built artifacts or public history.
 - [ ] Publish repository and verified release under pavangupta352. Repository/commits are authorized; unrelated external messaging requires concrete user direction.
 
 ## Task 10: Independent final review and completion audit
 
-- [ ] Fresh reviewer checks product contract, code, tests, package and outstanding material risks across final branch.
-- [ ] Address material findings in one coordinated fix batch, verify targeted regressions and re-review fixes.
-- [ ] Run complete meaningful checks once after final changes, inspect GitHub workflow outcomes and release artifacts.
+- [x] Fresh reviewer checks product contract, code, tests, package and outstanding material risks across final branch.
+- [x] Address material findings in one coordinated fix batch, verify targeted regressions and re-review fixes.
+- [x] Run complete meaningful checks once after final changes, inspect GitHub workflow outcomes and release artifacts.
 - [ ] Reconcile every roadmap gate, update memory/progress and public status to actual evidence. Leave goal active if required work remains. Do not use 'perfect', benchmark preference or production-ready as substitutes for measured evidence.
 
