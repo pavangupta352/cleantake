@@ -1,0 +1,59 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cleantake"
+version = "0.1.0.dev0"
+description = "Recover damaged dialogue from the recordings you already have."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+authors = [{name = "Pavan Gupta", email = "pavan.gupta.352@gmail.com"}]
+keywords = ["audio", "dialogue", "repair", "podcast", "synchronization"]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Environment :: Console",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Topic :: Multimedia :: Sound/Audio :: Editors",
+]
+dependencies = [
+  "numpy>=2.2,<3",
+  "scipy>=1.15,<2",
+  "soundfile>=0.13,<1",
+  "pydantic>=2.11,<3",
+  "fastapi>=0.115,<1",
+  "uvicorn>=0.34,<1",
+  "python-multipart>=0.0.20,<1",
+  "typer>=0.16,<1",
+  "rich>=14,<15",
+  "turnchunk==0.4.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/pavangupta352/cleantake"
+Repository = "https://github.com/pavangupta352/cleantake"
+Issues = "https://github.com/pavangupta352/cleantake/issues"
+
+[project.scripts]
+cleantake = "cleantake.cli:app"
+
+[dependency-groups]
+dev = ["pytest>=8.3", "pytest-cov>=6", "httpx>=0.28", "ruff>=0.11", "build>=1.2"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cleantake"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = ["media: requires local FFmpeg", "slow: long-recording or corpus evaluation"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
