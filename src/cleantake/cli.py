@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
+if __name__ == "__main__":
+    import multiprocessing
+
+    multiprocessing.freeze_support()
+
 import functools
 import json
-import os
-import shutil
 import socket
-import sys
 import threading
 import webbrowser
 from pathlib import Path
@@ -21,20 +23,13 @@ from cleantake.exports import ExportError, export_project
 from cleantake.media import MediaError, inspect_media
 from cleantake.portability import export_archive, import_archive
 from cleantake.projects import ProjectError, ProjectStore
+from cleantake.runtime import check_media_tools, default_workspace
 
 app = typer.Typer(
     no_args_is_help=True,
     add_completion=False,
     help="Recover damaged dialogue from simultaneous recordings.",
 )
-
-
-def default_workspace() -> Path:
-    if sys.platform == "darwin":
-        return Path.home() / "Library/Application Support/CleanTake"
-    if sys.platform == "win32":
-        return Path(os.environ.get("LOCALAPPDATA", Path.home() / "AppData/Local")) / "CleanTake"
-    return Path(os.environ.get("XDG_DATA_HOME", Path.home() / ".local/share")) / "cleantake"
 
 
 def _json(value):
@@ -98,14 +93,8 @@ def main(
 def doctor():
     """Check the local media tools and packaged studio."""
     result = {"version": __version__}
-    ready = True
-    for name in ("ffmpeg", "ffprobe"):
-        path = shutil.which(name)
-        result[name] = {
-            "available": bool(path),
-            "action": None if path else "Install FFmpeg and add its binaries to PATH.",
-        }
-        ready = ready and bool(path)
+    result.update(check_media_tools())
+    ready = all(result[name]["available"] for name in ("ffmpeg", "ffprobe"))
     result["studio"] = {"available": (Path(__file__).parent / "static/index.html").is_file()}
     _json(result)
     if not ready:

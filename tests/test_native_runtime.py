@@ -1,0 +1,152 @@
+from __future__ import annotations
+
+import shutil
+import subprocess
+import sys
+import time
+
+import numpy as np
+import pytest
+import soundfile as sf
+from typer.testing import CliRunner
+
+from cleantake.cli import app
+from cleantake.media import MediaError, _binary, decode_to_cache, inspect_media
+
+
+def test_frozen_media_uses_absolute_bundle_path_with_empty_search_path(tmp_path, monkeypatch):
+    bundle = tmp_path / "Bundle é" / "_internal"
+    tools = bundle / "media"
+    tools.mkdir(parents=True)
+    source = shutil.which("ffprobe")
+    assert source
+    target = tools / ("ffprobe.exe" if sys.platform == "win32" else "ffprobe")
+    shutil.copy2(source, target)
+    monkeypatch.setattr(sys, "frozen", True, raising=False)
+    monkeypatch.setattr(sys, "_MEIPASS", str(bundle), raising=False)
+    monkeypatch.setenv("PATH", "")
+    assert _binary("ffprobe") == str(target.resolve())
+
+
+def test_frozen_missing_media_never_falls_back_to_host_tools(tmp_path, monkeypatch):
+    assert shutil.which("ffprobe")
+    monkeypatch.setattr(sys, "frozen", True, raising=False)
+    monkeypatch.setattr(sys, "_MEIPASS", str(tmp_path), raising=False)
+    with pytest.raises(MediaError, match="[Bb]undled.*ffprobe"):
+        _binary("ffprobe")
+    result = CliRunner().invoke(app, ["doctor"])
+    assert result.exit_code == 1
+    assert '"available": false' in result.stdout
+    assert "reinstall" in result.stdout.lower()
+
+
+def test_frozen_corrupt_media_has_actionable_error_without_host_fallback(tmp_path, monkeypatch):
+    tools = tmp_path / "media"
+    tools.mkdir()
+    target = tools / ("ffprobe.exe" if sys.platform == "win32" else "ffprobe")
+    target.write_bytes(b"not an executable")
+    target.chmod(0o755)
+    audio = tmp_path / "source.wav"
+    sf.write(audio, np.zeros(4800), 48_000)
+    monkeypatch.setattr(sys, "frozen", True, raising=False)
+    monkeypatch.setattr(sys, "_MEIPASS", str(tmp_path), raising=False)
+    with pytest.raises(MediaError, match="run|reinstall"):
+        inspect_media(audio)
+
+
+def test_real_wavpack_import_uses_actual_wv_demuxer_name(tmp_path):
+    source = tmp_path / "source.wav"
+    packed = tmp_path / "recording.wv"
+    cache = tmp_path / "cache.f32le"
+    audio = (np.sin(np.arange(48_000) * 0.07) * 0.2).astype("float32")
+    sf.write(source, audio, 48_000, subtype="PCM_16")
+    subprocess.run(
+        ["ffmpeg", "-v", "error", "-i", str(source), "-c:a", "wavpack", str(packed)],
+        check=True,
+    )
+    result = decode_to_cache(packed, cache)
+    assert result.container_name == "wv"
+    assert result.frames == 48_000
+    expected, _ = sf.read(source, dtype="float32")
+    assert np.array_equal(np.fromfile(cache, dtype="<f4"), expected)
+
+
+def test_finishing_missing_frozen_tool_cannot_use_host_ffmpeg(tmp_path, monkeypatch):
+    from cleantake.exports import ExportError, finish_audio
+
+    source = tmp_path / "source.wav"
+    sf.write(source, np.sin(np.arange(96_000) * 0.07) * 0.1, 48_000)
+    monkeypatch.setattr(sys, "frozen", True, raising=False)
+    monkeypatch.setattr(sys, "_MEIPASS", str(tmp_path), raising=False)
+    with pytest.raises(ExportError, match="[Bb]undled.*ffmpeg"):
+        finish_audio(source, tmp_path / "finished.wav")
+
+
+def test_missing_frozen_decoder_does_not_leave_a_partial_cache(tmp_path, monkeypatch):
+    tools = tmp_path / "media"
+    tools.mkdir()
+    name = "ffprobe.exe" if sys.platform == "win32" else "ffprobe"
+    shutil.copy2(shutil.which("ffprobe"), tools / name)
+    source = tmp_path / "source.wav"
+    sf.write(source, np.zeros(4800), 48_000)
+    cache = tmp_path / "cache" / "audio.f32le"
+    monkeypatch.setattr(sys, "frozen", True, raising=False)
+    monkeypatch.setattr(sys, "_MEIPASS", str(tmp_path), raising=False)
+    with pytest.raises(MediaError, match="[Bb]undled.*ffmpeg"):
+        decode_to_cache(source, cache)
+    assert not cache.exists()
+    assert not list(cache.parent.iterdir())
+
+
+def _windows_child_tree(pid_file):
+    child = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(60)"])
+    from pathlib import Path
+
+    Path(pid_file).write_text(str(child.pid))
+    child.wait()
+
+
+@pytest.mark.skipif(sys.platform != "win32", reason="Requires the actual Windows process APIs")
+def test_windows_hidden_helpers_and_empty_path_tree_cancellation(tmp_path, monkeypatch):
+    import ctypes
+    import multiprocessing
+
+    from cleantake.runtime import subprocess_options
+    from cleantake.server.jobs import JobManager
+
+    result = subprocess.run(
+        [sys.executable, "-c", "import ctypes; print(ctypes.windll.kernel32.GetConsoleWindow())"],
+        capture_output=True,
+        text=True,
+        check=True,
+        **subprocess_options(),
+    )
+    assert result.stdout.strip() == "0"
+    pid_file = tmp_path / "child.pid"
+    worker = multiprocessing.get_context("spawn").Process(
+        target=_windows_child_tree,
+        args=(str(pid_file),),
+    )
+    worker.start()
+    try:
+        deadline = time.monotonic() + 10
+        while not pid_file.exists():
+            assert time.monotonic() < deadline
+            time.sleep(0.02)
+        child_pid = int(pid_file.read_text())
+        kernel = ctypes.windll.kernel32
+        kernel.OpenProcess.restype = ctypes.c_void_p
+        handle = kernel.OpenProcess(0x100000, False, child_pid)
+        assert handle
+        try:
+            monkeypatch.setenv("PATH", "")
+            JobManager._stop(None, worker)
+            assert not worker.is_alive()
+            assert kernel.WaitForSingleObject(ctypes.c_void_p(handle), 5000) == 0
+        finally:
+            kernel.CloseHandle(ctypes.c_void_p(handle))
+    finally:
+        if worker.is_alive():
+            worker.kill()
+        worker.join(timeout=5)
+        worker.close()

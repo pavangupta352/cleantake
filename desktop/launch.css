@@ -1,0 +1,12 @@
+:root {
+  color-scheme: light;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color: #20314b;
+  background: #f9fafc;
+}
+body { margin: 0; min-height: 100vh; display: grid; place-items: center; }
+main { padding: 40px; text-align: center; }
+.mark { width: 48px; height: 48px; stroke: #244f99; stroke-width: 1.65; stroke-linecap: round; fill: none; }
+h1 { margin: 18px 0 8px; font-size: 30px; font-weight: 650; line-height: 1.25; letter-spacing: -0.02em; }
+p { margin: 0; color: #586980; font-size: 14px; line-height: 1.5; }
+::selection { background: #e5edf9; color: #20314b; }

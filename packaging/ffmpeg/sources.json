@@ -1,0 +1,23 @@
+{
+  "ffmpeg": {
+    "version": "9.0.1",
+    "url": "https://ffmpeg.org/releases/ffmpeg-9.0.1.tar.xz",
+    "archive": "ffmpeg-9.0.1.tar.xz",
+    "root": "ffmpeg-9.0.1",
+    "bytes": 12036420,
+    "sha256": "cf38e0e28c7e5605942c4a77755349b0145804a397af37eb1fb4c77cb237f635",
+    "signature": "ffmpeg-9.0.1.tar.xz.asc",
+    "signature_sha256": "b613a00005232a1245ace7080088781ac23a916119d3e5b0d6c042368eee0177",
+    "key": "ffmpeg-devel.asc",
+    "key_sha256": "397b3becedcd5a98769967ff1ff8501ddc89f8368b8f766e4701377d7dbaabe5",
+    "fingerprint": "FCF986EA15E6E293A5644F10B4322F04D67658D8"
+  },
+  "musl": {
+    "version": "1.2.6",
+    "url": "https://musl.libc.org/releases/musl-1.2.6.tar.gz",
+    "archive": "musl-1.2.6.tar.gz",
+    "root": "musl-1.2.6",
+    "bytes": 1082499,
+    "sha256": "d585fd3b613c66151fc3249e8ed44f77020cb5e6c1e635a616d3f9f82460512a"
+  }
+}

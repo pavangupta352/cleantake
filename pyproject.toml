@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "cleantake"
-version = "0.1.0"
+version = "0.2.0"
 description = "Recover damaged dialogue from the recordings you already have."
 readme = "README.md"
 requires-python = ">=3.12"
@@ -40,6 +40,11 @@ Issues = "https://github.com/pavangupta352/cleantake/issues"
 cleantake = "cleantake.cli:app"
 
 [dependency-groups]
+bundle = [
+    "psutil==7.2.2",
+    "pyinstaller==6.22.2",
+    "pyinstaller-hooks-contrib==2026.7",
+]
 dev = ["pytest>=8.3", "pytest-cov>=6", "httpx>=0.28", "ruff>=0.11", "build>=1.2"]
 
 [tool.hatch.build.targets.wheel]
@@ -47,7 +52,10 @@ packages = ["src/cleantake"]
 
 [tool.hatch.build.targets.sdist]
 include = [
-  "/src", "/tests", "/scripts", "/docs", "/examples", "/eval", "/.github",
+  "/src", "/tests", "/scripts", "/packaging",
+  "/desktop/main.cjs", "/desktop/lib", "/desktop/scripts", "/desktop/test",
+  "/desktop/resources", "/desktop/launch.html", "/desktop/launch.css",
+  "/desktop/package.json", "/desktop/package-lock.json", "/desktop/electron-builder.cjs", "/docs", "/examples", "/eval", "/.github",
   "/.gitattributes", "/.gitignore",
   "/studio/src", "/studio/e2e", "/studio/package.json", "/studio/package-lock.json",
   "/studio/index.html", "/studio/vite.config.ts", "/studio/tsconfig.json",

@@ -1,0 +1,27 @@
+{
+  "name": "cleantake-desktop",
+  "productName": "CleanTake",
+  "version": "0.2.0",
+  "description": "Recover damaged dialogue from your backup recordings.",
+  "author": {
+    "name": "Pavan Gupta",
+    "email": "pavan.gupta.352@gmail.com"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/pavangupta352/cleantake",
+  "main": "main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test test/*.test.cjs",
+    "icons": "node scripts/build-icons.cjs",
+    "pack": "npm run icons && electron-builder --config electron-builder.cjs --dir",
+    "dist": "npm run icons && electron-builder --config electron-builder.cjs",
+    "test:app": "node scripts/smoke-app.cjs"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "2.6.2",
+    "electron": "44.2.0",
+    "electron-builder": "26.16.1",
+    "playwright": "1.63.0"
+  }
+}

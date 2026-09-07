@@ -1,0 +1,13 @@
+{
+  "license": "CC0-1.0",
+  "signal": "44100 Hz mono PCM16; n=0..44099; round(8000*sin(2*pi*440*n/44100))",
+  "generator": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "files": {
+    "tone.mp3": {
+      "sha256": "8a3397bbc9a65d55780f237d14bd6f72d99ab0f62fadb8fbca757579129a2acc",
+      "bytes": 8585,
+      "codec": "libmp3lame",
+      "duration_seconds": 1
+    }
+  }
+}

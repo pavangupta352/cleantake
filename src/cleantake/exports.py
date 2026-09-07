@@ -30,6 +30,7 @@ from cleantake.engine import (
 from cleantake.media import sha256_file
 from cleantake.models import ProjectRecord
 from cleantake.projects import ProjectConflictError, ProjectStore
+from cleantake.runtime import RuntimeDependencyError, media_binary, subprocess_options
 
 
 class ExportError(ValueError):
@@ -298,9 +299,10 @@ def export_project(
 
 
 def _ffmpeg(source, filter_text, output_args, cancelled):
-    binary = shutil.which("ffmpeg")
-    if binary is None:
-        raise ExportError("FFmpeg is required for loudness finishing")
+    try:
+        binary = media_binary("ffmpeg")
+    except RuntimeDependencyError as error:
+        raise ExportError(str(error)) from error
     command = [
         binary,
         "-hide_banner",
@@ -317,7 +319,12 @@ def _ffmpeg(source, filter_text, output_args, cancelled):
         *output_args,
     ]
     with tempfile.TemporaryFile() as log:
-        process = subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=log)
+        try:
+            process = subprocess.Popen(
+                command, stdout=subprocess.DEVNULL, stderr=log, **subprocess_options()
+            )
+        except OSError as error:
+            raise ExportError("Cannot run FFmpeg; reinstall CleanTake or FFmpeg.") from error
         started = time.monotonic()
         try:
             while process.poll() is None:

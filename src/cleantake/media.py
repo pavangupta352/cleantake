@@ -5,7 +5,6 @@ from __future__ import annotations
 import hashlib
 import json
 import os
-import shutil
 import stat
 import subprocess
 import tempfile
@@ -16,13 +15,15 @@ from typing import Any
 
 import numpy as np
 
+from cleantake.runtime import RuntimeDependencyError, media_binary, subprocess_options
+
 WORKING_SAMPLE_RATE = 48_000
 _COPY_CHUNK_BYTES = 1024 * 1024
 # Only self-contained recording containers may provide an imported source.
 # Playlists and virtual demuxers can consume bytes outside the hashed original.
 _INPUT_OPTIONS = [
     "-format_whitelist",
-    "wav,flac,mp3,ogg,mov,matroska,webm,avi,aiff,asf,aac,ac3,eac3,wavpack,ape,mpeg,mpegts",
+    "wav,flac,mp3,ogg,mov,matroska,webm,avi,aiff,asf,aac,ac3,eac3,wv,ape,mpeg,mpegts",
     "-protocol_whitelist",
     "file,pipe",
 ]
@@ -88,10 +89,10 @@ def _checked_regular_file(path: Path) -> Path:
 
 
 def _binary(name: str) -> str:
-    path = shutil.which(name)
-    if path is None:
-        raise MediaError(f"{name} is required to inspect or decode audio")
-    return path
+    try:
+        return media_binary(name)
+    except RuntimeDependencyError as error:
+        raise MediaError(str(error)) from error
 
 
 def _positive_float(raw: Any, fallback: float | None = None) -> float:
@@ -147,9 +148,12 @@ def inspect_media(path: Path, *, timeout_seconds: float = 60.0) -> MediaProbe:
             capture_output=True,
             text=True,
             timeout=timeout_seconds,
+            **subprocess_options(),
         )
     except subprocess.TimeoutExpired as error:
         raise MediaError("audio inspection timed out") from error
+    except OSError as error:
+        raise MediaError("Cannot run ffprobe; reinstall CleanTake or FFmpeg.") from error
     if completed.returncode != 0:
         raise MediaError("file has no readable audio; it may be malformed or unsupported")
     try:
@@ -233,13 +237,14 @@ def decode_to_cache(
     destination.parent.mkdir(parents=True, exist_ok=True)
     if destination.is_symlink():
         raise MediaError("audio cache destination must not be a symbolic link")
+    decoder = _binary("ffmpeg")
     temporary_fd, temporary_name = tempfile.mkstemp(
         prefix=f".{destination.name}.", suffix=".tmp", dir=destination.parent
     )
     os.close(temporary_fd)
     temporary = Path(temporary_name)
     command = [
-        _binary("ffmpeg"),
+        decoder,
         "-hide_banner",
         "-loglevel",
         "error",
@@ -274,6 +279,7 @@ def decode_to_cache(
             capture_output=True,
             text=True,
             timeout=timeout_seconds,
+            **subprocess_options(),
         )
         if completed.returncode != 0:
             raise MediaError("audio decode failed; the selection may be malformed or unsupported")
@@ -293,6 +299,10 @@ def decode_to_cache(
         os.replace(temporary, destination)
     except subprocess.TimeoutExpired as error:
         raise MediaError("audio decode timed out") from error
+    except OSError as error:
+        raise MediaError(
+            "Cannot decode audio; check disk permissions or reinstall the audio tools."
+        ) from error
     finally:
         temporary.unlink(missing_ok=True)
 

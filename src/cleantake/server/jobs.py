@@ -374,8 +374,17 @@ class JobManager:
                 if process.is_alive():
                     process.kill()
         elif process.is_alive():
+            from cleantake.runtime import subprocess_options
+
+            taskkill = (
+                Path(os.environ.get("SystemRoot", r"C:\Windows")) / "System32" / "taskkill.exe"
+            )
             subprocess.run(
-                ["taskkill", "/PID", str(process.pid), "/T", "/F"], capture_output=True, check=False
+                [str(taskkill), "/PID", str(process.pid), "/T", "/F"],
+                capture_output=True,
+                check=False,
+                timeout=5,
+                **subprocess_options(),
             )
             if process.is_alive():
                 process.kill()

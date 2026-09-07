@@ -1,0 +1,220 @@
+name: Native desktop
+
+on:
+  push:
+    branches: [main, 'feat/**', 'fix/**']
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      sign:
+        description: 'Require publisher signing and macOS notarization (protected credentials)'
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: native-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  native:
+    name: ${{ matrix.platform }} / ${{ matrix.arch }} / ${{ matrix.runner }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 120
+    # A name alone does not protect an environment. Configure native-signing with
+    # maintainer approval and trusted branch restrictions before adding secrets.
+    environment: ${{ github.event_name == 'workflow_dispatch' && inputs.sign && 'native-signing' || 'native-build' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-14
+            platform: mac
+            arch: arm64
+          - runner: macos-15-intel
+            platform: mac
+            arch: x64
+          - runner: windows-latest
+            platform: win
+            arch: x64
+            msystem: UCRT64
+            msys_packages: make diffutils pkgconf gnupg mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-nasm
+          - runner: windows-11-arm
+            platform: win
+            arch: arm64
+            msystem: CLANGARM64
+            msys_packages: make diffutils pkgconf gnupg mingw-w64-clang-aarch64-clang
+          - runner: ubuntu-22.04
+            platform: linux
+            arch: x64
+          - runner: ubuntu-24.04-arm
+            platform: linux
+            arch: arm64
+    env:
+      PYTHONUTF8: '1'
+      CLEANTAKE_SIGN: ${{ github.event_name == 'workflow_dispatch' && inputs.sign && 'true' || 'false' }}
+      # Development builds must not discover a runner's unrelated signing identity.
+      CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff # v6
+        with:
+          python-version: '3.12.13'
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+          architecture: ${{ matrix.arch }}
+          cache: npm
+          cache-dependency-path: desktop/package-lock.json
+      - name: Install Linux build and desktop test tools
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes build-essential binutils gnupg xvfb x11-utils pulseaudio dbus-x11
+          if [ '${{ matrix.arch }}' = 'x64' ]; then sudo apt-get install --yes nasm; fi
+      - name: Install macOS source verification tools
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          xcode-select -p
+          brew install gnupg
+          if [ '${{ matrix.arch }}' = 'x64' ]; then brew install nasm; fi
+      - uses: msys2/setup-msys2@66cd2cce69caa17b53920067426061ca1de3a884 # v2
+        if: runner.os == 'Windows'
+        with:
+          msystem: ${{ matrix.msystem }}
+          path-type: inherit
+          update: true
+          install: ${{ matrix.msys_packages }}
+      - name: Install locked native build dependencies
+        run: uv sync --locked --group bundle
+      - name: Verify native installer helper behavior
+        run: uv run pytest packaging/ci -q
+      - name: Build signed-source media tools (Unix)
+        if: runner.os != 'Windows'
+        run: uv run --group bundle python scripts/build_media_tools.py --output build/native/media --work-dir build/native/media-work
+      - name: Build signed-source media tools (Windows)
+        if: runner.os == 'Windows'
+        shell: msys2 {0}
+        run: uv run --group bundle python scripts/build_media_tools.py --output build/native/media --work-dir build/native/media-work
+      - name: Freeze the native backend and required resources
+        run: uv run --group bundle python scripts/build_runtime.py --media-dir build/native/media --output build/native/runtime
+      - name: Exercise relocated frozen processes without developer tools on PATH
+        run: uv run --group bundle python scripts/smoke_runtime.py --runtime build/native/runtime/cleantake-runtime --report build/native/evidence/runtime.json
+      - name: Install locked desktop build dependencies
+        working-directory: desktop
+        run: npm ci
+      - name: Verify desktop process and security behavior
+        working-directory: desktop
+        run: npm test
+      - name: Build development installers (ad-hoc macOS, unsigned Windows)
+        if: env.CLEANTAKE_SIGN != 'true'
+        working-directory: desktop
+        run: npm run dist -- --${{ matrix.platform }} --${{ matrix.arch }}
+      - name: Require macOS protected signing credentials
+        if: env.CLEANTAKE_SIGN == 'true' && runner.os == 'macOS'
+        shell: bash
+        env:
+          CSC_LINK: ${{ secrets.CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          for key in CSC_LINK CSC_KEY_PASSWORD APPLE_ID APPLE_APP_SPECIFIC_PASSWORD APPLE_TEAM_ID; do
+            if [ -z "${!key}" ]; then echo "Required protected credential is missing: $key"; exit 1; fi
+          done
+      - name: Require Windows protected signing credentials
+        if: env.CLEANTAKE_SIGN == 'true' && runner.os == 'Windows'
+        shell: pwsh
+        env:
+          WIN_CSC_LINK: ${{ secrets.WIN_CSC_LINK }}
+          WIN_CSC_KEY_PASSWORD: ${{ secrets.WIN_CSC_KEY_PASSWORD }}
+        run: |
+          foreach ($key in @('WIN_CSC_LINK', 'WIN_CSC_KEY_PASSWORD')) {
+            if (-not [Environment]::GetEnvironmentVariable($key)) { throw "Required protected credential is missing: $key" }
+          }
+      - name: Build publisher-signed and notarized macOS installers
+        if: env.CLEANTAKE_SIGN == 'true' && runner.os == 'macOS'
+        working-directory: desktop
+        env:
+          CSC_LINK: ${{ secrets.CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          CSC_IDENTITY_AUTO_DISCOVERY: 'true'
+        run: npm run dist -- --mac --${{ matrix.arch }}
+      - name: Build publisher-signed Windows installers
+        if: env.CLEANTAKE_SIGN == 'true' && runner.os == 'Windows'
+        working-directory: desktop
+        env:
+          WIN_CSC_LINK: ${{ secrets.WIN_CSC_LINK }}
+          WIN_CSC_KEY_PASSWORD: ${{ secrets.WIN_CSC_KEY_PASSWORD }}
+        run: npm run dist -- --win --${{ matrix.arch }}
+      - name: Build Linux packages during a signed release run
+        if: env.CLEANTAKE_SIGN == 'true' && runner.os == 'Linux'
+        working-directory: desktop
+        run: npm run dist -- --linux --${{ matrix.arch }}
+      - name: Start dedicated Linux desktop audio and display
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          mkdir -p build/native/evidence
+          PULSE_TEST_SOCKET="$RUNNER_TEMP/cleantake-pulse.sock"
+          pulseaudio --daemonize --exit-idle-time=-1 --use-pid-file=false -n \
+            --load="module-native-protocol-unix socket=$PULSE_TEST_SOCKET" \
+            --load="module-null-sink sink_name=cleantake_test"
+          export PULSE_SERVER="unix:$PULSE_TEST_SOCKET"
+          pactl set-default-sink cleantake_test
+          pactl info > build/native/evidence/pulse.txt
+          echo "PULSE_SERVER=$PULSE_SERVER" >> "$GITHUB_ENV"
+          Xvfb :99 -screen 0 1440x1000x24 -nolisten tcp > build/native/evidence/xvfb.txt 2>&1 &
+          echo 'DISPLAY=:99' >> "$GITHUB_ENV"
+          for _ in $(seq 1 30); do
+            if xdpyinfo -display :99 >/dev/null 2>&1; then exit 0; fi
+            sleep 1
+          done
+          exit 1
+      - name: Verify actual installed applications and retained projects (Linux)
+        if: runner.os == 'Linux'
+        run: dbus-run-session -- uv run --group bundle python scripts/native_ci.py install-smoke --arch ${{ matrix.arch }}
+      - name: Verify actual installed applications and retained projects (macOS / Windows)
+        if: runner.os != 'Linux'
+        shell: bash
+        run: |
+          SIGN_CHECK=()
+          if [ "$CLEANTAKE_SIGN" = 'true' ]; then SIGN_CHECK=(--signed); fi
+          uv run --group bundle python scripts/native_ci.py install-smoke --arch '${{ matrix.arch }}' "${SIGN_CHECK[@]}"
+      - name: Retain native evidence, including failed gates
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: native-evidence-${{ matrix.platform }}-${{ matrix.arch }}
+          path: |
+            build/native/evidence/
+            build/native/media/manifest.json
+            build/native/media-work/logs/
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Retain native installers and exact corresponding media source
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: native-packages-${{ matrix.platform }}-${{ matrix.arch }}
+          path: |
+            dist/native/*.dmg
+            dist/native/*.exe
+            dist/native/*.deb
+            dist/native/*.tar.xz
+            build/native/media/source/
+            build/native/media/licenses/
+            build/native/media/manifest.json
+          if-no-files-found: warn
+          retention-days: 14

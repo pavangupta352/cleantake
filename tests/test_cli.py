@@ -16,7 +16,7 @@ runner = CliRunner()
 def test_help_version_and_doctor_are_usable():
     assert runner.invoke(app, ["--help"]).exit_code == 0
     version = runner.invoke(app, ["--version"])
-    assert version.exit_code == 0 and "0.1.0" in version.stdout
+    assert version.exit_code == 0 and "0.2.0" in version.stdout
     doctor = runner.invoke(app, ["doctor"])
     assert doctor.exit_code == 0
     result = json.loads(doctor.stdout)
