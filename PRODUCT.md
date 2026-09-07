@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Local Python audio processing, a React and TypeScript studio served on loopback, and a command-line interface. Selected under the maintainer's delegation of implementation decisions; local studio versus desktop packaging is an open preference. Keep the processing engine reusable if packaging changes.
+Local Python audio processing, a React and TypeScript studio served on loopback, and a command-line interface. The next distribution adds an Electron desktop window with a frozen Python runtime and bundled media tools. The maintainer explicitly requires a simple fresh-machine installation without separate developer runtimes. Keep the processing engine shared across desktop, browser and CLI clients.
 
 ## Users
 
@@ -52,3 +52,11 @@ Dated research and source reviews inform this plan. No product benchmark or list
 
 Keyboard operation, visible focus, labeled controls and status announcements. Never encode repair status only by color. Waveform actions also have numeric time controls. Listening controls respect the user's playback choice and reduced-motion preference.
 
+## Desktop installation requirement
+
+Ship self-contained native packages for supported Windows, macOS and Linux
+systems. Include application runtimes, browser engine, media tools, offline
+sample and licenses. Use native install/open/quit behavior, preserve projects
+across updates and uninstalls, and verify each shipped architecture. System
+support and publisher-signing prompts must be described from actual evidence;
+do not claim that every historical PC or operating system is supported.
