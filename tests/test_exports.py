@@ -51,7 +51,7 @@ def test_export_contains_literal_donor_and_both_fade_contributors(session, tmp_p
     np.testing.assert_allclose(
         samples[12_480:23_520], donor[12_480:23_520] * 10 ** (-6 / 20), atol=1e-7
     )
-    provenance = json.loads((out / "source-map.json").read_text())
+    provenance = json.loads((out / "source-map.json").read_text(encoding="utf-8"))
     assert provenance["project_revision"] == store.get(pid).revision == result["revision"]
     assert provenance["output"]["frames"] == 48_000
     assert provenance["output"]["subtype"] == "FLOAT"
@@ -64,7 +64,7 @@ def test_export_contains_literal_donor_and_both_fade_contributors(session, tmp_p
     contributor = next(c for c in fades[0]["contributors"] if c["source_id"] == second.id)
     assert contributor["source_start_frame"] == 12_000
     assert contributor["original_clock_start_frame"] == 12_000
-    assert str(tmp_path) not in (out / "source-map.json").read_text()
+    assert str(tmp_path) not in (out / "source-map.json").read_text(encoding="utf-8")
     names = {artifact["name"] for artifact in result["artifacts"]}
     assert {"dialogue.wav", "source-map.json", "session.rpp"} <= names
     assert len([name for name in names if name.startswith("stems/")]) == 2
@@ -95,7 +95,7 @@ def test_flac_quantization_is_explicit_and_bounded(session, tmp_path):
     assert info.subtype == "PCM_24" and info.frames == len(primary)
     audio, _ = sf.read(tmp_path / "render/dialogue.flac", dtype="float32")
     np.testing.assert_allclose(audio, primary, atol=2**-23)
-    manifest = json.loads((tmp_path / "render/source-map.json").read_text())
+    manifest = json.loads((tmp_path / "render/source-map.json").read_text(encoding="utf-8"))
     assert manifest["output"]["subtype"] == "PCM_24"
 
 
@@ -106,7 +106,7 @@ def test_export_refuses_existing_destination_and_changed_source(session, tmp_pat
     (out / "keep").write_text("keep")
     with pytest.raises(ExportError, match="exists"):
         export_project(store, pid, out)
-    assert (out / "keep").read_text() == "keep"
+    assert (out / "keep").read_text(encoding="utf-8") == "keep"
     cache = store.source_path(pid, second.id, "cache")
     with cache.open("r+b") as handle:
         handle.write(b"bad!")
@@ -138,7 +138,7 @@ def test_reaper_session_references_existing_stems_and_editable_weight_envelopes(
     )
     out = tmp_path / "render"
     export_project(store, pid, out)
-    text = (out / "session.rpp").read_text()
+    text = (out / "session.rpp").read_text(encoding="utf-8")
     assert text.startswith("<REAPER_PROJECT")
     assert text.count("<VOLENV2") == 2
     assert f'FILE "stems/{first.id}.wav"' in text
@@ -198,7 +198,7 @@ def test_finishing_target_miss_warns_without_changing_unmastered_export(tmp_path
     store.import_source(project.id, source)
     export_project(store, project.id, tmp_path / "plain")
     result = export_project(store, project.id, tmp_path / "finished", finish=True)
-    provenance = json.loads((tmp_path / "finished/source-map.json").read_text())
+    provenance = json.loads((tmp_path / "finished/source-map.json").read_text(encoding="utf-8"))
     processing = provenance["processing"][0]
 
     assert processing["measured"]["integrated_lufs"] < -17
@@ -233,7 +233,7 @@ def test_skipped_finishing_warning_reaches_export_result_and_source_map(tmp_path
     project = store.create("Silence")
     store.import_source(project.id, source)
     result = export_project(store, project.id, tmp_path / "export", finish=True)
-    provenance = json.loads((tmp_path / "export/source-map.json").read_text())
+    provenance = json.loads((tmp_path / "export/source-map.json").read_text(encoding="utf-8"))
     processing = provenance["processing"][0]
 
     assert result["warnings"]

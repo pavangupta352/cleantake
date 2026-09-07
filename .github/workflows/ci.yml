@@ -96,6 +96,19 @@ jobs:
         run: diff -r studio/dist src/cleantake/static --exclude=THIRD_PARTY_NOTICES.txt
       - run: npx playwright install --with-deps chromium firefox webkit
         working-directory: studio
+      - name: Inspect Firefox audio before runner setup
+        run: node e2e/audio-backend.mjs
+        working-directory: studio
+      - name: Start a real audio clock for headless browser playback
+        run: |
+          sudo apt-get install -y pulseaudio
+          pulseaudio --start --exit-idle-time=-1
+          pactl load-module module-null-sink sink_name=cleantake_test
+          pactl set-default-sink cleantake_test
+          pactl info
+      - name: Verify Firefox can start and advance audio
+        run: node e2e/audio-backend.mjs --require-running
+        working-directory: studio
       - run: npm run test:e2e
         working-directory: studio
       - name: Exercise the bundled studio through production security headers

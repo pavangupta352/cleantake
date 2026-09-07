@@ -53,7 +53,7 @@ include = [
   "/studio/index.html", "/studio/vite.config.ts", "/studio/tsconfig.json",
   "/studio/playwright.config.ts", "/pyproject.toml", "/uv.lock", "/README.md",
   "/LICENSE", "/THIRD_PARTY_NOTICES.md", "/CONTRIBUTING.md", "/SECURITY.md",
-  "/CHANGELOG.md", "/PRODUCT.md", "/DESIGN.md",
+  "/CHANGELOG.md", "/CITATION.cff", "/PRODUCT.md", "/DESIGN.md",
 ]
 
 [tool.pytest.ini_options]
