@@ -1,0 +1,16 @@
+:root {
+  font-synthesis: none;
+  color-scheme: light;
+  --font: "Segoe UI", "Helvetica Neue", "Arial", sans-serif;
+  --desk: #eef1f5;
+  --paper: #ffffff;
+  --ink: #20314b;
+  --secondary: #586980;
+  --blue: #244f99;
+  --teal: #28756a;
+  --amber: #795717;
+  --amber-paper: #fbf0d9;
+  --line: #d8dfe8;
+  --line-strong: #b9c5d5;
+  --lane-label: 187px;
+}

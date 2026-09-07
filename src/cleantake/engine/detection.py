@@ -113,6 +113,23 @@ def _signal_above_background(candidate, start, end, rate, width, reference_frame
 
 
 def _proposal(reference, candidates, start, end, kind, rate, width):
+    if kind == "dropout":
+        # Whole silent frames establish a gap, but its boundaries need not lie
+        # on the analysis grid. Recover the adjacent near-zero samples without
+        # padding over intact PCM or resampling filter fringes. Context must then
+        # be taken outside these actual bounds, not inside a missed edge frame.
+        # Neighboring overload windows retain their own repair ranges; extending
+        # into them would create mutually overlapping proposed edits.
+        left = max(0, start - width)
+        _, _, left_clipped = _stats(reference[left:start], width)
+        audible = np.flatnonzero(np.abs(reference[left:start]) > 1e-7)
+        if not left_clipped.any():
+            start = left + int(audible[-1]) + 1 if len(audible) else left
+        right = min(len(reference), end + width)
+        _, _, right_clipped = _stats(reference[end:right], width)
+        audible = np.flatnonzero(np.abs(reference[end:right]) > 1e-7)
+        if not right_clipped.any():
+            end = end + int(audible[0]) if len(audible) else right
     if end - start < width * 2:
         return None
     alternatives = []
@@ -132,8 +149,17 @@ def _proposal(reference, candidates, start, end, kind, rate, width):
         valid, maximum = True, 0.0
         for lo in range(start, end, width * 500):
             hi = min(end, lo + width * 500)
+            # A final partial block still needs a full evidence window.
+            lo = min(lo, hi - width)
             donor = sample_aligned(candidate.samples, lo, hi, rate, candidate.alignment)
             rms, peaks, clipping = _stats(donor, width)
+            if len(donor) % width:
+                # Refined bounds may leave a partial frame: inspect an overlapping
+                # final window so neither a damaged tail nor its peak is omitted.
+                tail_rms, tail_peaks, tail_clipping = _stats(donor[-width:], width)
+                rms = np.concatenate((rms, tail_rms))
+                peaks = np.concatenate((peaks, tail_peaks))
+                clipping = np.concatenate((clipping, tail_clipping))
             if clipping.any() or not len(rms) or np.any(rms * 10 ** (gain / 20) < 0.001):
                 valid = False
                 break
@@ -187,9 +213,10 @@ def _proposal(reference, candidates, start, end, kind, rate, width):
 def find_repairs(reference, candidates, sample_rate):
     """Suggest frame-aligned repairs for review, never automatically accept them.
 
-    Uses 20 ms evidence windows and ten-second PCM blocks. Proposal boundaries
-    have this resolution. Weak/noisy context and all-source silence are not enough
-    to assert recoverability. No noise-only replacements are currently proposed.
+    Uses 20 ms evidence windows and ten-second PCM blocks. Dropout bounds extend
+    through adjacent near-zero samples; clipping retains the window resolution.
+    Weak/noisy context and all-source silence are not enough to assert
+    recoverability. No noise-only replacements are currently proposed.
     """
     _array(reference)
     _rate(sample_rate)

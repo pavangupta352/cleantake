@@ -1,0 +1,32 @@
+name: Bug report
+description: Report a reproducible problem with processing, the studio or installation.
+body:
+  - type: markdown
+    attributes:
+      value: Please keep private recordings and access tokens out of public reports. For a vulnerability, use the contact in SECURITY.md.
+  - type: textarea
+    id: behavior
+    attributes:
+      label: What happened?
+      description: Include what you expected and what you observed.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Include the command or studio steps, and a short shareable fixture if available.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version and operating system
+      placeholder: CleanTake version or commit, operating system, FFmpeg version
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Sanitized error output, screenshots, or source and repair timestamps. State the license for any attached media.

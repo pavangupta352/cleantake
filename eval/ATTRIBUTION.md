@@ -1,0 +1,11 @@
+# Evaluation provenance and attribution
+
+**AMI Meeting Corpus — AMI Project Consortium.** The six source WAVs and manual timing annotations come from the University of Edinburgh's official [AMI distribution](https://groups.inf.ed.ac.uk/ami/download/). The corpus is licensed under [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/), as stated on the [AMI license page](https://groups.inf.ed.ac.uk/ami/corpus/license.shtml). The license includes its disclaimer of warranties and limitation of liability. CleanTake is not endorsed by the consortium or the recorded participants.
+
+[corpus.json](corpus.json) records exact publisher URLs, SHA-256 hashes, meeting/channel identifiers and sample intervals. Eighteen one-minute excerpts preserve the publisher's original mono 16 kHz PCM16 sample values; their only preparation changes are trimming to the declared intervals and removal of WAV metadata. Evaluation-only derivatives add the shifts, clock drift, polarity changes, dropouts and clipping specified in [protocol.json](protocol.json). No speech is generated. Derivatives are not written over the original recordings and are not checked into this directory.
+
+[annotation-summary.json](annotation-summary.json) contains aggregate counts and interval unions calculated from AMI manual annotations v1.6.2. Timing labels can be approximate. Counts describe annotated overlap and vocal events, not independent listening judgments. Its six windows retain the original selection history: 120–180 and 420–480 seconds were fixed before inspecting annotation counts; 300–360 was then added for both meetings to include channel-0 speech, overlap and laughter. No window was selected for its CleanTake result. CleanTake's meeting split was set after corpus preparation and before engine tuning.
+
+If redistributing recordings or derivatives, carry this attribution, the license link, the exact source identifiers and the modification history. The numerical long-session fixture is generated solely for engineering checks and is not evidence from human speech.
+
+Corpus reference: Carletta, J. (2006), *Announcing the AMI Meeting Corpus*, The ELRA Newsletter 11(1), pp. 3–5. [Official corpus overview](https://groups.inf.ed.ac.uk/ami/corpus/overview.shtml).

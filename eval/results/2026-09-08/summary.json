@@ -1,0 +1,188 @@
+{
+  "schema": 1,
+  "clock_cases": 24,
+  "real_cases": 36,
+  "invariant_failures": [],
+  "code_lock_unchanged": true,
+  "groups": [
+    {
+      "split": "development",
+      "condition": "clean",
+      "recordings": 3,
+      "donor_proposals": 0,
+      "unresolved_flags": 0,
+      "donor_proposals_outside_injected_intervals": 0,
+      "injected_seconds": 0.0,
+      "injected_seconds_covered_by_proposals": 0.0,
+      "aligned_donors": 3,
+      "donor_alignment_attempts": 6,
+      "outside_injection_modified_seconds": 0.0
+    },
+    {
+      "split": "development",
+      "condition": "dropout",
+      "recordings": 3,
+      "donor_proposals": 0,
+      "unresolved_flags": 0,
+      "donor_proposals_outside_injected_intervals": 0,
+      "injected_seconds": 3.0,
+      "injected_seconds_covered_by_proposals": 0.0,
+      "aligned_donors": 3,
+      "donor_alignment_attempts": 6,
+      "outside_injection_modified_seconds": 0.0
+    },
+    {
+      "split": "development",
+      "condition": "clipping",
+      "recordings": 3,
+      "donor_proposals": 0,
+      "unresolved_flags": 3,
+      "donor_proposals_outside_injected_intervals": 0,
+      "injected_seconds": 3.0,
+      "injected_seconds_covered_by_proposals": 0.0,
+      "aligned_donors": 3,
+      "donor_alignment_attempts": 6,
+      "outside_injection_modified_seconds": 0.0
+    },
+    {
+      "split": "development",
+      "condition": "shared_dropout",
+      "recordings": 3,
+      "donor_proposals": 0,
+      "unresolved_flags": 0,
+      "donor_proposals_outside_injected_intervals": 0,
+      "injected_seconds": 3.0,
+      "injected_seconds_covered_by_proposals": 0.0,
+      "aligned_donors": 3,
+      "donor_alignment_attempts": 6,
+      "outside_injection_modified_seconds": 0.0
+    },
+    {
+      "split": "development",
+      "condition": "shared_clipping",
+      "recordings": 3,
+      "donor_proposals": 0,
+      "unresolved_flags": 3,
+      "donor_proposals_outside_injected_intervals": 0,
+      "injected_seconds": 3.0,
+      "injected_seconds_covered_by_proposals": 0.0,
+      "aligned_donors": 3,
+      "donor_alignment_attempts": 6,
+      "outside_injection_modified_seconds": 0.0
+    },
+    {
+      "split": "development",
+      "condition": "clock_dropout",
+      "recordings": 3,
+      "donor_proposals": 0,
+      "unresolved_flags": 0,
+      "donor_proposals_outside_injected_intervals": 0,
+      "injected_seconds": 3.0,
+      "injected_seconds_covered_by_proposals": 0.0,
+      "aligned_donors": 3,
+      "donor_alignment_attempts": 6,
+      "outside_injection_modified_seconds": 0.0
+    },
+    {
+      "split": "reserved_evaluation",
+      "condition": "clean",
+      "recordings": 3,
+      "donor_proposals": 0,
+      "unresolved_flags": 7,
+      "donor_proposals_outside_injected_intervals": 0,
+      "injected_seconds": 0.0,
+      "injected_seconds_covered_by_proposals": 0.0,
+      "aligned_donors": 5,
+      "donor_alignment_attempts": 6,
+      "outside_injection_modified_seconds": 0.0
+    },
+    {
+      "split": "reserved_evaluation",
+      "condition": "dropout",
+      "recordings": 3,
+      "donor_proposals": 4,
+      "unresolved_flags": 7,
+      "donor_proposals_outside_injected_intervals": 0,
+      "injected_seconds": 3.0,
+      "injected_seconds_covered_by_proposals": 2.0,
+      "aligned_donors": 5,
+      "donor_alignment_attempts": 6,
+      "outside_injection_modified_seconds": 0.0
+    },
+    {
+      "split": "reserved_evaluation",
+      "condition": "clipping",
+      "recordings": 3,
+      "donor_proposals": 8,
+      "unresolved_flags": 7,
+      "donor_proposals_outside_injected_intervals": 1,
+      "injected_seconds": 3.0,
+      "injected_seconds_covered_by_proposals": 1.32,
+      "aligned_donors": 5,
+      "donor_alignment_attempts": 6,
+      "outside_injection_modified_seconds": 0.08
+    },
+    {
+      "split": "reserved_evaluation",
+      "condition": "shared_dropout",
+      "recordings": 3,
+      "donor_proposals": 0,
+      "unresolved_flags": 7,
+      "donor_proposals_outside_injected_intervals": 0,
+      "injected_seconds": 3.0,
+      "injected_seconds_covered_by_proposals": 0.0,
+      "aligned_donors": 5,
+      "donor_alignment_attempts": 6,
+      "outside_injection_modified_seconds": 0.0
+    },
+    {
+      "split": "reserved_evaluation",
+      "condition": "shared_clipping",
+      "recordings": 3,
+      "donor_proposals": 1,
+      "unresolved_flags": 14,
+      "donor_proposals_outside_injected_intervals": 1,
+      "injected_seconds": 3.0,
+      "injected_seconds_covered_by_proposals": 0.0,
+      "aligned_donors": 5,
+      "donor_alignment_attempts": 6,
+      "outside_injection_modified_seconds": 0.08
+    },
+    {
+      "split": "reserved_evaluation",
+      "condition": "clock_dropout",
+      "recordings": 3,
+      "donor_proposals": 4,
+      "unresolved_flags": 7,
+      "donor_proposals_outside_injected_intervals": 0,
+      "injected_seconds": 3.0,
+      "injected_seconds_covered_by_proposals": 2.0,
+      "aligned_donors": 4,
+      "donor_alignment_attempts": 6,
+      "outside_injection_modified_seconds": 0.0
+    }
+  ],
+  "known_clock": {
+    "development": {
+      "passed": 12,
+      "total": 12,
+      "maximum_offset_error_ms": 0.002967193393210721,
+      "maximum_endpoint_error_ms": 0.007841256958258089
+    },
+    "reserved_evaluation": {
+      "passed": 12,
+      "total": 12,
+      "maximum_offset_error_ms": 0.01001107153925096,
+      "maximum_endpoint_error_ms": 0.0027206793877109885
+    }
+  },
+  "rendering": {
+    "successful": 36,
+    "duration_retained": 36,
+    "outside_edits_exact": 36,
+    "pending_only_exact": 36,
+    "finite": 36,
+    "maximum_peak": 1.0,
+    "maximum_provenance_abs_error": 2.220446049250313e-16
+  }
+}

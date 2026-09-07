@@ -1,0 +1,114 @@
+name: Checks
+
+on:
+  push:
+    branches: [main, 'feat/**', 'fix/**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    name: Python ${{ matrix.python }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            python: '3.12'
+          - os: ubuntu-latest
+            python: '3.13'
+          - os: ubuntu-latest
+            python: '3.14'
+          - os: macos-latest
+            python: '3.12'
+          - os: windows-latest
+            python: '3.12'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff # v6
+        with:
+          python-version: ${{ matrix.python }}
+          enable-cache: true
+      - name: Install FFmpeg (Linux)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Install FFmpeg (macOS)
+        if: runner.os == 'macOS'
+        run: command -v ffmpeg || brew install ffmpeg
+      - name: Install FFmpeg (Windows)
+        if: runner.os == 'Windows'
+        run: choco install ffmpeg --yes --no-progress
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        if: runner.os == 'Windows'
+        with:
+          node-version: '22'
+      - run: uv sync --locked
+      - name: Rebuild bundled assets and license notices on Windows
+        if: runner.os == 'Windows'
+        run: uv run python scripts/build_release.py --assets-only
+      - run: uv run ruff check src tests scripts
+      - run: uv run pytest --cov=cleantake --cov-report=term-missing
+      - name: Build the bundled Python package
+        run: uv build
+      - name: Check a clean installation outside the checkout
+        shell: bash
+        run: |
+          uv venv "$RUNNER_TEMP/cleantake-installed"
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            CLEAN_PY="$RUNNER_TEMP/cleantake-installed/Scripts/python.exe"
+          else
+            CLEAN_PY="$RUNNER_TEMP/cleantake-installed/bin/python"
+          fi
+          uv pip install --python "$CLEAN_PY" dist/*.whl
+          "$CLEAN_PY" scripts/smoke_installed.py
+
+  studio:
+    name: Studio and browser workflow
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff # v6
+        with:
+          python-version: '3.12'
+          enable-cache: true
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: studio/package-lock.json
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - run: uv sync --locked
+      - run: npm ci
+        working-directory: studio
+      - run: npm run build
+        working-directory: studio
+      - name: Verify bundled studio matches the locked source build
+        run: diff -r studio/dist src/cleantake/static --exclude=THIRD_PARTY_NOTICES.txt
+      - run: npx playwright install --with-deps chromium firefox webkit
+        working-directory: studio
+      - run: npm run test:e2e
+        working-directory: studio
+      - name: Exercise the bundled studio through production security headers
+        run: npm run test:e2e -- --project=chromium
+        working-directory: studio
+        env:
+          CLEANTAKE_PACKAGED: '1'
+      - name: Retain browser failure evidence
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: browser-failure-evidence
+          path: |
+            studio/test-results/
+            studio/playwright-report/
+          retention-days: 7

@@ -1,0 +1,25 @@
+{
+  "segments": [
+    {
+      "id": 0,
+      "start": 1.0,
+      "end": 2.4,
+      "text": " Can you hear the backup recording?",
+      "speaker": "Speaker A",
+      "words": [
+        {
+          "word": " Can",
+          "start": 1.0,
+          "end": 1.2,
+          "probability": 0.98
+        },
+        {
+          "word": " you",
+          "start": 1.2,
+          "end": 1.4,
+          "probability": 0.97
+        }
+      ]
+    }
+  ]
+}

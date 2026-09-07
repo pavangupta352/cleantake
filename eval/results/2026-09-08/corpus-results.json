@@ -1,0 +1,3602 @@
+{
+  "schema": 1,
+  "lock_sha256": "4ee7fc6d02a2d8971db8eba43fa9efa5b1a3ab796b69d14f55016b4ec3b0b9a3",
+  "cases": [
+    {
+      "condition": "clean",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0007505068181926696,
+          "drift_ppm": -0.9528143393732711,
+          "confidence": 0.5444147335961913,
+          "anchors": 6,
+          "residual_ms": 0.062063628603449356,
+          "status": "aligned",
+          "polarity": -1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.7505068181926696,
+            "drift_error_ppm": -0.9528143393732711,
+            "endpoint_error_ms": 0.6933379578302733,
+            "polarity_correct": false
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": -0.017639457986359828,
+          "drift_ppm": 382.0734024243541,
+          "confidence": 0.31438197683193947,
+          "anchors": 3,
+          "residual_ms": 0.8140749469737363,
+          "status": "aligned",
+          "polarity": -1,
+          "nominal_clock_errors": {
+            "offset_error_ms": -17.63945798635983,
+            "drift_error_ppm": 382.0734024243541,
+            "endpoint_error_ms": 5.284946159101418,
+            "polarity_correct": false
+          }
+        }
+      ],
+      "proposals": [],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 0,
+      "injected_primary_rms": null,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.00390625,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "9a7f8a7eb9c695184d8a3b0f9195fd446d9f5736274fbd96c2df775fe00830c4"
+      },
+      "render_and_map_seconds": 0.01698108296841383,
+      "meeting": "ES2004a",
+      "start_seconds": 120,
+      "split": "development",
+      "elapsed_seconds": 0.18650600005639717
+    },
+    {
+      "condition": "dropout",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0006821104558789351,
+          "drift_ppm": 0.004295593295787777,
+          "confidence": 0.5351167309462028,
+          "anchors": 8,
+          "residual_ms": 0.07748418648096365,
+          "status": "aligned",
+          "polarity": -1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.682110455878935,
+            "drift_error_ppm": 0.004295593295787777,
+            "endpoint_error_ms": 0.6823681914766823,
+            "polarity_correct": false
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": -0.017639457986359828,
+          "drift_ppm": 382.0734024243541,
+          "confidence": 0.31438197683193947,
+          "anchors": 3,
+          "residual_ms": 0.8140749469737363,
+          "status": "aligned",
+          "polarity": -1,
+          "nominal_clock_errors": {
+            "offset_error_ms": -17.63945798635983,
+            "drift_error_ppm": 382.0734024243541,
+            "endpoint_error_ms": 5.284946159101418,
+            "polarity_correct": false
+          }
+        }
+      ],
+      "proposals": [],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.00025463554292623556,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.00390625,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "80fefb719d2209389cc3d5f9b00f483bd9bb3a35fa4e691702a2be3f1c4e6401"
+      },
+      "render_and_map_seconds": 0.012544249999336898,
+      "meeting": "ES2004a",
+      "start_seconds": 120,
+      "split": "development",
+      "elapsed_seconds": 0.18044170801294968
+    },
+    {
+      "condition": "clipping",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0007505068181926696,
+          "drift_ppm": -0.9528143393732711,
+          "confidence": 0.5444147335961913,
+          "anchors": 6,
+          "residual_ms": 0.062063628603449356,
+          "status": "aligned",
+          "polarity": -1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.7505068181926696,
+            "drift_error_ppm": -0.9528143393732711,
+            "endpoint_error_ms": 0.6933379578302733,
+            "polarity_correct": false
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": -0.017639457986359828,
+          "drift_ppm": 382.0734024243541,
+          "confidence": 0.31438197683193947,
+          "anchors": 3,
+          "residual_ms": 0.8140749469737363,
+          "status": "aligned",
+          "polarity": -1,
+          "nominal_clock_errors": {
+            "offset_error_ms": -17.63945798635983,
+            "drift_error_ppm": 382.0734024243541,
+            "endpoint_error_ms": 5.284946159101418,
+            "polarity_correct": false
+          }
+        }
+      ],
+      "proposals": [],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.00025463554292623556,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.01904296875,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "f6c79d6a8a6724ed342f4911067fea6640aaa6f0fe333b9e1e8b5bff76b33399"
+      },
+      "render_and_map_seconds": 0.012758416996803135,
+      "meeting": "ES2004a",
+      "start_seconds": 120,
+      "split": "development",
+      "elapsed_seconds": 0.1774704169947654
+    },
+    {
+      "condition": "shared_dropout",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0006821106876301859,
+          "drift_ppm": 0.004299132474265554,
+          "confidence": 0.5444147335961913,
+          "anchors": 8,
+          "residual_ms": 0.07748388116490391,
+          "status": "aligned",
+          "polarity": -1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.6821106876301859,
+            "drift_error_ppm": 0.004299132474265554,
+            "endpoint_error_ms": 0.6823686355786418,
+            "polarity_correct": false
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": -0.017639457986359828,
+          "drift_ppm": 382.0734024243541,
+          "confidence": 0.31438197683193947,
+          "anchors": 3,
+          "residual_ms": 0.8140749469737363,
+          "status": "aligned",
+          "polarity": -1,
+          "nominal_clock_errors": {
+            "offset_error_ms": -17.63945798635983,
+            "drift_error_ppm": 382.0734024243541,
+            "endpoint_error_ms": 5.284946159101418,
+            "polarity_correct": false
+          }
+        }
+      ],
+      "proposals": [],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.00025463554292623556,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.00390625,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "80fefb719d2209389cc3d5f9b00f483bd9bb3a35fa4e691702a2be3f1c4e6401"
+      },
+      "render_and_map_seconds": 0.012709166971035302,
+      "meeting": "ES2004a",
+      "start_seconds": 120,
+      "split": "development",
+      "elapsed_seconds": 0.18041658401489258
+    },
+    {
+      "condition": "shared_clipping",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0006798202316705805,
+          "drift_ppm": 0.44891107861987134,
+          "confidence": 0.5444147335961913,
+          "anchors": 8,
+          "residual_ms": 0.07934054794408774,
+          "status": "aligned",
+          "polarity": -1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.6798202316705806,
+            "drift_error_ppm": 0.44891107861987134,
+            "endpoint_error_ms": 0.7067548963877728,
+            "polarity_correct": false
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": -0.017639457986359828,
+          "drift_ppm": 382.0734024243541,
+          "confidence": 0.31438197683193947,
+          "anchors": 3,
+          "residual_ms": 0.8140749469737363,
+          "status": "aligned",
+          "polarity": -1,
+          "nominal_clock_errors": {
+            "offset_error_ms": -17.63945798635983,
+            "drift_error_ppm": 382.0734024243541,
+            "endpoint_error_ms": 5.284946159101418,
+            "polarity_correct": false
+          }
+        }
+      ],
+      "proposals": [],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.00025463554292623556,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.01904296875,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "f6c79d6a8a6724ed342f4911067fea6640aaa6f0fe333b9e1e8b5bff76b33399"
+      },
+      "render_and_map_seconds": 0.011977792019024491,
+      "meeting": "ES2004a",
+      "start_seconds": 120,
+      "split": "development",
+      "elapsed_seconds": 0.17825754097430035
+    },
+    {
+      "condition": "clock_dropout",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.37569098447607663,
+          "drift_ppm": 120.23401607280378,
+          "confidence": 0.49069017048437946,
+          "anchors": 8,
+          "residual_ms": 0.06473998597006381,
+          "status": "aligned",
+          "polarity": -1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.6909844760766282,
+            "drift_error_ppm": 0.234016072803783,
+            "endpoint_error_ms": 0.7050254404448552,
+            "polarity_correct": false
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.35737125230570826,
+          "drift_ppm": 501.8012868310469,
+          "confidence": 0.31524779730198854,
+          "anchors": 3,
+          "residual_ms": 0.8172573928000745,
+          "status": "aligned",
+          "polarity": -1,
+          "nominal_clock_errors": {
+            "offset_error_ms": -17.628747694291736,
+            "drift_error_ppm": 381.8012868310469,
+            "endpoint_error_ms": 5.279329515571078,
+            "polarity_correct": false
+          }
+        }
+      ],
+      "proposals": [],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.00025463554292623556,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.00390625,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "80fefb719d2209389cc3d5f9b00f483bd9bb3a35fa4e691702a2be3f1c4e6401"
+      },
+      "render_and_map_seconds": 0.012546250014565885,
+      "meeting": "ES2004a",
+      "start_seconds": 120,
+      "split": "development",
+      "elapsed_seconds": 0.1923093749792315
+    },
+    {
+      "condition": "clean",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0006293031494661636,
+          "drift_ppm": -0.10912819869665336,
+          "confidence": 0.6601803335988499,
+          "anchors": 16,
+          "residual_ms": 0.21630941552594551,
+          "status": "aligned",
+          "polarity": -1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.6293031494661636,
+            "drift_error_ppm": -0.10912819869665336,
+            "endpoint_error_ms": 0.6227554575443643,
+            "polarity_correct": false
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0,
+          "drift_ppm": 0.0,
+          "confidence": 0.0,
+          "anchors": 0,
+          "residual_ms": 0.0,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.0,
+            "drift_error_ppm": 0.0,
+            "endpoint_error_ms": 0.0,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 0,
+      "injected_primary_rms": null,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.3951416015625,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "f2d5167ade302afc0915c321b790a04c8c77a72ac9741fc85b820ee794d26982"
+      },
+      "render_and_map_seconds": 0.012917957967147231,
+      "meeting": "ES2004a",
+      "start_seconds": 300,
+      "split": "development",
+      "elapsed_seconds": 0.18470033298945054
+    },
+    {
+      "condition": "dropout",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0006241291733885756,
+          "drift_ppm": -0.010285998915775502,
+          "confidence": 0.6481075145483314,
+          "anchors": 16,
+          "residual_ms": 0.21305285635004073,
+          "status": "aligned",
+          "polarity": -1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.6241291733885755,
+            "drift_error_ppm": -0.010285998915775502,
+            "endpoint_error_ms": 0.623512013453629,
+            "polarity_correct": false
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0,
+          "drift_ppm": 0.0,
+          "confidence": 0.0,
+          "anchors": 0,
+          "residual_ms": 0.0,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.0,
+            "drift_error_ppm": 0.0,
+            "endpoint_error_ms": 0.0,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.022736481471376517,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.3951416015625,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "d31efb181099790736ebafb68065920b101cc4fdd790120a43355300240eb21d"
+      },
+      "render_and_map_seconds": 0.014256457972805947,
+      "meeting": "ES2004a",
+      "start_seconds": 300,
+      "split": "development",
+      "elapsed_seconds": 0.18757425004150718
+    },
+    {
+      "condition": "clipping",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.000651902773619924,
+          "drift_ppm": -0.41199828065945654,
+          "confidence": 0.6423793137307973,
+          "anchors": 16,
+          "residual_ms": 0.20921275776408899,
+          "status": "aligned",
+          "polarity": -1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.651902773619924,
+            "drift_error_ppm": -0.41199828065945654,
+            "endpoint_error_ms": 0.6271828767803566,
+            "polarity_correct": false
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0,
+          "drift_ppm": 0.0,
+          "confidence": 0.0,
+          "anchors": 0,
+          "residual_ms": 0.0,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.0,
+            "drift_error_ppm": 0.0,
+            "endpoint_error_ms": 0.0,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [
+        {
+          "start_frame": 320000,
+          "end_frame": 321280,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 321920,
+          "end_frame": 324160,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 324800,
+          "end_frame": 328000,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        }
+      ],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.022736481471376517,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.3951416015625,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "5d00c8ffccff0fd8a8dd3127d167124ccba0a9ec61295965ce27728c155c9f85"
+      },
+      "render_and_map_seconds": 0.012031874968670309,
+      "meeting": "ES2004a",
+      "start_seconds": 300,
+      "split": "development",
+      "elapsed_seconds": 0.1876733330427669
+    },
+    {
+      "condition": "shared_dropout",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0006241291733885756,
+          "drift_ppm": -0.010285998915775502,
+          "confidence": 0.6481075145483314,
+          "anchors": 16,
+          "residual_ms": 0.21305285635004073,
+          "status": "aligned",
+          "polarity": -1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.6241291733885755,
+            "drift_error_ppm": -0.010285998915775502,
+            "endpoint_error_ms": 0.623512013453629,
+            "polarity_correct": false
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0,
+          "drift_ppm": 0.0,
+          "confidence": 0.0,
+          "anchors": 0,
+          "residual_ms": 0.0,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.0,
+            "drift_error_ppm": 0.0,
+            "endpoint_error_ms": 0.0,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.022736481471376517,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.3951416015625,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "d31efb181099790736ebafb68065920b101cc4fdd790120a43355300240eb21d"
+      },
+      "render_and_map_seconds": 0.012954499979969114,
+      "meeting": "ES2004a",
+      "start_seconds": 300,
+      "split": "development",
+      "elapsed_seconds": 0.18566600000485778
+    },
+    {
+      "condition": "shared_clipping",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0006509566004881072,
+          "drift_ppm": -0.3914143836656217,
+          "confidence": 0.6481075145483314,
+          "anchors": 16,
+          "residual_ms": 0.20910407195453742,
+          "status": "aligned",
+          "polarity": -1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.6509566004881072,
+            "drift_error_ppm": -0.3914143836656217,
+            "endpoint_error_ms": 0.62747173746817,
+            "polarity_correct": false
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0,
+          "drift_ppm": 0.0,
+          "confidence": 0.0,
+          "anchors": 0,
+          "residual_ms": 0.0,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.0,
+            "drift_error_ppm": 0.0,
+            "endpoint_error_ms": 0.0,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [
+        {
+          "start_frame": 320000,
+          "end_frame": 321280,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 321920,
+          "end_frame": 324160,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 324800,
+          "end_frame": 328000,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        }
+      ],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.022736481471376517,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.3951416015625,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "5d00c8ffccff0fd8a8dd3127d167124ccba0a9ec61295965ce27728c155c9f85"
+      },
+      "render_and_map_seconds": 0.014614915999118239,
+      "meeting": "ES2004a",
+      "start_seconds": 300,
+      "split": "development",
+      "elapsed_seconds": 0.1868201249744743
+    },
+    {
+      "condition": "clock_dropout",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.3756362688154267,
+          "drift_ppm": 119.67566703839262,
+          "confidence": 0.6494519023511247,
+          "anchors": 16,
+          "residual_ms": 0.21136956368433832,
+          "status": "aligned",
+          "polarity": -1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.6362688154267215,
+            "drift_error_ppm": -0.32433296160738223,
+            "endpoint_error_ms": 0.6168088377302786,
+            "polarity_correct": false
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0,
+          "drift_ppm": 0.0,
+          "confidence": 0.0,
+          "anchors": 0,
+          "residual_ms": 0.0,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": -375.0,
+            "drift_error_ppm": -120.0,
+            "endpoint_error_ms": -382.2,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.022736481471376517,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.3951416015625,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "d31efb181099790736ebafb68065920b101cc4fdd790120a43355300240eb21d"
+      },
+      "render_and_map_seconds": 0.012265375000424683,
+      "meeting": "ES2004a",
+      "start_seconds": 300,
+      "split": "development",
+      "elapsed_seconds": 0.19877512502716854
+    },
+    {
+      "condition": "clean",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0,
+          "drift_ppm": 0.0,
+          "confidence": 0.0,
+          "anchors": 1,
+          "residual_ms": 0.0,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.0,
+            "drift_error_ppm": 0.0,
+            "endpoint_error_ms": 0.0,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0,
+          "drift_ppm": 0.0,
+          "confidence": 0.0,
+          "anchors": 0,
+          "residual_ms": 0.0,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.0,
+            "drift_error_ppm": 0.0,
+            "endpoint_error_ms": 0.0,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 0,
+      "injected_primary_rms": null,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.074371337890625,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "0a456af64c9de8e9d45de31b0a5c412eb7d4a606d9b58e59c75bbbc29f1caa83"
+      },
+      "render_and_map_seconds": 0.012335624953266233,
+      "meeting": "ES2004a",
+      "start_seconds": 420,
+      "split": "development",
+      "elapsed_seconds": 0.1996380839846097
+    },
+    {
+      "condition": "dropout",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0,
+          "drift_ppm": 0.0,
+          "confidence": 0.0,
+          "anchors": 1,
+          "residual_ms": 0.0,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.0,
+            "drift_error_ppm": 0.0,
+            "endpoint_error_ms": 0.0,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0,
+          "drift_ppm": 0.0,
+          "confidence": 0.0,
+          "anchors": 0,
+          "residual_ms": 0.0,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.0,
+            "drift_error_ppm": 0.0,
+            "endpoint_error_ms": 0.0,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.00048224189186606245,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.074371337890625,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "e92eba9d36084c696f51d374af0b186e4946da8224c82da27c1da3caa963171b"
+      },
+      "render_and_map_seconds": 0.014068832970224321,
+      "meeting": "ES2004a",
+      "start_seconds": 420,
+      "split": "development",
+      "elapsed_seconds": 0.18415112496586516
+    },
+    {
+      "condition": "clipping",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0,
+          "drift_ppm": 0.0,
+          "confidence": 0.0,
+          "anchors": 1,
+          "residual_ms": 0.0,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.0,
+            "drift_error_ppm": 0.0,
+            "endpoint_error_ms": 0.0,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0,
+          "drift_ppm": 0.0,
+          "confidence": 0.0,
+          "anchors": 0,
+          "residual_ms": 0.0,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.0,
+            "drift_error_ppm": 0.0,
+            "endpoint_error_ms": 0.0,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.00048224189186606245,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.074371337890625,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "c095f38998ee3faef62b430e0aeea0a5b267f326d64730abb7b8024aaeeb1478"
+      },
+      "render_and_map_seconds": 0.012373125005979091,
+      "meeting": "ES2004a",
+      "start_seconds": 420,
+      "split": "development",
+      "elapsed_seconds": 0.17945024999789894
+    },
+    {
+      "condition": "shared_dropout",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0,
+          "drift_ppm": 0.0,
+          "confidence": 0.0,
+          "anchors": 1,
+          "residual_ms": 0.0,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.0,
+            "drift_error_ppm": 0.0,
+            "endpoint_error_ms": 0.0,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0,
+          "drift_ppm": 0.0,
+          "confidence": 0.0,
+          "anchors": 0,
+          "residual_ms": 0.0,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.0,
+            "drift_error_ppm": 0.0,
+            "endpoint_error_ms": 0.0,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.00048224189186606245,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.074371337890625,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "e92eba9d36084c696f51d374af0b186e4946da8224c82da27c1da3caa963171b"
+      },
+      "render_and_map_seconds": 0.013648291991557926,
+      "meeting": "ES2004a",
+      "start_seconds": 420,
+      "split": "development",
+      "elapsed_seconds": 0.17727020801976323
+    },
+    {
+      "condition": "shared_clipping",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0,
+          "drift_ppm": 0.0,
+          "confidence": 0.0,
+          "anchors": 1,
+          "residual_ms": 0.0,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.0,
+            "drift_error_ppm": 0.0,
+            "endpoint_error_ms": 0.0,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0,
+          "drift_ppm": 0.0,
+          "confidence": 0.0,
+          "anchors": 1,
+          "residual_ms": 0.0,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.0,
+            "drift_error_ppm": 0.0,
+            "endpoint_error_ms": 0.0,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.00048224189186606245,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.074371337890625,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "c095f38998ee3faef62b430e0aeea0a5b267f326d64730abb7b8024aaeeb1478"
+      },
+      "render_and_map_seconds": 0.011957000009715557,
+      "meeting": "ES2004a",
+      "start_seconds": 420,
+      "split": "development",
+      "elapsed_seconds": 0.17602733301464468
+    },
+    {
+      "condition": "clock_dropout",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0,
+          "drift_ppm": 0.0,
+          "confidence": 0.0,
+          "anchors": 1,
+          "residual_ms": 0.0,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": -375.0,
+            "drift_error_ppm": -120.0,
+            "endpoint_error_ms": -382.2,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0,
+          "drift_ppm": 0.0,
+          "confidence": 0.0,
+          "anchors": 0,
+          "residual_ms": 0.0,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": -375.0,
+            "drift_error_ppm": -120.0,
+            "endpoint_error_ms": -382.2,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.00048224189186606245,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.074371337890625,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "e92eba9d36084c696f51d374af0b186e4946da8224c82da27c1da3caa963171b"
+      },
+      "render_and_map_seconds": 0.01622183300787583,
+      "meeting": "ES2004a",
+      "start_seconds": 420,
+      "split": "development",
+      "elapsed_seconds": 0.21126683399779722
+    },
+    {
+      "condition": "clean",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.00047146768393694564,
+          "drift_ppm": -4.1962374365167765,
+          "confidence": 0.904481757622843,
+          "anchors": 24,
+          "residual_ms": 0.12212365862506236,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.47146768393694566,
+            "drift_error_ppm": -4.1962374365167765,
+            "endpoint_error_ms": 0.21969343774593902,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.00269683813615103,
+          "drift_ppm": -12.83016744043966,
+          "confidence": 0.7069070544837558,
+          "anchors": 19,
+          "residual_ms": 0.4136582402087313,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 2.69683813615103,
+            "drift_error_ppm": -12.83016744043966,
+            "endpoint_error_ms": 1.9270280897246506,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 0,
+      "injected_primary_rms": null,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.48046875,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "421bc7c9d0a64cc41bfb85cc5e6deea4c4baa67952ec8eb6bd93d4fb20c13330"
+      },
+      "render_and_map_seconds": 0.014935542014427483,
+      "meeting": "IS1009a",
+      "start_seconds": 120,
+      "split": "reserved_evaluation",
+      "elapsed_seconds": 0.30719033401692286
+    },
+    {
+      "condition": "dropout",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.00047117316670680073,
+          "drift_ppm": -4.168139079046525,
+          "confidence": 0.904481757622843,
+          "anchors": 24,
+          "residual_ms": 0.12234202542767372,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.4711731667068007,
+            "drift_error_ppm": -4.168139079046525,
+            "endpoint_error_ms": 0.22108482196400925,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0027088418084602675,
+          "drift_ppm": -12.952066192886226,
+          "confidence": 0.7069070544837558,
+          "anchors": 19,
+          "residual_ms": 0.4143294919896308,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 2.7088418084602677,
+            "drift_error_ppm": -12.952066192886226,
+            "endpoint_error_ms": 1.9317178368870938,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [
+        {
+          "start_frame": 320000,
+          "end_frame": 328000,
+          "kind": "dropout",
+          "source_id": "lapel",
+          "confidence": 0.8042069612987395,
+          "reason": "Missing primary signal",
+          "alternatives": [
+            {
+              "source_id": "lapel",
+              "confidence": 0.8042069612987395,
+              "gain_db": 8.641611218511267,
+              "reason": "Intact interval with correlated surrounding signal"
+            }
+          ],
+          "status": "accepted",
+          "gain_db": 8.641611218511267,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 640000,
+          "end_frame": 648000,
+          "kind": "dropout",
+          "source_id": "lapel",
+          "confidence": 0.8101298718017995,
+          "reason": "Missing primary signal",
+          "alternatives": [
+            {
+              "source_id": "lapel",
+              "confidence": 0.8101298718017995,
+              "gain_db": 7.826944870949842,
+              "reason": "Intact interval with correlated surrounding signal"
+            }
+          ],
+          "status": "accepted",
+          "gain_db": 7.826944870949842,
+          "fade_ms": 12.0
+        }
+      ],
+      "review_accepted": 2,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.04452130362939847,
+      "fault_frames_covered_by_proposals": 16000,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.48046875,
+        "provenance_max_abs_error": 1.3877787807814457e-17,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "89d8d171f9e8628bb2c40c3b08de2e6d4d3f9280249ecabfc441fc8e39b17474"
+      },
+      "render_and_map_seconds": 0.031398416962474585,
+      "meeting": "IS1009a",
+      "start_seconds": 120,
+      "split": "reserved_evaluation",
+      "elapsed_seconds": 0.24956695805303752
+    },
+    {
+      "condition": "clipping",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0004730504314841069,
+          "drift_ppm": -4.252740546564063,
+          "confidence": 0.8926667900077118,
+          "anchors": 24,
+          "residual_ms": 0.1224329789383656,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.47305043148410686,
+            "drift_error_ppm": -4.252740546564063,
+            "endpoint_error_ms": 0.2178859986902631,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0027203270589223516,
+          "drift_ppm": -13.282772068397783,
+          "confidence": 0.7034187281183627,
+          "anchors": 18,
+          "residual_ms": 0.4186238467600395,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 2.7203270589223516,
+            "drift_error_ppm": -13.282772068397783,
+            "endpoint_error_ms": 1.9233607348184845,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [
+        {
+          "start_frame": 320000,
+          "end_frame": 321600,
+          "kind": "clipping",
+          "source_id": "lapel",
+          "confidence": 0.7590140112781161,
+          "reason": "Flat-top overload",
+          "alternatives": [
+            {
+              "source_id": "lapel",
+              "confidence": 0.7590140112781161,
+              "gain_db": 8.85339694902202,
+              "reason": "Intact interval with correlated surrounding signal"
+            }
+          ],
+          "status": "accepted",
+          "gain_db": 8.85339694902202,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 322560,
+          "end_frame": 323840,
+          "kind": "clipping",
+          "source_id": "lapel",
+          "confidence": 0.7704674662566163,
+          "reason": "Flat-top overload",
+          "alternatives": [
+            {
+              "source_id": "lapel",
+              "confidence": 0.7704674662566163,
+              "gain_db": 9.082995293872166,
+              "reason": "Intact interval with correlated surrounding signal"
+            }
+          ],
+          "status": "accepted",
+          "gain_db": 9.082995293872166,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 324480,
+          "end_frame": 328000,
+          "kind": "clipping",
+          "source_id": "lapel",
+          "confidence": 0.7781843096701216,
+          "reason": "Flat-top overload",
+          "alternatives": [
+            {
+              "source_id": "lapel",
+              "confidence": 0.7781843096701216,
+              "gain_db": 9.030842843005876,
+              "reason": "Intact interval with correlated surrounding signal"
+            }
+          ],
+          "status": "accepted",
+          "gain_db": 9.030842843005876,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 640000,
+          "end_frame": 643840,
+          "kind": "clipping",
+          "source_id": "lapel",
+          "confidence": 0.7714844034791812,
+          "reason": "Flat-top overload",
+          "alternatives": [
+            {
+              "source_id": "lapel",
+              "confidence": 0.7714844034791812,
+              "gain_db": 8.205164271933176,
+              "reason": "Intact interval with correlated surrounding signal"
+            }
+          ],
+          "status": "accepted",
+          "gain_db": 8.205164271933176,
+          "fade_ms": 12.0
+        }
+      ],
+      "review_accepted": 4,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.04452130362939847,
+      "fault_frames_covered_by_proposals": 10240,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.48046875,
+        "provenance_max_abs_error": 5.551115123125783e-17,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "e0988aed176985da7c220debc7da744e7e8ba91ed086920656e79b92e23ee553"
+      },
+      "render_and_map_seconds": 0.031746292021125555,
+      "meeting": "IS1009a",
+      "start_seconds": 120,
+      "split": "reserved_evaluation",
+      "elapsed_seconds": 0.25052454200340435
+    },
+    {
+      "condition": "shared_dropout",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.00047115359912884737,
+          "drift_ppm": -4.167889949895053,
+          "confidence": 0.904481757622843,
+          "anchors": 24,
+          "residual_ms": 0.12234128283622117,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.47115359912884736,
+            "drift_error_ppm": -4.167889949895053,
+            "endpoint_error_ms": 0.2210802021351442,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.002708989243065056,
+          "drift_ppm": -12.960648609592177,
+          "confidence": 0.7069070544837558,
+          "anchors": 19,
+          "residual_ms": 0.41420238161640727,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 2.708989243065056,
+            "drift_error_ppm": -12.960648609592177,
+            "endpoint_error_ms": 1.9313503264895255,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.04452130362939847,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.48046875,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "f1a62afb85b371bd5c802358cec245348e231e1489132d6974e305b4082f3ab5"
+      },
+      "render_and_map_seconds": 0.014015875000040978,
+      "meeting": "IS1009a",
+      "start_seconds": 120,
+      "split": "reserved_evaluation",
+      "elapsed_seconds": 0.22866466699633747
+    },
+    {
+      "condition": "shared_clipping",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0004686637781741734,
+          "drift_ppm": -4.247904234924923,
+          "confidence": 0.8948368904870532,
+          "anchors": 24,
+          "residual_ms": 0.12224188608792656,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.4686637781741734,
+            "drift_error_ppm": -4.247904234924923,
+            "endpoint_error_ms": 0.21378952407867802,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.002720202773154909,
+          "drift_ppm": -13.31297791262773,
+          "confidence": 0.7194778230973977,
+          "anchors": 18,
+          "residual_ms": 0.4181618478818651,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 2.720202773154909,
+            "drift_error_ppm": -13.31297791262773,
+            "endpoint_error_ms": 1.9214240983972453,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [
+        {
+          "start_frame": 320000,
+          "end_frame": 321600,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 322560,
+          "end_frame": 323840,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 324480,
+          "end_frame": 328000,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 640000,
+          "end_frame": 643840,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        }
+      ],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.04452130362939847,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.48046875,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "91162517b2c552592ff41b6c8e8fd9484afec3cf81b5695b64d520491c6044b1"
+      },
+      "render_and_map_seconds": 0.0188189169857651,
+      "meeting": "IS1009a",
+      "start_seconds": 120,
+      "split": "reserved_evaluation",
+      "elapsed_seconds": 0.24542479100637138
+    },
+    {
+      "condition": "clock_dropout",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.3754729594578478,
+          "drift_ppm": 115.68091240038619,
+          "confidence": 0.8936885449658417,
+          "anchors": 24,
+          "residual_ms": 0.1224466554238268,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.47295945784781024,
+            "drift_error_ppm": -4.319087599613809,
+            "endpoint_error_ms": 0.21381420187098168,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.37771432677094813,
+          "drift_ppm": 108.30333957702877,
+          "confidence": 0.0,
+          "anchors": 18,
+          "residual_ms": 0.46131641491577746,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 2.714326770948128,
+            "drift_error_ppm": -11.696660422971235,
+            "endpoint_error_ms": 2.012527145569854,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [
+        {
+          "start_frame": 320000,
+          "end_frame": 328000,
+          "kind": "dropout",
+          "source_id": "lapel",
+          "confidence": 0.7981879788664057,
+          "reason": "Missing primary signal",
+          "alternatives": [
+            {
+              "source_id": "lapel",
+              "confidence": 0.7981879788664057,
+              "gain_db": 8.712480913952636,
+              "reason": "Intact interval with correlated surrounding signal"
+            }
+          ],
+          "status": "accepted",
+          "gain_db": 8.712480913952636,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 640000,
+          "end_frame": 648000,
+          "kind": "dropout",
+          "source_id": "lapel",
+          "confidence": 0.799311535112072,
+          "reason": "Missing primary signal",
+          "alternatives": [
+            {
+              "source_id": "lapel",
+              "confidence": 0.799311535112072,
+              "gain_db": 7.9177967402175256,
+              "reason": "Intact interval with correlated surrounding signal"
+            }
+          ],
+          "status": "accepted",
+          "gain_db": 7.9177967402175256,
+          "fade_ms": 12.0
+        }
+      ],
+      "review_accepted": 2,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.04452130362939847,
+      "fault_frames_covered_by_proposals": 16000,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.48046875,
+        "provenance_max_abs_error": 5.551115123125783e-17,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "dff8734fd8d1237a3e30e50928c1b129e544e9ac8874eaca7da9c8046c6e0fad"
+      },
+      "render_and_map_seconds": 0.01896837499225512,
+      "meeting": "IS1009a",
+      "start_seconds": 120,
+      "split": "reserved_evaluation",
+      "elapsed_seconds": 0.25124625000171363
+    },
+    {
+      "condition": "clean",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.00041276202126277914,
+          "drift_ppm": -2.972917775902521,
+          "confidence": 0.8529896196533284,
+          "anchors": 23,
+          "residual_ms": 0.272888248409198,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.4127620212627791,
+            "drift_error_ppm": -2.972917775902521,
+            "endpoint_error_ms": 0.2343869547086279,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0021071583298899643,
+          "drift_ppm": 8.169406812964722,
+          "confidence": 0.5917250214383979,
+          "anchors": 12,
+          "residual_ms": 0.9477923486867169,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 2.1071583298899643,
+            "drift_error_ppm": 8.169406812964722,
+            "endpoint_error_ms": 2.5973227386678475,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [
+        {
+          "start_frame": 133760,
+          "end_frame": 135040,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 903040,
+          "end_frame": 904640,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 906880,
+          "end_frame": 907520,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 907840,
+          "end_frame": 908480,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 912000,
+          "end_frame": 912640,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 932480,
+          "end_frame": 933760,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 936320,
+          "end_frame": 937600,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        }
+      ],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 0,
+      "injected_primary_rms": null,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 1.0,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "137630105a2968c8458e16323aee09c0f1a8a420e5bdcae01cc55b4041545027"
+      },
+      "render_and_map_seconds": 0.012423500011209399,
+      "meeting": "IS1009a",
+      "start_seconds": 300,
+      "split": "reserved_evaluation",
+      "elapsed_seconds": 0.20144391700159758
+    },
+    {
+      "condition": "dropout",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.00041276202126277914,
+          "drift_ppm": -2.972917775902521,
+          "confidence": 0.8529896196533284,
+          "anchors": 23,
+          "residual_ms": 0.272888248409198,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.4127620212627791,
+            "drift_error_ppm": -2.972917775902521,
+            "endpoint_error_ms": 0.2343869547086279,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0021071583298899643,
+          "drift_ppm": 8.169406812964722,
+          "confidence": 0.5917250214383979,
+          "anchors": 12,
+          "residual_ms": 0.9477923486867169,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 2.1071583298899643,
+            "drift_error_ppm": 8.169406812964722,
+            "endpoint_error_ms": 2.5973227386678475,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [
+        {
+          "start_frame": 133760,
+          "end_frame": 135040,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 903040,
+          "end_frame": 904640,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 906880,
+          "end_frame": 907520,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 907840,
+          "end_frame": 908480,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 912000,
+          "end_frame": 912640,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 932480,
+          "end_frame": 933760,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 936320,
+          "end_frame": 937600,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        }
+      ],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.0024163309430618686,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 1.0,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "adcf3cd55d4f4280db2d315043296e04a63c0a1a3e6055b525628fca8b44bd04"
+      },
+      "render_and_map_seconds": 0.014171540969982743,
+      "meeting": "IS1009a",
+      "start_seconds": 300,
+      "split": "reserved_evaluation",
+      "elapsed_seconds": 0.22192083398113027
+    },
+    {
+      "condition": "clipping",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0004262537056576453,
+          "drift_ppm": -2.3936422927237753,
+          "confidence": 0.8535077213121982,
+          "anchors": 23,
+          "residual_ms": 0.2340022662381549,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.4262537056576453,
+            "drift_error_ppm": -2.3936422927237753,
+            "endpoint_error_ms": 0.28263516809421885,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0021100113899344165,
+          "drift_ppm": 2.8934512494026574,
+          "confidence": 0.5722957344445239,
+          "anchors": 12,
+          "residual_ms": 0.778906996206717,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 2.1100113899344164,
+            "drift_error_ppm": 2.8934512494026574,
+            "endpoint_error_ms": 2.2836184648985762,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [
+        {
+          "start_frame": 133760,
+          "end_frame": 135040,
+          "kind": "clipping",
+          "source_id": "lapel",
+          "confidence": 0.5836396642270055,
+          "reason": "Flat-top overload",
+          "alternatives": [
+            {
+              "source_id": "lapel",
+              "confidence": 0.5836396642270055,
+              "gain_db": 0.21579838972803353,
+              "reason": "Intact interval with correlated surrounding signal"
+            }
+          ],
+          "status": "accepted",
+          "gain_db": 0.21579838972803353,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 903040,
+          "end_frame": 904640,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 906880,
+          "end_frame": 907520,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 907840,
+          "end_frame": 908480,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 912000,
+          "end_frame": 912640,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 932480,
+          "end_frame": 933760,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 936320,
+          "end_frame": 937600,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        }
+      ],
+      "review_accepted": 1,
+      "donor_proposals_outside_faults": 1,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.0024163309430618686,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 1.0,
+        "provenance_max_abs_error": 2.220446049250313e-16,
+        "content_changed_outside_injected_fault_frames": 1280,
+        "output_sha256_f64le": "4e747762b7ad4aa1e53474500b0e55c4c5022f9346ed390f27f37c62a492c1f9"
+      },
+      "render_and_map_seconds": 0.015445625002030283,
+      "meeting": "IS1009a",
+      "start_seconds": 300,
+      "split": "reserved_evaluation",
+      "elapsed_seconds": 0.20533454103861004
+    },
+    {
+      "condition": "shared_dropout",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.00041276202126277914,
+          "drift_ppm": -2.972917775902521,
+          "confidence": 0.8529896196533284,
+          "anchors": 23,
+          "residual_ms": 0.272888248409198,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.4127620212627791,
+            "drift_error_ppm": -2.972917775902521,
+            "endpoint_error_ms": 0.2343869547086279,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0021071583298899643,
+          "drift_ppm": 8.169406812964722,
+          "confidence": 0.5917250214383979,
+          "anchors": 12,
+          "residual_ms": 0.9477923486867169,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 2.1071583298899643,
+            "drift_error_ppm": 8.169406812964722,
+            "endpoint_error_ms": 2.5973227386678475,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [
+        {
+          "start_frame": 133760,
+          "end_frame": 135040,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 903040,
+          "end_frame": 904640,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 906880,
+          "end_frame": 907520,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 907840,
+          "end_frame": 908480,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 912000,
+          "end_frame": 912640,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 932480,
+          "end_frame": 933760,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 936320,
+          "end_frame": 937600,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        }
+      ],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.0024163309430618686,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 1.0,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "adcf3cd55d4f4280db2d315043296e04a63c0a1a3e6055b525628fca8b44bd04"
+      },
+      "render_and_map_seconds": 0.012766833999194205,
+      "meeting": "IS1009a",
+      "start_seconds": 300,
+      "split": "reserved_evaluation",
+      "elapsed_seconds": 0.2062313329661265
+    },
+    {
+      "condition": "shared_clipping",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.00042627975630110193,
+          "drift_ppm": -2.3912063439286384,
+          "confidence": 0.8560535014136095,
+          "anchors": 23,
+          "residual_ms": 0.2339022776816579,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.42627975630110193,
+            "drift_error_ppm": -2.3912063439286384,
+            "endpoint_error_ms": 0.2828073756653836,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0021100113899344165,
+          "drift_ppm": 2.8934512494026574,
+          "confidence": 0.5722957344445239,
+          "anchors": 12,
+          "residual_ms": 0.778906996206717,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 2.1100113899344164,
+            "drift_error_ppm": 2.8934512494026574,
+            "endpoint_error_ms": 2.2836184648985762,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [
+        {
+          "start_frame": 133760,
+          "end_frame": 135040,
+          "kind": "clipping",
+          "source_id": "lapel",
+          "confidence": 0.5854678020737794,
+          "reason": "Flat-top overload",
+          "alternatives": [
+            {
+              "source_id": "lapel",
+              "confidence": 0.5854678020737794,
+              "gain_db": 0.2159820338700701,
+              "reason": "Intact interval with correlated surrounding signal"
+            }
+          ],
+          "status": "accepted",
+          "gain_db": 0.2159820338700701,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 903040,
+          "end_frame": 904640,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 906880,
+          "end_frame": 907520,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 907840,
+          "end_frame": 908480,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 912000,
+          "end_frame": 912640,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 932480,
+          "end_frame": 933760,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 936320,
+          "end_frame": 937600,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        }
+      ],
+      "review_accepted": 1,
+      "donor_proposals_outside_faults": 1,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.0024163309430618686,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 1.0,
+        "provenance_max_abs_error": 1.1102230246251565e-16,
+        "content_changed_outside_injected_fault_frames": 1280,
+        "output_sha256_f64le": "6b5b125031ef4912af362b2a94dc3bfaf1a0cc71df81f1bf78fa8060d03d8b5a"
+      },
+      "render_and_map_seconds": 0.016803500009700656,
+      "meeting": "IS1009a",
+      "start_seconds": 300,
+      "split": "reserved_evaluation",
+      "elapsed_seconds": 0.21601829200517386
+    },
+    {
+      "condition": "clock_dropout",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.3753964102903037,
+          "drift_ppm": 117.50710186038363,
+          "confidence": 0.8559709908545625,
+          "anchors": 23,
+          "residual_ms": 0.2631468378104596,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.3964102903036837,
+            "drift_error_ppm": -2.492898139616372,
+            "endpoint_error_ms": 0.2468364019267014,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.3770279238728975,
+          "drift_ppm": 132.85505799706198,
+          "confidence": 0.6257623674970739,
+          "anchors": 11,
+          "residual_ms": 0.9733323404932057,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 2.027923872897519,
+            "drift_error_ppm": 12.855057997061976,
+            "endpoint_error_ms": 2.7992273527212377,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [
+        {
+          "start_frame": 133760,
+          "end_frame": 135040,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 903040,
+          "end_frame": 904640,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 906880,
+          "end_frame": 907520,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 907840,
+          "end_frame": 908480,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 912000,
+          "end_frame": 912640,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 932480,
+          "end_frame": 933760,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 936320,
+          "end_frame": 937600,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        }
+      ],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.0024163309430618686,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 1.0,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "adcf3cd55d4f4280db2d315043296e04a63c0a1a3e6055b525628fca8b44bd04"
+      },
+      "render_and_map_seconds": 0.012520750053226948,
+      "meeting": "IS1009a",
+      "start_seconds": 300,
+      "split": "reserved_evaluation",
+      "elapsed_seconds": 0.2339514170307666
+    },
+    {
+      "condition": "clean",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0005091761010115362,
+          "drift_ppm": -4.121088038014371,
+          "confidence": 0.928878068405705,
+          "anchors": 24,
+          "residual_ms": 0.10912623525571213,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.5091761010115362,
+            "drift_error_ppm": -4.121088038014371,
+            "endpoint_error_ms": 0.261910818730674,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.002864634745264065,
+          "drift_ppm": -10.577943663115978,
+          "confidence": 0.0,
+          "anchors": 13,
+          "residual_ms": 0.1697403315470578,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 2.864634745264065,
+            "drift_error_ppm": -10.577943663115978,
+            "endpoint_error_ms": 2.2299581254771064,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 0,
+      "injected_primary_rms": null,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.95306396484375,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "51471592afda5fe51aa7c2c9a3d322c5d269d72097900d1eab28b4c6c9d815f9"
+      },
+      "render_and_map_seconds": 0.01500012504402548,
+      "meeting": "IS1009a",
+      "start_seconds": 420,
+      "split": "reserved_evaluation",
+      "elapsed_seconds": 0.20675716700498015
+    },
+    {
+      "condition": "dropout",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0005087948635808455,
+          "drift_ppm": -4.085667993341773,
+          "confidence": 0.928878068405705,
+          "anchors": 24,
+          "residual_ms": 0.1099598324933919,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.5087948635808456,
+            "drift_error_ppm": -4.085667993341773,
+            "endpoint_error_ms": 0.26365478398033915,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.002864634745264065,
+          "drift_ppm": -10.577943663115978,
+          "confidence": 0.0,
+          "anchors": 13,
+          "residual_ms": 0.1697403315470578,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 2.864634745264065,
+            "drift_error_ppm": -10.577943663115978,
+            "endpoint_error_ms": 2.2299581254771064,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [
+        {
+          "start_frame": 320000,
+          "end_frame": 328000,
+          "kind": "dropout",
+          "source_id": "lapel",
+          "confidence": 0.8446614827871392,
+          "reason": "Missing primary signal",
+          "alternatives": [
+            {
+              "source_id": "lapel",
+              "confidence": 0.8446614827871392,
+              "gain_db": 6.998156692896713,
+              "reason": "Intact interval with correlated surrounding signal"
+            }
+          ],
+          "status": "accepted",
+          "gain_db": 6.998156692896713,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 640000,
+          "end_frame": 648000,
+          "kind": "dropout",
+          "source_id": "lapel",
+          "confidence": 0.6919901268874166,
+          "reason": "Missing primary signal",
+          "alternatives": [
+            {
+              "source_id": "lapel",
+              "confidence": 0.6919901268874166,
+              "gain_db": 9.542044757353164,
+              "reason": "Intact interval with correlated surrounding signal"
+            }
+          ],
+          "status": "accepted",
+          "gain_db": 9.542044757353164,
+          "fade_ms": 12.0
+        }
+      ],
+      "review_accepted": 2,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.06670077994493187,
+      "fault_frames_covered_by_proposals": 16000,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.95306396484375,
+        "provenance_max_abs_error": 2.7755575615628914e-17,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "4feae5d503fe0b1942826e3c08cc301dda50c0baea73a42f4767731ee7ff1a51"
+      },
+      "render_and_map_seconds": 0.01769366697408259,
+      "meeting": "IS1009a",
+      "start_seconds": 420,
+      "split": "reserved_evaluation",
+      "elapsed_seconds": 0.2075841249898076
+    },
+    {
+      "condition": "clipping",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0005045536928005855,
+          "drift_ppm": -4.114163025007298,
+          "confidence": 0.9239990701634788,
+          "anchors": 24,
+          "residual_ms": 0.10819403099747604,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.5045536928005855,
+            "drift_error_ppm": -4.114163025007298,
+            "endpoint_error_ms": 0.25770391130014764,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0028941922781654896,
+          "drift_ppm": -10.164987843608428,
+          "confidence": 0.0,
+          "anchors": 15,
+          "residual_ms": 0.19572265483853887,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 2.8941922781654896,
+            "drift_error_ppm": -10.164987843608428,
+            "endpoint_error_ms": 2.2842930075489836,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [
+        {
+          "start_frame": 320640,
+          "end_frame": 328000,
+          "kind": "clipping",
+          "source_id": "lapel",
+          "confidence": 0.842321148248768,
+          "reason": "Flat-top overload",
+          "alternatives": [
+            {
+              "source_id": "lapel",
+              "confidence": 0.842321148248768,
+              "gain_db": 7.086137543471032,
+              "reason": "Intact interval with correlated surrounding signal"
+            }
+          ],
+          "status": "accepted",
+          "gain_db": 7.086137543471032,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 640000,
+          "end_frame": 641280,
+          "kind": "clipping",
+          "source_id": "lapel",
+          "confidence": 0.6590782412750283,
+          "reason": "Flat-top overload",
+          "alternatives": [
+            {
+              "source_id": "lapel",
+              "confidence": 0.6590782412750283,
+              "gain_db": 9.970309932702246,
+              "reason": "Intact interval with correlated surrounding signal"
+            }
+          ],
+          "status": "accepted",
+          "gain_db": 9.970309932702246,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 641600,
+          "end_frame": 643840,
+          "kind": "clipping",
+          "source_id": "lapel",
+          "confidence": 0.6324184231338524,
+          "reason": "Flat-top overload",
+          "alternatives": [
+            {
+              "source_id": "lapel",
+              "confidence": 0.6324184231338524,
+              "gain_db": 10.182908868495584,
+              "reason": "Intact interval with correlated surrounding signal"
+            }
+          ],
+          "status": "accepted",
+          "gain_db": 10.182908868495584,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 645120,
+          "end_frame": 648000,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        }
+      ],
+      "review_accepted": 3,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.06670077994493187,
+      "fault_frames_covered_by_proposals": 10880,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.95306396484375,
+        "provenance_max_abs_error": 5.551115123125783e-17,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "1f979b3b825fa359a519e8143b9c0151c06f525f7fd399193e7102c8c0a902a4"
+      },
+      "render_and_map_seconds": 0.021008207986596972,
+      "meeting": "IS1009a",
+      "start_seconds": 420,
+      "split": "reserved_evaluation",
+      "elapsed_seconds": 0.2146092919865623
+    },
+    {
+      "condition": "shared_dropout",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.00050879596212964,
+          "drift_ppm": -4.085877237698007,
+          "confidence": 0.928878068405705,
+          "anchors": 24,
+          "residual_ms": 0.10995315049342472,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.50879596212964,
+            "drift_error_ppm": -4.085877237698007,
+            "endpoint_error_ms": 0.26364332786775957,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0028309949786131158,
+          "drift_ppm": -7.329759611058308,
+          "confidence": 0.0,
+          "anchors": 14,
+          "residual_ms": 0.19929595996065758,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 2.830994978613116,
+            "drift_error_ppm": -7.329759611058308,
+            "endpoint_error_ms": 2.3912094019496175,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.06670077994493187,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.95306396484375,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "c8c6e75c67f5d794fbb5a9afe20bf51ed406dcfb58a481ff5f7aa4d72ea23471"
+      },
+      "render_and_map_seconds": 0.013703417032957077,
+      "meeting": "IS1009a",
+      "start_seconds": 420,
+      "split": "reserved_evaluation",
+      "elapsed_seconds": 0.19740366702899337
+    },
+    {
+      "condition": "shared_clipping",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.0005024969395643039,
+          "drift_ppm": -4.081969960424365,
+          "confidence": 0.9239990701634788,
+          "anchors": 24,
+          "residual_ms": 0.10863435587291516,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.502496939564304,
+            "drift_error_ppm": -4.081969960424365,
+            "endpoint_error_ms": 0.257578741938842,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.0028960930249999645,
+          "drift_ppm": -10.110554465238662,
+          "confidence": 0.0,
+          "anchors": 15,
+          "residual_ms": 0.200286528273402,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 2.8960930249999643,
+            "drift_error_ppm": -10.110554465238662,
+            "endpoint_error_ms": 2.2894597570856448,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [
+        {
+          "start_frame": 320640,
+          "end_frame": 328000,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 640000,
+          "end_frame": 641280,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 641600,
+          "end_frame": 643840,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 645120,
+          "end_frame": 648000,
+          "kind": "clipping",
+          "source_id": null,
+          "confidence": 0.0,
+          "reason": "Overload evidence; no verified intact donor",
+          "alternatives": [],
+          "status": "unresolved",
+          "gain_db": 0.0,
+          "fade_ms": 12.0
+        }
+      ],
+      "review_accepted": 0,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.06670077994493187,
+      "fault_frames_covered_by_proposals": 0,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.95306396484375,
+        "provenance_max_abs_error": 0.0,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "a7a1eb4c3c2329e2fb5e0e32477bc4c4abdf917308637b263268d77dffca0fc4"
+      },
+      "render_and_map_seconds": 0.012315624975599349,
+      "meeting": "IS1009a",
+      "start_seconds": 420,
+      "split": "reserved_evaluation",
+      "elapsed_seconds": 0.20925150002585724
+    },
+    {
+      "condition": "clock_dropout",
+      "alignments": [
+        {
+          "source_id": "lapel",
+          "offset_seconds": 0.37549382871563164,
+          "drift_ppm": 115.96236129998744,
+          "confidence": 0.9318414921800454,
+          "anchors": 23,
+          "residual_ms": 0.10688615702898803,
+          "status": "aligned",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 0.493828715631639,
+            "drift_error_ppm": -4.037638700012565,
+            "endpoint_error_ms": 0.2515703936308851,
+            "polarity_correct": true
+          }
+        },
+        {
+          "source_id": "array",
+          "offset_seconds": 0.37874914572642543,
+          "drift_ppm": 45.57201741318324,
+          "confidence": 0.0,
+          "anchors": 16,
+          "residual_ms": 1.0895940379729925,
+          "status": "uncertain",
+          "polarity": 1,
+          "nominal_clock_errors": {
+            "offset_error_ms": 3.749145726425429,
+            "drift_error_ppm": -74.42798258681677,
+            "endpoint_error_ms": -0.7165332287835764,
+            "polarity_correct": true
+          }
+        }
+      ],
+      "proposals": [
+        {
+          "start_frame": 320000,
+          "end_frame": 328000,
+          "kind": "dropout",
+          "source_id": "lapel",
+          "confidence": 0.8589286933148166,
+          "reason": "Missing primary signal",
+          "alternatives": [
+            {
+              "source_id": "lapel",
+              "confidence": 0.8589286933148166,
+              "gain_db": 7.055666234246003,
+              "reason": "Intact interval with correlated surrounding signal"
+            }
+          ],
+          "status": "accepted",
+          "gain_db": 7.055666234246003,
+          "fade_ms": 12.0
+        },
+        {
+          "start_frame": 640000,
+          "end_frame": 648000,
+          "kind": "dropout",
+          "source_id": "lapel",
+          "confidence": 0.6742658344850087,
+          "reason": "Missing primary signal",
+          "alternatives": [
+            {
+              "source_id": "lapel",
+              "confidence": 0.6742658344850087,
+              "gain_db": 9.55972528257487,
+              "reason": "Intact interval with correlated surrounding signal"
+            }
+          ],
+          "status": "accepted",
+          "gain_db": 9.55972528257487,
+          "fade_ms": 12.0
+        }
+      ],
+      "review_accepted": 2,
+      "donor_proposals_outside_faults": 0,
+      "injected_frames": 16000,
+      "injected_primary_rms": 0.06670077994493187,
+      "fault_frames_covered_by_proposals": 16000,
+      "render": {
+        "duration_retained": true,
+        "outside_edits_exact": true,
+        "pending_only_exact": true,
+        "finite": true,
+        "peak": 0.95306396484375,
+        "provenance_max_abs_error": 5.551115123125783e-17,
+        "content_changed_outside_injected_fault_frames": 0,
+        "output_sha256_f64le": "f7ff6bb23d54cebe9b8a89323742f15ef843934c580d8264dae3b598f8a6e324"
+      },
+      "render_and_map_seconds": 0.024545042018871754,
+      "meeting": "IS1009a",
+      "start_seconds": 420,
+      "split": "reserved_evaluation",
+      "elapsed_seconds": 0.22964016703190282
+    }
+  ],
+  "clock_cases": [
+    {
+      "meeting": "ES2004a",
+      "start_seconds": 120,
+      "split": "development",
+      "condition": "positive_offset",
+      "alignment": {
+        "offset_seconds": 0.3750000238177786,
+        "drift_ppm": -0.0005459063417105399,
+        "confidence": 0.9999987846056468,
+        "anchors": 24,
+        "residual_ms": 1.503252320035748e-05,
+        "status": "aligned",
+        "polarity": 1
+      },
+      "offset_error_ms": 2.381777858273537e-05,
+      "drift_error_ppm": -0.0005459063417105399,
+      "endpoint_error_ms": -8.936601919897021e-06,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.09783254202920943
+    },
+    {
+      "meeting": "ES2004a",
+      "start_seconds": 120,
+      "split": "development",
+      "condition": "negative_offset",
+      "alignment": {
+        "offset_seconds": -0.21999997618222245,
+        "drift_ppm": -0.0005459063171855017,
+        "confidence": 0.9999987846056468,
+        "anchors": 24,
+        "residual_ms": 1.5032523844930647e-05,
+        "status": "aligned",
+        "polarity": 1
+      },
+      "offset_error_ms": 2.3817777555779074e-05,
+      "drift_error_ppm": -0.0005459063171855017,
+      "endpoint_error_ms": -8.936601475351024e-06,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.08970066695474088
+    },
+    {
+      "meeting": "ES2004a",
+      "start_seconds": 120,
+      "split": "development",
+      "condition": "positive_drift",
+      "alignment": {
+        "offset_seconds": 0.3749988801805073,
+        "drift_ppm": 119.97209454938071,
+        "confidence": 0.982670151590505,
+        "anchors": 24,
+        "residual_ms": 0.008438128290009565,
+        "status": "aligned",
+        "polarity": -1
+      },
+      "offset_error_ms": -0.0011198194926897997,
+      "drift_error_ppm": -0.027905450619286398,
+      "endpoint_error_ms": -0.0027941465298469835,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.08930737501941621
+    },
+    {
+      "meeting": "ES2004a",
+      "start_seconds": 120,
+      "split": "development",
+      "condition": "negative_drift",
+      "alignment": {
+        "offset_seconds": -0.21999875634761237,
+        "drift_ppm": -79.98449114584668,
+        "confidence": 0.9927632339477184,
+        "anchors": 24,
+        "residual_ms": 0.007166676781370991,
+        "status": "aligned",
+        "polarity": 1
+      },
+      "offset_error_ms": 0.0012436523876280248,
+      "drift_error_ppm": 0.015508854153324592,
+      "endpoint_error_ms": 0.0021741836368275,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.09042399999452755
+    },
+    {
+      "meeting": "ES2004a",
+      "start_seconds": 300,
+      "split": "development",
+      "condition": "positive_offset",
+      "alignment": {
+        "offset_seconds": 0.37500000558940594,
+        "drift_ppm": -6.31401286493806e-05,
+        "confidence": 0.9999996266835156,
+        "anchors": 24,
+        "residual_ms": 1.335279864542838e-05,
+        "status": "aligned",
+        "polarity": 1
+      },
+      "offset_error_ms": 5.589405938088987e-06,
+      "drift_error_ppm": -6.31401286493806e-05,
+      "endpoint_error_ms": 1.8009982191261514e-06,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.08901995798805729
+    },
+    {
+      "meeting": "ES2004a",
+      "start_seconds": 300,
+      "split": "development",
+      "condition": "negative_offset",
+      "alignment": {
+        "offset_seconds": -0.21999999441059456,
+        "drift_ppm": -6.314010147752484e-05,
+        "confidence": 0.9999996266835156,
+        "anchors": 24,
+        "residual_ms": 1.3352798777485777e-05,
+        "status": "aligned",
+        "polarity": 1
+      },
+      "offset_error_ms": 5.589405438488626e-06,
+      "drift_error_ppm": -6.314010147752484e-05,
+      "endpoint_error_ms": 1.800999349837136e-06,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.08906845800811425
+    },
+    {
+      "meeting": "ES2004a",
+      "start_seconds": 300,
+      "split": "development",
+      "condition": "positive_drift",
+      "alignment": {
+        "offset_seconds": 0.37500217605923475,
+        "drift_ppm": 119.83304473011655,
+        "confidence": 0.9975607105433126,
+        "anchors": 24,
+        "residual_ms": 0.009234606850702737,
+        "status": "aligned",
+        "polarity": -1
+      },
+      "offset_error_ms": 0.0021760592347486174,
+      "drift_error_ppm": -0.1669552698834451,
+      "endpoint_error_ms": -0.007841256958258089,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.08966387499822304
+    },
+    {
+      "meeting": "ES2004a",
+      "start_seconds": 300,
+      "split": "development",
+      "condition": "negative_drift",
+      "alignment": {
+        "offset_seconds": -0.22000052797289954,
+        "drift_ppm": -79.90427353045,
+        "confidence": 0.9986572516018344,
+        "anchors": 24,
+        "residual_ms": 0.007303415635488531,
+        "status": "aligned",
+        "polarity": 1
+      },
+      "offset_error_ms": -0.0005279728995388755,
+      "drift_error_ppm": 0.09572646955000153,
+      "endpoint_error_ms": 0.005215615273461215,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.08933550002984703
+    },
+    {
+      "meeting": "ES2004a",
+      "start_seconds": 420,
+      "split": "development",
+      "condition": "positive_offset",
+      "alignment": {
+        "offset_seconds": 0.3749998373194809,
+        "drift_ppm": 0.0038753206836879698,
+        "confidence": 0.9999996881270841,
+        "anchors": 24,
+        "residual_ms": 0.0002902968254621489,
+        "status": "aligned",
+        "polarity": 1
+      },
+      "offset_error_ms": -0.00016268051911128012,
+      "drift_error_ppm": 0.0038753206836879698,
+      "endpoint_error_ms": 6.983872190999808e-05,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.09090708300936967
+    },
+    {
+      "meeting": "ES2004a",
+      "start_seconds": 420,
+      "split": "development",
+      "condition": "negative_offset",
+      "alignment": {
+        "offset_seconds": -0.22000016268051786,
+        "drift_ppm": 0.003875320625709122,
+        "confidence": 0.9999996881270841,
+        "anchors": 24,
+        "residual_ms": 0.00029029682558705326,
+        "status": "aligned",
+        "polarity": 1
+      },
+      "offset_error_ms": -0.00016268051786227922,
+      "drift_error_ppm": 0.003875320625709122,
+      "endpoint_error_ms": 6.983871968026808e-05,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.08977312501519918
+    },
+    {
+      "meeting": "ES2004a",
+      "start_seconds": 420,
+      "split": "development",
+      "condition": "positive_drift",
+      "alignment": {
+        "offset_seconds": 0.3749970328066068,
+        "drift_ppm": 120.0219673845122,
+        "confidence": 0.9997167447844315,
+        "anchors": 24,
+        "residual_ms": 0.008259025536314767,
+        "status": "aligned",
+        "polarity": -1
+      },
+      "offset_error_ms": -0.002967193393210721,
+      "drift_error_ppm": 0.0219673845121946,
+      "endpoint_error_ms": -0.001649150322479045,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.09243883396266028
+    },
+    {
+      "meeting": "ES2004a",
+      "start_seconds": 420,
+      "split": "development",
+      "condition": "negative_drift",
+      "alignment": {
+        "offset_seconds": -0.21999856436452309,
+        "drift_ppm": -80.01594906384024,
+        "confidence": 0.9996403619308998,
+        "anchors": 24,
+        "residual_ms": 0.0055257399109197155,
+        "status": "aligned",
+        "polarity": 1
+      },
+      "offset_error_ms": 0.0014356354769151647,
+      "drift_error_ppm": -0.015949063840238864,
+      "endpoint_error_ms": 0.00047869164650083296,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.0874966669944115
+    },
+    {
+      "meeting": "IS1009a",
+      "start_seconds": 120,
+      "split": "reserved_evaluation",
+      "condition": "positive_offset",
+      "alignment": {
+        "offset_seconds": 0.374999996253787,
+        "drift_ppm": -0.00021280800529890838,
+        "confidence": 0.9999982349206651,
+        "anchors": 24,
+        "residual_ms": 4.201672951534435e-05,
+        "status": "aligned",
+        "polarity": 1
+      },
+      "offset_error_ms": -3.7462130064724875e-06,
+      "drift_error_ppm": -0.00021280800529890838,
+      "endpoint_error_ms": -1.651469332440699e-05,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.1291854580049403
+    },
+    {
+      "meeting": "IS1009a",
+      "start_seconds": 120,
+      "split": "reserved_evaluation",
+      "condition": "negative_offset",
+      "alignment": {
+        "offset_seconds": -0.2200000037462125,
+        "drift_ppm": -0.00021280804251865978,
+        "confidence": 0.9999982349206651,
+        "anchors": 24,
+        "residual_ms": 4.201672906544855e-05,
+        "status": "aligned",
+        "polarity": 1
+      },
+      "offset_error_ms": -3.7462125068721264e-06,
+      "drift_error_ppm": -0.00021280804251865978,
+      "endpoint_error_ms": -1.651469505799171e-05,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.10550170799251646
+    },
+    {
+      "meeting": "IS1009a",
+      "start_seconds": 120,
+      "split": "reserved_evaluation",
+      "condition": "positive_drift",
+      "alignment": {
+        "offset_seconds": 0.37499512842268024,
+        "drift_ppm": 120.04578419185694,
+        "confidence": 0.9926367798516877,
+        "anchors": 24,
+        "residual_ms": 0.010372187129406803,
+        "status": "aligned",
+        "polarity": -1
+      },
+      "offset_error_ms": -0.0048715773197649526,
+      "drift_error_ppm": 0.045784191856938605,
+      "endpoint_error_ms": -0.0021245258083486362,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.11391216603806242
+    },
+    {
+      "meeting": "IS1009a",
+      "start_seconds": 120,
+      "split": "reserved_evaluation",
+      "condition": "negative_drift",
+      "alignment": {
+        "offset_seconds": -0.21999606962796753,
+        "drift_ppm": -80.05132026824481,
+        "confidence": 0.990848071837374,
+        "anchors": 24,
+        "residual_ms": 0.008097182155291177,
+        "status": "aligned",
+        "polarity": 1
+      },
+      "offset_error_ms": 0.003930372032473484,
+      "drift_error_ppm": -0.051320268244808176,
+      "endpoint_error_ms": 0.000851155937784993,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.10855929198442027
+    },
+    {
+      "meeting": "IS1009a",
+      "start_seconds": 300,
+      "split": "reserved_evaluation",
+      "condition": "positive_offset",
+      "alignment": {
+        "offset_seconds": 0.37500002681449024,
+        "drift_ppm": -0.0007472376461369189,
+        "confidence": 0.9999990838130353,
+        "anchors": 23,
+        "residual_ms": 2.6951807382154704e-05,
+        "status": "aligned",
+        "polarity": 1
+      },
+      "offset_error_ms": 2.6814490239335242e-05,
+      "drift_error_ppm": -0.0007472376461369189,
+      "endpoint_error_ms": -1.8019768528879894e-05,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.09590424998896196
+    },
+    {
+      "meeting": "IS1009a",
+      "start_seconds": 300,
+      "split": "reserved_evaluation",
+      "condition": "negative_offset",
+      "alignment": {
+        "offset_seconds": -0.21999999337264733,
+        "drift_ppm": -0.0002831535012000063,
+        "confidence": 0.9999990113609879,
+        "anchors": 22,
+        "residual_ms": 1.6168458528741382e-05,
+        "status": "aligned",
+        "polarity": 1
+      },
+      "offset_error_ms": 6.627352666654929e-06,
+      "drift_error_ppm": -0.0002831535012000063,
+      "endpoint_error_ms": -1.036185740534545e-05,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.0902707910281606
+    },
+    {
+      "meeting": "IS1009a",
+      "start_seconds": 300,
+      "split": "reserved_evaluation",
+      "condition": "positive_drift",
+      "alignment": {
+        "offset_seconds": 0.3749990664715783,
+        "drift_ppm": 119.97910141642637,
+        "confidence": 0.9878706473162419,
+        "anchors": 23,
+        "residual_ms": 0.012191359314691612,
+        "status": "aligned",
+        "polarity": -1
+      },
+      "offset_error_ms": -0.0009335284216760442,
+      "drift_error_ppm": -0.02089858357362573,
+      "endpoint_error_ms": -0.0021874434360935877,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.09278958302456886
+    },
+    {
+      "meeting": "IS1009a",
+      "start_seconds": 300,
+      "split": "reserved_evaluation",
+      "condition": "negative_drift",
+      "alignment": {
+        "offset_seconds": -0.22000170070156397,
+        "drift_ppm": -79.94154869177576,
+        "confidence": 0.9884464888603216,
+        "anchors": 22,
+        "residual_ms": 0.009343668823148365,
+        "status": "aligned",
+        "polarity": 1
+      },
+      "offset_error_ms": -0.0017007015639669554,
+      "drift_error_ppm": 0.05845130822423528,
+      "endpoint_error_ms": 0.001806376929487161,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.09195070900022984
+    },
+    {
+      "meeting": "IS1009a",
+      "start_seconds": 420,
+      "split": "reserved_evaluation",
+      "condition": "positive_offset",
+      "alignment": {
+        "offset_seconds": 0.375000000477192,
+        "drift_ppm": -4.5946407917595085e-06,
+        "confidence": 0.9999993703866834,
+        "anchors": 24,
+        "residual_ms": 3.6614305089986056e-05,
+        "status": "aligned",
+        "polarity": 1
+      },
+      "offset_error_ms": 4.771920081303449e-07,
+      "drift_error_ppm": -4.5946407917595085e-06,
+      "endpoint_error_ms": 2.0151356062477442e-07,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.10276583302766085
+    },
+    {
+      "meeting": "IS1009a",
+      "start_seconds": 420,
+      "split": "reserved_evaluation",
+      "condition": "negative_offset",
+      "alignment": {
+        "offset_seconds": -0.21999999952280824,
+        "drift_ppm": -4.594630776270891e-06,
+        "confidence": 0.9999993703866834,
+        "anchors": 24,
+        "residual_ms": 3.661430510518412e-05,
+        "status": "aligned",
+        "polarity": 1
+      },
+      "offset_error_ms": 4.771917583301644e-07,
+      "drift_error_ppm": -4.594630776270891e-06,
+      "endpoint_error_ms": 2.0151391175391087e-07,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.09067100001266226
+    },
+    {
+      "meeting": "IS1009a",
+      "start_seconds": 420,
+      "split": "reserved_evaluation",
+      "condition": "positive_drift",
+      "alignment": {
+        "offset_seconds": 0.37498998892846075,
+        "drift_ppm": 120.20511089934148,
+        "confidence": 0.9881568277788018,
+        "anchors": 24,
+        "residual_ms": 0.007465712439632577,
+        "status": "aligned",
+        "polarity": -1
+      },
+      "offset_error_ms": -0.01001107153925096,
+      "drift_error_ppm": 0.2051108993414772,
+      "endpoint_error_ms": 0.0022955824212376715,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.09948716597864404
+    },
+    {
+      "meeting": "IS1009a",
+      "start_seconds": 420,
+      "split": "reserved_evaluation",
+      "condition": "negative_drift",
+      "alignment": {
+        "offset_seconds": -0.21999168128004204,
+        "drift_ppm": -80.18398998909454,
+        "confidence": 0.9943968531306668,
+        "anchors": 24,
+        "residual_ms": 0.005190923552857349,
+        "status": "aligned",
+        "polarity": 1
+      },
+      "offset_error_ms": 0.008318719957961518,
+      "drift_error_ppm": -0.18398998909454178,
+      "endpoint_error_ms": -0.0027206793877109885,
+      "polarity_correct": true,
+      "passed": true,
+      "seconds": 0.09640216699335724
+    }
+  ],
+  "failures": [],
+  "code_lock_unchanged": true,
+  "completed_at_utc": "2026-09-07T20:42:07.772506+00:00"
+}

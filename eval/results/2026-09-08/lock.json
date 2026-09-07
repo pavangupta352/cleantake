@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "locked_at_utc": "2026-09-07T20:41:57.247895+00:00",
+  "git_revision": "bde282488c9faa8d6b5c0fe264a3f831d8ed20b0",
+  "worktree_dirty": true,
+  "code_sha256": {
+    "src/cleantake/engine/__init__.py": "f9ab22b6234e972e2fedb5fa59a7ce1d09fb12e2c7ddafe6d8aaa08b2f86aefb",
+    "src/cleantake/engine/alignment.py": "7200f26e2443d70e9f30e4169950c4aa0c3bcec212b3d9ae4817023103e68240",
+    "src/cleantake/engine/contracts.py": "70b84b44ff8ea0eda445c954fabc3acdc386a29cb37c8b95861e3170d24bc83c",
+    "src/cleantake/engine/detection.py": "79329dc4ae2c7f55a5b559a327d64335bc4a94a8e5ddd212696a0223cf03660c",
+    "src/cleantake/engine/render.py": "fd9adda67658989e449ee022392ac6f1eaf4265cb6704fff943c22972d36b5b3",
+    "eval/run.py": "daa81eafae1324dcf85ae388e63c24be6d1d629c94d356b02aa80e93b820a6ea",
+    "eval/protocol.json": "431dcbec221e10da7e0eaaeb706eb22db2bac2b50ed58a44779ff994e8786559",
+    "eval/corpus.json": "f2856bc2914b9e698f33d852713c7056ae865d8afcd00919a0c5c716e5ce20c3"
+  },
+  "production_sha256": {
+    "src/cleantake/__init__.py": "65d2e50bd3d94458a7f42337b6635202b824970762a29f2ae8fa1e6c7c6af75f",
+    "src/cleantake/cli.py": "6f275c2499211ee02688eb99a8d1ff685c85bc03db3ce2045473e310cf691995",
+    "src/cleantake/demo.py": "b76fdde06a55e25ca23b91a87fe3927485652435b13cc4bf9ddc539967aac429",
+    "src/cleantake/engine/__init__.py": "f9ab22b6234e972e2fedb5fa59a7ce1d09fb12e2c7ddafe6d8aaa08b2f86aefb",
+    "src/cleantake/engine/alignment.py": "7200f26e2443d70e9f30e4169950c4aa0c3bcec212b3d9ae4817023103e68240",
+    "src/cleantake/engine/contracts.py": "70b84b44ff8ea0eda445c954fabc3acdc386a29cb37c8b95861e3170d24bc83c",
+    "src/cleantake/engine/detection.py": "79329dc4ae2c7f55a5b559a327d64335bc4a94a8e5ddd212696a0223cf03660c",
+    "src/cleantake/engine/render.py": "fd9adda67658989e449ee022392ac6f1eaf4265cb6704fff943c22972d36b5b3",
+    "src/cleantake/exports.py": "1ff769e5a62667671d93624723076733b8f9c80532f4c7d50e3cecf8a9b84741",
+    "src/cleantake/media.py": "eabae019e32dcc23197b430de320cc5bf728df4d1c26d0df19432ede57397de4",
+    "src/cleantake/models.py": "5114791b447d3011ec56da982b0c392ee3923893cdcc5e9e42b8b928aee3f0a5",
+    "src/cleantake/portability.py": "3bbb28d2dcb344687a744203f4d4594af8a584b740c8633ada5c1c057ab9ba1c",
+    "src/cleantake/projects.py": "035a38b41f6b5dc1d9969c0f0792bf76037597e4d4ffee3247b91b686ddfe745",
+    "src/cleantake/server/__init__.py": "bc336a4f73ba31041d3a89bf33f0a3152a860d508691217bc9391d0e5da87d7d",
+    "src/cleantake/server/app.py": "60c4c9e77eb52b153624fc17116ae31c84206153cd5e3856533dc745ebfd28a8",
+    "src/cleantake/server/jobs.py": "654359050cb36acd9e4f7a4c6c1af24c2f687c5ebd2ae50ae5ba84fec8c862f6",
+    "src/cleantake/server/limits.py": "fac0324c3600844b2fb74368aff720cdaefddb4487edcae84d3d38a4561f296c",
+    "src/cleantake/server/security.py": "9a4e51e9a8ab04736856aab933ddec2a77fcb7022534c9396c0bd689482c52c8",
+    "src/cleantake/transcripts.py": "fc9ebb56c058193574a0b0222df63f5530e8d113781ed7faacfb28d20cf92fc1"
+  },
+  "corpus_sha256": {
+    "excerpts/ES2004a_0120-0180_Headset-0.wav": "dd9bd3c204e99b74d800a04af4bef0d6eae1cb3dd892b7d958b04534fd59a21b",
+    "excerpts/ES2004a_0120-0180_Lapel-0.wav": "8cae7f837ee7afd630d9eac9d8b46717cd4d0f5fb32ed99bc14192be19ee2cac",
+    "excerpts/ES2004a_0120-0180_Array1-01.wav": "01d2864394d962449bdd39dff9e981dca8c6963c3f1550748be96163b406d14d",
+    "excerpts/ES2004a_0300-0360_Headset-0.wav": "243024bd5e1795cb8b50f27ccace25c0452d702dbb28b9bb901e2f7608640668",
+    "excerpts/ES2004a_0300-0360_Lapel-0.wav": "679d84cdfd93a7522c609c7bf598a747b376a86e6fddad6a51a0b804062b0d8c",
+    "excerpts/ES2004a_0300-0360_Array1-01.wav": "cc181016a5c7d91f2d3126d33fff195262b20311f5cf6e4a5b4f7ba9ce0617ec",
+    "excerpts/ES2004a_0420-0480_Headset-0.wav": "53034f7d32c190782291cf7ac011a59fd380e0ad5ad20d5272291546a07e4b33",
+    "excerpts/ES2004a_0420-0480_Lapel-0.wav": "b033b5b4ae7c51e6480bd414be1eb0994edff3d5ed2d2594e59fce3be19b06f9",
+    "excerpts/ES2004a_0420-0480_Array1-01.wav": "ae78878c10d944585a771752573830d1695f9013b064aab1a392a82c1f263013",
+    "excerpts/IS1009a_0120-0180_Headset-0.wav": "abf6e4c2f9166ffe271420ece34b08f3ad3f0aa8083f872d4d72f212ba7716b3",
+    "excerpts/IS1009a_0120-0180_Lapel-0.wav": "0ba294e3ca59930217e4734c34a224f65ab1f0acfbb75fa3b84762203d91d220",
+    "excerpts/IS1009a_0120-0180_Array1-01.wav": "661a3c6a7d7f6e90ea04d09b6d451eec80d412f69f43ea58b35186c856437ac3",
+    "excerpts/IS1009a_0300-0360_Headset-0.wav": "3a66261ac78a4cd4722a97c9ebe884134365b7fe911214d86cbb6eac2cd7f3b2",
+    "excerpts/IS1009a_0300-0360_Lapel-0.wav": "cde4e8ebed88c8a2b63188896d47f3ebf24f45ab48b2596f0afc0df6e59d0e56",
+    "excerpts/IS1009a_0300-0360_Array1-01.wav": "f867b2f72fa4efa75928338824fda768b7d8fe8c11126e755b0c9e382a889453",
+    "excerpts/IS1009a_0420-0480_Headset-0.wav": "493e35b2cf1e9b1e7bed03b4521d4e64b014b0a3f601c295825873b38b9f8b59",
+    "excerpts/IS1009a_0420-0480_Lapel-0.wav": "e1b8ffbd2b82694407db2b8db6078580d9a63dfde565e87c0916c4f405ec3305",
+    "excerpts/IS1009a_0420-0480_Array1-01.wav": "a2abc14a6b4d948fef37899f2133b97d771b2c6c2d1644443d7d7935ff5f2aa0"
+  },
+  "split": {
+    "decided_at": "2026-09-08",
+    "development": [
+      "ES2004a"
+    ],
+    "reserved_evaluation": [
+      "IS1009a"
+    ],
+    "reason": "Reserve entire meeting before algorithm tuning. Original excerpts share publisher synchronization. Any fault injection is recorded separately.",
+    "processing_results": null
+  },
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "python": "3.12.13",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "soundfile": "0.14.0"
+}

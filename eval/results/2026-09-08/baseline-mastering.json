@@ -1,0 +1,114 @@
+{
+  "schema": 1,
+  "scope": "Executed same-input single-file mastering, not a multitrack rescue or listening comparison. Different processing chains and output bit depths.",
+  "cleanroom": {
+    "release": "v0.1.1",
+    "release_commit": "50d8a0fd954bfa4380e394d0f673d1a2e666a6ae",
+    "visible_app_version": "v0.1.0",
+    "dmg_sha256": "f68b9715f256c7552f772ca48438ff91c826fcd1e40f9acdc743091b77bd825c",
+    "codesign_deep_strict": "passed",
+    "workflow": "Desktop Master, Standard tier, Podcast Stereo preset (-16 LUFS), default mono WAV export",
+    "visible_processing": [
+      "highpass 80 Hz",
+      "mouth/impulse bridging",
+      "DeepFilterNet3",
+      "breath -6 dB",
+      "de-esser",
+      "Auto EQ Neutral"
+    ],
+    "ui_report": {
+      "input_lufs": -33,
+      "output_lufs": -16.1,
+      "input_true_peak_dbtp": -8.1,
+      "output_true_peak_dbtp": -1,
+      "input_lra_lu": 15.2,
+      "output_lra_lu": 15.2
+    },
+    "multitrack_execution": "Not executed; native file-drop-only surface inaccessible in bounded run"
+  },
+  "cleantake": {
+    "workflow": "ProjectStore import original 16 kHz WAV to 48 kHz working cache; export_project finish=True with no edits",
+    "original_sha256": "243024bd5e1795cb8b50f27ccace25c0452d702dbb28b9bb901e2f7608640668",
+    "cache_sha256": "1fe58692b18b43bbdbb7775b86b9f91d95d6aba84ea8555754479b274f5a06fe",
+    "processing": [
+      {
+        "operation": "loudness",
+        "target_lufs": -16,
+        "true_peak_ceiling_dbtp": -1,
+        "source_file": "dialogue.wav",
+        "output_file": "dialogue-finished.wav",
+        "status": "finished",
+        "normalization": "dynamic",
+        "measured": {
+          "integrated_lufs": -18.7,
+          "true_peak_dbtp": -1.0,
+          "method": "ffmpeg ebur128"
+        },
+        "sha256": "e772d9b229d8915e00279f9512149a8e1156804736354ee9a3c00cd031baa75a"
+      }
+    ],
+    "chain": "FFmpeg two-pass loudnorm (-16 LUFS, -1 dBTP, LRA 11), unchanged duration",
+    "git_revision": "bde282488c9faa8d6b5c0fe264a3f831d8ed20b0",
+    "production_sha256": {
+      "src/cleantake/exports.py": "1ff769e5a62667671d93624723076733b8f9c80532f4c7d50e3cecf8a9b84741",
+      "src/cleantake/media.py": "eabae019e32dcc23197b430de320cc5bf728df4d1c26d0df19432ede57397de4",
+      "src/cleantake/projects.py": "b3baf4a2b377b6b32ab2bd6c9f4734ca3573bfc112fc67856599b5547579ba76",
+      "src/cleantake/models.py": "5114791b447d3011ec56da982b0c392ee3923893cdcc5e9e42b8b928aee3f0a5"
+    },
+    "identity_note": "Pipeline hashes rechecked against the immediately preceding resource run after the output was metered; all four modules were unchanged."
+  },
+  "measurement_tool": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "measurements": {
+    "input": {
+      "filename": "01-headset.wav",
+      "sha256": "243024bd5e1795cb8b50f27ccace25c0452d702dbb28b9bb901e2f7608640668",
+      "sample_rate": 16000,
+      "frames": 960000,
+      "duration_seconds": 60.0,
+      "channels": 1,
+      "subtype": "PCM_16",
+      "sample_peak": 0.3951416015625,
+      "rms": 0.01738204387514065,
+      "finite": true,
+      "integrated_lufs": -32.9,
+      "loudness_range_lu": 15.3,
+      "true_peak_dbtp": -8.1
+    },
+    "cleanroom_standard_podcast": {
+      "filename": "headset-standard-podcast.wav",
+      "sha256": "f9df0560f7ae4a72db9cdcaf5f5ad23d57263e3f542a5f45ca97c5312a8201de",
+      "sample_rate": 48000,
+      "frames": 2880000,
+      "duration_seconds": 60.0,
+      "channels": 1,
+      "subtype": "PCM_16",
+      "sample_peak": 0.890472412109375,
+      "rms": 0.11424539440716126,
+      "finite": true,
+      "integrated_lufs": -16.1,
+      "loudness_range_lu": 20.6,
+      "true_peak_dbtp": -1.0
+    },
+    "cleantake_finish": {
+      "filename": "dialogue-finished.wav",
+      "sha256": "e772d9b229d8915e00279f9512149a8e1156804736354ee9a3c00cd031baa75a",
+      "sample_rate": 48000,
+      "frames": 2880000,
+      "duration_seconds": 60.0,
+      "channels": 1,
+      "subtype": "FLOAT",
+      "sample_peak": 0.8914394378662109,
+      "rms": 0.09351408839245705,
+      "finite": true,
+      "integrated_lufs": -18.7,
+      "loudness_range_lu": 14.0,
+      "true_peak_dbtp": -1.0
+    }
+  },
+  "limits": [
+    "One real 60-second mono AMI development excerpt",
+    "No blind listening or editor-time measurement",
+    "No comparative quality ranking",
+    "Cleanroom applies additional audio processing; this is not an identical-chain comparison"
+  ]
+}

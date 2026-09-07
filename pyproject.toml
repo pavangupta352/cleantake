@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "cleantake"
-version = "0.1.0.dev0"
+version = "0.1.0"
 description = "Recover damaged dialogue from the recordings you already have."
 readme = "README.md"
 requires-python = ">=3.12"
@@ -12,7 +12,7 @@ license = "MIT"
 authors = [{name = "Pavan Gupta", email = "pavan.gupta.352@gmail.com"}]
 keywords = ["audio", "dialogue", "repair", "podcast", "synchronization"]
 classifiers = [
-  "Development Status :: 2 - Pre-Alpha",
+  "Development Status :: 4 - Beta",
   "Environment :: Console",
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
@@ -45,6 +45,17 @@ dev = ["pytest>=8.3", "pytest-cov>=6", "httpx>=0.28", "ruff>=0.11", "build>=1.2"
 [tool.hatch.build.targets.wheel]
 packages = ["src/cleantake"]
 
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src", "/tests", "/scripts", "/docs", "/examples", "/eval", "/.github",
+  "/.gitattributes", "/.gitignore",
+  "/studio/src", "/studio/e2e", "/studio/package.json", "/studio/package-lock.json",
+  "/studio/index.html", "/studio/vite.config.ts", "/studio/tsconfig.json",
+  "/studio/playwright.config.ts", "/pyproject.toml", "/uv.lock", "/README.md",
+  "/LICENSE", "/THIRD_PARTY_NOTICES.md", "/CONTRIBUTING.md", "/SECURITY.md",
+  "/CHANGELOG.md", "/PRODUCT.md", "/DESIGN.md",
+]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra"
@@ -56,4 +67,3 @@ target-version = "py312"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
-

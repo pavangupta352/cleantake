@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "description": "Fixed faults independent of inspected audio and production engine. No optimization on reserved meeting. Engine runs on original 16 kHz PCM for corpus metrics; separate project/resource integration uses 48 kHz ingestion.",
+  "intervals_seconds": [
+    [
+      20,
+      20.5
+    ],
+    [
+      40,
+      40.5
+    ]
+  ],
+  "clipping": {
+    "gain": 8,
+    "ceiling": 0.25
+  },
+  "clock_cases": [
+    {
+      "name": "positive_offset",
+      "offset_seconds": 0.375,
+      "drift_ppm": 0,
+      "polarity": 1
+    },
+    {
+      "name": "negative_offset",
+      "offset_seconds": -0.22,
+      "drift_ppm": 0,
+      "polarity": 1
+    },
+    {
+      "name": "positive_drift",
+      "offset_seconds": 0.375,
+      "drift_ppm": 120,
+      "polarity": -1
+    },
+    {
+      "name": "negative_drift",
+      "offset_seconds": -0.22,
+      "drift_ppm": -80,
+      "polarity": 1
+    }
+  ],
+  "real_cases": [
+    "clean",
+    "dropout",
+    "clipping",
+    "shared_dropout",
+    "shared_clipping",
+    "clock_dropout"
+  ],
+  "clock_dropout": {
+    "offset_seconds": 0.375,
+    "drift_ppm": 120,
+    "polarity": 1
+  },
+  "thresholds": {
+    "same_microphone_offset_error_ms": 2,
+    "same_microphone_endpoint_error_ms": 3,
+    "distinct_microphone_nominal_endpoint_error_ms": 20,
+    "provenance_max_abs_error": 1e-10
+  },
+  "automatic_acceptance": "None. Harness explicitly marks all donor proposals accepted to test rendering; reported review_accepted does not imply automatic user acceptance.",
+  "interpretation": "Fixed intervals can contain silence, overlap or another speaker. Count overlap with injected faults, never classify every miss as missing speech. Clean proposals have no organic-damage adjudication and are called unrequested proposals, not verified false positives."
+}

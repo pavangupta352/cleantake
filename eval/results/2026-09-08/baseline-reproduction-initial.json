@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "scope": "Single-file finishing measurements; no comparative listening or quality ranking.",
+  "git_revision": "bde282488c9faa8d6b5c0fe264a3f831d8ed20b0",
+  "production_sha256": {
+    "src/cleantake/__init__.py": "ec5b09cef4fce366afe8481b91bb3d8ec5d232d9a191bb2511bbd650c7999860",
+    "src/cleantake/cli.py": "6f275c2499211ee02688eb99a8d1ff685c85bc03db3ce2045473e310cf691995",
+    "src/cleantake/demo.py": "b76fdde06a55e25ca23b91a87fe3927485652435b13cc4bf9ddc539967aac429",
+    "src/cleantake/engine/__init__.py": "f9ab22b6234e972e2fedb5fa59a7ce1d09fb12e2c7ddafe6d8aaa08b2f86aefb",
+    "src/cleantake/engine/alignment.py": "7200f26e2443d70e9f30e4169950c4aa0c3bcec212b3d9ae4817023103e68240",
+    "src/cleantake/engine/contracts.py": "70b84b44ff8ea0eda445c954fabc3acdc386a29cb37c8b95861e3170d24bc83c",
+    "src/cleantake/engine/detection.py": "79329dc4ae2c7f55a5b559a327d64335bc4a94a8e5ddd212696a0223cf03660c",
+    "src/cleantake/engine/render.py": "fd9adda67658989e449ee022392ac6f1eaf4265cb6704fff943c22972d36b5b3",
+    "src/cleantake/exports.py": "1ff769e5a62667671d93624723076733b8f9c80532f4c7d50e3cecf8a9b84741",
+    "src/cleantake/media.py": "eabae019e32dcc23197b430de320cc5bf728df4d1c26d0df19432ede57397de4",
+    "src/cleantake/models.py": "5114791b447d3011ec56da982b0c392ee3923893cdcc5e9e42b8b928aee3f0a5",
+    "src/cleantake/portability.py": "3bbb28d2dcb344687a744203f4d4594af8a584b740c8633ada5c1c057ab9ba1c",
+    "src/cleantake/projects.py": "b3baf4a2b377b6b32ab2bd6c9f4734ca3573bfc112fc67856599b5547579ba76",
+    "src/cleantake/server/__init__.py": "bc336a4f73ba31041d3a89bf33f0a3152a860d508691217bc9391d0e5da87d7d",
+    "src/cleantake/server/app.py": "60c4c9e77eb52b153624fc17116ae31c84206153cd5e3856533dc745ebfd28a8",
+    "src/cleantake/server/jobs.py": "654359050cb36acd9e4f7a4c6c1af24c2f687c5ebd2ae50ae5ba84fec8c862f6",
+    "src/cleantake/server/limits.py": "fac0324c3600844b2fb74368aff720cdaefddb4487edcae84d3d38a4561f296c",
+    "src/cleantake/server/security.py": "9a4e51e9a8ab04736856aab933ddec2a77fcb7022534c9396c0bd689482c52c8",
+    "src/cleantake/transcripts.py": "ee25a42885f4398ef73c2d5111a51f6ea7296f9dc2ba068b664c9b694025f64b"
+  },
+  "source_hashes_unchanged": true,
+  "runner_sha256": "42c4df59248c9f7dbea32913a55a64142a8c926f6c37e7da0295193bd19e67c5",
+  "original_sha256": "243024bd5e1795cb8b50f27ccace25c0452d702dbb28b9bb901e2f7608640668",
+  "cache_sha256": "1fe58692b18b43bbdbb7775b86b9f91d95d6aba84ea8555754479b274f5a06fe",
+  "cleantake_processing": [
+    {
+      "operation": "loudness",
+      "target_lufs": -16,
+      "true_peak_ceiling_dbtp": -1,
+      "source_file": "dialogue.wav",
+      "output_file": "dialogue-finished.wav",
+      "status": "finished",
+      "normalization": "dynamic",
+      "measured": {
+        "integrated_lufs": -18.7,
+        "true_peak_dbtp": -1.0,
+        "method": "ffmpeg ebur128"
+      },
+      "sha256": "e772d9b229d8915e00279f9512149a8e1156804736354ee9a3c00cd031baa75a"
+    }
+  ],
+  "measurement_tool": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "measurements": {
+    "input": {
+      "filename": "01-headset.wav",
+      "sha256": "243024bd5e1795cb8b50f27ccace25c0452d702dbb28b9bb901e2f7608640668",
+      "sample_rate": 16000,
+      "frames": 960000,
+      "duration_seconds": 60.0,
+      "channels": 1,
+      "subtype": "PCM_16",
+      "sample_peak": 0.3951416015625,
+      "rms": 0.01738204387514065,
+      "finite": true,
+      "integrated_lufs": -32.9,
+      "loudness_range_lu": 15.3,
+      "true_peak_dbtp": -8.1
+    },
+    "comparison": {
+      "filename": "headset-standard-podcast.wav",
+      "sha256": "f9df0560f7ae4a72db9cdcaf5f5ad23d57263e3f542a5f45ca97c5312a8201de",
+      "sample_rate": 48000,
+      "frames": 2880000,
+      "duration_seconds": 60.0,
+      "channels": 1,
+      "subtype": "PCM_16",
+      "sample_peak": 0.890472412109375,
+      "rms": 0.11424539440716126,
+      "finite": true,
+      "integrated_lufs": -16.1,
+      "loudness_range_lu": 20.6,
+      "true_peak_dbtp": -1.0
+    },
+    "cleantake_finish": {
+      "filename": "dialogue-finished.wav",
+      "sha256": "e772d9b229d8915e00279f9512149a8e1156804736354ee9a3c00cd031baa75a",
+      "sample_rate": 48000,
+      "frames": 2880000,
+      "duration_seconds": 60.0,
+      "channels": 1,
+      "subtype": "FLOAT",
+      "sample_peak": 0.8914394378662109,
+      "rms": 0.09351408839245705,
+      "finite": true,
+      "integrated_lufs": -18.7,
+      "loudness_range_lu": 14.0,
+      "true_peak_dbtp": -1.0
+    }
+  },
+  "comparison_settings": "Record the actual product version and settings separately."
+}

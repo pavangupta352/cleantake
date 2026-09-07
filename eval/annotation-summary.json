@@ -1,0 +1,108 @@
+{
+  "source": "AMI manual annotations v1.6.2",
+  "license": "CC-BY-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "credit": "AMI Meeting Corpus, AMI Project Consortium",
+  "interpretation": "Aggregate publisher-timed vocal intervals, not listening judgments. CleanTake preserved all primary samples on these unmodified excerpts.",
+  "windows": {
+    "ES2004a": [
+      {
+        "start": 120,
+        "end": 180,
+        "words_by_agent": {
+          "A": 1,
+          "B": 148,
+          "C": 0,
+          "D": 0
+        },
+        "total_words": 149,
+        "vocal_events": {},
+        "annotated_vocal_union_seconds": 56.15,
+        "annotated_multispeaker_overlap_seconds": 0.0
+      },
+      {
+        "start": 300,
+        "end": 360,
+        "words_by_agent": {
+          "A": 88,
+          "B": 3,
+          "C": 11,
+          "D": 24
+        },
+        "total_words": 126,
+        "vocal_events": {
+          "other": 1,
+          "laugh": 1
+        },
+        "annotated_vocal_union_seconds": 43.987,
+        "annotated_multispeaker_overlap_seconds": 6.124
+      },
+      {
+        "start": 420,
+        "end": 480,
+        "words_by_agent": {
+          "A": 0,
+          "B": 7,
+          "C": 33,
+          "D": 71
+        },
+        "total_words": 111,
+        "vocal_events": {
+          "laugh": 3
+        },
+        "annotated_vocal_union_seconds": 39.764,
+        "annotated_multispeaker_overlap_seconds": 7.93
+      }
+    ],
+    "IS1009a": [
+      {
+        "start": 120,
+        "end": 180,
+        "words_by_agent": {
+          "A": 107,
+          "B": 0,
+          "C": 0,
+          "D": 3
+        },
+        "total_words": 110,
+        "vocal_events": {
+          "cough": 1,
+          "other": 1
+        },
+        "annotated_vocal_union_seconds": 39.306,
+        "annotated_multispeaker_overlap_seconds": 0.87
+      },
+      {
+        "start": 300,
+        "end": 360,
+        "words_by_agent": {
+          "A": 44,
+          "B": 22,
+          "C": 1,
+          "D": 26
+        },
+        "total_words": 93,
+        "vocal_events": {
+          "laugh": 10,
+          "other": 3
+        },
+        "annotated_vocal_union_seconds": 32.958,
+        "annotated_multispeaker_overlap_seconds": 13.23
+      },
+      {
+        "start": 420,
+        "end": 480,
+        "words_by_agent": {
+          "A": 103,
+          "B": 58,
+          "C": 10,
+          "D": 1
+        },
+        "total_words": 172,
+        "vocal_events": {},
+        "annotated_vocal_union_seconds": 56.18,
+        "annotated_multispeaker_overlap_seconds": 6.39
+      }
+    ]
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "project_id": "c12b85e4-5c67-46ea-9c2d-95f5c198f1f7",
+  "project_name": "Sample · recover a missing half-second",
+  "injected_fault_seconds": [
+    17.0,
+    17.5
+  ],
+  "license": "CC-BY-4.0",
+  "attribution": "AMI Meeting Corpus — AMI Project Consortium",
+  "pending_repairs": 0,
+  "next": "Listen to the labeled before/after excerpts and inspect the source map.",
+  "accepted_repairs": 1,
+  "cleantake_version": "0.1.0",
+  "sample_rate": 48000,
+  "listening_excerpt_project_seconds": [
+    14,
+    20
+  ],
+  "decision": {
+    "id": "02b6c445-74a2-4f82-9331-82612fede475",
+    "start_frame": 816039,
+    "end_frame": 839953,
+    "kind": "dropout",
+    "source_id": "d12f12d1-0b71-40eb-a9da-925deb5b71f8",
+    "confidence": 0.4271449395957217,
+    "reason": "Missing primary signal",
+    "alternatives": [
+      {
+        "source_id": "d12f12d1-0b71-40eb-a9da-925deb5b71f8",
+        "confidence": 0.4271449395957217,
+        "gain_db": 12.824418753318387,
+        "reason": "Intact interval with correlated surrounding signal"
+      }
+    ],
+    "status": "accepted",
+    "gain_db": 12.824418753318387,
+    "fade_ms": 12.0
+  },
+  "intervention": "Script explicitly accepted the sole automatic proposal; no manual alignment, boundary, source, gain or fade changes.",
+  "processing": "PCM24 listening excerpts from the unmastered float export",
+  "unchanged_primary_outside_repair_before_quantization": true,
+  "duration_frames": 960000,
+  "source_manifest": [
+    {
+      "file": "ES2004a_0324-0344_Headset-0.wav",
+      "sha256": "8f504006e2aab2d7206457650cea3994da728f75c058fb65317bc29fa7e9dfad",
+      "original_url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2004a/audio/ES2004a.Headset-0.wav",
+      "original_sha256": "abb4917719c6e033b066fbd400b6d37fe46ddd62c89b513f77016a51f54e2ad1",
+      "start_seconds": 324,
+      "end_seconds": 344,
+      "sample_rate": 16000,
+      "license": "CC-BY-4.0",
+      "changes": "Excerpt only; original mono 16 kHz PCM16 samples preserved, WAV metadata removed."
+    },
+    {
+      "file": "ES2004a_0324-0344_Lapel-0.wav",
+      "sha256": "be163f51dadfe905612e2471a0f6810f9f55d19d1ac91cbdf162ce6233944ce2",
+      "original_url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2004a/audio/ES2004a.Lapel-0.wav",
+      "original_sha256": "373f8668517731f43af3d380c647fce5dc934011664adc61bd3f7e2f30ee75c3",
+      "start_seconds": 324,
+      "end_seconds": 344,
+      "sample_rate": 16000,
+      "license": "CC-BY-4.0",
+      "changes": "Excerpt only; original mono 16 kHz PCM16 samples preserved, WAV metadata removed."
+    }
+  ],
+  "sha256": {
+    "ATTRIBUTION.md": "a66c5569bc0117b5a4d511012db7284d99532761db6a1eea8671306312a2adbf",
+    "after.wav": "843cce804edf7eed18dfbbb89257bbf4fdf9b7bcb3d21fd78f7d9f5ccd18715f",
+    "before.wav": "51528046ffb275cafb66b506156ea0170c16c2df935f0e50819aa03194188080",
+    "source-map.json": "15dd1f30d4f1c91dcb5f021b9c6bd039393325a492ce9d78744d4af39bbd3046"
+  }
+}

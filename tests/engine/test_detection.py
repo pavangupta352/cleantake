@@ -153,3 +153,46 @@ def test_intact_speech_with_room_noise_can_still_rescue_actual_missing_speech():
     assert len(proposals) == 1
     assert proposals[0].source_id == "backup"
     assert (proposals[0].start_frame, proposals[0].end_frame) == (16000, 20000)
+
+
+def test_dropout_boundaries_retain_samples_between_the_analysis_grid_and_gap_edges():
+    """A valid off-grid zero run is recovered through its actual silent samples."""
+    clean = speech(6)
+    primary = clean.copy()
+    primary[16023:19971] = 0
+    proposals = find_repairs(primary, [track(clean)], 8000)
+    assert len(proposals) == 1
+    assert (proposals[0].start_frame, proposals[0].end_frame) == (16023, 19971)
+
+
+def test_donor_damage_in_partial_edge_window_cannot_supply_the_gap():
+    clean = speech(6)
+    primary = clean.copy()
+    primary[16023:19971] = 0
+    donor = clean.copy()
+    donor[19950:19971] = 1
+    assert find_repairs(primary, [track(donor)], 8000) == []
+
+
+def test_refined_dropout_does_not_overlap_neighboring_overload_repairs():
+    from cleantake.engine import render_range
+
+    clean = speech(6)
+    primary = clean.copy()
+    primary[15840:16080] = 0.25
+    primary[16080:19920] = 0
+    primary[19920:20160] = 0.25
+    candidate = track(clean)
+    proposals = find_repairs(primary, [candidate], 8000)
+    assert any(proposal.kind == "dropout" for proposal in proposals)
+    assert any(proposal.kind == "clipping" for proposal in proposals)
+    assert all(
+        left.end_frame <= right.start_frame
+        for left, right in zip(proposals, proposals[1:], strict=False)
+    )
+    for proposal in proposals:
+        proposal.status = "accepted"
+    rendered = render_range(primary, [candidate], proposals, 0, len(primary), 8000)
+    assert len(rendered) == len(primary)
+    np.testing.assert_array_equal(rendered[:15840], primary[:15840])
+    np.testing.assert_array_equal(rendered[20160:], primary[20160:])

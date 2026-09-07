@@ -1,0 +1,27 @@
+name: Difficult recording
+description: Share a reproducible alignment or dialogue-recovery case.
+body:
+  - type: markdown
+    attributes:
+      value: Only share recordings you are allowed to redistribute. A small licensed excerpt is usually enough. Missing speech can only be recovered if another source captured it.
+  - type: textarea
+    id: recording
+    attributes:
+      label: Recording arrangement
+      description: Microphones, speakers, formats, sample rates, duration and which source is primary.
+    validations:
+      required: true
+  - type: textarea
+    id: passage
+    attributes:
+      label: Passage to inspect
+      description: Exact source and project times, the damage, the expected donor, and what CleanTake did.
+    validations:
+      required: true
+  - type: textarea
+    id: provenance
+    attributes:
+      label: Fixture and permission
+      description: A reproducible fixture or link, its license, and any injected faults or other modifications.
+    validations:
+      required: true
