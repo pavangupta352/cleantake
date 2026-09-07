@@ -203,6 +203,7 @@ jobs:
           name: native-evidence-${{ matrix.platform }}-${{ matrix.arch }}
           path: |
             build/native/evidence/
+            build/native/runtime/cleantake-runtime/runtime-manifest.json
             build/native/media/manifest.json
             build/native/soundfile/manifest.json
             build/native/media-work/logs/

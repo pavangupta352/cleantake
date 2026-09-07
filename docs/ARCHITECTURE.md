@@ -1,6 +1,6 @@
 # CleanTake architecture
 
-Status: implementation plan, 8 September 2026. Maintainer: Pavan Gupta.
+Status: implemented recovery engine; native distribution under release verification, 8 September 2026. Maintainer: Pavan Gupta.
 
 ## Outcome and boundary
 
@@ -8,7 +8,13 @@ CleanTake recovers a damaged passage from an intact simultaneous recording, lets
 
 Start with two to four audio sources from the same performance. Import audio and video supported by the installed FFmpeg build; store actual decoded metadata. Manual source labels and speaker names are authoritative. Automatic speaker identification is not necessary for the recovery path. A source without a confident common time basis requires manual alignment before it may supply a repair.
 
-The recommended distribution is an installable Python package containing the built browser studio and a CLI. `cleantake studio` serves only loopback and opens the studio. `cleantake repair` supports a reproducible file-to-export workflow. Desktop packaging can wrap the same engine without changing project or edit semantics.
+The desktop distribution packages Electron, a frozen Python service and native
+media executables. Electron owns the local window and service lifecycle; the
+existing studio and processing engine retain the same project and edit semantics.
+The wheel/source route remains available for developers and command-line users:
+`cleantake studio` serves only loopback and `cleantake repair` supports a
+reproducible file-to-export workflow. See [native distribution](NATIVE-DISTRIBUTION.md)
+for dependency, installation, signing and platform verification requirements.
 
 ## Alternatives considered
 
@@ -29,6 +35,8 @@ The recommended distribution is an installable Python package containing the bui
 - `src/cleantake/server/`: loopback API, streamed uploads, bounded jobs, status/cancellation and built studio hosting.
 - `src/cleantake/cli.py`: diagnostic, project creation, analysis, repair, render, export and studio entry points.
 - `studio/`: React/TypeScript editor, real waveform peaks, source comparison, repair queue, decision history, transcript navigation, recovery and export controls.
+- `desktop/`: sandboxed native window, menus, exports, single-instance and backend lifecycle.
+- `packaging/`: frozen runtime, pinned third-party source/notices and native verification inputs.
 - `tests/`: numerical, project, media, security, integration and distribution checks. `studio/e2e/` exercises the real local server.
 
 ## Media and timeline contract

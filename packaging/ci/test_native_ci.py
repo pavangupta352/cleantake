@@ -65,7 +65,7 @@ def test_identifies_mach_universal_binary():
 
 def test_dependency_boundary_rejects_external_runtime_and_checkout(tmp_path):
     system = platform.system()
-    bundle = tmp_path / "bundle"
+    bundle = tmp_path / "CleanTake CI café (test)"
     bundle.mkdir()
     lib = bundle / "libpython3.12.so"
     lib.touch()
@@ -161,19 +161,17 @@ def test_debian_artifact_uses_its_amd64_architecture_name(tmp_path):
         ci.artifact(tmp_path, "arm64", ".deb")
 
 
-def test_elf_dependencies_keep_complete_spaced_unicode_paths(tmp_path):
-    bundle = tmp_path / "CleanTake CI café" / "Portable café (test)"
+def test_elf_dependencies_keep_complete_spaced_unicode_paths():
+    # ldd always reports POSIX paths, even when this parser test runs on Windows.
+    bundle = Path("/tmp/CleanTake CI café/Portable café (test)")
     library = bundle / "resources/backend/_internal/libgcc_s.so.1"
-    library.parent.mkdir(parents=True)
-    library.touch()
     output = (
         "\tlinux-vdso.so.1 (0x0000ffffabc00000)\n"
-        f"\tlibgcc_s.so.1 => {library} (0x0000ffffabc01000)\n"
+        f"\tlibgcc_s.so.1 => {library.as_posix()} (0x0000ffffabc01000)\n"
         "\t/lib/ld-linux-aarch64.so.1 (0x0000ffffabc02000)\n"
     )
     paths = ci.elf_dependency_paths(output)
     assert paths == [library, Path("/lib/ld-linux-aarch64.so.1")]
-    assert ci.dependency_origin(paths[0], bundle, "Linux") == "bundled"
 
 
 @pytest.mark.skipif(platform.system() != "Darwin", reason="Exercises the real macOS loader")

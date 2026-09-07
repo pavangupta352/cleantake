@@ -171,8 +171,10 @@ def test_queue_ceiling_rejects_extra_work_and_cancellation_cleans_upload(client)
     assert list((client.app.state.workspace / "uploads").iterdir()) == []
 
 
-def test_cancellation_terminates_an_actual_ffmpeg_descendant(client):
+def test_cancellation_terminates_an_actual_ffmpeg_descendant(client, tmp_path, monkeypatch):
     import os
+    import shlex
+    import shutil
     import subprocess
 
     import pytest
@@ -181,7 +183,18 @@ def test_cancellation_terminates_an_actual_ffmpeg_descendant(client):
         pytest.skip("Process-tree inspection uses POSIX ps; Windows uses taskkill /T")
     project = project_with_source(client)
     pid = project["id"]
-    payload = wav_bytes(np.random.default_rng(35).normal(0, 0.1, 19_200_000).astype("float32"))
+    decoder = shutil.which("ffmpeg")
+    assert decoder
+    tools = tmp_path / "paced media"
+    tools.mkdir()
+    wrapper = tools / "ffmpeg"
+    # Pace the real decoder, so a fast WAV import cannot finish between ps
+    # snapshots. The shell is replaced by FFmpeg and cancellation still has to
+    # terminate that actual child process and roll back the staged import.
+    wrapper.write_text(f'#!/bin/sh\nexec {shlex.quote(decoder)} -re "$@"\n')
+    wrapper.chmod(0o755)
+    monkeypatch.setenv("PATH", str(tools) + os.pathsep + os.environ.get("PATH", ""))
+    payload = wav_bytes(np.random.default_rng(35).normal(0, 0.1, 1_440_000).astype("float32"))
     job = client.post(
         f"/api/projects/{pid}/sources", files={"file": ("decode.wav", payload)}
     ).json()
@@ -205,7 +218,12 @@ def test_cancellation_terminates_an_actual_ffmpeg_descendant(client):
         if child_pid is not None:
             break
         time.sleep(0.005)
-    assert child_pid is not None, "The test must observe a real FFmpeg child before cancelling"
+    if child_pid is None:
+        current = client.get(f"/api/jobs/{job['id']}").json()
+        raise AssertionError(
+            f"No actual FFmpeg child observed: job={current['status']}, "
+            f"error={current.get('error')}"
+        )
     client.post(f"/api/jobs/{job['id']}/cancel")
     terminal = wait_job(client, job)
     assert terminal["status"] == "cancelled", terminal

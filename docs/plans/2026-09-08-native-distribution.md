@@ -32,15 +32,15 @@ Electron 44.2.0, electron-builder 26.16.1; the existing locked processing stack.
 **Owns:** `scripts/build_media_tools.py`, `packaging/ffmpeg/**`,
 `tests/test_media_build.py`, media build/source documentation.
 
-- [ ] Implement a hash-verified official source download and safe extraction.
+- [x] Implement a hash-verified official source download and safe extraction.
 - [ ] Build native FFmpeg/FFprobe with the specified software-only LGPL setup,
   using Clang on macOS, MSYS2 UCRT64/CLANGARM64 on Windows, and a suitable native
   static toolchain on Linux. Record every effective flag and compiler version.
-- [ ] Stage `bin/ffmpeg[.exe]`, `bin/ffprobe[.exe]`, notices, immutable manifest,
+- [x] Stage `bin/ffmpeg[.exe]`, `bin/ffprobe[.exe]`, notices, immutable manifest,
   and corresponding-source provenance beneath an explicit output directory.
 - [ ] Verify executable architecture, actual shared dependencies, effective
   license, real audio/video demuxing, and required finishing filters.
-- [ ] Preserve exact original source and reconstruction instructions for release
+- [x] Preserve exact original source and reconstruction instructions for release
   redistribution. Report failures without weakening feature coverage.
 
 ## Task 2: Frozen backend, tool discovery, and desktop protocol
@@ -50,41 +50,47 @@ Electron 44.2.0, electron-builder 26.16.1; the existing locked processing stack.
 `packaging/runtime_entry.py`, `packaging/cleantake.spec`,
 `scripts/build_runtime.py`, `scripts/smoke_runtime.py`.
 
-- [ ] Add regressions for absolute bundled tool discovery and missing/corrupt
+- [x] Add regressions for absolute bundled tool discovery and missing/corrupt
   tools without PATH fallback; retain source/wheel behavior.
-- [ ] Correct the WavPack `wv` format-whitelist mismatch with a real fixture.
+- [x] Correct the WavPack `wv` format-whitelist mismatch with a real fixture.
   Hide Windows media subprocess windows while preserving cancellation.
-- [ ] Implement early freeze dispatch, first-run sample initialization under the
+- [x] Implement early freeze dispatch, first-run sample initialization under the
   workspace lease, structured ready/error output, stdin shutdown/EOF handling,
   and meaningful lifecycle tests with real spawned jobs.
-- [ ] Freeze all runtime libraries, static assets, sample media, metadata, and
+- [x] Freeze all runtime libraries, static assets, sample media, metadata, and
   notices. Keep the console backend and use the spec's onedir resource layout.
-- [ ] Run the actual frozen backend with developer runtimes unavailable on PATH;
+- [x] Run the actual frozen backend with developer runtimes unavailable on PATH;
   exercise import/analyze/repair/export/archive/restart/cancellation and cleanup.
 
 ## Task 3: Desktop window and installation experience
 
 **Owns:** `desktop/**`, scoped native surface brief and design additions.
 
-- [ ] Reuse the studio's reviewed visual world and native window controls. Read
+- [x] Reuse the studio's reviewed visual world and native window controls. Read
   the craft floor before adding the launch surface; keep setup copy concise.
-- [ ] Implement strict backend handshake validation, local-only navigation,
+- [x] Implement strict backend handshake validation, local-only navigation,
   sandboxed renderer, denied permissions, native exports, normal menus,
   single-instance focus, sensible window bounds, and shutdown/error recovery.
-- [ ] Add meaningful node tests for process/protocol/security behavior and
+- [x] Add meaningful node tests for process/protocol/security behavior and
   packaged Electron tests for the complete sample/edit/export/quit path.
-- [ ] Configure offline per-user NSIS, architecture-specific DMGs, and Linux
+- [x] Configure offline per-user NSIS, architecture-specific DMGs, and Linux
   Debian/portable targets with complete resources and license notices.
-- [ ] Inspect actual desktop launch/editing states in one bounded batch, resolve
+- [x] Inspect actual desktop launch/editing states in one bounded batch, resolve
   material findings, obtain a fresh scoped finish review, and document the built
   native shell without reopening the completed studio design.
+
+Tasks 1–3 are implemented and independently reviewed. Task 1’s native-build
+checkboxes remain open until every target has actual build/dependency evidence. Native runtime and desktop
+execution above is verified on macOS ARM64; each remaining platform must pass
+Task 4 before its installer is published. No cross-platform execution result is
+inferred from the local checks.
 
 ## Task 4: Native builds, installation checks, and signing
 
 **Owns:** `.github/workflows/native.yml`, native validation helpers,
 packaging manifests, signing integration, release assembly.
 
-- [ ] Lock native build dependencies and run six explicit architecture jobs.
+- [x] Lock native build dependencies and run six explicit architecture jobs.
   Cache only hash-keyed build inputs; preserve complete build manifests.
 - [ ] Verify frozen payloads, dependency closure, installed native apps, actual
   audio playback and worker lifecycle on each target. Test Linux package

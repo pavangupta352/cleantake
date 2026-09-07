@@ -473,9 +473,9 @@ def install_smoke(args) -> dict:
         "signing_requested": args.signed,
         "checks": [],
         "limits": [
-            "Hosted runner with build tools installed; app launch removes developer "
-            "tools from PATH and static checks inventory native dependencies.",
-            "Installer runs as the hosted runner account; Windows UAC and macOS "
+            "The verification host has build tools installed; app launch removes "
+            "developer tools from PATH and static checks inventory native dependencies.",
+            "Installer runs as the verification account; Windows UAC and macOS "
             "first-download quarantine prompts require separate trust evidence.",
         ],
     }
@@ -617,6 +617,10 @@ def install_smoke(args) -> dict:
             require_retained(workspace, before)
             if system == "Linux":
                 archive = artifact(args.artifacts, args.arch, ".tar.xz")
+                report["portable"] = {
+                    "name": archive.name,
+                    "sha256": hashlib.sha256(archive.read_bytes()).hexdigest(),
+                }
                 portable = temp / "Portable café"
                 extract_portable(archive, portable)
                 candidates = [path for path in portable.rglob("cleantake") if path.is_file()]

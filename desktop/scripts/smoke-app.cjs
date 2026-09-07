@@ -22,7 +22,7 @@ const fresh = !fs.existsSync(path.join(workspace, ".desktop-initialized.json"));
 const env = { ...process.env, PATH: "" };
 for (const key of ["ELECTRON_RUN_AS_NODE", "NODE_OPTIONS", "PYTHONHOME", "PYTHONPATH", "VIRTUAL_ENV", "CONDA_PREFIX"]) delete env[key];
 const args = [`--user-data-dir=${userData}`, "--workspace", workspace];
-const report = { schema_version: 1, platform: process.platform, architecture: process.arch, started_at: new Date().toISOString(), checks: [] };
+const report = { schema_version: 1, commit: process.env.GITHUB_SHA || null, platform: process.platform, architecture: process.arch, started_at: new Date().toISOString(), checks: [] };
 let application;
 let observer;
 let observerPath;
@@ -45,6 +45,14 @@ function passed(name, details = {}) {
 }
 async function visible(locator) { await locator.waitFor({ state: "visible", timeout: 90000 }); }
 async function menuHistory(direction) {
+  // A saved API revision can arrive before React finishes the preceding action.
+  // Wait for the control the menu uses, just as a visible button click does.
+  await page.waitForFunction(direction => {
+    const active = document.activeElement;
+    if (active && (active.isContentEditable || active.matches("input, textarea, select"))) return true;
+    const label = direction === "undo" ? "Undo last edit" : "Redo last edit";
+    return document.querySelector(`button[aria-label="${label}"]`)?.disabled === false;
+  }, direction, { timeout: 10000 });
   await application.evaluate(({ Menu, BrowserWindow }, direction) => {
     const edit = Menu.getApplicationMenu().items.find(item => item.label === "Edit");
     const command = edit.submenu.items.find(item => item.role === direction || item.id === `edit-${direction}`);
@@ -125,12 +133,19 @@ async function download(button, name) {
   try {
     const started = Date.now();
     await launch();
-    const shell = await application.evaluate(({ app, BrowserWindow }) => {
+    const inspectShell = () => application.evaluate(({ app, BrowserWindow }) => {
       const window = BrowserWindow.getAllWindows()[0];
       const preferences = window.webContents.getLastWebPreferences();
       return { packaged: app.isPackaged, version: app.getVersion(), sandbox: preferences.sandbox, nodeIntegration: preferences.nodeIntegration, contextIsolation: preferences.contextIsolation, visible: window.isVisible(), count: BrowserWindow.getAllWindows().length };
     });
-    assert(shell.packaged && shell.sandbox && shell.contextIsolation && !shell.nodeIntegration && shell.visible);
+    let shell = await inspectShell();
+    report.initial_shell = shell;
+    assert(shell.packaged && shell.sandbox && shell.contextIsolation && !shell.nodeIntegration, `Unexpected native shell: ${JSON.stringify(shell)}`);
+    await until(async () => {
+      shell = await inspectShell();
+      report.last_shell = shell;
+      return shell.visible;
+    }, "The native window did not become visible after the studio loaded", 10000);
     assert.equal(shell.count, 1);
     assert.equal(await page.evaluate(() => typeof window.require), "undefined");
     assert.equal(await page.evaluate(() => typeof window.process), "undefined");

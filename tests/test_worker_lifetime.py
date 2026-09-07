@@ -12,9 +12,10 @@ from types import SimpleNamespace
 import pytest
 
 
-def _guarded_worker(connection, gate):
+def _guarded_worker(connection, gate, initialized):
     from cleantake.server.jobs import _guard_worker_lifetime
 
+    initialized.set()
     gate.wait()
     _guard_worker_lifetime()
     child = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(60)"])
@@ -22,9 +23,9 @@ def _guarded_worker(connection, gate):
     child.wait()
 
 
-def _broker(connection, gate):
+def _broker(connection, gate, initialized):
     worker = multiprocessing.get_context("spawn").Process(
-        target=_guarded_worker, args=(connection, gate)
+        target=_guarded_worker, args=(connection, gate, initialized)
     )
     worker.start()
     connection.send(worker.pid)
@@ -76,7 +77,8 @@ def test_worker_and_child_exit_when_actual_parent_dies(parent_dies_before_guard)
     context = multiprocessing.get_context("spawn")
     receiver, sender = context.Pipe(duplex=False)
     gate = context.Event()
-    broker = context.Process(target=_broker, args=(sender, gate))
+    initialized = context.Event()
+    broker = context.Process(target=_broker, args=(sender, gate, initialized))
     broker.start()
     sender.close()
     owned = []
@@ -86,6 +88,10 @@ def test_worker_and_child_exit_when_actual_parent_dies(parent_dies_before_guard)
         owned.append(worker_pid)
         with contextlib.ExitStack() as stack:
             worker_exited = stack.enter_context(_exit_observer(worker_pid))
+            # Windows duplicates the spawn pipe from its parent before target
+            # entry. Exercise our guard after that handshake, not a bootstrap
+            # failure caused by killing the parent before DuplicateHandle.
+            assert initialized.wait(15), "Worker did not complete its spawn bootstrap"
             if not parent_dies_before_guard:
                 gate.set()
                 assert receiver.poll(15), "Guarded worker did not create its child"
@@ -101,8 +107,9 @@ def test_worker_and_child_exit_when_actual_parent_dies(parent_dies_before_guard)
                 assert child_exited(5), "Media-style child survived its worker"
                 owned.remove(child_pid)
             else:
-                assert receiver.poll(1)
-                with pytest.raises(EOFError):
+                # Both writers have exited. Windows named pipes may report
+                # BrokenPipeError directly instead of POSIX-style readable EOF.
+                with pytest.raises((EOFError, BrokenPipeError)):
                     receiver.recv()
     finally:
         if broker.is_alive():

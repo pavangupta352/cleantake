@@ -190,6 +190,8 @@ The type ramp is compact and task-specific rather than a large promotional hiera
 
 Body text uses the `body` role. Most supporting copy and control labels sit at 12–13px; small timestamps, source metadata and legends use 10–11px. These small annotations support the main labels, rather than replacing them. The selected passage's time range is more prominent (21px desktop, 22px in the single-column inspector). The transport time follows the `time` role and steps down to 16px and 15px on narrower layouts.
 
+The native launch surface uses the same interface font, with a single product name (30px, weight 650, line height 1.25, letter spacing −0.02em) and a secondary status line (14px, line height 1.5). This brief startup hierarchy does not change the studio's compact type ramp.
+
 **The Time Is Data Rule.** Use tabular numerals for timecodes, repair ranges, durations and numeric metadata. Keep seconds, milliseconds, decibels and alignment units visible in labels. Use sentence case; status badges capitalize their state text.
 
 ## Layout
@@ -211,6 +213,8 @@ Spacing is practical rather than a rigid mathematical scale: 4–8px within tigh
 The page supports widths from 320px. Bottom padding grows with the transport (112px desktop, 150px at the 960px breakpoint, 185px at the 500px breakpoint), allowing lower controls to scroll above it. Long source names truncate in lanes and rows; the source settings and replacement selector retain the underlying name. Paired numeric fields remain available on narrow screens.
 
 **The Shared Clock Rule.** Aligned lanes share the displayed time range and playhead. An uncertain source explicitly says “Own clock · alignment needed,” dims its waveform and withholds project-time seeking and selection overlays until aligned.
+
+The desktop edition places this same responsive studio inside an ordinary framed OS window. Valid saved bounds and the maximized state are restored; bounds that no longer fit a display fall back to a centered window, capped at 1440 × 960px with room around the available work area. The normal minimum is 760 × 560px, reduced when the available window bounds are smaller. The shell adds no custom titlebar or second editing layout.
 
 ## Elevation & Depth
 
@@ -267,6 +271,16 @@ The right inspector uses quiet chrome, a bordered heading and stacked content. I
 Playback stays visible at the bottom with the current time, audition mode, donor selector and numeric seeking. Switching audition mode preserves the playhead position and resumes only when playback was active. The loading spinner is functional feedback (1.4 seconds per linear rotation). There are no entrance animations.
 
 Export, transcript and help use a right-side drawer (420px wide, capped at the viewport width) between the project bar and transport. Confirmation dialogs use a centered, padded surface with a maximum width of 500px. Reduced-motion settings reduce transitions and animations to 0.01ms, run animations once and use immediate scrolling.
+
+### Native Desktop Shell
+
+The shell retains OS window controls and application menus around the existing studio. Its initial background is quiet chrome. The centered launch surface has 40px of padding, a blue waveform mark (48px), the product name and “Opening your studio…” in secondary slate. It uses a busy state and a status announcement, with no progress percentage or decorative animation. The window becomes visible after its first rendered state; the ready studio then replaces the launch surface.
+
+Native Edit → Undo and Redo use the studio's project history when focus is outside a text-entry control. In text-entry controls they preserve native text undo/redo, and an open modal prevents a project-history action behind it. Menu accelerators share this routing: Command/Ctrl+Z for Undo and Command/Ctrl+Shift+Z for Redo, with Ctrl+Y also registered outside macOS. Cut, Copy, Paste and Select All remain native text actions. View provides studio reload, zoom and fullscreen; Help provides the editing guide, downloads, problem reporting, licenses and log access.
+
+Startup and service failures use a native error dialog with “Try again,” “Show log” and “Quit.” Retry returns to the launch state while reopening the studio; log access opens its folder. Closing the last window quits the application and stops its local service. Opening another instance focuses the existing window. Saved project decisions remain available on restart.
+
+Prepared exports use the OS save dialog, titled “Save CleanTake export,” with the generated filename in Downloads as its initial destination. The studio keeps responsibility for preparing the audio or archive; the native dialog lets the editor choose where to save it. Native dialogs and menus inherit the platform's presentation rather than imitating studio controls.
 
 ## Do's and Don'ts
 

@@ -487,6 +487,7 @@ def main():
     args = parser.parse_args()
     report = {
         "schema_version": 1,
+        "commit": os.environ.get("GITHUB_SHA"),
         "started_at": datetime.now(UTC).isoformat(),
         "platform": sys.platform,
         "architecture": platform.machine(),

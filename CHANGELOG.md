@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.2.0 — native release candidate
+
+- Bundle the browser runtime, Python processing engine, media tools and sample
+  into native desktop distributions for macOS, Windows and Linux.
+- Open a ready local studio with native windows, menus and file-save dialogs.
+  Install the sample once and preserve projects when the app is reinstalled.
+- Route native Undo/Redo to repair decisions while retaining normal text editing.
+- Stop owned workers and media tools after service crashes, recover interrupted
+  jobs, and retain the last saved project revision.
+- Verify real frozen and installed workflows with developer tools absent from
+  the application's search path. Retain exact source, license and build records.
+
+Native downloads remain under platform verification. Publisher signing and
+system compatibility are reported separately in the [desktop guide](docs/DESKTOP.md).
+The complete 0.1.0 recovery workflow remains available below.
+
 ## 0.1.0
 
 First public release of the complete local recovery workflow.
