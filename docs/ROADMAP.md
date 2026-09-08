@@ -21,15 +21,15 @@ Release checks passed for the full workflow, corpus evaluation, licensed demo, i
 
 ## Desktop distribution · 0.2.0
 
-The next release adds an installed application with its own browser, processing
+Version 0.2.0 adds an installed application with its own browser, processing
 runtime, audio tools and sample. The recovery workflow remains shared with the
-CLI edition. This extension is under native platform verification.
+CLI edition. All six targets have passed actual native installation checks.
 
 - [x] Bundle the processing engine, media tools, offline sample and editing window.
 - [x] Implement native menus, save dialogs, first launch and owned process cleanup.
 - [x] Preserve exact dependency notices, corresponding source and build recipes.
 - [x] Verify release assembly rejects incomplete, mixed or changed inputs.
-- [ ] Complete frozen processing and actual installation checks on all six targets.
+- [x] Complete frozen processing and actual installation checks on all six targets.
 - [ ] Publish the verified installers, source supplement and checksums.
 
 The [desktop guide](DESKTOP.md) records installation and publisher-trust limits.

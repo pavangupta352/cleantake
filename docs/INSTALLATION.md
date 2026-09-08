@@ -1,8 +1,14 @@
 # Installation
 
-CleanTake runs on your computer. It needs Python 3.12 or newer and FFmpeg with
-FFprobe on your `PATH`. The Python package includes the browser studio and the
-licensed sample recordings. Node.js is needed only to change or rebuild the UI.
+For the desktop app, use the [Mac, Windows or Linux installer](DESKTOP.md).
+It includes the application runtimes, audio tools and offline sample.
+
+## Command-line and browser edition
+
+The following instructions install the optional Python package. It needs Python
+3.12 or newer and FFmpeg with FFprobe on your `PATH`. This package includes the
+browser studio and licensed sample recordings. Node.js is needed only to change
+or rebuild the UI. Its workspace and exports are compatible with the desktop app.
 
 ## Install the media tools
 
@@ -23,7 +29,7 @@ With [uv](https://docs.astral.sh/uv/getting-started/installation/), install the
 downloaded file in its own environment:
 
 ```sh
-uv tool install --python 3.12 ./cleantake-0.1.0-py3-none-any.whl
+uv tool install --python 3.12 ./cleantake-0.2.0-py3-none-any.whl
 cleantake doctor
 cleantake studio
 ```
@@ -36,7 +42,7 @@ python -m venv .venv
 # macOS / Linux
 source .venv/bin/activate
 # Windows PowerShell: .venv\Scripts\Activate.ps1
-python -m pip install ./cleantake-0.1.0-py3-none-any.whl
+python -m pip install ./cleantake-0.2.0-py3-none-any.whl
 cleantake doctor
 ```
 
@@ -100,8 +106,9 @@ notices, and `uv build`. Outputs and checksums are in `dist/`.
 
 ## Common problems
 
-- **FFmpeg missing:** install both media tools, reopen the terminal, then run
-  `cleantake doctor` again.
+- **FFmpeg missing in the CLI/browser edition:** install both media tools, reopen
+  the terminal, then run `cleantake doctor` again. The desktop app carries its own
+  copies; reinstall its matching package if bundled files are missing.
 - **Workspace already open:** stop its studio process before running CLI edits
   or starting a second studio. Do not delete the lock to bypass an active process.
 - **Recording will not import:** use a self-contained audio/video file. Playlists

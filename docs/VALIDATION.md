@@ -44,3 +44,80 @@ The [browser job](https://github.com/pavangupta352/cleantake/actions/runs/341633
 The Linux Firefox audio probe established the runner setup requirement: before PulseAudio started, an actual user gesture left `AudioContext.resume()` pending, with state `suspended` and clock `0`. After starting a PulseAudio 16.1 null sink, the same probe resumed successfully, entered `running`, and advanced to `0.1131972789` seconds. The complete browser assertions then passed unchanged.
 
 [Release 0.1.0](https://github.com/pavangupta352/cleantake/releases/tag/v0.1.0) is tagged at `2992f23`, which adds only three release documents to the verified software revision above. Its wheel is byte-identical to the independently checked and freshly installed wheel (`SHA256: 8bc8dcc3bd91f0bdd0e3ccfd6a5b9f9fcf536690d6cadac5f317443c170299b7`). The release includes checksums for the wheel, source archive and licensed portable demo.
+
+## Native desktop · 0.2.0
+
+[Native run 34177076224](https://github.com/pavangupta352/cleantake/actions/runs/34177076224)
+completed successfully for commit
+[`43ad902829714aeb02e9773b65abdb0cbc0b042f`](https://github.com/pavangupta352/cleantake/commit/43ad902829714aeb02e9773b65abdb0cbc0b042f)
+on September 8, 2026 UTC. Each target built its native media tools and processing
+runtime, created an installer, installed it and exercised the installed app.
+The published native manifest identifies this build commit separately from later
+release documentation.
+
+| Actual verification environment | Architecture | Frozen runtime | Installed app | Native binaries inspected | Saved files retained after uninstall and reinstall |
+|---|---|---|---|---|---|
+| [macOS 14.8.9](https://github.com/pavangupta352/cleantake/actions/runs/34177076224/job/101908503298) | ARM64 | 13 passed | 9 passed | 121 | 24 / 24 |
+| [macOS 15.7.9](https://github.com/pavangupta352/cleantake/actions/runs/34177076224/job/101908503216) | x64 | 13 passed | 9 passed | 121 | 24 / 24 |
+| [Windows 11, build 26200](https://github.com/pavangupta352/cleantake/actions/runs/34177076224/job/101908503285) | ARM64 | 13 passed | 9 passed | 181 | 24 / 24 |
+| [Windows Server 2025, build 26100](https://github.com/pavangupta352/cleantake/actions/runs/34177076224/job/101908503325) | x64 | 13 passed | 9 passed | 184 | 24 / 24 |
+| [Ubuntu 24.04, glibc 2.39](https://github.com/pavangupta352/cleantake/actions/runs/34177076224/job/101908503350) | ARM64 | 13 passed | 9 passed | 122 | 24 / 24 |
+| [Ubuntu 22.04, glibc 2.35](https://github.com/pavangupta352/cleantake/actions/runs/34177076224/job/101908503125) | x64 | 13 passed | 9 passed | 126 | 24 / 24 |
+
+The frozen checks cover bundled-resource integrity, tool discovery with an empty
+search path, first-run sample creation, actual spawned processing, export and
+archive workflows, WavPack import, media-process cancellation, control-pipe EOF,
+parent-crash cleanup and immediate reopening. All six bundles use the pinned
+native CPython 3.12.13 distribution, build 20260504.
+
+The nine installed-app gates check the actual packaged window with its sandbox
+and context isolation enabled, first-run sample and advancing audio clock,
+repair/undo/redo, native project history and text editing, WAV and archive save
+flows, denied external navigation, single-instance focus, quit without orphan
+workers, and reopening saved edits. File hashes establish that removing and
+reinstalling each application retained all 24 saved workspace files. Dependency
+inspection accepts only bundled components and operating-system libraries.
+
+The Ubuntu x64 portable archive separately passed its nine app gates. On Ubuntu
+24 ARM, the portable archive was refused by the system's SUID/user-namespace
+sandbox policy; the Debian-installed app passed. That failure remains in the
+report, with the portable route marked unsupported. Neither Linux portable
+archive is included in the public 0.2.0 release. No operating-system sandbox or
+protection policy was disabled.
+
+[Checks run 34177076215](https://github.com/pavangupta352/cleantake/actions/runs/34177076215)
+at the same commit also passed: **340 Python tests and 5 scoped skips** on each
+of Linux Python 3.12, 3.13 and 3.14, macOS Python 3.12 and Windows Python 3.12.
+Each job built the wheel/source archive and passed the fresh installed-package
+smoke. Unix skips four Windows API checks; Windows skips four POSIX-only checks.
+Each also skips one optional frozen-bundle diagnostic in the source-only job.
+The browser workflow passed **24 tests across Chromium, Firefox and WebKit**, then
+**8 against the bundled studio and its production security headers**.
+
+The separately retained release wheel was installed in a fresh environment
+outside the checkout on macOS ARM64. Its actual smoke verified the packaged
+studio, sample repair, exact timing and archive round trip. The unchanged public
+portable demo imported two sources and one accepted repair, then exported finite
+48 kHz audio with 960,000 frames and the original samples preserved outside the
+repair. This Python package check used the host's external FFmpeg, as documented
+for that edition; native app checks used bundled tools.
+
+These results come from hosted build runners and a local package installation.
+The native app ran with developer tools absent from its search path, but the
+hosts themselves had build tools installed. This is not pristine physical-device
+certification, a test of every OS version, or proof of audible output through
+every sound device. The Windows per-user installer was exercised under the
+runner account; consumer UAC interactions need separate observation.
+
+Mac signatures passed integrity checks but are **ad-hoc**, with Gatekeeper
+assessment returning **rejected**. The apps are not notarized. Windows app,
+installer and uninstaller were all **NotSigned**; Linux packages are unsigned.
+Acceptance of the final browser download under macOS quarantine or Windows
+SmartScreen/Smart App Control has not yet been established. See the
+[desktop guide](DESKTOP.md) for conditional platform instructions and limits.
+
+`NATIVE-RELEASE.json` and `SHA256SUMS` accompany the installers. The native source
+supplement preserves the exact component-source inventories and the runtime,
+installed-app and installer reports used by
+[release assembly](../packaging/release/README.md). Hash correspondence does not
+upgrade unsigned or ad-hoc artifacts to a verified-publisher release.

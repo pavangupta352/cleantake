@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.2.0 — native release candidate
+## 0.2.0
 
 - Bundle the browser runtime, Python processing engine, media tools and sample
   into native desktop distributions for macOS, Windows and Linux.
@@ -12,9 +12,11 @@
 - Verify real frozen and installed workflows with developer tools absent from
   the application's search path. Retain exact source, license and build records.
 
-Native downloads remain under platform verification. Publisher signing and
-system compatibility are reported separately in the [desktop guide](docs/DESKTOP.md).
-The complete 0.1.0 recovery workflow remains available below.
+All six native targets passed frozen processing, installed-app editing and
+export, dependency inspection, and saved-project retention through removal and
+reinstallation. See the [validation record](docs/VALIDATION.md#native-desktop--020).
+Mac builds are ad-hoc signed and not notarized; Windows installers are unsigned.
+The [desktop guide](docs/DESKTOP.md) explains installation and publisher trust.
 
 ## 0.1.0
 

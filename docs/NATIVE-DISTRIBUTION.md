@@ -7,9 +7,10 @@ editor opens the application, chooses the included sample or imports recordings,
 and completes the existing recovery workflow without installing Python, Node.js,
 FFmpeg, a separate browser, a model, or a GPU computing driver.
 
-Version 0.1.0 remains the published Python/browser release. This specification
-defines the additional distribution work for 0.2.0; it is not a claim that the
-native artifacts have already passed their release checks.
+This document describes the native architecture and its acceptance requirements.
+The [validation record](VALIDATION.md) identifies actual tested revisions and
+platforms; the [desktop guide](DESKTOP.md) covers installation and publisher trust.
+The Python/browser edition remains available alongside the native application.
 
 ## Architecture
 

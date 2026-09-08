@@ -1,112 +1,161 @@
 # Desktop installation
 
-The 0.2.0 desktop candidates are being verified. The published 0.1.0 release uses
-the [Python/browser installation](INSTALLATION.md). Native release notes will
-identify the tested installers and their publisher-signing status.
-
-The desktop edition includes its audio tools, Python, processing libraries,
-editing window, and sample recordings. You do not need to install developer
-tools, download a model, create an account, or install a GPU computing driver.
-Recordings and edits stay on your computer.
+CleanTake's desktop app includes its editing window, Python, audio tools,
+processing libraries and sample recordings. You do not need a separate browser,
+FFmpeg installation, model, account, developer tools or GPU computing driver.
+Processing stays on your computer and the included sample works offline.
 
 ## Choose your download
 
-| Computer | Download type | Architecture choice |
-|---|---|---|
-| Mac, macOS 14 or newer | `.dmg` | `arm64` for Apple silicon; `x64` for Intel |
-| Windows | `.exe` | `x64` for Intel/AMD; `arm64` for Windows on ARM |
-| Ubuntu / Debian desktop | `.deb` | `amd64` for Intel/AMD; `arm64` for ARM |
+Download from the [CleanTake 0.2.0 release](https://github.com/pavangupta352/cleantake/releases/tag/v0.2.0).
 
-On a Mac, **About This Mac** shows either an Apple chip or an Intel processor.
-On Windows, **Settings → System → About → System type** identifies the processor
-architecture. Match the download to the processor; an ARM download is not an
-alternative name for a 64-bit Intel/AMD download.
+| Computer | File |
+|---|---|
+| Mac with Apple silicon | `CleanTake-0.2.0-mac-arm64.dmg` |
+| Mac with Intel processor | `CleanTake-0.2.0-mac-x64.dmg` |
+| Windows with Intel or AMD processor | `CleanTake-0.2.0-win-x64.exe` |
+| Windows with ARM processor | `CleanTake-0.2.0-win-arm64.exe` |
+| Ubuntu desktop with Intel or AMD processor | `CleanTake-0.2.0-linux-amd64.deb` |
+| Ubuntu desktop with ARM processor | `CleanTake-0.2.0-linux-arm64.deb` |
 
-The intended Windows minimum is Windows 10 for x64 and Windows 11 for ARM64.
-Linux builds use Ubuntu 22.04 for x64 and Ubuntu 24.04 for ARM64. Exact runner
-and dependency evidence belongs to each release. These targets do not cover
-32-bit systems, phones, every Linux distribution, or computers whose operating
-system cannot provide normal display and audio output.
+On a Mac, **Apple menu → About This Mac** shows an Apple chip or an Intel
+processor. On Windows, check **Settings → System → About → System type**.
+On Ubuntu, `dpkg --print-architecture` reports `amd64` or `arm64`.
 
-## Install and open
+Mac downloads require macOS 14 or newer. The intended Windows minimum is Windows
+10 for Intel/AMD and Windows 11 for ARM. Linux builds use Ubuntu 22.04 for
+Intel/AMD and Ubuntu 24.04 for ARM; other Debian-based distributions have not
+been qualified. The release notes identify the systems actually checked. There
+are no 32-bit or mobile builds. See the [native validation record](VALIDATION.md#native-desktop--020)
+for the exact tested systems and installer checks.
 
-**Mac:** open the DMG, drag CleanTake into Applications, and open the installed
-application. Eject the disk image afterward. Replace the application when
-upgrading; your saved projects live elsewhere.
+## Mac
 
-**Windows:** open the matching installer. It installs for your user and creates
-normal application shortcuts. Use **Settings → Apps** to remove it. Removing
-the application preserves saved projects.
+1. Open the matching DMG and drag **CleanTake** into **Applications**.
+2. Open **CleanTake** from Applications.
+3. Eject the disk image once installation is complete.
 
-**Ubuntu / Debian:** install the downloaded package through your package manager.
-For example, from the directory containing the Intel/AMD download:
+These builds are ad-hoc signed and **not notarized**. macOS may block their first
+launch. If you downloaded the app from this project's release and choose to
+open it, Apple documents a per-app approval: after attempting to open CleanTake,
+go to **System Settings → Privacy & Security**, find CleanTake's blocked-app
+entry and choose **Open Anyway**, then **Open**. Use this only when the entry
+identifies the app you intended to install. This option may be unavailable on a
+managed Mac. See [Apple's instructions](https://support.apple.com/en-us/102445).
+
+This is the official conditional approval route; acceptance of the exact
+downloaded CleanTake build has not yet been verified. If the option is absent,
+or macOS reports damage or malware, stop and report the exact message through
+the [issue tracker](https://github.com/pavangupta352/cleantake/issues).
+
+## Windows
+
+1. Open the matching installer. It installs for your Windows account and opens
+   CleanTake when finished.
+2. Use the **CleanTake** Start menu or desktop shortcut for later launches.
+
+These installers are **unsigned**, so Windows does not show a verified
+publisher. An unrecognized-app SmartScreen prompt may offer **More info → Run
+anyway**. If you downloaded this project's installer and choose to proceed,
+check its file name before confirming. See [Microsoft's SmartScreen guidance](https://learn.microsoft.com/en-us/windows/apps/package-and-deploy/publish-first-app#step-6-handle-smartscreen-for-new-apps).
+
+Smart App Control or an organization's policy can block unsigned apps entirely.
+Smart App Control has no approval for a single blocked app, so this unsigned
+release may not run on those computers. For an organization-managed computer,
+contact its administrator. Keep your existing protections enabled. See
+[Microsoft's explanation](https://support.microsoft.com/en-us/windows/security/threat-malware-protection/smart-app-control-frequently-asked-questions).
+
+## Ubuntu desktop
+
+Open a terminal in the folder containing your download. For Intel/AMD:
 
 ```sh
 sudo apt install ./CleanTake-0.2.0-linux-amd64.deb
 ```
 
-The package manager resolves the required operating-system desktop libraries.
-Those downloads may need an internet connection. CleanTake's own audio tools
-and processing runtime are already in the package. Open CleanTake from your
-application launcher after installation.
+For ARM:
 
-Linux portable archives are a secondary route. They cannot install desktop
-libraries or an application-specific sandbox policy, and therefore have narrower
-compatibility than the Debian package. Use the package on distributions that
-restrict unprivileged user namespaces; do not disable the browser sandbox.
+```sh
+sudo apt install ./CleanTake-0.2.0-linux-arm64.deb
+```
 
-## Try a repair immediately
+Review the package manager's prompt and confirm installation. It installs any
+required desktop libraries, which may need an internet connection. CleanTake's
+audio tools and processing runtime are already included. Open **CleanTake**
+from the application launcher when installation finishes.
 
-The first launch adds **Sample · recover a missing half-second** to an empty
-workspace. Open it, select the passage near 17 seconds, and listen to **Original**
-and **Source**. The backup contains the recorded speech missing from the main
-microphone. Choose **Accept repair** to include it in **Repair** playback, then
+Use the Debian package for the supported Ubuntu route. A portable archive, if
+offered by a release, has separate compatibility limits and does not install
+operating-system dependencies.
+
+## Hear your first repair
+
+An empty workspace starts with **Sample · recover a missing half-second**.
+Open it, select the passage near 17 seconds, and compare **Original** and
+**Source**. The backup contains speech missing from the main recording.
+Choose **Accept repair** to include that passage in **Repair** playback, then
 export the result.
 
-The sample uses real, licensed AMI recordings with a clearly labeled injected
-gap. Its suggestion starts pending. Removing the sample does not make it
-reappear on every launch. Existing projects are preserved.
+The sample uses licensed AMI recordings with a clearly labeled injected gap.
+The repair starts pending so you can hear and choose it yourself. Existing
+projects are preserved; deleting the sample does not make it return at every
+launch.
 
-For your own recording, create a project and add a main recording plus its
-simultaneous backups. See the [editing guide](GUIDE.md) for alignment, listening,
-manual repairs, transcripts, and exports.
+To work on your own recording, create a project and add the main recording plus
+its simultaneous backups. The [editing guide](GUIDE.md) covers alignment,
+listening, manual repairs and exports.
 
-## Saved work and updates
+## Update, remove or reinstall
 
-Decisions are saved as you edit. Closing CleanTake stops processing and keeps
-the last published project revision. Interrupted jobs can be retried after
-reopening. **Edit → Undo/Redo** operates on project decisions when you are in the
-editor and on text when you are typing in a field.
+Close CleanTake before updating or removing it. **Help → Downloads and updates**
+opens the release page. Install updates explicitly; the app does not silently
+replace itself.
 
-Default project folders are the same as the browser/CLI edition:
+| System | Update or reinstall | Remove the application |
+|---|---|---|
+| Mac | Drag the new CleanTake into Applications and confirm replacement | Move CleanTake from Applications to the Trash |
+| Windows | Run the matching installer again | Settings → Apps → Installed apps → CleanTake → Uninstall; on Windows 10, use Apps & features |
+| Ubuntu | Install the downloaded package with the same `apt install ./…` command | Run `sudo apt remove cleantake` |
+
+Removing the application preserves saved projects. Reinstalling for the same
+account uses that workspace again. Export a portable project archive before
+moving to another computer or account.
 
 | System | Saved projects and processing data |
 |---|---|
-| macOS | `~/Library/Application Support/CleanTake` |
+| Mac | `~/Library/Application Support/CleanTake` |
 | Windows | `%LOCALAPPDATA%\CleanTake` |
 | Linux | `$XDG_DATA_HOME/cleantake`, or `~/.local/share/cleantake` |
 
-Export a portable project archive to move work between computers. A native
-application update does not replace this workspace. Close the application before
-editing the same workspace through the command line.
+Decisions are saved as you edit. Closing the app stops processing and retains
+the last published project revision; interrupted jobs can be retried after
+reopening. **Edit → Undo/Redo** changes project decisions in the editor and text
+when you are typing in a field. Close the app before opening its workspace with
+the command-line edition.
 
-**Help → Downloads and updates** opens the release page. Updates are installed
-explicitly; the application does not silently replace executable code.
+## If something does not work
 
-## First-launch and troubleshooting
+- **First launch is slow:** the operating system may need time to check bundled
+  libraries. CleanTake keeps its launch window visible while the studio starts.
+  If startup fails, the dialog offers a retry and access to its log.
+- **Workspace already open:** close the other CleanTake studio using it, then
+  retry.
+- **No sound:** check the system output device and volume. No GPU computing
+  driver is required, but the computer still needs working operating-system
+  display and audio support.
+- **Import or alignment problem:** see [common problems](INSTALLATION.md#common-problems)
+  and the [editing guide](GUIDE.md).
 
-First launch can take longer while the operating system validates bundled
-libraries. CleanTake shows its launch window until the studio is ready. If the
-audio service cannot start, the dialog offers a retry and access to its log.
-The log excludes private session tokens.
+For a bug report, include your operating-system version, the installer file name
+and the exact error. Keep private recordings and session links out of public
+issues.
 
-Application dependencies and publisher trust are separate checks. Ad-hoc macOS
-signatures are not notarization, and unsigned Windows builds do not identify a
-verified publisher. Read the actual release's signing status before installing.
-An installer never removes quarantine, changes trusted roots, or disables
-platform security to hide a warning.
+## Licenses and component source
 
-If a workspace is already open, close its other studio first. If audio does not
-play, check the system output device and volume. CleanTake does not replace
-missing operating-system hardware drivers. For import or alignment problems,
-see [common problems](INSTALLATION.md#common-problems).
+The app includes [third-party notices](../THIRD_PARTY_NOTICES.md). The matching
+release's [native source supplement](https://github.com/pavangupta352/cleantake/releases/download/v0.2.0/CleanTake-0.2.0-native-sources.tar.xz)
+contains the corresponding covered-component source and build instructions,
+including the supplement for **Electron 44.2.0 / Chromium 152.0.7977.76**, alongside
+the bundled FFmpeg and SoundFile component sources. It is for inspection and
+rebuilding; it is not needed to install or use CleanTake. The application's
+Electron and Chromium license notices remain included with the app.

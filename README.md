@@ -9,10 +9,13 @@ the source of every replacement visible through the final export.
 [![Checks](https://github.com/pavangupta352/cleantake/actions/workflows/ci.yml/badge.svg)](https://github.com/pavangupta352/cleantake/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-244f99)](LICENSE)
 
+**[Download the desktop app](https://github.com/pavangupta352/cleantake/releases/tag/v0.2.0)** · [Hear a repair](#hear-one-repair) · [Editing guide](docs/GUIDE.md)
+
 ![CleanTake studio with synchronized source lanes, a selected passage and repair controls](docs/assets/studio.png)
 
-The studio runs locally in your browser. Your files stay on your computer.
-There is no account, paid processing service or cloud upload.
+Open CleanTake as a desktop app on Mac, Windows or Linux. Your recordings stay
+on your computer. The app includes its processing tools and an offline sample;
+there is no account or cloud upload.
 
 ## Hear one repair
 
@@ -31,27 +34,35 @@ AMI Project Consortium. [Attribution and modifications](docs/assets/demo/ATTRIBU
 · [Decision and hashes](docs/assets/demo/manifest.json)
 · [Actual source map](docs/assets/demo/source-map.json)
 
-## Try it
+## Download and try it
 
-Install FFmpeg, then download the wheel from
-[the latest release](https://github.com/pavangupta352/cleantake/releases/latest).
-With [uv](https://docs.astral.sh/uv/getting-started/installation/):
+**[Download CleanTake 0.2.0](https://github.com/pavangupta352/cleantake/releases/tag/v0.2.0)**
 
-```sh
-uv tool install --python 3.12 ./cleantake-0.1.0-py3-none-any.whl
-cleantake doctor
-cleantake demo
-cleantake studio
-```
+| Computer | Download |
+|---|---|
+| Mac · Apple silicon | [Apple silicon DMG](https://github.com/pavangupta352/cleantake/releases/download/v0.2.0/CleanTake-0.2.0-mac-arm64.dmg) |
+| Mac · Intel | [Intel DMG](https://github.com/pavangupta352/cleantake/releases/download/v0.2.0/CleanTake-0.2.0-mac-x64.dmg) |
+| Windows · Intel / AMD | [Windows installer](https://github.com/pavangupta352/cleantake/releases/download/v0.2.0/CleanTake-0.2.0-win-x64.exe) |
+| Windows · ARM | [Windows ARM installer](https://github.com/pavangupta352/cleantake/releases/download/v0.2.0/CleanTake-0.2.0-win-arm64.exe) |
+| Ubuntu desktop · Intel / AMD | [Debian package](https://github.com/pavangupta352/cleantake/releases/download/v0.2.0/CleanTake-0.2.0-linux-amd64.deb) |
+| Ubuntu desktop · ARM | [ARM Debian package](https://github.com/pavangupta352/cleantake/releases/download/v0.2.0/CleanTake-0.2.0-linux-arm64.deb) |
 
-Open the sample project, select the passage near 17 seconds, and compare
-**Original**, **Repair** and **Source**. Accept it when you're satisfied, then
-export. The sample works offline and leaves the choice to you.
+Install the matching download and open CleanTake. No separate Python, FFmpeg,
+browser, model or GPU computing driver is required. Linux's package manager
+resolves any required operating-system desktop libraries.
 
-Python 3.12+ and FFmpeg/FFprobe are required. The wheel includes the studio and
-sample audio; using it does not require Node.js.
-[Installation and troubleshooting](docs/INSTALLATION.md)
-· [Editing guide](docs/GUIDE.md)
+**Publisher trust:** these macOS builds are ad-hoc signed and are not notarized;
+the Windows installers are unsigned. macOS can block first launch; Windows can show a publisher warning or block
+unsigned apps under Smart App Control or managed policies. See the [desktop guide](docs/DESKTOP.md) for the
+actual platform scope and signing status before downloading.
+
+The first launch opens a workspace with **Sample · recover a missing half-second**.
+Open the sample, select the passage near 17 seconds, and compare **Original**
+with **Source**. Choose **Accept repair**, listen in **Repair** mode, then export.
+The included sample works offline and leaves the choice to you.
+
+[Desktop installation](docs/DESKTOP.md) · [Editing guide](docs/GUIDE.md)
+· [CLI / browser installation](docs/INSTALLATION.md#command-line-and-browser-edition)
 · [Reproduce the sample](examples/README.md)
 
 ## The complete recovery desk
@@ -76,6 +87,9 @@ loudness-normalized file while preserving the unmastered mix.
 · [Transcript integration with turnchunk](docs/TRANSCRIPTS.md)
 
 ## Use the command line
+
+Install the optional [command-line edition](docs/INSTALLATION.md#command-line-and-browser-edition)
+for shell commands and unattended workflows.
 
 ```sh
 cleantake repair main.wav lapel.wav camera.mov --output review-export
@@ -108,14 +122,14 @@ erase laughter or cut overlapping speakers. Noise alone does not trigger a
 claim that a backup is better.
 
 The current output timeline is **48 kHz mono**. Inputs may be multichannel;
-select a channel or downmix on import. Compressed formats depend on the installed
-FFmpeg build. Self-contained recordings are supported; media playlists are not.
+select a channel or downmix on import. The desktop edition includes its FFmpeg
+build; the CLI/browser edition uses the FFmpeg installed on your system.
+Self-contained recordings are supported; media playlists are not.
 
 The [evaluation report](docs/EVALUATION.md) includes fixed-clock tests,
 untuned meeting excerpts, missed proposals and long-session measurements.
 Independent listening preference, organic damage coverage and editor-time
-advantage have not been established. The first public release includes the full
-workflow; these claims remain open for evidence.
+advantage have not been established.
 
 ## Develop and contribute
 

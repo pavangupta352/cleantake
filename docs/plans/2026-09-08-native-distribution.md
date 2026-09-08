@@ -33,12 +33,12 @@ Electron 44.2.0, electron-builder 26.16.1; the existing locked processing stack.
 `tests/test_media_build.py`, media build/source documentation.
 
 - [x] Implement a hash-verified official source download and safe extraction.
-- [ ] Build native FFmpeg/FFprobe with the specified software-only LGPL setup,
+- [x] Build native FFmpeg/FFprobe with the specified software-only LGPL setup,
   using Clang on macOS, MSYS2 UCRT64/CLANGARM64 on Windows, and a suitable native
   static toolchain on Linux. Record every effective flag and compiler version.
 - [x] Stage `bin/ffmpeg[.exe]`, `bin/ffprobe[.exe]`, notices, immutable manifest,
   and corresponding-source provenance beneath an explicit output directory.
-- [ ] Verify executable architecture, actual shared dependencies, effective
+- [x] Verify executable architecture, actual shared dependencies, effective
   license, real audio/video demuxing, and required finishing filters.
 - [x] Preserve exact original source and reconstruction instructions for release
   redistribution. Report failures without weakening feature coverage.
@@ -79,11 +79,9 @@ Electron 44.2.0, electron-builder 26.16.1; the existing locked processing stack.
   material findings, obtain a fresh scoped finish review, and document the built
   native shell without reopening the completed studio design.
 
-Tasks 1–3 are implemented and independently reviewed. Task 1’s native-build
-checkboxes remain open until every target has actual build/dependency evidence. Native runtime and desktop
-execution above is verified on macOS ARM64; each remaining platform must pass
-Task 4 before its installer is published. No cross-platform execution result is
-inferred from the local checks.
+Tasks 1–3 are implemented and independently reviewed. The media tools and
+frozen runtime have passed actual native execution on all six targets. Installed
+apps have passed on all six targets, including both Windows architectures. No cross-platform result is inferred from local checks.
 
 ## Task 4: Native builds, installation checks, and signing
 
@@ -92,20 +90,21 @@ packaging manifests, signing integration, release assembly.
 
 - [x] Lock native build dependencies and run six explicit architecture jobs.
   Cache only hash-keyed build inputs; preserve complete build manifests.
-- [ ] Verify frozen payloads, dependency closure, installed native apps, actual
+- [x] Verify frozen payloads, dependency closure, installed native apps, actual
   audio playback and worker lifecycle on each target. Test Linux package
   dependencies and sandbox setup on the declared distribution base.
-- [ ] Verify installer behavior and retained project data on uninstall/reinstall.
-- [ ] Integrate available signing/notarization credentials securely; record
-  actual trust results and any remaining publisher-verification prompts.
-- [ ] Resolve material review/CI findings with regressions and bounded rechecks.
+- [x] Verify installer behavior and retained project data on uninstall/reinstall.
+- [x] Wire protected signing/notarization inputs and record actual trust results.
+  Publisher credentials were unavailable: these builds remain ad-hoc on Mac
+  and unsigned on Windows; no verified-publisher claim is made.
+- [x] Resolve material review/CI findings with regressions and bounded rechecks.
 
 ## Task 5: Public distribution and continuity
 
 **Owns:** README, install/desktop guides, changelog, licenses, public validation,
 GitHub release assets, private continuity records.
 
-- [ ] Put native downloads first, with clear operating-system/architecture
+- [x] Put native downloads first, with clear operating-system/architecture
   choices, actual system requirements, and advanced wheel/source alternatives.
 - [ ] Publish 0.2.0 only with verified native artifacts, source, license notices,
   complete checksums, and honest signing/platform evidence.

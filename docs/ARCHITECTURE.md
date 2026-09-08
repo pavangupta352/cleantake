@@ -1,6 +1,6 @@
 # CleanTake architecture
 
-Status: implemented recovery engine; native distribution under release verification, 8 September 2026. Maintainer: Pavan Gupta.
+Status: implemented recovery engine and six verified native desktop targets, 8 September 2026. Maintainer: Pavan Gupta.
 
 ## Outcome and boundary
 
