@@ -143,6 +143,50 @@ def test_diagnostic_redaction_preserves_errors_without_private_handshake():
     assert ci.redact(text) == "failed http://127.0.0.1:1234/#token=[redacted] in request"
 
 
+@pytest.mark.parametrize("change", ["required", "unknown", "survivor", "timeout", "success",
+                                  "bypass", "x64", "other_os"])
+def test_portable_sandbox_qualification_fails_closed(change):
+    diagnostic = {
+        "exit_code": -5, "timed_out": False, "surviving_processes": [],
+        "sandbox_bypass": False,
+        "stderr": "The SUID sandbox helper binary was found, but is not configured correctly. "
+        "Rather than run without sandboxing I'm aborting now. "
+        "chrome-sandbox is owned by root and has mode 4755.",
+    }
+    policy, arch = "diagnostic", "arm64"
+    os_release = {"ID": "ubuntu", "VERSION_ID": "24.04"}
+    if change == "required":
+        policy = "required"
+    elif change == "unknown":
+        diagnostic["stderr"] = "Segmentation fault"
+    elif change == "survivor":
+        diagnostic["surviving_processes"] = [123]
+    elif change == "timeout":
+        diagnostic["timed_out"] = True
+    elif change == "success":
+        diagnostic["exit_code"] = 0
+    elif change == "bypass":
+        diagnostic["sandbox_bypass"] = True
+    elif change == "x64":
+        arch = "x64"
+    elif change == "other_os":
+        os_release["VERSION_ID"] = "22.04"
+    assert not ci.known_portable_sandbox_refusal(policy, diagnostic, arch, os_release)
+
+
+def test_only_exact_observed_arm_ubuntu_sandbox_refusal_qualifies():
+    diagnostic = {
+        "exit_code": -5, "timed_out": False, "surviving_processes": [],
+        "sandbox_bypass": False,
+        "stderr": "FATAL:setuid_sandbox_host.cc:166: The SUID sandbox helper binary was found, "
+        "but is not configured correctly. Rather than run without sandboxing I'm aborting now. "
+        "/tmp/CleanTake café/chrome-sandbox is owned by root and has mode 4755.",
+    }
+    assert ci.known_portable_sandbox_refusal(
+        "diagnostic", diagnostic, "arm64", {"ID": "ubuntu", "VERSION_ID": "24.04"}
+    )
+
+
 @pytest.mark.skipif(os.name != "posix", reason="Linux launch diagnostic uses POSIX processes")
 def test_portable_launch_diagnostic_captures_failure_without_runtime_environment(tmp_path):
     executable = tmp_path / "failed app"

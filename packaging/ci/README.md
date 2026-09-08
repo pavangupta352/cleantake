@@ -8,7 +8,7 @@ browser suites. These helpers do not publish releases.
 Run the non-mutating verifier tests with:
 
 ```sh
-uv run pytest packaging/ci -q
+uv run --group bundle pytest packaging/ci packaging/python -q
 actionlint .github/workflows/native.yml
 ```
 
@@ -18,6 +18,13 @@ build-directory library. That platform-specific test is explicitly skipped on
 other operating systems; the corresponding installed dependency audit still
 runs on every native target. Windows import inspection includes delayed DLL
 loads as well as the ordinary import table.
+
+Each matrix target requests an architecture-qualified managed interpreter, such
+as `cpython-3.12.13-windows-aarch64-none`. Before compilation, the workflow checks
+CPython 3.12.13, build 20260504, and the requested native architecture. Windows
+checks the interpreter's compile target through `sysconfig`; an emulated x64
+interpreter on an ARM host cannot claim ARM notices or library provenance.
+The bundle group supplies `psutil` for bounded diagnostic process-tree checks.
 
 ## Installed artifacts
 
@@ -53,10 +60,21 @@ the first-run edit script on an already edited project. The desktop harness
 separately owns restart/reopen and process-cleanup checks.
 
 Linux also extracts and launches the portable archive after removing the Debian
-package. The archive does not receive an AppArmor exception from this helper.
-A restricted host may therefore reject that launch; retain the actual result
-and scope archive compatibility accordingly. Never change the machine's
-user-namespace policy or disable Chromium sandboxing to make that check pass.
+package. `--portable-policy required` is the default: any portable failure fails
+the job. The Ubuntu 24.04 ARM matrix alone uses `--portable-policy diagnostic`.
+It still attempts the real portable launch. Only the observed Chromium SUID
+sandbox refusal can qualify that archive as unsupported, after a separate direct
+launch confirms a nonzero exit, no timeout, no sandbox bypass, and no surviving
+probe process. Unknown errors and other operating-system or architecture cases
+still fail.
+
+In that qualified case, the Debian installer must pass every installed desktop
+and uninstall/reinstall retention gate. The report records `primary_installer`
+as passed, `portable.status` as unsupported, and the excluded archive's name,
+size, and SHA-256 under `excluded_artifacts`. A successful job then qualifies the
+Debian route only; the portable archive remains excluded from release. Previous
+failed runs keep their original results. The helper grants no AppArmor exception
+to the archive and changes neither user-namespace policy nor sandbox settings.
 
 ## Evidence and its limits
 

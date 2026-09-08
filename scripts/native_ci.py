@@ -482,6 +482,21 @@ def portable_launch_diagnostic(executable: Path, directory: Path, seconds=10) ->
     }
 
 
+def known_portable_sandbox_refusal(policy, diagnostic, arch, os_release) -> bool:
+    stderr = diagnostic.get("stderr", "")
+    return (
+        policy == "diagnostic" and arch == "arm64"
+        and os_release.get("ID") == "ubuntu" and os_release.get("VERSION_ID") == "24.04"
+        and type(diagnostic.get("exit_code")) is int and diagnostic["exit_code"] != 0
+        and diagnostic.get("timed_out") is False
+        and diagnostic.get("sandbox_bypass") is False
+        and diagnostic.get("surviving_processes") == []
+        and "The SUID sandbox helper binary was found, but is not configured correctly." in stderr
+        and "Rather than run without sandboxing I'm aborting now." in stderr
+        and "owned by root and has mode 4755" in stderr
+    )
+
+
 def signature_status(executable: Path, required: bool) -> dict:
     if platform.system() == "Darwin":
         bundle = executable.parents[2]
@@ -560,6 +575,7 @@ def install_smoke(args) -> dict:
             for key in ("ImageOS", "ImageVersion", "RUNNER_OS", "RUNNER_ARCH")
         },
         "signing_requested": args.signed,
+        "portable_policy": args.portable_policy,
         "checks": [],
         "limits": [
             "The verification host has build tools installed; app launch removes "
@@ -704,11 +720,13 @@ def install_smoke(args) -> dict:
             report["checks"].append({"name": "reinstall-retains-projects", "files": len(before)})
             uninstall()
             require_retained(workspace, before)
+            report["primary_installer"] = {"status": "passed", "name": installer.name}
             if system == "Linux":
                 archive = artifact(args.artifacts, args.arch, ".tar.xz")
                 report["portable"] = {
                     "name": archive.name,
                     "sha256": hashlib.sha256(archive.read_bytes()).hexdigest(),
+                    "bytes": archive.stat().st_size,
                 }
                 portable = temp / "Portable café"
                 extract_portable(archive, portable)
@@ -718,12 +736,13 @@ def install_smoke(args) -> dict:
                         "portable archive does not have exactly one application executable"
                     )
                 report["portable_dependency_audit"] = audit(candidates[0].parent, args.arch)
+                portable_result = None
                 try:
                     portable_result = app_smoke(
                         candidates[0], temp / "Portable workspace café",
                         evidence / "portable-app", args.desktop.resolve(),
                     )
-                except Exception:
+                except Exception as portable_error:
                     try:
                         report["portable_launch_diagnostic"] = portable_launch_diagnostic(
                             candidates[0], temp / "Portable diagnostic café"
@@ -736,7 +755,7 @@ def install_smoke(args) -> dict:
                     if journal:
                         try:
                             kernel = run(
-                                [journal, "--kernel", "--since=-2min", "--no-pager", "-n", "80"],
+                                [journal, "-k", "--since=-2min", "--no-pager", "-n", "80"],
                                 check=False, timeout=3,
                             )
                             report["portable_kernel_diagnostic"] = {
@@ -751,13 +770,23 @@ def install_smoke(args) -> dict:
                             report["portable_kernel_diagnostic"] = {
                                 "error": redact(str(journal_error))
                             }
-                    raise
-                report["checks"].append(
-                    {
-                        "name": "portable-desktop",
-                        **portable_result,
-                    }
-                )
+                    if not known_portable_sandbox_refusal(
+                        args.portable_policy, report["portable_launch_diagnostic"],
+                        args.arch, platform.freedesktop_os_release(),
+                    ):
+                        raise
+                    report["portable"].update(
+                        status="unsupported", reason="suid_sandbox_unavailable",
+                        supported_route="Debian installer",
+                    )
+                    report["excluded_artifacts"] = [dict(report["portable"])]
+                    report["checks"].append({
+                        "name": "portable-desktop", "status": "unsupported",
+                        "error": redact(str(portable_error)),
+                    })
+                if portable_result is not None:
+                    report["portable"]["status"] = "passed"
+                    report["checks"].append({"name": "portable-desktop", **portable_result})
             report["success"] = True
         except Exception as exc:
             report["success"] = False
@@ -787,6 +816,8 @@ def main():
     install_parser.add_argument("--desktop", type=Path, default=Path("desktop"))
     install_parser.add_argument("--evidence", type=Path, default=Path("build/native/evidence"))
     install_parser.add_argument("--signed", action="store_true")
+    install_parser.add_argument("--portable-policy", choices=("required", "diagnostic"),
+                                default="required")
     audit_parser = subcommands.add_parser("audit")
     audit_parser.add_argument("--root", type=Path, required=True)
     audit_parser.add_argument("--report", type=Path, required=True)

@@ -10,6 +10,7 @@ import os
 import platform
 import shutil
 import sys
+import sysconfig
 import tempfile
 from pathlib import Path
 
@@ -45,6 +46,20 @@ def interpreter_identity(*, prefix: Path | None = None) -> dict:
     }.get(sys.platform)
     if arch is None or family is None:
         raise ValueError(f"Unsupported embedded Python target: {sys.platform}/{machine}")
+    if sys.platform == "win32":
+        interpreter_arch = {"win-amd64": "x86_64", "win-arm64": "aarch64"}.get(
+            sysconfig.get_platform().lower()
+        )
+        if interpreter_arch != arch:
+            raise ValueError(
+                f"Embedded interpreter architecture {interpreter_arch} does not match "
+                f"the native Windows host {arch}"
+            )
+    requested_arch = os.environ.get("CLEANTAKE_NATIVE_ARCH")
+    if requested_arch and {"x64": "x86_64", "arm64": "aarch64"}.get(requested_arch) != arch:
+        raise ValueError(
+            f"Embedded Python does not match requested native architecture {requested_arch}"
+        )
     if sys.platform == "linux" and platform.libc_ver()[0] != "glibc":
         raise ValueError("The pinned Linux interpreter requires the glibc distribution")
     return {"python_version": version, "build": build, "target": f"{arch}-{family}"}

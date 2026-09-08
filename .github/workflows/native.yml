@@ -34,27 +34,36 @@ jobs:
           - runner: macos-14
             platform: mac
             arch: arm64
+            python: cpython-3.12.13-macos-aarch64-none
           - runner: macos-15-intel
             platform: mac
             arch: x64
+            python: cpython-3.12.13-macos-x86_64-none
           - runner: windows-latest
             platform: win
             arch: x64
+            python: cpython-3.12.13-windows-x86_64-none
             msystem: UCRT64
             msys_packages: make diffutils pkgconf gnupg mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-nasm
           - runner: windows-11-arm
             platform: win
             arch: arm64
+            python: cpython-3.12.13-windows-aarch64-none
             msystem: CLANGARM64
             msys_packages: make diffutils pkgconf gnupg mingw-w64-clang-aarch64-clang
           - runner: ubuntu-22.04
             platform: linux
             arch: x64
+            python: cpython-3.12.13-linux-x86_64-gnu
+            portable_policy: required
           - runner: ubuntu-24.04-arm
             platform: linux
             arch: arm64
+            python: cpython-3.12.13-linux-aarch64-gnu
+            portable_policy: diagnostic
     env:
       PYTHONUTF8: '1'
+      CLEANTAKE_NATIVE_ARCH: ${{ matrix.arch }}
       CLEANTAKE_SIGN: ${{ github.event_name == 'workflow_dispatch' && inputs.sign && 'true' || 'false' }}
       # Development builds must not discover a runner's unrelated signing identity.
       CSC_IDENTITY_AUTO_DISCOVERY: 'false'
@@ -63,7 +72,7 @@ jobs:
       - uses: astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff # v6
         with:
           version: '0.11.11'
-          python-version: '3.12.13'
+          python-version: ${{ matrix.python }}
           enable-cache: true
           cache-dependency-glob: uv.lock
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -95,6 +104,8 @@ jobs:
           install: ${{ matrix.msys_packages }}
       - name: Install locked native build dependencies
         run: uv sync --locked --group bundle
+      - name: Verify exact native interpreter identity before building
+        run: uv run --group bundle python -c "import json, runpy; print(json.dumps(runpy.run_path('packaging/python/stage_notices.py')['interpreter_identity']()))"
       - name: Verify native installer helper behavior
         run: uv run --group bundle pytest packaging/ci packaging/python -q
       - name: Build signed-source media tools (Unix)
@@ -188,7 +199,7 @@ jobs:
           exit 1
       - name: Verify actual installed applications and retained projects (Linux)
         if: runner.os == 'Linux'
-        run: dbus-run-session -- uv run --group bundle python scripts/native_ci.py install-smoke --arch ${{ matrix.arch }}
+        run: dbus-run-session -- uv run --group bundle python scripts/native_ci.py install-smoke --arch ${{ matrix.arch }} --portable-policy ${{ matrix.portable_policy }}
       - name: Verify actual installed applications and retained projects (macOS / Windows)
         if: runner.os != 'Linux'
         shell: bash

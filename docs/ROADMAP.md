@@ -18,3 +18,21 @@ Features enter the release because they complete recovery or make it dependable.
 
 
 Release checks passed for the full workflow, corpus evaluation, licensed demo, independent reviews, clean installation and native CI. [Version 0.1.0 is published](https://github.com/pavangupta352/cleantake/releases/tag/v0.1.0) with the installable wheel, source archive, portable demo and SHA-256 checksums. See the [validation record](VALIDATION.md) for exact platforms and results. Broader listening and editor-time claims remain separate evidence work; see the [evaluation report](EVALUATION.md).
+
+## Desktop distribution · 0.2.0
+
+The next release adds an installed application with its own browser, processing
+runtime, audio tools and sample. The recovery workflow remains shared with the
+CLI edition. This extension is under native platform verification.
+
+- [x] Bundle the processing engine, media tools, offline sample and editing window.
+- [x] Implement native menus, save dialogs, first launch and owned process cleanup.
+- [x] Preserve exact dependency notices, corresponding source and build recipes.
+- [x] Verify release assembly rejects incomplete, mixed or changed inputs.
+- [ ] Complete frozen processing and actual installation checks on all six targets.
+- [ ] Publish the verified installers, source supplement and checksums.
+
+The [desktop guide](DESKTOP.md) records installation and publisher-trust limits.
+The [distribution specification](NATIVE-DISTRIBUTION.md) defines the gates;
+the [assembly guide](../packaging/release/README.md) explains how release files
+are tied to their actual test evidence.

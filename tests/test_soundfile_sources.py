@@ -18,6 +18,16 @@ source_stage = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(source_stage)
 
 
+def test_emulated_windows_python_cannot_select_host_arm_library(monkeypatch):
+    import sysconfig
+
+    monkeypatch.setattr(source_stage.platform, "system", lambda: "Windows")
+    monkeypatch.setattr(source_stage.platform, "machine", lambda: "ARM64")
+    monkeypatch.setattr(sysconfig, "get_platform", lambda: "win-amd64")
+    with pytest.raises(source_stage.SourceError, match="interpreter architecture"):
+        source_stage.native_target()
+
+
 def test_modified_native_library_cannot_use_the_wrong_source_provenance(tmp_path):
     binary = tmp_path / "libsndfile.dylib"
     binary.write_bytes(b"abc")

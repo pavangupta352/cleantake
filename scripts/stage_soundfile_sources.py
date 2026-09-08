@@ -9,6 +9,7 @@ import json
 import platform
 import shutil
 import sys
+import sysconfig
 import tarfile
 import tempfile
 import urllib.error
@@ -66,6 +67,15 @@ def native_target() -> str:
     )
     if system is None or arch is None:
         raise SourceError("No pinned SoundFile wheel for this native target")
+    if system == "windows":
+        interpreter_arch = {"win-amd64": "x64", "win-arm64": "arm64"}.get(
+            sysconfig.get_platform().lower()
+        )
+        if interpreter_arch != arch:
+            raise SourceError(
+                f"Python interpreter architecture {interpreter_arch} does not match "
+                f"the native Windows host {arch}; select the native managed interpreter"
+            )
     return f"{system}-{arch}"
 
 

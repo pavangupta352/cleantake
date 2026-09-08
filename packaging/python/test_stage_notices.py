@@ -53,3 +53,31 @@ def test_different_python_build_cannot_reuse_pinned_notices(tmp_path):
 def test_missing_managed_build_identity_fails_closed(tmp_path):
     with pytest.raises(ValueError, match="BUILD"):
         notices.interpreter_identity(prefix=tmp_path)
+
+
+def test_emulated_windows_interpreter_cannot_claim_native_arm_notices(monkeypatch):
+    import sysconfig
+
+    monkeypatch.setattr(notices.sys, "platform", "win32")
+    monkeypatch.setattr(notices.platform, "machine", lambda: "ARM64")
+    monkeypatch.setattr(sysconfig, "get_platform", lambda: "win-amd64")
+    with pytest.raises(ValueError, match="interpreter architecture"):
+        notices.interpreter_identity()
+
+
+def test_native_windows_arm_interpreter_uses_arm_notices(monkeypatch):
+    import sysconfig
+
+    monkeypatch.setattr(notices.sys, "platform", "win32")
+    monkeypatch.setattr(notices.platform, "machine", lambda: "ARM64")
+    monkeypatch.setattr(sysconfig, "get_platform", lambda: "win-arm64")
+    monkeypatch.setenv("CLEANTAKE_NATIVE_ARCH", "arm64")
+    assert notices.interpreter_identity()["target"] == "aarch64-pc-windows-msvc"
+
+
+def test_ci_matrix_architecture_must_match_selected_interpreter(monkeypatch):
+    monkeypatch.setattr(notices.sys, "platform", "darwin")
+    monkeypatch.setattr(notices.platform, "machine", lambda: "arm64")
+    monkeypatch.setenv("CLEANTAKE_NATIVE_ARCH", "x64")
+    with pytest.raises(ValueError, match="requested native architecture"):
+        notices.interpreter_identity()
