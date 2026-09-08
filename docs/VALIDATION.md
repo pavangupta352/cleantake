@@ -25,6 +25,69 @@ The thresholds below are chosen engineering acceptance targets, not established 
 
 Each tier answers a different question. Do not relabel tier 1 or 2 as organic damage or independent validation. Do not publish private user media without explicit permission.
 
+## Transcript timing correction · 0.2.1
+
+[Release 0.2.1](https://github.com/pavangupta352/cleantake/releases/tag/v0.2.1)
+is built and tagged at
+[`0730f04b06f597ffcf170803a7aace359b579152`](https://github.com/pavangupta352/cleantake/commit/0730f04b06f597ffcf170803a7aace359b579152).
+The correction preserves source-marked estimated timing in supported JSON
+transcript layouts, including Azure phrases, Deepgram paragraphs and grouped
+AssemblyAI words with missing endpoints. It leaves audio processing and dependency
+versions unchanged.
+
+[Checks 34227687655](https://github.com/pavangupta352/cleantake/actions/runs/34227687655)
+passed on September 8, 2026 UTC. Each of the five Python jobs (Linux 3.12, 3.13
+and 3.14; Mac 3.12; Windows 3.12) passed **380 tests**, with five platform or
+optional-runtime skips and two upstream deprecation warnings. All five fresh
+installed-wheel smoke checks passed. The real browser workflow passed **27 tests
+across Chromium, Firefox and WebKit** in 5.2 minutes, then **nine packaged
+Chromium tests** in 1.5 minutes. The new browser case verifies estimated and
+precise labels, source offset/drift navigation, saved edit preservation and
+project reopening.
+
+[Native run 34227687534](https://github.com/pavangupta352/cleantake/actions/runs/34227687534)
+qualified six fresh installers from that same commit:
+
+| Target | Observed verification environment |
+|---|---|
+| Mac ARM64 | macOS 14.8.9 |
+| Mac x64 | macOS 15.7.9 |
+| Windows ARM64 | Windows 11, build 26200 |
+| Windows x64 | Windows Server 2025, build 26100 |
+| Linux ARM64 | Ubuntu 24.04 runner, glibc 2.39 |
+| Linux x64 | Ubuntu 22.04 runner, glibc 2.35 |
+
+Each passed **13 frozen-runtime checks**, **nine installed-app checks**, and
+preserved the same **24 project files** after both removal and reinstallation.
+All six runtime manifests identify the corrected importer bytes. The release
+manifest retains exact installer hashes and report identities. Both Linux
+portable archives are excluded; the Debian packages are the qualified Linux
+installation route.
+
+A separate fresh external wheel installation passed the three literal audited
+transcript cases, the real repair/export/archive/studio smoke and compatibility
+with the unchanged public demo. Safely extracting the source archive and
+rebuilding its wheel produced byte-identical output. The strict release assembler
+verified the native inputs, corresponding source and retained package evidence;
+all 12 uploaded asset sizes and server-reported SHA-256 digests matched the
+independently checked local output.
+A separate anonymous download of every public asset returned HTTP 200: all
+12 files, totaling 1,382,758,001 bytes, matched the assembled output; all 11
+entries in the public checksum inventory also matched.
+
+**Scope:** the fix applies to transcripts imported in 0.2.1. Saved project and
+archive entries retain their previous labels. Re-importing appends another entry;
+there is no general in-place refresh control. Audio edit decisions are preserved.
+This patch adds no natural-fault or participant result; see the separate
+[natural-fault intake](../eval/natural/README.md).
+
+Native verification used hosted machines with developer tools removed from the
+application's search path, not every pristine physical computer or device driver.
+Mac builds remain ad-hoc signed and not notarized; Windows installers remain
+unsigned. The separately documented browser-download approval on Pavan's Mac
+below applies to 0.2.0 and was not repeated for this patch. Existing 0.2.0 release
+assets and its acceptance record remain unchanged.
+
 ## Verified build: 65a836d
 
 [Checks run 34163316857](https://github.com/pavangupta352/cleantake/actions/runs/34163316857) completed successfully for commit [`65a836d549f7f6c3e632ba3f7dd2689c4c6a3559`](https://github.com/pavangupta352/cleantake/commit/65a836d549f7f6c3e632ba3f7dd2689c4c6a3559). These are observed results from the hosted runners, collected on September 7, 2026 UTC.

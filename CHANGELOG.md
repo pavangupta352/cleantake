@@ -12,6 +12,10 @@
   Retain explicit units, raw metadata and missing endpoints. Transcript import
   and navigation leave sample-based audio edits unchanged.
 
+The correction applies to new imports. Previously saved project and archive
+transcripts keep their stored labels; reopening does not refresh them. Importing
+the same file again adds another entry rather than replacing it.
+
 The recovery engine and dependency versions are unchanged. A separate
 [natural-fault intake](eval/natural/README.md) records a publisher-documented
 candidate; it contains no evaluated audio or participant outcomes.

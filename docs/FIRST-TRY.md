@@ -3,7 +3,7 @@
 Set aside 10–15 minutes with the included sample. You do not need your own
 recordings, an account or paid tools.
 
-[Download the free desktop app](https://github.com/pavangupta352/cleantake/releases/tag/v0.2.0)
+[Download the free desktop app](https://github.com/pavangupta352/cleantake/releases/tag/v0.2.1)
 for your computer, install it and open CleanTake. It includes the audio tools
 and an offline sample. Read the [desktop installation guide](DESKTOP.md) for
 supported systems and the current signing limitations: Mac builds are not
