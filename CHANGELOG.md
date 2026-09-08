@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.2
+
+- Show the saved replacement source and full original filename beside Accept,
+  with separately labeled project and recording time ranges.
+- Account for the saved source offset and clock drift in the recording range.
+- Mark unsaved repair fields clearly so they cannot be confused with the saved
+  replacement being reviewed.
+- Keep acceptance unavailable without a saved, aligned source covering the
+  complete repair range.
+
+The recovery engine, dependency versions and existing demo media are unchanged.
+
 ## 0.2.1
 
 - Preserve source-marked estimated times in Azure phrases, Deepgram paragraphs,

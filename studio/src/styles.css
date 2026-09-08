@@ -520,6 +520,7 @@ button.wide {
   margin: 0;
   font-size: 12px;
   color: var(--amber);
+  overflow-wrap: anywhere;
 }
 .job-status {
   display: flex;
@@ -1241,6 +1242,42 @@ details[open] > summary {
 }
 .decision-actions button {
   font-size: 12px;
+}
+.repair-provenance {
+  grid-column: 1 / -1;
+  min-width: 0;
+  padding-bottom: 8px;
+  font-size: 12px;
+}
+.repair-provenance h3 {
+  margin: 0 0 8px;
+  font-size: 13px;
+}
+.repair-source-name,
+.repair-source-file {
+  display: block;
+  overflow-wrap: anywhere;
+}
+.repair-source-file {
+  color: var(--secondary);
+  font-size: 11px;
+}
+.repair-provenance dl {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0;
+}
+.repair-provenance dt {
+  color: var(--secondary);
+  font-size: 11px;
+}
+.repair-provenance dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.repair-provenance p {
+  margin: 8px 0 0;
 }
 .inspector-footnote {
   font-size: 10px;

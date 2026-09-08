@@ -578,6 +578,318 @@ test("manual repair exports real replacement samples with source maps and reopen
   ).toHaveLength(1);
 });
 
+test("repair decisions disclose the saved recording and both clocks through editing and export", async ({
+  page,
+  request,
+  projectName,
+}, testInfo) => {
+  const name = projectName("Repair source disclosure");
+  await create(page, name);
+  await importRecordings(page, [
+    join(fixtures, "Headset-injected-dropout.wav"),
+    lapel,
+    join(fixtures, "Lapel-identity-probe.wav"),
+  ]);
+  let saved = await projectByName(request, name);
+  const longName = "Interview_backup_".repeat(9);
+  for (const [index, source] of saved.sources.slice(1).entries()) {
+    const response = await request.patch(
+      `/api/projects/${saved.id}/sources/${source.id}`,
+      {
+        headers,
+        data: {
+          name: index === 0 ? "Lapel backup" : longName,
+          alignment: {
+            offset_seconds: index === 0 ? 0.5 : -0.25,
+            drift_ppm: index === 0 ? 1000 : -500,
+            polarity: 1,
+          },
+          expected_revision: saved.revision,
+        },
+      },
+    );
+    expect(response.ok()).toBeTruthy();
+    saved = await response.json();
+  }
+  const response = await request.post(`/api/projects/${saved.id}/repairs`, {
+    headers,
+    data: {
+      source_id: saved.sources[1].id,
+      start_frame: 240000,
+      end_frame: 264000,
+      kind: "manual",
+      expected_revision: saved.revision,
+    },
+  });
+  expect(response.ok()).toBeTruthy();
+  saved = await response.json();
+  await page.reload();
+  await page.getByRole("button", { name: new RegExp(name) }).click();
+  await page.getByRole("button", { name: /Manual passage/ }).click();
+  const details = page.getByRole("region", {
+    name: "Repair source details",
+    exact: true,
+  });
+  const accept = page.getByRole("button", {
+    name: "Accept repair",
+    exact: true,
+  });
+  await expect(details).toContainText("Lapel backup");
+  await expect(details).toContainText("ES2004a_0324-0344_Lapel-0.wav");
+  await expect(
+    details.getByLabel("Project time range", { exact: true }),
+  ).toHaveText("00:05.000 — 00:05.500");
+  await expect(
+    details.getByLabel("Recording time range", { exact: true }),
+  ).toHaveText("00:05.505 — 00:06.006");
+  await expect(details).toContainText("Edges blend with the original.");
+  await expect(accept).toBeEnabled();
+  await page
+    .getByRole("combobox", { name: /^Replacement recording/ })
+    .selectOption(saved.sources[2].id);
+  await page.getByLabel("End (seconds)", { exact: true }).fill("6");
+  await expect(accept).toBeDisabled();
+  await expect(details).toContainText("Lapel backup");
+  await expect(details).not.toContainText(longName);
+  await expect(details).toContainText("Saved values shown");
+  await page
+    .getByRole("button", { name: "Save passage changes", exact: true })
+    .click();
+  await expect(details).toContainText(longName);
+  await expect(
+    details.getByLabel("Project time range", { exact: true }),
+  ).toHaveText("00:05.000 — 00:06.000");
+  await expect(
+    details.getByLabel("Recording time range", { exact: true }),
+  ).toHaveText("00:04.748 — 00:05.747");
+  await expect(accept).toBeEnabled();
+  await page
+    .getByRole("button", { name: "Undo last edit", exact: true })
+    .click();
+  await expect(details).toContainText("Lapel backup");
+  await expect(
+    details.getByLabel("Project time range", { exact: true }),
+  ).toHaveText("00:05.000 — 00:05.500");
+  await page
+    .getByRole("button", { name: "Redo last edit", exact: true })
+    .click();
+  await expect(details).toContainText(longName);
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await details.scrollIntoViewIfNeeded();
+  await page.screenshot({
+    path: testInfo.outputPath("source-details-desktop.png"),
+    fullPage: true,
+    animations: "disabled",
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(accept).toBeEnabled();
+  await page.screenshot({
+    path: testInfo.outputPath("source-details-mobile.png"),
+    fullPage: true,
+    animations: "disabled",
+  });
+  const overflow = await page.evaluate(() =>
+    Array.from(document.querySelectorAll("body *"))
+      .filter(
+        (element) => element.getBoundingClientRect().right > innerWidth + 1,
+      )
+      .slice(0, 8)
+      .map((element) => ({
+        tag: element.tagName,
+        className: element.className,
+        right: element.getBoundingClientRect().right,
+      })),
+  );
+  expect(
+    await page.evaluate(() => document.documentElement.scrollWidth),
+    JSON.stringify(overflow),
+  ).toBeLessThanOrEqual(390);
+  const placement = await details.evaluate((element) => {
+    const rect = element.getBoundingClientRect();
+    const button = element
+      .parentElement!.querySelector("button")!
+      .getBoundingClientRect();
+    return { bottom: rect.bottom, buttonTop: button.top, right: rect.right };
+  });
+  expect(placement.right).toBeLessThanOrEqual(390);
+  expect(placement.buttonTop - placement.bottom).toBeGreaterThanOrEqual(0);
+  expect(placement.buttonTop - placement.bottom).toBeLessThanOrEqual(24);
+  await accept.click();
+  await expect(accept).toBeDisabled();
+  saved = await projectByName(request, name);
+  expect(saved.repairs[0]).toMatchObject({
+    status: "accepted",
+    source_id: saved.sources[2].id,
+    start_frame: 240000,
+    end_frame: 288000,
+  });
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.getByRole("button", { name: "Export", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Prepare export", exact: true })
+    .click();
+  const mapButton = page
+    .getByRole("button")
+    .filter({ hasText: /^source-map\.json/ });
+  await expect(mapButton).toBeVisible({ timeout: 60_000 });
+  const download = page.waitForEvent("download");
+  await mapButton.click();
+  const mapPath = testInfo.outputPath("source-map.json");
+  await (await download).saveAs(mapPath);
+  const map = JSON.parse(readFileSync(mapPath, "utf8"));
+  const contributors = map.spans
+    .flatMap(
+      (span: {
+        contributors: {
+          source_id: string;
+          source_start_frame: number;
+          source_end_frame: number;
+        }[];
+      }) => span.contributors,
+    )
+    .filter(
+      (item: { source_id: string }) => item.source_id === saved.sources[2].id,
+    );
+  expect(
+    Math.min(
+      ...contributors.map(
+        (item: { source_start_frame: number }) => item.source_start_frame,
+      ),
+    ) / 48000,
+  ).toBeCloseTo(4.7475, 8);
+  expect(
+    Math.max(
+      ...contributors.map(
+        (item: { source_end_frame: number }) => item.source_end_frame,
+      ),
+    ) / 48000,
+  ).toBeCloseTo(5.747, 8);
+});
+
+test("repair source details distinguish missing, uncertain and uncovered donors", async ({
+  page,
+  request,
+  projectName,
+}) => {
+  const name = projectName("Repair source availability");
+  await create(page, name);
+  await importRecordings(page, [
+    join(fixtures, "Headset-injected-dropout.wav"),
+    lapel,
+    join(fixtures, "Lapel-identity-probe.wav"),
+  ]);
+  let saved = await projectByName(request, name);
+  const alignedId = saved.sources[1].id;
+  const uncertainId = saved.sources[2].id;
+  let response = await request.patch(
+    `/api/projects/${saved.id}/sources/${alignedId}`,
+    {
+      headers,
+      data: {
+        alignment: { offset_seconds: 0, drift_ppm: 0, polarity: 1 },
+        expected_revision: saved.revision,
+      },
+    },
+  );
+  expect(response.ok()).toBeTruthy();
+  saved = await response.json();
+  for (const [sourceId, start, end] of [
+    [null, 1, 1.5],
+    [uncertainId, 2, 2.5],
+    [alignedId, 19, 20],
+  ] as const) {
+    response = await request.post(`/api/projects/${saved.id}/repairs`, {
+      headers,
+      data: {
+        source_id: sourceId ?? alignedId,
+        start_frame: start * 48000,
+        end_frame: end * 48000,
+        kind: "manual",
+        expected_revision: saved.revision,
+      },
+    });
+    expect(response.ok()).toBeTruthy();
+    saved = await response.json();
+    if (sourceId === null) {
+      response = await request.patch(
+        `/api/projects/${saved.id}/repairs/${saved.repairs.at(-1).id}`,
+        {
+          headers,
+          data: {
+            source_id: null,
+            status: "unresolved",
+            expected_revision: saved.revision,
+          },
+        },
+      );
+      expect(response.ok(), await response.text()).toBeTruthy();
+      saved = await response.json();
+    }
+  }
+  await page.reload();
+  await page.getByRole("button", { name: new RegExp(name) }).click();
+  const rows = page.getByRole("button", { name: /Manual passage/ });
+  const details = page.getByRole("region", {
+    name: "Repair source details",
+    exact: true,
+  });
+  const accept = page.getByRole("button", {
+    name: "Accept repair",
+    exact: true,
+  });
+  await rows.nth(0).click();
+  await expect(details).toContainText("No replacement recording saved.");
+  await expect(accept).toBeDisabled();
+  await rows.nth(1).click();
+  await expect(details).toContainText("Alignment needed");
+  await expect(
+    details.getByLabel("Recording time range", { exact: true }),
+  ).toHaveCount(0);
+  await expect(accept).toBeDisabled();
+  await rows.nth(2).click();
+  await expect(
+    details.getByLabel("Recording time range", { exact: true }),
+  ).toHaveText("00:19.000 — 00:20.000");
+  await expect(accept).toBeEnabled();
+  await accept.click();
+  await expect(accept).toBeDisabled();
+  saved = await projectByName(request, name);
+  expect(saved.repairs[2].status).toBe("accepted");
+  response = await request.patch(
+    `/api/projects/${saved.id}/sources/${alignedId}`,
+    {
+      headers,
+      data: {
+        alignment: { offset_seconds: -0.25, drift_ppm: 0, polarity: 1 },
+        expected_revision: saved.revision,
+      },
+    },
+  );
+  expect(response.ok()).toBeTruthy();
+  saved = await response.json();
+  response = await request.post(`/api/projects/${saved.id}/repairs`, {
+    headers,
+    data: {
+      source_id: alignedId,
+      start_frame: 0,
+      end_frame: 24000,
+      kind: "manual",
+      expected_revision: saved.revision,
+    },
+  });
+  expect(response.ok()).toBeTruthy();
+  await page.reload();
+  await page.getByRole("button", { name: new RegExp(name) }).click();
+  await rows.last().click();
+  await expect(
+    details.getByLabel("Recording time range", { exact: true }),
+  ).toHaveText("−00:00.250 — 00:00.250");
+  await expect(details).toContainText(
+    "This recording does not cover the whole passage.",
+  );
+  await expect(accept).toBeDisabled();
+});
+
 test("source-marked transcript estimates survive import and reopening without changing audio edits", async ({
   page,
   request,

@@ -266,6 +266,8 @@ Repair rows form a continuous list with shared column alignment and bottom divid
 
 The right inspector uses quiet chrome, a bordered heading and stacked content. It holds one selected passage, source settings or introductory guidance at a time. Edit boundaries, donor selection, gain, crossfade, save and decision actions remain grouped with the passage. The layout stacks below the score on small screens, retaining source and numeric detail.
 
+Immediately before Accept, Replacement details shows the saved recording name and original filename when different. Labeled project and recording time ranges share millisecond precision; the recording clock includes its saved offset and drift. Unsaved form changes retain the saved disclosure and block the decision until Save. Missing alignment or incomplete recording coverage is stated here before acceptance. Long names wrap without widening the page, and this disclosure spans the full decision area on phones.
+
 ### Transport, Drawers and Motion
 
 Playback stays visible at the bottom with the current time, audition mode, donor selector and numeric seeking. Switching audition mode preserves the playhead position and resumes only when playback was active. The loading spinner is functional feedback (1.4 seconds per linear rotation). There are no entrance animations.

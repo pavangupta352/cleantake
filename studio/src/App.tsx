@@ -2030,6 +2030,14 @@ function SourceInspector({
   );
 }
 
+function recordingTime(seconds: number) {
+  const milliseconds = Math.round(Math.abs(seconds) * 1000);
+  const hours = Math.floor(milliseconds / 3_600_000);
+  const minutes = Math.floor(milliseconds / 60_000) % 60;
+  const remainder = milliseconds % 60_000;
+  return `${seconds < 0 && milliseconds ? "−" : ""}${hours ? `${String(hours).padStart(2, "0")}:` : ""}${String(minutes).padStart(2, "0")}:${String(Math.floor(remainder / 1000)).padStart(2, "0")}.${String(remainder % 1000).padStart(3, "0")}`;
+}
+
 function RepairInspector({
   repair,
   project,
@@ -2064,6 +2072,23 @@ function RepairInspector({
   const rate = project.sample_rate;
   const usable = donorSources.some(
     (source) => source.id === donor && source.alignment.status !== "uncertain",
+  );
+  const savedSource = donorSources.find(
+    (source) => source.id === repair?.source_id,
+  );
+  const savedAligned =
+    savedSource && savedSource.alignment.status !== "uncertain";
+  const scale = savedSource
+    ? 1 + savedSource.alignment.drift_ppm / 1_000_000
+    : 1;
+  const offset = (savedSource?.alignment.offset_seconds ?? 0) * rate;
+  const sourceStart = repair ? repair.start_frame * scale + offset : 0;
+  const sourceEnd = repair ? repair.end_frame * scale + offset : 0;
+  const covered = !!(
+    repair &&
+    savedSource &&
+    sourceStart >= 0 &&
+    (repair.end_frame - 1) * scale + offset <= savedSource.audio.frames - 1
   );
   return (
     <div className="inspector-content">
@@ -2215,18 +2240,93 @@ function RepairInspector({
         >
           {repair ? "Save passage changes" : "Create proposed repair"}
         </button>
-        {formChanged && repair && (
-          <p className="fine-print">
-            Save your changes before auditioning or deciding.
-          </p>
-        )}
       </form>
       {repair && (
         <div className="decision-actions">
+          <section
+            className="repair-provenance"
+            aria-label="Repair source details"
+          >
+            <h3>Replacement details</h3>
+            {savedSource ? (
+              <>
+                <strong className="repair-source-name">
+                  {savedSource.name}
+                </strong>
+                {savedSource.original_filename !== savedSource.name && (
+                  <span className="repair-source-file">
+                    {savedSource.original_filename}
+                  </span>
+                )}
+                {(savedSource.audio.source_channels > 1 ||
+                  savedSource.audio.selected_stream > 0) && (
+                  <span className="repair-source-file">
+                    Stream {savedSource.audio.selected_stream + 1} ·{" "}
+                    {savedSource.audio.channel_mode === "downmix"
+                      ? "mono downmix"
+                      : `channel ${Number(savedSource.audio.selected_channel) + 1}`}
+                  </span>
+                )}
+              </>
+            ) : (
+              <p>No replacement recording saved.</p>
+            )}
+            <dl>
+              <div>
+                <dt>In project</dt>
+                <dd aria-label="Project time range">
+                  {recordingTime(repair.start_frame / rate)} —{" "}
+                  {recordingTime(repair.end_frame / rate)}
+                </dd>
+              </div>
+              {savedAligned && (
+                <div>
+                  <dt>In recording</dt>
+                  <dd aria-label="Recording time range">
+                    {recordingTime(sourceStart / rate)} —{" "}
+                    {recordingTime(sourceEnd / rate)}
+                  </dd>
+                </div>
+              )}
+            </dl>
+            <p className="fine-print">
+              Times rounded to milliseconds.
+              {(repair.fade_ms * rate) / 1000 > 0.5 &&
+              repair.end_frame - repair.start_frame >= 2 &&
+              savedSource
+                ? " Edges blend with the original."
+                : ""}
+            </p>
+            {!savedSource ? (
+              <p className="warning-text">
+                Choose a recording and save the passage before accepting.
+              </p>
+            ) : !savedAligned ? (
+              <p className="warning-text">
+                Alignment needed. Review this recording’s clock before
+                accepting.
+              </p>
+            ) : !covered ? (
+              <p className="warning-text">
+                This recording does not cover the whole passage. Adjust the
+                range or choose another recording.
+              </p>
+            ) : null}
+            {formChanged && (
+              <p className="fine-print" role="status">
+                Saved values shown. Save your changes before auditioning or
+                deciding.
+              </p>
+            )}
+          </section>
           <button
             className="primary wide"
             disabled={
-              busy || !usable || formChanged || repair.status === "accepted"
+              busy ||
+              !savedAligned ||
+              !covered ||
+              formChanged ||
+              repair.status === "accepted"
             }
             onClick={() => void status("accepted")}
           >

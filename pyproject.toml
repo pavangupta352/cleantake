@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "cleantake"
-version = "0.2.1"
+version = "0.2.2"
 description = "Recover damaged dialogue from the recordings you already have."
 readme = "README.md"
 requires-python = ">=3.12"
