@@ -19,7 +19,7 @@ there is no account or cloud upload.
 
 ## Hear one repair
 
-**[Watch the 18-second comparison](https://raw.githubusercontent.com/pavangupta352/cleantake/main/docs/assets/launch/cleantake-comparison.mp4)**
+**[Watch the 18-second comparison](https://pavangupta352.github.io/cleantake/#demo)**
 · [Video credits](docs/assets/launch/ATTRIBUTION.md)
 
 **[Before: a half-second gap](https://raw.githubusercontent.com/pavangupta352/cleantake/main/docs/assets/demo/before.wav)**

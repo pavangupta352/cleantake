@@ -37,5 +37,11 @@
   "credit": [
     "AMI Project Consortium (original recordings)",
     "Pavan Gupta (comparison graphics and video edit)"
-  ]
+  ],
+  "poster": {
+    "file": "poster.png",
+    "source": "Video frame at 0 seconds; unchanged",
+    "license": "CC-BY-4.0",
+    "sha256": "ebdd23a07af7dc187effc90a42f81c643f6a369f57a582a0eec89840d5d96467"
+  }
 }

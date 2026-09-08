@@ -17,3 +17,5 @@ The video plays the six-second before clip at **1–7 seconds** and the six-seco
 The modified recordings are controlled examples, not naturally occurring damage, participant approval or a listening-quality benchmark. Current product validation and broader limitations are recorded in [the evaluation report](../../EVALUATION.md) and [desktop validation](../../VALIDATION.md).
 
 Corpus reference: Carletta, J. (2006). *Announcing the AMI Meeting Corpus*. The ELRA Newsletter 11(1), January–March, pp. 3–5. [Official corpus overview](https://groups.inf.ed.ac.uk/ami/corpus/overview.shtml).
+
+The launch page poster, `poster.png`, is an unchanged still from the first video frame and shares the comparison’s CC BY 4.0 credit and license. The favicon, `icon.svg`, is an unchanged copy of the CleanTake application icon, covered by the repository’s MIT license.

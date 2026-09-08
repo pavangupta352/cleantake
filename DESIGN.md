@@ -282,6 +282,14 @@ Startup and service failures use a native error dialog with “Try again,” “
 
 Prepared exports use the OS save dialog, titled “Save CleanTake export,” with the generated filename in Downloads as its initial destination. The studio keeps responsibility for preparing the audio or archive; the native dialog lets the editor choose where to save it. Native dialogs and menus inherit the platform's presentation rather than imitating studio controls.
 
+### Public Launch Page
+
+The public page at `docs/index.html` is a Persuade surface. It extends the light slate desk, blue ink and real source waveforms without changing the studio's compact editing scale. A large, plain headline sits beside the native comparison player on desktop; on phones the player follows the introduction, ahead of the download action. The page uses the existing system font stack, fine dividers and one blue download action. Its larger heading scale is specific to this page.
+
+The comparison uses the actual licensed before/after recordings and a shared waveform scale. Written labels and a caption disclose the injected gap and recorded replacement. Native video controls preserve familiar playback, keyboard and fullscreen behavior. The page has visible link focus, a skip link and reduced-motion support. A flat sequence explains the editing workflow, followed by a first-try guide and concrete recovery and installation limits. No invented interface, testimonial, adoption counter or decorative animation is used.
+
+Hosting is a static GitHub Pages deployment from `main` and `/docs`. The page loads no application scripts, analytics, external fonts or third-party embeds. Full audio credits remain linked beside the player and in the footer.
+
 ## Do's and Don'ts
 
 ### Do:
