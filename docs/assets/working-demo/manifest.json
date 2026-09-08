@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "title": "CleanTake: compare, accept and export a recorded repair",
+  "software": {
+    "version": "0.2.1",
+    "commit": "0730f04b06f597ffcf170803a7aace359b579152"
+  },
+  "created_on": "2026-09-08",
+  "credit": {
+    "audio": "AMI Meeting Corpus — AMI Project Consortium",
+    "app_recording_and_edit": "Pavan Gupta",
+    "license": "CC BY 4.0",
+    "details": "ATTRIBUTION.md"
+  },
+  "source": {
+    "meeting": "ES2004a",
+    "channels": [
+      "Headset-0",
+      "Lapel-0"
+    ],
+    "bundled_excerpt_meeting_seconds": [
+      324,
+      344
+    ],
+    "injected_project_seconds": [
+      17,
+      17.5
+    ],
+    "listening_project_seconds": [
+      14,
+      20
+    ],
+    "listening_meeting_seconds": [
+      338,
+      344
+    ],
+    "original_source_sha256": {
+      "Headset · injected gap": "99e810009980481f9171d8bd75c162490e2ee1e467aafc8a8fc4a30545675265",
+      "Lapel · backup": "be163f51dadfe905612e2471a0f6810f9f55d19d1ac91cbdf162ce6233944ce2"
+    }
+  },
+  "video": {
+    "duration_seconds": 22.066667,
+    "dimensions": [
+      1080,
+      1080
+    ],
+    "fps": 30,
+    "audio_schedule_seconds": [
+      {
+        "mode": "Original",
+        "start": 1.404199951171875,
+        "duration": 6
+      },
+      {
+        "mode": "Repair",
+        "start": 10.8415,
+        "duration": 6
+      }
+    ],
+    "capture_sampled_frames": 277,
+    "capture_rate_note": "Screen pixels sampled at approximately 12 fps and presented at 30 fps; no claim of native 30 fps capture.",
+    "audio_source_files": [
+      "before.wav",
+      "after.wav"
+    ],
+    "audio_encoding": "AAC at 256 kb/s, mono 48 kHz, with no extra gain or mastering. Separate FLOAT WAVs are the references."
+  },
+  "gif": {
+    "dimensions": [
+      1080,
+      720
+    ],
+    "fps": 12,
+    "duration_seconds": 10.0,
+    "segments_source_start_end_duration": [
+      [
+        0,
+        1.2,
+        0.7
+      ],
+      [
+        1.2,
+        7.85,
+        2.3
+      ],
+      [
+        8.14,
+        9.85,
+        1.5
+      ],
+      [
+        10.28,
+        17.33,
+        2.4
+      ],
+      [
+        18.45,
+        19.0,
+        0.6
+      ],
+      [
+        20.05,
+        21.95,
+        1.6
+      ],
+      [
+        14.15,
+        15.75,
+        1.0
+      ]
+    ],
+    "audio": false,
+    "condensed": true,
+    "decoded_frames": 120,
+    "loop": true
+  },
+  "editing": "Actual packaged studio pixels, cropped for readable details. The settled 0.4-second frame is held over the opening 0.4 seconds; the video ends after actual download and before the export drawer closes. Editorial titles and a pointer based on measured click coordinates are composited separately. No controls, waveform data or repair state were fabricated.",
+  "project_evidence": {
+    "before_revision": 5,
+    "accepted_revision": 6,
+    "repair_start_frame": 816039,
+    "repair_end_frame_exclusive": 839953,
+    "gain_db": 12.824418753318387,
+    "crossfade_ms": 12,
+    "source_map": "source-map.json",
+    "downloaded_full_export_sha256": "024cbf6b6003b1b6853ee4cee418d8cb8f2c1bd6a5f23d67389fd51f38ec2c45",
+    "repaired_excerpt_exact_downloaded_export": true,
+    "outside_accepted_interval_unchanged_frames": 936086
+  },
+  "validation": {
+    "native_player_response_audio": "passed",
+    "same_time_encoded_audio_correlation": [
+      0.9999746757601592,
+      0.9999791651317543
+    ],
+    "mp4_full_decode": "passed",
+    "gif_full_decode": "passed",
+    "gif_bytes": 1044019,
+    "limitations": "Controlled development sample with an injected fault; no natural-failure performance, human listening preference or editor-time claim. GIF is condensed and silent."
+  },
+  "files": {
+    "ATTRIBUTION.md": {
+      "bytes": 4686,
+      "sha256": "fd89e0902c156f473bf932a369d7959fd23d4c3018713ea2142aa54af5e55847"
+    },
+    "after.wav": {
+      "bytes": 1152080,
+      "sha256": "8ce4096ef7d629ea4f83bea10797d0aff7d59f19b5ff5e7769a23effb56ca87e"
+    },
+    "before.wav": {
+      "bytes": 1152080,
+      "sha256": "ec88e87762001d2754877d57d92c452c195c022a2ca0ec7fbcbbaaab2a90e28c"
+    },
+    "cleantake-workflow.gif": {
+      "bytes": 1044019,
+      "sha256": "2a07c3c9392ba2e1d3f2bc41ad16e3487b81749d7d951a7fa9df5bd8a7985146"
+    },
+    "cleantake-workflow.mp4": {
+      "bytes": 714676,
+      "sha256": "54b0cf44fdd5a6a422705a34e9d54793804b01e943d944d9b239c10bb8ce45f6"
+    },
+    "poster.png": {
+      "bytes": 128139,
+      "sha256": "ffcbfd1e6efd3ed1eb5d489b0033865a55cc4eb0d7b8c33c38b75a2259462b8d"
+    },
+    "source-map.json": {
+      "bytes": 9134,
+      "sha256": "66bae253ba0ba3b70b80686a9702b919f9d62ea2c9fa914a4360f079dcc28bc0"
+    },
+    "still.png": {
+      "bytes": 100247,
+      "sha256": "cfa7ba7811fa84c56b15dde444be370aca63fdfdd4ae9758cd350546b5d20b91"
+    }
+  }
+}

@@ -11,7 +11,20 @@ the source of every replacement visible through the final export.
 
 **[Download the desktop app](https://github.com/pavangupta352/cleantake/releases/tag/v0.2.1)** · [Hear a repair](#hear-one-repair) · [Editing guide](docs/GUIDE.md)
 
-![CleanTake studio with synchronized source lanes, a selected passage and repair controls](docs/assets/studio.png)
+<a href="https://pavangupta352.github.io/cleantake/#demo">
+  <picture>
+    <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/working-demo/still.png">
+    <img src="docs/assets/working-demo/cleantake-workflow.gif" alt="CleanTake's working studio: compare a deliberately damaged main microphone, accept a lapel repair, and export the audio with its source decisions." width="1080" height="720">
+  </picture>
+</a>
+
+**[Watch with sound · 22 seconds](https://pavangupta352.github.io/cleantake/#demo)**
+· [Static image](docs/assets/working-demo/still.png)
+· [Media credits](docs/assets/working-demo/ATTRIBUTION.md)
+
+A condensed recording of the working app. The sample deliberately introduces a
+half-second gap; the lapel captured the replacement. Audio: AMI Project Consortium,
+CC BY 4.0.
 
 Open CleanTake as a desktop app on Mac, Windows or Linux. Your recordings stay
 on your computer. The app includes its processing tools and an offline sample;
@@ -19,7 +32,7 @@ there is no account or cloud upload.
 
 ## Hear one repair
 
-**[Watch the 18-second comparison](https://pavangupta352.github.io/cleantake/#demo)**
+**[Watch the original 18-second comparison](https://pavangupta352.github.io/cleantake/assets/launch/cleantake-comparison.mp4)**
 · [Video credits](docs/assets/launch/ATTRIBUTION.md)
 
 **[Before: a half-second gap](https://raw.githubusercontent.com/pavangupta352/cleantake/main/docs/assets/demo/before.wav)**
