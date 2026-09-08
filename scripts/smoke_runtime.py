@@ -37,13 +37,17 @@ def digest(path):
 def isolated_environment():
     env = dict(os.environ)
     env["PATH"] = ""
+    env["CLEANTAKE_SMOKE_DIAGNOSTICS"] = "1"
     for name in ("PYTHONHOME", "PYTHONPATH", "VIRTUAL_ENV", "CONDA_PREFIX"):
         env.pop(name, None)
     return env
 
 
 class Session:
-    def __init__(self, executable, workspace):
+    def __init__(self, executable, workspace, report=None):
+        self.workspace = Path(workspace)
+        self.report = report
+        self.last_job = None
         self.process = subprocess.Popen(
             [str(executable), "--desktop", "--workspace", str(workspace)],
             stdin=subprocess.PIPE,
@@ -73,7 +77,7 @@ class Session:
         def read_errors():
             while line := self.process.stderr.readline(4096):
                 self.errors.append(line)
-                del self.errors[:-30]
+                del self.errors[:-128]
 
         def monitor():
             parent = psutil.Process(self.process.pid)
@@ -138,9 +142,11 @@ class Session:
         )
 
     def wait_job(self, job, expected="completed"):
+        self.last_job = job
         deadline = time.monotonic() + 120
         while time.monotonic() < deadline:
             current = self.request(f"/api/jobs/{job['id']}")
+            self.last_job = current
             if current["status"] in {"completed", "cancelled", "failed", "interrupted"}:
                 assert current["status"] == expected, current
                 return current
@@ -194,7 +200,59 @@ class Session:
             time.sleep(0.005)
         raise AssertionError("No actual FFmpeg child observed")
 
+    def diagnostics(self):
+        """Capture evidence before teardown removes the failed job's workspace."""
+        processes = []
+        identities = dict(self.observed)
+        try:
+            parent = psutil.Process(self.process.pid)
+            identities.update({p.pid: p for p in [parent, *parent.children(recursive=True)]})
+        except psutil.Error:
+            pass
+        for process in list(identities.values()):
+            try:
+                with process.oneshot():
+                    processes.append({
+                        "pid": process.pid, "ppid": process.ppid(), "name": process.name(),
+                        "status": process.status(), "threads": process.num_threads(),
+                        "rss_bytes": process.memory_info().rss,
+                        "cpu_seconds": dict(process.cpu_times()._asdict()),
+                        "command": process.cmdline(),
+                    })
+            except psutil.Error:
+                processes.append({"pid": process.pid, "status": "exited_or_unavailable"})
+        files, results = [], {}
+        pending = self.workspace / "pending"
+        if pending.is_dir():
+            for path in pending.rglob("*"):
+                if path.is_file() and not path.is_symlink():
+                    relative = path.relative_to(pending).as_posix()
+                    files.append({"path": relative, "bytes": path.stat().st_size})
+                    if path.name == "result.json" and path.stat().st_size < 65536:
+                        try:
+                            results[path.parent.name] = json.loads(path.read_text(encoding="utf-8"))
+                        except (OSError, ValueError):
+                            results[path.parent.name] = {"unreadable": True}
+                    if len(files) >= 200:
+                        break
+        result = {
+            "job": self.last_job, "backend_returncode": self.process.poll(),
+            "processes": processes, "peak_tree_rss_bytes": self.peak_rss,
+            "pending_files": files, "pending_results": results,
+            "stderr_tail": "".join(self.errors)[-32768:],
+        }
+        if self.token:
+            return json.loads(json.dumps(result).replace(self.token, "[redacted]"))
+        return result
+
     def cleanup(self):
+        if sys.exc_info()[0] is not None and self.report is not None:
+            try:
+                self.report.setdefault("failure_diagnostics", []).append(self.diagnostics())
+            except (OSError, ValueError, psutil.Error) as error:
+                self.report.setdefault("failure_diagnostics", []).append(
+                    {"capture_error": type(error).__name__}
+                )
         self.monitoring = False
         if self.process.poll() is None:
             try:
@@ -255,7 +313,7 @@ def run(runtime: Path, report: dict):
                 "cold_start_seconds": time.monotonic() - doctor_started,
             }
         )
-        session = Session(executable, workspace)
+        session = Session(executable, workspace, report)
         try:
             session.ready()
             assert session.version == report["version"]
@@ -414,7 +472,7 @@ def run(runtime: Path, report: dict):
             )
         finally:
             session.cleanup()
-        session = Session(executable, workspace)
+        session = Session(executable, workspace, report)
         try:
             session.ready()
             assert len(session.request("/api/projects")["projects"]) == 3
@@ -429,7 +487,7 @@ def run(runtime: Path, report: dict):
             crashed.process.wait(timeout=5)
             # Reopen immediately; do not clean up the old worker tree on behalf
             # of the application or delay reopening until it exits.
-            session = Session(executable, workspace)
+            session = Session(executable, workspace, report)
             try:
                 crashed.wait_children()
                 crash_cleanup_seconds = time.monotonic() - crash_started
@@ -459,7 +517,7 @@ def run(runtime: Path, report: dict):
             session.stop()
         finally:
             session.cleanup()
-        session = Session(executable, workspace)
+        session = Session(executable, workspace, report)
         try:
             session.ready()
             assert not session.request("/api/projects")["projects"]
@@ -470,7 +528,7 @@ def run(runtime: Path, report: dict):
         media_tool = relocated / "_internal/media" / ("ffprobe" + suffix)
         media_tool.parent.chmod(media_tool.parent.stat().st_mode | stat.S_IWUSR)
         media_tool.rename(media_tool.with_suffix(".disabled"))
-        session = Session(executable, workspace)
+        session = Session(executable, workspace, report)
         try:
             event = session.events.get(timeout=30)
             assert event["event"] == "error" and event["code"] == "media_tools_unavailable"
