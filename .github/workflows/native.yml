@@ -4,6 +4,7 @@ on:
   push:
     branches: [main, 'feat/**', 'fix/**']
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
   workflow_dispatch:
     inputs:
       sign:
@@ -21,6 +22,7 @@ concurrency:
 
 jobs:
   native:
+    if: ${{ github.event_name != 'pull_request' || !github.event.pull_request.draft }}
     name: ${{ matrix.platform }} / ${{ matrix.arch }} / ${{ matrix.runner }}
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 120
