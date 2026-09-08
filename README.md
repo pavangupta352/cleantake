@@ -14,7 +14,7 @@ the source of every replacement visible through the final export.
 <a href="https://pavangupta352.github.io/cleantake/#demo">
   <picture>
     <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/working-demo/still.png">
-    <img src="docs/assets/working-demo/cleantake-workflow.gif" alt="CleanTake's working studio: compare a deliberately damaged main microphone, accept a lapel repair, and export the audio with its source decisions." width="1080" height="720">
+    <img src="docs/assets/working-demo/cleantake-workflow.gif" alt="CleanTake's working studio: compare a deliberately damaged main microphone, accept a lapel repair, and export the audio with its source decisions." width="1080">
   </picture>
 </a>
 
