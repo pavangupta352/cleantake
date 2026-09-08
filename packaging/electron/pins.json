@@ -1,0 +1,1234 @@
+{
+  "chromium_revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+  "chromium_version": "152.0.7977.76",
+  "electron_revision": "aa650d74597c652878629df0038a50485e156a09",
+  "electron_version": "44.2.0",
+  "ffmpeg_revision": "2b68d2babae73714846961fb0ee47e3b3d2e39a9",
+  "native_distributions": {
+    "linux-arm64": {
+      "bytes": 124089403,
+      "name": "electron-v44.2.0-linux-arm64.zip",
+      "sha256": "8693fd67332d417775dc2ffc470f4c05eda9d0ed1ac329e4866e108afaa4ddda",
+      "url": "https://github.com/electron/electron/releases/download/v44.2.0/electron-v44.2.0-linux-arm64.zip",
+      "verification": "official release asset digest; archive not inspected in this local source audit"
+    },
+    "linux-x64": {
+      "bytes": 122996717,
+      "name": "electron-v44.2.0-linux-x64.zip",
+      "sha256": "574f7d8cd2a82d77812849729a282b86639b050de120d58b138a126d16b48692",
+      "url": "https://github.com/electron/electron/releases/download/v44.2.0/electron-v44.2.0-linux-x64.zip",
+      "verification": "official release asset digest; archive not inspected in this local source audit"
+    },
+    "macos-arm64": {
+      "bytes": 130326085,
+      "chromium_notices": {
+        "bytes": 20111209,
+        "sha256": "a62dabd1c6ef1327365b2a3fdffb806222684a746dcb8f4afd1c1f690eba5535"
+      },
+      "ffmpeg_member": {
+        "bytes": 2317968,
+        "name": "Electron.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Libraries/libffmpeg.dylib",
+        "sha256": "403e8c54c8fb6a4125d55bc289098988e0d495767e14325989e720400d95fc99"
+      },
+      "name": "electron-v44.2.0-darwin-arm64.zip",
+      "sha256": "f906dff5d054b1b92e5711781b13cc206fd7139ce66467503b9d0a3e6fbc9b02",
+      "url": "https://github.com/electron/electron/releases/download/v44.2.0/electron-v44.2.0-darwin-arm64.zip",
+      "verification": "official ZIP actually downloaded and SHA-256 verified; libffmpeg member inspected"
+    },
+    "macos-x64": {
+      "bytes": 134103753,
+      "name": "electron-v44.2.0-darwin-x64.zip",
+      "sha256": "0c58057eebd23859389e2eba1555975bcbc8adebcc5aa97ff36c036125e2b21a",
+      "url": "https://github.com/electron/electron/releases/download/v44.2.0/electron-v44.2.0-darwin-x64.zip",
+      "verification": "official release asset digest; archive not inspected in this local source audit"
+    },
+    "windows-arm64": {
+      "bytes": 156319877,
+      "name": "electron-v44.2.0-win32-arm64.zip",
+      "sha256": "a753799aaf4e01262c2f103ef38c0349c9d3370069becc53f9276a5773891427",
+      "url": "https://github.com/electron/electron/releases/download/v44.2.0/electron-v44.2.0-win32-arm64.zip",
+      "verification": "official release asset digest; archive not inspected in this local source audit"
+    },
+    "windows-x64": {
+      "bytes": 158199548,
+      "name": "electron-v44.2.0-win32-x64.zip",
+      "sha256": "4021363e3090d67a144ebedb90765cf193b0e61f300c519c83f0174502a481da",
+      "url": "https://github.com/electron/electron/releases/download/v44.2.0/electron-v44.2.0-win32-x64.zip",
+      "verification": "official release asset digest; archive not inspected in this local source audit"
+    }
+  },
+  "recipe_files": {
+    "README.md": {
+      "bytes": 11363,
+      "sha256": "c15116081b684f6b1e4ed99bce49f12fa7a47c18bbd3442b0ec58c87ab7a46f7"
+    },
+    "upstream-metadata/chromium/.gn": {
+      "bytes": 8325,
+      "sha256": "b17d58c4d7d648fab31108af33e71a4dc6725667bc2df665a9ae8456683eba64"
+    },
+    "upstream-metadata/chromium/BUILD.gn": {
+      "bytes": 54887,
+      "sha256": "3a975bdf5a09d3b652920bdd27cb68a0be8e51a5706b2710715f566c50f6b10c"
+    },
+    "upstream-metadata/chromium/DEPS": {
+      "bytes": 194497,
+      "sha256": "2557b5a638eb7f6d4efc81afee0e94e8ac811e70dfbca32d4214715c1fb3c4c9"
+    },
+    "upstream-metadata/chromium/LICENSE": {
+      "bytes": 1536,
+      "sha256": "368cca1106be99d39ecd32a38d8305585d802a475effb66380b91ffc9bcf709b"
+    },
+    "upstream-metadata/chromium/components/spellcheck/spellcheck_build_features.gni": {
+      "bytes": 922,
+      "sha256": "82276c7ec6f6f4fd942af29cd5199b576f6c9dc5a251401d27138fb95d032822"
+    },
+    "upstream-metadata/chromium/docs/linux/build_instructions.md": {
+      "bytes": 35683,
+      "sha256": "ed25beb1f3e75e1d146052a4c01b69c08cb33b3bd5fdb90b03de1fa11a0ba45e"
+    },
+    "upstream-metadata/chromium/docs/mac_build_instructions.md": {
+      "bytes": 13373,
+      "sha256": "9b811cc15690efebc692652a568492c38e6f1fae157ff65544018dff323ebafd"
+    },
+    "upstream-metadata/chromium/docs/windows_build_instructions.md": {
+      "bytes": 24061,
+      "sha256": "0d260d169d12b10be89d612008060c3e2cad594c18e2349709941321c0482099"
+    },
+    "upstream-metadata/chromium/media/media_options.gni": {
+      "bytes": 17498,
+      "sha256": "04d35146dad0cb22bfc527069add1d12e87ca97100e5e7d48edb091302f347a3"
+    },
+    "upstream-metadata/chromium/services/device/usb/BUILD.gn": {
+      "bytes": 5590,
+      "sha256": "a4169f48ee3f9e711b24aec89843490ad37756e0643892dc471c047f42da917d"
+    },
+    "upstream-metadata/chromium/third_party/blink/DEPS": {
+      "bytes": 867,
+      "sha256": "62c34c5a56659174359f81e75bd49e96145f82cd99c6dc1d5f35c2402184e94b"
+    },
+    "upstream-metadata/chromium/third_party/blink/LICENSE_FOR_ABOUT_CREDITS": {
+      "bytes": 51483,
+      "sha256": "a661d10f8f194b1963a75bb4d308f17b078cc064624313a556902d89705f6876"
+    },
+    "upstream-metadata/chromium/third_party/blink/README.md": {
+      "bytes": 787,
+      "sha256": "d9a2d79204c5de9441dfde80ea4be0d36c9bf0032d3782ab223356639ea4ed8d"
+    },
+    "upstream-metadata/chromium/third_party/rust/chromium_crates_io/Cargo.lock": {
+      "bytes": 50172,
+      "sha256": "04f2391ae7255b1ec5a4f39b752cf515e8160a8e6b2945ad086c634c71870644"
+    },
+    "upstream-metadata/chromium/third_party/rust/chromium_crates_io/Cargo.toml": {
+      "bytes": 4529,
+      "sha256": "5a8e0f8077bbe0b9914b5dbe7d9eb61d6f80404a60754b3d5a03479f328fa8db"
+    },
+    "upstream-metadata/chromium/third_party/rust/chromium_crates_io/README.chromium.hbs": {
+      "bytes": 334,
+      "sha256": "dfe76a4b4e529656fa6fc1c339c90c65fd16cd702211e7aea71287a88cc7aeda"
+    },
+    "upstream-metadata/chromium/third_party/rust/chromium_crates_io/gnrt_config.toml": {
+      "bytes": 27624,
+      "sha256": "749689b1200f92585936509ac8d35180fd346a50558ff987c4ad74a4aba5f3e3"
+    },
+    "upstream-metadata/electron/DEPS": {
+      "bytes": 8471,
+      "sha256": "d274ded2f09a85412fe3f5ba35fc30b195dc7c34d9e67790d306a26b9b099029"
+    },
+    "upstream-metadata/electron/LICENSE": {
+      "bytes": 1096,
+      "sha256": "5154e165bd6c2cc0cfbcd8916498c7abab0497923bafcd5cb07673fe8480087d"
+    },
+    "upstream-metadata/electron/build/args/all.gn": {
+      "bytes": 3900,
+      "sha256": "5ef3dcead9ec7d5a5b556d7db92ab6a40166801913298702250a455fd244388d"
+    },
+    "upstream-metadata/electron/build/args/release.gn": {
+      "bytes": 902,
+      "sha256": "b4490cee911e0ed136a6d095c69a7914cb3f4aa2d5517e3f987a2b5f45d3cd56"
+    },
+    "upstream-metadata/electron/docs/development/build-instructions-gn.md": {
+      "bytes": 14271,
+      "sha256": "8f32a0b64d1ccf87b474fd8f9455b853a45278cb7a95c45a768ef153e4ffa97c"
+    },
+    "upstream-metadata/electron/patches/config.json": {
+      "bytes": 1335,
+      "sha256": "08aa50304d789950aea678e6cb334e1864658f2960dbae511eda5f057fc0bd9d"
+    },
+    "upstream-metadata/electron/patches/ffmpeg/.patches": {
+      "bytes": 28,
+      "sha256": "eb2ff86699f3aa0f6ac1b484a8c8a117a3149465273699e136e132024e38e7c6"
+    },
+    "upstream-metadata/electron/patches/ffmpeg/link_with_loader_path.patch": {
+      "bytes": 1219,
+      "sha256": "bc6cdc29ad4ec2641dd59b4c3a25375b9166c35e202e5122cb73190885ec647d"
+    },
+    "upstream-metadata/ffmpeg/chromium/config/Chrome/linux/arm64/config.h": {
+      "bytes": 25913,
+      "sha256": "543959d54e34ef642debf7288a524c4d4273baa9f4728bc34ad684ee88a19100"
+    },
+    "upstream-metadata/ffmpeg/chromium/config/Chrome/linux/x64/config.h": {
+      "bytes": 25490,
+      "sha256": "466264a296138d828c1d10f1034e7656e7aacb1063081877f68239b218350dc9"
+    },
+    "upstream-metadata/ffmpeg/chromium/config/Chrome/mac/arm64/config.h": {
+      "bytes": 26838,
+      "sha256": "b026515f35cf30ef11411ce45d9e9e9a3311cae9e98ede89cae585962e27931d"
+    },
+    "upstream-metadata/ffmpeg/chromium/config/Chrome/mac/x64/config.h": {
+      "bytes": 26736,
+      "sha256": "75300e71e4d25bf04f335cff1577c6e329973c762bd75a93e82962e8022dbbb9"
+    },
+    "upstream-metadata/ffmpeg/chromium/config/Chrome/win/arm64/config.h": {
+      "bytes": 25920,
+      "sha256": "ea11617f2a9fd577495c91ebba93fe853bb54deee903ee8a774421cf4b548fc3"
+    },
+    "upstream-metadata/ffmpeg/chromium/config/Chrome/win/x64/config.h": {
+      "bytes": 25773,
+      "sha256": "4c935fe035611b9e72376de36a49539cc6a915f4cc22aeefa76c4f972193de60"
+    },
+    "upstream-metadata/native-provenance.json": {
+      "bytes": 3773,
+      "sha256": "ce551bcfc826ef17b60bce25c8078a58d5091959443ab5167b60f63ac137ad9e"
+    }
+  },
+  "schema_version": 1,
+  "sources": [
+    {
+      "bytes": 29771635,
+      "licenses": [],
+      "name": "third_party--blink--renderer.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/blink/renderer",
+      "sha256": "d952007a95b897394178642fc635a53dcfebe8280f28d1e7aafa88c6b4368f75",
+      "source_member_count": 18880,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/blink/renderer.tar.gz"
+    },
+    {
+      "bytes": 1371841,
+      "licenses": [],
+      "name": "third_party--blink--public.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/blink/public",
+      "sha256": "fd7c89d9cbb1ad08d10028d76f0376f0852931632d478eec6e38cab6af830ab0",
+      "source_member_count": 1564,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/blink/public.tar.gz"
+    },
+    {
+      "bytes": 320975,
+      "licenses": [],
+      "name": "third_party--blink--common.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/blink/common",
+      "sha256": "954735272ce782d724eb98c4180c36d9c542a97ef4b51b7da4056772be5abae4",
+      "source_member_count": 360,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/blink/common.tar.gz"
+    },
+    {
+      "bytes": 849991,
+      "licenses": [],
+      "name": "third_party--blink--tools.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/blink/tools",
+      "sha256": "5094126839d581d2db282a44200d6382a8bd42234fec595472e38fd485319f8a",
+      "source_member_count": 393,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/blink/tools.tar.gz"
+    },
+    {
+      "bytes": 208228,
+      "licenses": [
+        {
+          "bytes": 26436,
+          "destination": "third_party--libusb/src/COPYING",
+          "member": "src/COPYING",
+          "sha256": "5df07007198989c622f5d41de8d703e7bef3d0e79d62e24332ee739a452af62a"
+        }
+      ],
+      "name": "third_party--libusb.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/libusb",
+      "sha256": "27bf8d3acbd499b75b2be7b7645c908d216fa357ef96643ab656aaec88a767ad",
+      "source_member_count": 59,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/libusb.tar.gz"
+    },
+    {
+      "bytes": 1199616,
+      "licenses": [
+        {
+          "bytes": 18093,
+          "destination": "third_party--hunspell/COPYING",
+          "member": "COPYING",
+          "sha256": "640d90f6ee401241ff62834d0d1b33f83049e99b8bfdfa04ed1b0a1635dde3e7"
+        },
+        {
+          "bytes": 26531,
+          "destination": "third_party--hunspell/COPYING.LESSER",
+          "member": "COPYING.LESSER",
+          "sha256": "7c6699c75f87b52bdc542db26d6b1b92892577cda46e20eceb79e2790a1c291b"
+        },
+        {
+          "bytes": 25755,
+          "destination": "third_party--hunspell/COPYING.MPL",
+          "member": "COPYING.MPL",
+          "sha256": "53692a2ed6c6a2c6ec9b32dd0b820dfae91e0a1fcdf625ca9ed0bdf8705fcc4f"
+        },
+        {
+          "bytes": 1973,
+          "destination": "third_party--hunspell/license.hunspell",
+          "member": "license.hunspell",
+          "sha256": "3f7ddd07c296edbfe0a47c7bcc82038ad347a2c4f672345b24f95c624db68513"
+        },
+        {
+          "bytes": 2912,
+          "destination": "third_party--hunspell/license.myspell",
+          "member": "license.myspell",
+          "sha256": "dcda061adeed22b26f276c01ec374f930789ae0d684e5aa8f8be309dd680ff20"
+        }
+      ],
+      "name": "third_party--hunspell.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/hunspell",
+      "sha256": "6defba5982b017c09c42e7af4c8668f1bbb710cddbef9f9db5b4b42e3020c9c1",
+      "source_member_count": 98,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/hunspell.tar.gz"
+    },
+    {
+      "bytes": 18682,
+      "licenses": [
+        {
+          "bytes": 16726,
+          "destination": "base--third_party--nspr/LICENSE",
+          "member": "LICENSE",
+          "sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04"
+        }
+      ],
+      "name": "base--third_party--nspr.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "base/third_party/nspr",
+      "sha256": "43b6bfb5504efa038961fbb9ac4679507827c26c4e0664e4183d1ff24bf500dd",
+      "source_member_count": 6,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/base/third_party/nspr.tar.gz"
+    },
+    {
+      "bytes": 16486,
+      "licenses": [
+        {
+          "bytes": 26847,
+          "destination": "net--third_party--mozilla_security_manager/LICENSE",
+          "member": "LICENSE",
+          "sha256": "a718a32ad435b316ce3a9e871e05421d6ca784c435f8ef5715c1b6e289381f04"
+        }
+      ],
+      "name": "net--third_party--mozilla_security_manager.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "net/third_party/mozilla_security_manager",
+      "sha256": "2fbce20238e71419b920deddf21f1965eb03ebb0a4a3f802553154fbd6dd07c4",
+      "source_member_count": 6,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/net/third_party/mozilla_security_manager.tar.gz"
+    },
+    {
+      "bytes": 7750,
+      "licenses": [
+        {
+          "bytes": 18122,
+          "destination": "net--third_party--mozilla_win/LICENSE",
+          "member": "LICENSE",
+          "sha256": "6d29b685206b28617dd9ac13818ccc943e57df68aeea1db0f4a5539f4507a9aa"
+        }
+      ],
+      "name": "net--third_party--mozilla_win.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "net/third_party/mozilla_win",
+      "sha256": "0a7ccd4b4babeeeacff80a8e7996e78e81e4ae0928b6c685813efd13c140b270",
+      "source_member_count": 7,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/net/third_party/mozilla_win.tar.gz"
+    },
+    {
+      "bytes": 16948,
+      "licenses": [
+        {
+          "bytes": 3200,
+          "destination": "url--third_party--mozilla/LICENSE.txt",
+          "member": "LICENSE.txt",
+          "sha256": "284545e873c704952e5b1b39d457dd83a3b115a51d9f1eb5175137bd69b8fa1b"
+        }
+      ],
+      "name": "url--third_party--mozilla.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "url/third_party/mozilla",
+      "sha256": "e2a0fc67064fea5ecfe19382b79500076e98f8428352082ee169709792e0ee2a",
+      "source_member_count": 4,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/url/third_party/mozilla.tar.gz"
+    },
+    {
+      "bytes": 6111,
+      "licenses": [
+        {
+          "bytes": 1699,
+          "destination": "third_party--isimpledom/LICENSE",
+          "member": "LICENSE",
+          "sha256": "7a92c5e7a83b5ddcc693bb84ea8bdb842308509c1758cffdfe24717609154c75"
+        }
+      ],
+      "name": "third_party--isimpledom.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/isimpledom",
+      "sha256": "348012a818ca00c593aa0b9711f3feae9fc874b2946ee13a1354b7248668e2a1",
+      "source_member_count": 8,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/isimpledom.tar.gz"
+    },
+    {
+      "bytes": 6480,
+      "licenses": [
+        {
+          "bytes": 16727,
+          "destination": "third_party--eigen3/LICENSE",
+          "member": "LICENSE",
+          "sha256": "66a3107d5ad6a058aab753eaac2047ccb2ed0e39465dd0fe5844da3e300d5172"
+        }
+      ],
+      "name": "third_party--eigen3.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/eigen3",
+      "sha256": "14c857094669fcd98ca5d3ad54a80ee2fac1f58a58377d99f43d5e78e2891062",
+      "source_member_count": 5,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/eigen3.tar.gz"
+    },
+    {
+      "bytes": 1923889,
+      "licenses": [],
+      "name": "build.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "build",
+      "sha256": "740a6dfce588a1bcbb03d8ea1cdf660fa6e4761f66da175799c6dbcff36215be",
+      "source_member_count": 1484,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/build.tar.gz"
+    },
+    {
+      "bytes": 60713,
+      "licenses": [
+        {
+          "bytes": 1537,
+          "destination": "buildtools/LICENSE",
+          "member": "LICENSE",
+          "sha256": "ff11d445fb41a1087c7630e120ab15f1a2cb67c1b707173cb494141805fca35e"
+        }
+      ],
+      "name": "buildtools.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "buildtools",
+      "sha256": "fa34cce76a46318165df83053a80fe50a6cc6bc0320a633bebb65b68b3fb2e9f",
+      "source_member_count": 85,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/buildtools.tar.gz"
+    },
+    {
+      "bytes": 615266,
+      "licenses": [],
+      "name": "media--filters.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "media/filters",
+      "sha256": "bf8dcac41ce0ea84db7b7bb63575687accef0da82563e1881a6376b54d19728b",
+      "source_member_count": 174,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/media/filters.tar.gz"
+    },
+    {
+      "bytes": 47141,
+      "licenses": [],
+      "name": "third_party--rust--chromium_crates_io--patches.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/rust/chromium_crates_io/patches",
+      "sha256": "bcc297edcee79b39043de55815136748c6f79c996d3d987fd71e0b5fd77f92da",
+      "source_member_count": 18,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/rust/chromium_crates_io/patches.tar.gz"
+    },
+    {
+      "bytes": 17969,
+      "licenses": [
+        {
+          "bytes": 16725,
+          "destination": "third_party--rust--chromium_crates_io--vendor--symphonia-v0_6/LICENSE",
+          "member": "LICENSE",
+          "sha256": "c76f740d1521b9bed9ca7a04ad526c310493c62621b1341d623b431736533b30"
+        }
+      ],
+      "name": "third_party--rust--chromium_crates_io--vendor--symphonia-v0_6.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/rust/chromium_crates_io/vendor/symphonia-v0_6",
+      "sha256": "b22f86679749ece5eed046882be7cfa27731bdff7b3574e79aa2f55e4a07188f",
+      "source_member_count": 12,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/rust/chromium_crates_io/vendor/symphonia-v0_6.tar.gz"
+    },
+    {
+      "bytes": 1439,
+      "licenses": [],
+      "name": "third_party--rust--symphonia--v0_6.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/rust/symphonia/v0_6",
+      "sha256": "50a99d1e4c0b413f7855e8b7a170eb31724241fd5441331966247da86c67c199",
+      "source_member_count": 2,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/rust/symphonia/v0_6.tar.gz"
+    },
+    {
+      "bytes": 32032,
+      "licenses": [
+        {
+          "bytes": 16725,
+          "destination": "third_party--rust--chromium_crates_io--vendor--symphonia-bundle-flac-v0_6/LICENSE",
+          "member": "LICENSE",
+          "sha256": "c76f740d1521b9bed9ca7a04ad526c310493c62621b1341d623b431736533b30"
+        }
+      ],
+      "name": "third_party--rust--chromium_crates_io--vendor--symphonia-bundle-flac-v0_6.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/rust/chromium_crates_io/vendor/symphonia-bundle-flac-v0_6",
+      "sha256": "3cbaffeb205bdd9ff35783ba0c1fd1ef42e52379102c91705557eec0aff82103",
+      "source_member_count": 14,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/rust/chromium_crates_io/vendor/symphonia-bundle-flac-v0_6.tar.gz"
+    },
+    {
+      "bytes": 1495,
+      "licenses": [],
+      "name": "third_party--rust--symphonia_bundle_flac--v0_6.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/rust/symphonia_bundle_flac/v0_6",
+      "sha256": "fae4618d6ca6240658b4e0a1bd8069547d52514f580c7d6b91ef7600f4c100c3",
+      "source_member_count": 2,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/rust/symphonia_bundle_flac/v0_6.tar.gz"
+    },
+    {
+      "bytes": 69636,
+      "licenses": [
+        {
+          "bytes": 16725,
+          "destination": "third_party--rust--chromium_crates_io--vendor--symphonia-bundle-mp3-v0_6/LICENSE",
+          "member": "LICENSE",
+          "sha256": "c76f740d1521b9bed9ca7a04ad526c310493c62621b1341d623b431736533b30"
+        }
+      ],
+      "name": "third_party--rust--chromium_crates_io--vendor--symphonia-bundle-mp3-v0_6.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/rust/chromium_crates_io/vendor/symphonia-bundle-mp3-v0_6",
+      "sha256": "761eec31588ba4fb65fa8124758f7a3a26b8a6278f0f88578fc76dc6141cff3f",
+      "source_member_count": 23,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/rust/chromium_crates_io/vendor/symphonia-bundle-mp3-v0_6.tar.gz"
+    },
+    {
+      "bytes": 1588,
+      "licenses": [],
+      "name": "third_party--rust--symphonia_bundle_mp3--v0_6.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/rust/symphonia_bundle_mp3/v0_6",
+      "sha256": "e8b9e1c49c9ff95ee7b8a34ac7702d8c5fbbecc5b39735509138b2beb1d45dc3",
+      "source_member_count": 2,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/rust/symphonia_bundle_mp3/v0_6.tar.gz"
+    },
+    {
+      "bytes": 12596,
+      "licenses": [
+        {
+          "bytes": 16725,
+          "destination": "third_party--rust--chromium_crates_io--vendor--symphonia-codec-pcm-v0_6/LICENSE",
+          "member": "LICENSE",
+          "sha256": "c76f740d1521b9bed9ca7a04ad526c310493c62621b1341d623b431736533b30"
+        }
+      ],
+      "name": "third_party--rust--chromium_crates_io--vendor--symphonia-codec-pcm-v0_6.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/rust/chromium_crates_io/vendor/symphonia-codec-pcm-v0_6",
+      "sha256": "fa98b9278be63e4a123b84f61aee32a5401a5d010a16473ab7eb9f7245061937",
+      "source_member_count": 8,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/rust/chromium_crates_io/vendor/symphonia-codec-pcm-v0_6.tar.gz"
+    },
+    {
+      "bytes": 1428,
+      "licenses": [],
+      "name": "third_party--rust--symphonia_codec_pcm--v0_6.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/rust/symphonia_codec_pcm/v0_6",
+      "sha256": "4eb1404ce690194f90dcc0691ca034d20b4a71c70f3f680471014029fbc4ead9",
+      "source_member_count": 2,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/rust/symphonia_codec_pcm/v0_6.tar.gz"
+    },
+    {
+      "bytes": 32291,
+      "licenses": [
+        {
+          "bytes": 16725,
+          "destination": "third_party--rust--chromium_crates_io--vendor--symphonia-codec-vorbis-v0_6/LICENSE",
+          "member": "LICENSE",
+          "sha256": "c76f740d1521b9bed9ca7a04ad526c310493c62621b1341d623b431736533b30"
+        }
+      ],
+      "name": "third_party--rust--chromium_crates_io--vendor--symphonia-codec-vorbis-v0_6.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/rust/chromium_crates_io/vendor/symphonia-codec-vorbis-v0_6",
+      "sha256": "b5560b4c286fa32c70ef915a254416a56c28aa7262b10511896a53e36434a2eb",
+      "source_member_count": 14,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/rust/chromium_crates_io/vendor/symphonia-codec-vorbis-v0_6.tar.gz"
+    },
+    {
+      "bytes": 1487,
+      "licenses": [],
+      "name": "third_party--rust--symphonia_codec_vorbis--v0_6.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/rust/symphonia_codec_vorbis/v0_6",
+      "sha256": "77d947ee258a7c08dbc247730ab2c63a9a9731b4d1f888be12eaffb46aa0c1e4",
+      "source_member_count": 2,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/rust/symphonia_codec_vorbis/v0_6.tar.gz"
+    },
+    {
+      "bytes": 20480,
+      "licenses": [
+        {
+          "bytes": 16725,
+          "destination": "third_party--rust--chromium_crates_io--vendor--symphonia-common-v0_6/LICENSE",
+          "member": "LICENSE",
+          "sha256": "c76f740d1521b9bed9ca7a04ad526c310493c62621b1341d623b431736533b30"
+        }
+      ],
+      "name": "third_party--rust--chromium_crates_io--vendor--symphonia-common-v0_6.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/rust/chromium_crates_io/vendor/symphonia-common-v0_6",
+      "sha256": "51a4dc4944419a1fd505ffb19472cd7b5bcbc5ae61c722fc52818c88f5d42eb3",
+      "source_member_count": 19,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/rust/chromium_crates_io/vendor/symphonia-common-v0_6.tar.gz"
+    },
+    {
+      "bytes": 1505,
+      "licenses": [],
+      "name": "third_party--rust--symphonia_common--v0_6.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/rust/symphonia_common/v0_6",
+      "sha256": "5c32c6f40d54d470aa1e5ddc53ca6f6007eb9af069e54f4dc37edd9fd071c365",
+      "source_member_count": 2,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/rust/symphonia_common/v0_6.tar.gz"
+    },
+    {
+      "bytes": 150936,
+      "licenses": [
+        {
+          "bytes": 16725,
+          "destination": "third_party--rust--chromium_crates_io--vendor--symphonia-core-v0_6/LICENSE",
+          "member": "LICENSE",
+          "sha256": "c76f740d1521b9bed9ca7a04ad526c310493c62621b1341d623b431736533b30"
+        }
+      ],
+      "name": "third_party--rust--chromium_crates_io--vendor--symphonia-core-v0_6.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/rust/chromium_crates_io/vendor/symphonia-core-v0_6",
+      "sha256": "0cd07e30e5508ab7a07ecd1aa8c7438f2cdb8e245ef5182138486fd5f5a9243b",
+      "source_member_count": 48,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/rust/chromium_crates_io/vendor/symphonia-core-v0_6.tar.gz"
+    },
+    {
+      "bytes": 1770,
+      "licenses": [],
+      "name": "third_party--rust--symphonia_core--v0_6.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/rust/symphonia_core/v0_6",
+      "sha256": "562383018ec5d2d9fa4a43213cc2b4f6aae48b2bea1958d9d1b91411900ed0a4",
+      "source_member_count": 2,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/rust/symphonia_core/v0_6.tar.gz"
+    },
+    {
+      "bytes": 61498,
+      "licenses": [
+        {
+          "bytes": 16725,
+          "destination": "third_party--rust--chromium_crates_io--vendor--symphonia-metadata-v0_6/LICENSE",
+          "member": "LICENSE",
+          "sha256": "c76f740d1521b9bed9ca7a04ad526c310493c62621b1341d623b431736533b30"
+        }
+      ],
+      "name": "third_party--rust--chromium_crates_io--vendor--symphonia-metadata-v0_6.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/rust/chromium_crates_io/vendor/symphonia-metadata-v0_6",
+      "sha256": "97631379610198d7b962f4d30b8c1bf6e878e0c875c2b36499a1567422e2ac3d",
+      "source_member_count": 26,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/rust/chromium_crates_io/vendor/symphonia-metadata-v0_6.tar.gz"
+    },
+    {
+      "bytes": 1600,
+      "licenses": [],
+      "name": "third_party--rust--symphonia_metadata--v0_6.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/rust/symphonia_metadata/v0_6",
+      "sha256": "199b50f6a31c27bdfccf7859706c32db70e26d3648a08b6e32fb2f6a46b4e729",
+      "source_member_count": 2,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/rust/symphonia_metadata/v0_6.tar.gz"
+    },
+    {
+      "bytes": 19601098,
+      "licenses": [
+        {
+          "bytes": 1096,
+          "destination": "electron-aa650d74597c652878629df0038a50485e156a09/LICENSE",
+          "member": "electron-aa650d74597c652878629df0038a50485e156a09/LICENSE",
+          "sha256": "5154e165bd6c2cc0cfbcd8916498c7abab0497923bafcd5cb07673fe8480087d"
+        }
+      ],
+      "name": "electron-aa650d74597c652878629df0038a50485e156a09.tar.gz",
+      "repository": "https://github.com/electron/electron",
+      "revision": "aa650d74597c652878629df0038a50485e156a09",
+      "root": "src/electron",
+      "sha256": "1b5efb43d8f9770f9a752849f64cf694b2898d679c1df9f6d7133203002be3d0",
+      "source_member_count": 3123,
+      "strip_components": 1,
+      "url": "https://codeload.github.com/electron/electron/tar.gz/aa650d74597c652878629df0038a50485e156a09"
+    },
+    {
+      "bytes": 18818098,
+      "licenses": [
+        {
+          "bytes": 18092,
+          "destination": "chromium-ffmpeg-2b68d2babae73714846961fb0ee47e3b3d2e39a9/COPYING.GPLv2",
+          "member": "COPYING.GPLv2",
+          "sha256": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643"
+        },
+        {
+          "bytes": 35147,
+          "destination": "chromium-ffmpeg-2b68d2babae73714846961fb0ee47e3b3d2e39a9/COPYING.GPLv3",
+          "member": "COPYING.GPLv3",
+          "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+        },
+        {
+          "bytes": 26517,
+          "destination": "chromium-ffmpeg-2b68d2babae73714846961fb0ee47e3b3d2e39a9/COPYING.LGPLv2.1",
+          "member": "COPYING.LGPLv2.1",
+          "sha256": "246041b6ecf9bc32d718a62c57877c78b5eb397b6467e74ed7ae2626ab189c30"
+        },
+        {
+          "bytes": 7651,
+          "destination": "chromium-ffmpeg-2b68d2babae73714846961fb0ee47e3b3d2e39a9/COPYING.LGPLv3",
+          "member": "COPYING.LGPLv3",
+          "sha256": "da7eabb7bafdf7d3ae5e9f223aa5bdc1eece45ac569dc21b3b037520b4464768"
+        },
+        {
+          "bytes": 4346,
+          "destination": "chromium-ffmpeg-2b68d2babae73714846961fb0ee47e3b3d2e39a9/LICENSE.md",
+          "member": "LICENSE.md",
+          "sha256": "2e1d16c72fd74e12063776371da757322f8b77589386532f4fd8634bde7de1af"
+        }
+      ],
+      "name": "chromium-ffmpeg-2b68d2babae73714846961fb0ee47e3b3d2e39a9.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/third_party/ffmpeg",
+      "revision": "2b68d2babae73714846961fb0ee47e3b3d2e39a9",
+      "root": "third_party/ffmpeg",
+      "sha256": "5c89ef02ad36ae5fee28e9418b3c235c4450681fa481b935b6b37e7244897c0f",
+      "source_member_count": 11015,
+      "url": "https://chromium.googlesource.com/chromium/third_party/ffmpeg/+archive/2b68d2babae73714846961fb0ee47e3b3d2e39a9.tar.gz"
+    },
+    {
+      "bytes": 226514,
+      "licenses": [
+        {
+          "bytes": 15921,
+          "destination": "third_party--axe-core/LICENSE",
+          "member": "LICENSE",
+          "sha256": "af175b9d96ee93c21a036152e1b905b0b95304d4ae8c2c921c7609100ba8df7e"
+        }
+      ],
+      "name": "third_party--axe-core.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/axe-core",
+      "sha256": "d0df7daad0beb0b8ff3748e490e4f72dbe73b8fe157d44cf4eaab17f269c484b",
+      "source_member_count": 7,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/axe-core.tar.gz"
+    },
+    {
+      "bytes": 2415365,
+      "licenses": [
+        {
+          "bytes": 143558,
+          "destination": "third_party--hyphenation-patterns/LICENSE",
+          "member": "LICENSE",
+          "sha256": "848b839a69abf379954f0a564a0c84f5dbb2aab4acc26c41571a20c0657a4fb7"
+        }
+      ],
+      "name": "third_party--hyphenation-patterns.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/hyphenation-patterns",
+      "sha256": "f5aa213ad0f4a220df5928f764fbce679ffbbf1c60c4ebd980e1b7f0a2939da2",
+      "source_member_count": 384,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/hyphenation-patterns.tar.gz"
+    },
+    {
+      "bytes": 3445441,
+      "licenses": [
+        {
+          "bytes": 11362,
+          "destination": "eigen-d53ac33805ba0a23fa139adaf24227fb6707e6fa/COPYING.APACHE",
+          "member": "COPYING.APACHE",
+          "sha256": "03379001a7b12a2ec997a25554247d985270b353c10d5bafee9ac8d6519820b7"
+        },
+        {
+          "bytes": 1517,
+          "destination": "eigen-d53ac33805ba0a23fa139adaf24227fb6707e6fa/COPYING.BSD",
+          "member": "COPYING.BSD",
+          "sha256": "51928dce36213c5333ba3172e847d735d4c6e9b7ff2722a326c49067155b82eb"
+        },
+        {
+          "bytes": 2193,
+          "destination": "eigen-d53ac33805ba0a23fa139adaf24227fb6707e6fa/COPYING.MINPACK",
+          "member": "COPYING.MINPACK",
+          "sha256": "c87b7f8ee88f6195e91743820c00354833583aef091b72e2d4a49c8e28e798a0"
+        },
+        {
+          "bytes": 16726,
+          "destination": "eigen-d53ac33805ba0a23fa139adaf24227fb6707e6fa/COPYING.MPL2",
+          "member": "COPYING.MPL2",
+          "sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04"
+        },
+        {
+          "bytes": 674,
+          "destination": "eigen-d53ac33805ba0a23fa139adaf24227fb6707e6fa/COPYING.README",
+          "member": "COPYING.README",
+          "sha256": "b680dc46db7b3d9e49931bf918e85a43ec3c790f64b4eee212ec5beeed1b02d5"
+        },
+        {
+          "bytes": 16726,
+          "destination": "eigen-d53ac33805ba0a23fa139adaf24227fb6707e6fa/LICENSE",
+          "member": "LICENSE",
+          "sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04"
+        }
+      ],
+      "name": "eigen-d53ac33805ba0a23fa139adaf24227fb6707e6fa.tar.gz",
+      "repository": "https://chromium.googlesource.com/external/gitlab.com/libeigen/eigen.git",
+      "revision": "d53ac33805ba0a23fa139adaf24227fb6707e6fa",
+      "root": "third_party/eigen3/src",
+      "sha256": "dea3e2beaf081107951fb581db3c841e658ed8529c341986b01aa9e245ec8c4c",
+      "source_member_count": 1972,
+      "url": "https://chromium.googlesource.com/external/gitlab.com/libeigen/eigen.git/+archive/d53ac33805ba0a23fa139adaf24227fb6707e6fa.tar.gz"
+    },
+    {
+      "bytes": 525905,
+      "licenses": [
+        {
+          "bytes": 15921,
+          "destination": "axe-core-281653df3794f429b71327fe3afa37ca0fadb1c7/LICENSE",
+          "member": "axe-core-281653df3794f429b71327fe3afa37ca0fadb1c7/LICENSE",
+          "sha256": "af175b9d96ee93c21a036152e1b905b0b95304d4ae8c2c921c7609100ba8df7e"
+        }
+      ],
+      "name": "axe-core-281653df3794f429b71327fe3afa37ca0fadb1c7.tar.gz",
+      "repository": "https://github.com/dequelabs/axe-core",
+      "revision": "281653df3794f429b71327fe3afa37ca0fadb1c7",
+      "root": "upstream/axe-core",
+      "sha256": "d9b7aa1c13dafaab97ce9a34768a4d43656072a25f34f3f6d945ff4b4f88e7b3",
+      "source_member_count": 1292,
+      "strip_components": 1,
+      "url": "https://codeload.github.com/dequelabs/axe-core/tar.gz/281653df3794f429b71327fe3afa37ca0fadb1c7"
+    },
+    {
+      "bytes": 69491626,
+      "licenses": [
+        {
+          "bytes": 108204,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/COPYING",
+          "member": "COPYING",
+          "sha256": "cde91164e09e33e94e1db4529aa77f89bc0c392b1ed138d689c66dfbd11d9701"
+        },
+        {
+          "bytes": 11358,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/COPYING.Apache",
+          "member": "COPYING.Apache",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        },
+        {
+          "bytes": 35148,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/COPYING.GPL3",
+          "member": "COPYING.GPL3",
+          "sha256": "0ae0485a5bd37a63e63603596417e4eb0e653334fa6c7f932ca3a0e85d4af227"
+        },
+        {
+          "bytes": 7795,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/COPYING.LESSER",
+          "member": "COPYING.LESSER",
+          "sha256": "d7137682540000e5f57ff3cb0b4943b66aa3ac4ecca28614ce46991fc291bd15"
+        },
+        {
+          "bytes": 26532,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/COPYING.LGPL",
+          "member": "COPYING.LGPL",
+          "sha256": "5bbcbb737e60fe9deba08ecbd00920cfcc3403ba2e534c64fdeea49d6bb87509"
+        },
+        {
+          "bytes": 1736,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/COPYING.MIT",
+          "member": "COPYING.MIT",
+          "sha256": "379ddd904c597d64e11a88bba68663f59501c9fa59e8124c0f4f32a67a5dc77a"
+        },
+        {
+          "bytes": 25755,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/COPYING.MPL",
+          "member": "COPYING.MPL",
+          "sha256": "53692a2ed6c6a2c6ec9b32dd0b820dfae91e0a1fcdf625ca9ed0bdf8705fcc4f"
+        },
+        {
+          "bytes": 108158,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/LICENSE",
+          "member": "LICENSE",
+          "sha256": "d63c6240d6f6330a025aade63d317d7ff04f95fc3325fe6aea3848ca452f64ea"
+        },
+        {
+          "bytes": 2426,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_bg_BG.txt",
+          "member": "README_bg_BG.txt",
+          "sha256": "d1aecf5b27c93260b844ad47b8e5cb3bdd75145a0e9cb651611c456002060a5e"
+        },
+        {
+          "bytes": 4750,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_ca_ES.txt",
+          "member": "README_ca_ES.txt",
+          "sha256": "89f5168bcf3c564520e81604d2b53e7edb99d81c187b59458f8c2a09a6b7b7c8"
+        },
+        {
+          "bytes": 19322,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_cs_CZ.txt",
+          "member": "README_cs_CZ.txt",
+          "sha256": "1583fd5d8640e924497124a8786828f17d9b73f8c84be8ba0ed4edf04b0a67ff"
+        },
+        {
+          "bytes": 1465,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_cy_GB.txt",
+          "member": "README_cy_GB.txt",
+          "sha256": "10faa1a70f2f002783cda3f0b0af3aa9e5ee6795f16176789fd4df3a887e1425"
+        },
+        {
+          "bytes": 1087,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_da_DK.txt",
+          "member": "README_da_DK.txt",
+          "sha256": "08c70c517b1ea1bd59b9d2fcb1a60868fdca75d3931a6affb02f296cf3c15810"
+        },
+        {
+          "bytes": 18767,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_de_DE.txt",
+          "member": "README_de_DE.txt",
+          "sha256": "b45a23299baa504f16579dd701b5b5e9437d747261436a0f23259e1d114e5d0f"
+        },
+        {
+          "bytes": 5731,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_de_DE_neu.txt",
+          "member": "README_de_DE_neu.txt",
+          "sha256": "9ef26e87938c4432ba4854663ba0196124880447a007c87d126fae87fdcade8c"
+        },
+        {
+          "bytes": 1811,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_el_GR.txt",
+          "member": "README_el_GR.txt",
+          "sha256": "421aabb24c2dd7ce5fc8c1d67d0588faedeb29e5f5704e65b50acaa02b8eb859"
+        },
+        {
+          "bytes": 15732,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_en_AU.txt",
+          "member": "README_en_AU.txt",
+          "sha256": "f0897dcfdf058bcfc93fbc8e7e1b5da4c27ae9e175ee3a9242e887f02eb84a8b"
+        },
+        {
+          "bytes": 15732,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_en_CA.txt",
+          "member": "README_en_CA.txt",
+          "sha256": "86700e39b2307dda4c087ad3505a1e634a5b4d518ab808c398a16d21ebe957e2"
+        },
+        {
+          "bytes": 15740,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_en_GB.txt",
+          "member": "README_en_GB.txt",
+          "sha256": "0bcf1616b29dee3fbcbef1428b0c3d4d77f6a36cc88b9e130ee65e5382899029"
+        },
+        {
+          "bytes": 15740,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_en_GB_oxendict.txt",
+          "member": "README_en_GB_oxendict.txt",
+          "sha256": "21d3729630ef43ac2623163acee92f26d3505124998df6c7d6a4b404c39eb3e9"
+        },
+        {
+          "bytes": 15732,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_en_US.txt",
+          "member": "README_en_US.txt",
+          "sha256": "168b4c01cb841f766a72f310b065c04d09cff46376c37a81d799593ce751c371"
+        },
+        {
+          "bytes": 6090,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_es_ES.txt",
+          "member": "README_es_ES.txt",
+          "sha256": "fd1c372edc60847a4c60b5a368864e760e39117adb0a5a80a4bf96a128620f2a"
+        },
+        {
+          "bytes": 56143,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_et_EE.txt",
+          "member": "README_et_EE.txt",
+          "sha256": "3346f1a79edd24b900e8d7c18f22b90f47a905292ea9705dc43920a6cb7fb7a8"
+        },
+        {
+          "bytes": 889,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_fa_IR.txt",
+          "member": "README_fa_IR.txt",
+          "sha256": "75c8983fc7e131c9813a7829c9d114e631545740052ed6f576b29d0163a65738"
+        },
+        {
+          "bytes": 3227,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_fr_FR.txt",
+          "member": "README_fr_FR.txt",
+          "sha256": "c22ed899c73989a145655cf7401422a5a682e88da0574e4a8e8c9c1b274b9b60"
+        },
+        {
+          "bytes": 89098,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_gl.txt",
+          "member": "README_gl.txt",
+          "sha256": "db4a07f07e4b44a0058171778d332d158b8b190f69122a8472ffa37a9b0a3dc7"
+        },
+        {
+          "bytes": 323,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_he_IL.txt",
+          "member": "README_he_IL.txt",
+          "sha256": "ba078442aac0005f7df77ab1d729dcc89d3fe1ceb3bc4f3554bdba221be88f4d"
+        },
+        {
+          "bytes": 2754,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_hi_IN.txt",
+          "member": "README_hi_IN.txt",
+          "sha256": "2b373a1e07efe18e89c04c7f69bd540681a5926edcb478a4331d0df387861487"
+        },
+        {
+          "bytes": 116,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_hr_HR.txt",
+          "member": "README_hr_HR.txt",
+          "sha256": "85de8935c7e9d1a7f1ded67e707a05e453a0b424d62c687b449a87b513351aa1"
+        },
+        {
+          "bytes": 826,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_hu_HU.txt",
+          "member": "README_hu_HU.txt",
+          "sha256": "273e34c8acac3f654792f23bfd4c0a6880ec0503bab907dcab882d1f4a3c9c77"
+        },
+        {
+          "bytes": 1776,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_hy.txt",
+          "member": "README_hy.txt",
+          "sha256": "f4b033e9ec603dce229c0a587fbfbec3e3e74269cd712877c8d4e808caab48b0"
+        },
+        {
+          "bytes": 39061,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_id_ID.txt",
+          "member": "README_id_ID.txt",
+          "sha256": "0d767ea512daa43c91fdc743071cd7f998bcbd1c875b8aec1c6f73e88be94a7b"
+        },
+        {
+          "bytes": 16363,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_it_IT.txt",
+          "member": "README_it_IT.txt",
+          "sha256": "c2b8b4b661fb6e2187a0b083fd3e6898f4f1a470d2885f4170708a5dd932d21c"
+        },
+        {
+          "bytes": 77276,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_ko.txt",
+          "member": "README_ko.txt",
+          "sha256": "d10241be766d5e0dca1cf91617bfcf8d3c398745f89366ba807ffe10fb8b9ac5"
+        },
+        {
+          "bytes": 3244,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_lt_LT.txt",
+          "member": "README_lt_LT.txt",
+          "sha256": "5f26149f4f5dca63f493b893dd95721ea6034dfc5b1b3415c547e1dd0d7f8ffc"
+        },
+        {
+          "bytes": 36323,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_lv_LV.txt",
+          "member": "README_lv_LV.txt",
+          "sha256": "ab61325f30c79af243e69bb030cea83bfdf3af60b425c17b6cc7ae7e7df09a8e"
+        },
+        {
+          "bytes": 285,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_nb_NO.txt",
+          "member": "README_nb_NO.txt",
+          "sha256": "b2e66abb5638ea20533ddb0054bad00bcb86ad7ad9f01bf70ecae5d03bb84357"
+        },
+        {
+          "bytes": 6227,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_nl_NL.txt",
+          "member": "README_nl_NL.txt",
+          "sha256": "9250339bfec3e0aaaf14749e6585d4ae02fdd214d21d2d85af8a78e7f8ed175c"
+        },
+        {
+          "bytes": 802,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_pl_PL.txt",
+          "member": "README_pl_PL.txt",
+          "sha256": "43c04d543d1c8b92c47373b3627386c16f2f6d80c108a8ebeae8709e7d1e276c"
+        },
+        {
+          "bytes": 4414,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_pt_BR.txt",
+          "member": "README_pt_BR.txt",
+          "sha256": "36383a89f3f98b5d7b2b7a7620d46ed5867dafb5b1bb2c1c11a15eddb29fdb6a"
+        },
+        {
+          "bytes": 2154,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_pt_PT.txt",
+          "member": "README_pt_PT.txt",
+          "sha256": "167798180368345350a184011c4e73b30f7bbb1ec4cd92fca136e62c2c7a04cf"
+        },
+        {
+          "bytes": 1625,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_ro_RO.txt",
+          "member": "README_ro_RO.txt",
+          "sha256": "c3638323e46b9b93b824b3180497ab2c5163d08c46c6ea84c082fffbd46de1b8"
+        },
+        {
+          "bytes": 12070,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_ru_RU.txt",
+          "member": "README_ru_RU.txt",
+          "sha256": "ab0a15a2977d17936f8361c0644834aaa286aa0f76ff4a707e9435212b1387b2"
+        },
+        {
+          "bytes": 773,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_sh.txt",
+          "member": "README_sh.txt",
+          "sha256": "96e212df63ba277d68ab3f8dd177143b7845943bdf098de5a7222f97da5aee04"
+        },
+        {
+          "bytes": 69940,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_sk_SK.txt",
+          "member": "README_sk_SK.txt",
+          "sha256": "b011321f5678107216b916f9b0a0b531c1cff90749bc6d623d6d65556905532f"
+        },
+        {
+          "bytes": 1662,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_sl_SI.txt",
+          "member": "README_sl_SI.txt",
+          "sha256": "f029062396d3e2f874110cd1453cd42dd6a96e3cb25f29e8738800d744d80301"
+        },
+        {
+          "bytes": 82,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_sq.txt",
+          "member": "README_sq.txt",
+          "sha256": "78a024dc1102e9239d37733db0d2b9ac3c8a82de5fd0d53b3023cb12e2e8601b"
+        },
+        {
+          "bytes": 782,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_sr.txt",
+          "member": "README_sr.txt",
+          "sha256": "616a341d2ebc21c2a7a8a0839fdec9942a1f8954a9458cf4d5a214fb4805b54f"
+        },
+        {
+          "bytes": 475,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_sv_SE.txt",
+          "member": "README_sv_SE.txt",
+          "sha256": "058f7939396d5c41182abb0262ebeed8271986f4643745c535ab7a281586dcf1"
+        },
+        {
+          "bytes": 2763,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_ta_IN.txt",
+          "member": "README_ta_IN.txt",
+          "sha256": "53ff26dce17dbce97db07b7682e182514edfd545d86b1f80d130e67709ed5503"
+        },
+        {
+          "bytes": 10480,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_tg_TG.txt",
+          "member": "README_tg_TG.txt",
+          "sha256": "89d9367af0a3defe237403f2ddf322612853d1d1f3ddd305d249735accbf6d8b"
+        },
+        {
+          "bytes": 79,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_tr.txt",
+          "member": "README_tr.txt",
+          "sha256": "5d83af1116926e152359c5259993ade5337a4b51d6afc38b53a36831f96b3cab"
+        },
+        {
+          "bytes": 606,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_uk_UA.txt",
+          "member": "README_uk_UA.txt",
+          "sha256": "02cf996a1a62da8c990c6d03553d1e4ecc2ad65daa04900251875e086b3036d5"
+        },
+        {
+          "bytes": 2935,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_vi_VN.txt",
+          "member": "README_vi_VN.txt",
+          "sha256": "5a8780e6a04e622b173770c2dab9b4877ad4ded9d3064e12d693464325f8d9ae"
+        },
+        {
+          "bytes": 320,
+          "destination": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58/README_xx_XX.txt",
+          "member": "README_xx_XX.txt",
+          "sha256": "7831cca45b4f45d34908ed8bdca13bb85fbe4ab0a20e6c7af4fa085019fbd17c"
+        }
+      ],
+      "name": "hunspell-dictionaries-cccf64a8acc951afe3f47fee023908e55699bc58.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/deps/hunspell_dictionaries",
+      "revision": "cccf64a8acc951afe3f47fee023908e55699bc58",
+      "root": "third_party/hunspell_dictionaries",
+      "sha256": "40fc68bd5de179fa12396bfffa9cfe5a9699257dbde251377a7329b1fd6abdfd",
+      "source_member_count": 243,
+      "url": "https://chromium.googlesource.com/chromium/deps/hunspell_dictionaries/+archive/cccf64a8acc951afe3f47fee023908e55699bc58.tar.gz"
+    },
+    {
+      "bytes": 4258366,
+      "licenses": [
+        {
+          "bytes": 1945,
+          "destination": "third_party--opus/src/COPYING",
+          "member": "src/COPYING",
+          "sha256": "01e1167d54a096d123cf6dfbbeb19587278845c6481d2d66d545669846079551"
+        }
+      ],
+      "name": "third_party--opus.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/src",
+      "revision": "0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174",
+      "root": "third_party/opus",
+      "sha256": "71e6cc740f65d4ea3e6eb86f937e805bb0b5d69d90d476cd51186bfe66eae536",
+      "source_member_count": 715,
+      "url": "https://chromium.googlesource.com/chromium/src/+archive/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/third_party/opus.tar.gz"
+    },
+    {
+      "bytes": 2433016,
+      "licenses": [
+        {
+          "bytes": 1554,
+          "destination": "nasm-525a09a813be0f75b646ee93fc2a31c27b87d722/LICENSE",
+          "member": "LICENSE",
+          "sha256": "7436a7c46b6e4d969b41e1ce387885ae4ced25710662189ff2983665253729ac"
+        }
+      ],
+      "name": "nasm-525a09a813be0f75b646ee93fc2a31c27b87d722.tar.gz",
+      "repository": "https://chromium.googlesource.com/chromium/deps/nasm",
+      "revision": "525a09a813be0f75b646ee93fc2a31c27b87d722",
+      "root": "third_party/nasm",
+      "sha256": "ffb0e74a7e66bfbac8e9bb6bc1a23c8a7555d6074313c0264942f44b1eaa7505",
+      "source_member_count": 1356,
+      "url": "https://chromium.googlesource.com/chromium/deps/nasm/+archive/525a09a813be0f75b646ee93fc2a31c27b87d722.tar.gz"
+    }
+  ]
+}

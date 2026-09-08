@@ -5,5 +5,6 @@ packaging/**/licenses/** -whitespace
 packaging/python/targets/** -whitespace
 packaging/soundfile/upstream-recipes/** -whitespace
 packaging/soundfile/vcpkg-recipes/** -whitespace
+packaging/electron/upstream-metadata/** -whitespace
 src/cleantake/static/** linguist-generated=true
 src/cleantake/static/THIRD_PARTY_NOTICES.txt -whitespace

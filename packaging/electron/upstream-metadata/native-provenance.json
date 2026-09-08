@@ -1,0 +1,70 @@
+{
+  "electron_version": "44.2.0",
+  "chromium_version": "152.0.7977.76",
+  "native_distributions": {
+    "macos-arm64": {
+      "name": "electron-v44.2.0-darwin-arm64.zip",
+      "url": "https://github.com/electron/electron/releases/download/v44.2.0/electron-v44.2.0-darwin-arm64.zip",
+      "bytes": 130326085,
+      "sha256": "f906dff5d054b1b92e5711781b13cc206fd7139ce66467503b9d0a3e6fbc9b02",
+      "verification": "official ZIP actually downloaded and SHA-256 verified; libffmpeg member inspected",
+      "ffmpeg_member": {
+        "name": "Electron.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Libraries/libffmpeg.dylib",
+        "bytes": 2317968,
+        "sha256": "403e8c54c8fb6a4125d55bc289098988e0d495767e14325989e720400d95fc99"
+      },
+      "chromium_notices": {
+        "bytes": 20111209,
+        "sha256": "a62dabd1c6ef1327365b2a3fdffb806222684a746dcb8f4afd1c1f690eba5535"
+      }
+    },
+    "macos-x64": {
+      "name": "electron-v44.2.0-darwin-x64.zip",
+      "url": "https://github.com/electron/electron/releases/download/v44.2.0/electron-v44.2.0-darwin-x64.zip",
+      "bytes": 134103753,
+      "sha256": "0c58057eebd23859389e2eba1555975bcbc8adebcc5aa97ff36c036125e2b21a",
+      "verification": "official release asset digest; archive not inspected in this local source audit"
+    },
+    "linux-arm64": {
+      "name": "electron-v44.2.0-linux-arm64.zip",
+      "url": "https://github.com/electron/electron/releases/download/v44.2.0/electron-v44.2.0-linux-arm64.zip",
+      "bytes": 124089403,
+      "sha256": "8693fd67332d417775dc2ffc470f4c05eda9d0ed1ac329e4866e108afaa4ddda",
+      "verification": "official release asset digest; archive not inspected in this local source audit"
+    },
+    "linux-x64": {
+      "name": "electron-v44.2.0-linux-x64.zip",
+      "url": "https://github.com/electron/electron/releases/download/v44.2.0/electron-v44.2.0-linux-x64.zip",
+      "bytes": 122996717,
+      "sha256": "574f7d8cd2a82d77812849729a282b86639b050de120d58b138a126d16b48692",
+      "verification": "official release asset digest; archive not inspected in this local source audit"
+    },
+    "windows-arm64": {
+      "name": "electron-v44.2.0-win32-arm64.zip",
+      "url": "https://github.com/electron/electron/releases/download/v44.2.0/electron-v44.2.0-win32-arm64.zip",
+      "bytes": 156319877,
+      "sha256": "a753799aaf4e01262c2f103ef38c0349c9d3370069becc53f9276a5773891427",
+      "verification": "official release asset digest; archive not inspected in this local source audit"
+    },
+    "windows-x64": {
+      "name": "electron-v44.2.0-win32-x64.zip",
+      "url": "https://github.com/electron/electron/releases/download/v44.2.0/electron-v44.2.0-win32-x64.zip",
+      "bytes": 158199548,
+      "sha256": "4021363e3090d67a144ebedb90765cf193b0e61f300c519c83f0174502a481da",
+      "verification": "official release asset digest; archive not inspected in this local source audit"
+    }
+  },
+  "observed_packaged_mac_arm64_ffmpeg": {
+    "bytes": 2322640,
+    "sha256": "ccbf61f2687e07655116a92399b7c8a09c72fa998e921935a1b03e5ee099ccf1",
+    "whole_file_hash_difference": "Local app signing changes signature data. This signed-file hash is recorded separately from the official ZIP member, not claimed equal.",
+    "identified_upstream_version": "git-2026-07-15-6cfe2122b0",
+    "license_identification": "LGPL version 2.1 or later"
+  },
+  "primary_refs": [
+    "https://github.com/electron/electron/releases/tag/v44.2.0",
+    "https://github.com/electron/electron/tree/aa650d74597c652878629df0038a50485e156a09",
+    "https://chromium.googlesource.com/chromium/src/+/0d89dfa2dd7c1ec4b8a14b9f303f887bb63b6174/DEPS",
+    "https://chromium.googlesource.com/chromium/third_party/ffmpeg/+/2b68d2babae73714846961fb0ee47e3b3d2e39a9"
+  ]
+}
