@@ -6,11 +6,50 @@ import os
 import shutil
 import subprocess
 import sys
+from contextlib import contextmanager
 from pathlib import Path
 
 
 class RuntimeDependencyError(ValueError):
     """A required media component is missing or cannot be executed."""
+
+
+
+@contextmanager
+def isolated_child_stdin():
+    """Keep Windows children off the desktop parent's actively read control pipe."""
+    if sys.platform != "win32":
+        yield
+        return
+
+    import ctypes
+    import msvcrt
+    from ctypes import wintypes
+
+    kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+    kernel.GetStdHandle.argtypes = [wintypes.DWORD]
+    kernel.GetStdHandle.restype = wintypes.HANDLE
+    kernel.SetStdHandle.argtypes = [wintypes.DWORD, wintypes.HANDLE]
+    kernel.SetStdHandle.restype = wintypes.BOOL
+    original = kernel.GetStdHandle(-10)  # STD_INPUT_HANDLE
+    if original == ctypes.c_void_p(-1).value:
+        raise ctypes.WinError(ctypes.get_last_error())
+
+    # SetStdHandle updates defaults for future children. Python's existing
+    # sys.stdin retains its original CRT handle and the parent's control pipe.
+    # A child otherwise can block in CPython's startup seek while the control
+    # thread has a pending read on that same synchronous pipe (CPython #78961).
+    with open(os.devnull, "rb", buffering=0) as null_input:
+        os.set_inheritable(null_input.fileno(), True)
+        handle = msvcrt.get_osfhandle(null_input.fileno())
+        if not kernel.SetStdHandle(-10, handle):
+            raise ctypes.WinError(ctypes.get_last_error())
+        try:
+            yield
+        finally:
+            # Restore before closing NUL. Never close the original control handle.
+            if not kernel.SetStdHandle(-10, original):
+                raise ctypes.WinError(ctypes.get_last_error())
 
 
 def default_workspace() -> Path:

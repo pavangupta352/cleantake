@@ -9,6 +9,7 @@ import shutil
 import socket
 import sys
 import threading
+from contextlib import ExitStack
 from pathlib import Path
 
 import uvicorn
@@ -16,7 +17,7 @@ import uvicorn
 from cleantake import __version__
 from cleantake.demo import create_demo
 from cleantake.projects import ProjectConflictError, ProjectStore
-from cleantake.runtime import check_media_tools, default_workspace
+from cleantake.runtime import check_media_tools, default_workspace, isolated_child_stdin
 from cleantake.server import create_app
 from cleantake.server.jobs import atomic_json
 
@@ -74,6 +75,7 @@ def run(workspace: Path) -> int:
     listener = None
     server = None
     stopping = threading.Event()
+    child_input = ExitStack()
 
     def control():
         try:
@@ -88,6 +90,7 @@ def run(workspace: Path) -> int:
             server.should_exit = True
 
     try:
+        child_input.enter_context(isolated_child_stdin())
         tools = check_media_tools()
         if any(not tool["available"] for tool in tools.values()):
             raise DesktopStartupError(
@@ -161,10 +164,13 @@ def run(workspace: Path) -> int:
         )
         return 1
     finally:
-        if application is not None:
-            application.state.jobs.close()
-        if listener is not None:
-            listener.close()
+        try:
+            if application is not None:
+                application.state.jobs.close()
+            if listener is not None:
+                listener.close()
+        finally:
+            child_input.close()
 
 
 def main(arguments=None) -> int:

@@ -182,3 +182,38 @@ def test_desktop_rejects_initialization_temp_symlink_without_writing_target(tmp_
         if process.poll() is None:
             process.kill()
             process.wait(timeout=5)
+
+
+def test_desktop_spawned_analysis_finishes_while_control_input_remains_open(tmp_path):
+    """The worker must not share a pipe on which the control thread is reading."""
+    process = launch(tmp_path)
+    try:
+        ready = message(process)
+        url = urlsplit(ready["url"])
+        origin = f"{url.scheme}://{url.netloc}"
+        token = parse_qs(url.fragment)["token"][0]
+
+        def request(path, value=None):
+            payload = None if value is None else json.dumps(value).encode()
+            req = urllib.request.Request(
+                origin + path, data=payload,
+                headers={"X-CleanTake-Token": token, "Content-Type": "application/json"},
+            )
+            return json.load(urllib.request.urlopen(req, timeout=5))
+
+        sample = request("/api/projects")["projects"][0]
+        job = request(
+            f"/api/projects/{sample['id']}/analyze",
+            {"expected_revision": sample["revision"]},
+        )
+        deadline = time.monotonic() + 20
+        while time.monotonic() < deadline:
+            job = request(f"/api/jobs/{job['id']}")
+            if job["status"] in {"completed", "failed", "cancelled", "interrupted"}:
+                break
+            time.sleep(0.05)
+        assert job["status"] == "completed", job
+        assert not process.stdin.closed
+        assert request(f"/api/projects/{sample['id']}")["revision"] > sample["revision"]
+    finally:
+        stop(process)

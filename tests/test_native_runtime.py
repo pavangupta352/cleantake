@@ -172,3 +172,69 @@ def test_windows_hidden_helpers_and_empty_path_tree_cancellation(
             worker.kill()
         worker.join(timeout=5)
         worker.close()
+
+
+@pytest.mark.skipif(sys.platform != "win32", reason="Requires actual Windows standard handles")
+def test_child_stdin_isolated_while_original_control_pipe_stays_readable():
+    import os
+
+    script = '''
+import ctypes, multiprocessing, os, subprocess, sys, threading, time
+from ctypes import wintypes
+from cleantake.runtime import isolated_child_stdin
+kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+kernel.GetStdHandle.argtypes = [wintypes.DWORD]
+kernel.GetStdHandle.restype = wintypes.HANDLE
+original = kernel.GetStdHandle(-10)
+with isolated_child_stdin():
+    assert kernel.GetStdHandle(-10) != original
+    received = []
+    started = threading.Event()
+    def read_control():
+        started.set()
+        received.append(sys.stdin.readline())
+    reader = threading.Thread(target=read_control, daemon=True)
+    reader.start()
+    assert started.wait(2)
+    worker = multiprocessing.get_context("spawn").Process(target=time.sleep, args=(0.01,))
+    worker.start()
+    try:
+        worker.join(5)
+        assert worker.exitcode == 0, "Spawn bootstrap stalled on the control pipe"
+        assert reader.is_alive() and not received, "Original control read was released"
+    finally:
+        if worker.is_alive():
+            worker.kill()
+            worker.join(5)
+        worker.close()
+    child = subprocess.run([sys.executable, "-c", "import sys; print(repr(sys.stdin.read()))"],
+                           capture_output=True, text=True, timeout=5)
+    assert child.returncode == 0, child.stderr
+    assert child.stdout.strip() == "''", child.stdout
+    print("CHILD_READY", flush=True)
+    reader.join(5)
+    assert received == ["shutdown\\n"], received
+assert kernel.GetStdHandle(-10) == original
+print("CONTROL_RETAINED", flush=True)
+'''
+    process = subprocess.Popen(
+        [sys.executable, "-c", script], stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE, text=True, env=dict(os.environ),
+    )
+    try:
+        import queue
+        import threading
+
+        messages = queue.Queue()
+        threading.Thread(
+            target=lambda: messages.put(process.stdout.readline()), daemon=True
+        ).start()
+        assert messages.get(timeout=10).strip() == "CHILD_READY"
+        process.stdin.write("shutdown\n")
+        process.stdin.flush()
+        assert process.wait(timeout=10) == 0, process.stderr.read()
+        assert process.stdout.read().strip() == "CONTROL_RETAINED"
+    finally:
+        if process.poll() is None:
+            process.kill()
+            process.wait(timeout=5)
