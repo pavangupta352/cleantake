@@ -39,9 +39,12 @@ These builds are ad-hoc signed and **not notarized**. macOS may block their firs
 launch. If you downloaded the app from this project's release and choose to
 open it, Apple documents a per-app approval: after attempting to open CleanTake,
 go to **System Settings → Privacy & Security**, find CleanTake's blocked-app
-entry and choose **Open Anyway**, then **Open**. Use this only when the entry
-identifies the app you intended to install. This option may be unavailable on a
-managed Mac. See [Apple's instructions](https://support.apple.com/en-us/102445).
+entry and choose **Open Anyway**. Confirm the next **Open** or **Open Anyway**
+prompt; macOS may also ask for an administrator's username and password to
+complete this per-app approval. Enter those only in the macOS system dialog.
+Use this route only when the entry identifies the app you intended to install.
+This option may be unavailable on a managed Mac. See
+[Apple's instructions](https://support.apple.com/en-us/102445).
 
 This is the official conditional approval route; acceptance of the exact
 downloaded CleanTake build has not yet been verified. If the option is absent,
