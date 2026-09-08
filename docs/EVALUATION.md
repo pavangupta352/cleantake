@@ -62,6 +62,11 @@ This is one measured machine and one numerical long session. No long-session lis
 
 ## External comparison and open evidence
 
+The separate [natural-fault intake packet](../eval/natural/README.md) records a
+publisher-documented AMI microphone-loss candidate and a prospective meeting-group
+split. Its affected channel and event time remain unidentified; no candidate
+audio has been downloaded or evaluated. It adds no result to this study.
+
 The [Cleanroom baseline record](../eval/BASELINE.md) distinguishes its actual multitrack alignment/mix workflow from source-based repair and single-file mastering. A published release is not proof that its benchmark ran. The executed single-file baseline exposed a CleanTake finishing target miss: an output measured −18.7 LUFS against a −16 LUFS request. A [separate independent recheck](../eval/results/2026-09-08/baseline-mastering-corrected.json) verified the reporting correction: `target_met: false`, a −2.7 LU error, ±0.5 LU tolerance and a warning propagated through the export response and source map. The audio remains byte-identical at −18.7 LUFS / −1.0 dBTP; loudness attainment has not improved. The missing-warning defect is resolved, while the target miss remains an explicit limitation. The initial evidence is preserved and is separate from the passing core-rendering checks above. Only observed operations and output are reported there.
 
 The following remain evidence gates before making broader claims:

@@ -16,6 +16,7 @@ from typing import Any
 
 import turnchunk
 from turnchunk.parsers.asr import _identify as _identify_json
+from turnchunk.parsers.asr import _speaker as _source_speaker
 
 _MAX_TIME_MS = 2**53 - 1
 _GENERIC_KINDS = {"generic_list", "generic_dict"}
@@ -104,7 +105,7 @@ def import_transcript(
                 parsed.format = f"json:{vendor}"
             else:
                 parsed = _parse(text, "json")
-            estimate_flags = _source_estimate_flags(data, vendor)
+                estimate_flags = _source_estimate_flags(data, vendor)
             timing_overrides = _source_timing_overrides(data, vendor)
         words = _extract_words(data, vendor, declared_unit)
     else:
@@ -121,6 +122,11 @@ def import_transcript(
     ):
         raise ValueError(f"Invalid {parsed.format.upper()} cue timing.")
 
+    if format_name == "json" and len(estimate_flags) != len(parsed.turns):
+        raise ValueError("Could not associate source timing estimates with transcript turns.")
+    if timing_overrides and len(timing_overrides) != len(parsed.turns):
+        raise ValueError("Could not associate source timing with transcript turns.")
+
     turns = []
     for index, turn in enumerate(parsed.turns):
         raw_start, raw_end = (
@@ -136,12 +142,10 @@ def import_transcript(
                 "start_ms": start_ms,
                 "end_ms": end_ms,
                 "time_estimated": estimate_flags[index]
-                if len(estimate_flags) == len(parsed.turns)
+                if format_name == "json"
                 else False,
             }
         )
-
-    _apply_word_estimates(turns, words)
 
     digest = hashlib.sha256()
     for value in (source_id, filename, text):
@@ -281,7 +285,7 @@ def _normalise_generic(
                 "end": end_ms / 1000 if end_ms is not None else None,
             }
         )
-        flags.append(_estimate_flag(entry, f"generic entry {index + 1}"))
+        flags.append(_entry_estimate_flag(entry))
     return shadow, flags
 
 
@@ -407,24 +411,188 @@ def _walk_dicts(data: Any) -> Iterator[tuple[str, dict[str, Any]]]:
             stack.extend((f"{path}[{index}]", child) for index, child in enumerate(value))
 
 
-def _source_estimate_flags(data: Any, vendor: str) -> list[bool]:
-    if not isinstance(data, dict):
-        return []
+def _entry_estimate_flag(item: dict[str, Any]) -> bool:
+    """Combine markers only within this selected source entry and its annotations."""
+    flags = [_estimate_flag(item, "source entry")]
+    for key in ("words", "sentences"):
+        children = item.get(key)
+        if children is None:
+            continue
+        if not isinstance(children, list):
+            raise ValueError(f"Source entry {key} must be a list.")
+        for child in children:
+            if isinstance(child, dict):
+                flags.append(_entry_estimate_flag(child))
+    return any(flags)
+
+
+def _group_estimate_flags(items: list[tuple[str, Any, bool, bool]]) -> list[bool]:
+    """Follow pinned turnchunk word grouping, including discarded whitespace groups.
+
+    Only selection and group membership are mirrored here. Text and timestamps
+    still come from turnchunk; timestamp overlap is not a source association.
+    """
+    groups: list[tuple[bool, bool]] = []
+    current_speaker = None
+    for token, speaker, estimated, punctuation in items:
+        if not token:
+            continue
+        speaker = _source_speaker(speaker)
+        if not groups or (speaker != current_speaker and not punctuation):
+            groups.append((bool(token.strip()), estimated))
+            current_speaker = speaker
+        else:
+            has_text, flagged = groups[-1]
+            groups[-1] = (has_text or bool(token.strip()), flagged or estimated)
+    return [estimated for has_text, estimated in groups if has_text]
+
+
+def _source_estimate_flags(data: dict[str, Any], vendor: str) -> list[bool]:
+    """Associate metadata with the source units selected by turnchunk 0.4.1."""
     if vendor == "whisper":
-        entries = data.get("segments")
-    elif vendor == "assemblyai":
-        entries = data.get("utterances") or data.get("words")
-    elif vendor == "deepgram":
-        entries = (data.get("results") or {}).get("utterances")
-    else:
-        entries = None
-    return [
-        _estimate_flag(item, f"{vendor} entry {index + 1}")
-        for index, item in enumerate(entries or [])
-        if isinstance(item, dict)
-        and isinstance(_first(item, "text", "transcript", "content"), str)
-        and _first(item, "text", "transcript", "content").strip()
-    ]
+        return [
+            _entry_estimate_flag(item)
+            for item in data.get("segments", [])
+            if isinstance(item, dict) and (item.get("text") or "").strip()
+        ]
+    if vendor == "assemblyai":
+        if data.get("utterances"):
+            return [
+                _entry_estimate_flag(item)
+                for item in data["utterances"]
+                if (item.get("text") or "").strip()
+            ]
+        return _group_estimate_flags(
+            [
+                (item.get("text") or "", item.get("speaker"), _entry_estimate_flag(item), False)
+                for item in data.get("words") or []
+                if isinstance(item, dict)
+            ]
+        )
+    if vendor == "deepgram":
+        results = data.get("results") or {}
+        if results.get("utterances"):
+            return [
+                _entry_estimate_flag(item)
+                for item in results["utterances"]
+                if (item.get("transcript") or "").strip()
+            ]
+        channels = results.get("channels") or []
+        best = (channels[0].get("alternatives") or [{}])[0] if channels else {}
+        paragraphs = (best.get("paragraphs") or {}).get("paragraphs") or []
+        if paragraphs:
+            return [
+                _entry_estimate_flag(item)
+                for item in paragraphs
+                if any(
+                    (sentence.get("text") or "").strip() for sentence in item.get("sentences") or []
+                )
+            ]
+        return _group_estimate_flags(
+            [
+                (
+                    item.get("punctuated_word") or item.get("word") or "",
+                    item.get("speaker"),
+                    _entry_estimate_flag(item),
+                    False,
+                )
+                for item in best.get("words") or []
+                if isinstance(item, dict)
+            ]
+        )
+    if vendor == "azure":
+        flags = []
+        for phrase in data.get("recognizedPhrases") or []:
+            if not isinstance(phrase, dict):
+                continue
+            best = (phrase.get("nBest") or [{}])[0] or {}
+            if (best.get("display") or best.get("lexical") or "").strip():
+                flags.append(any([_entry_estimate_flag(phrase), _entry_estimate_flag(best)]))
+        return flags
+    if vendor == "rev":
+        flags = []
+        for monologue in data.get("monologues") or []:
+            elements = monologue.get("elements") or []
+            if "".join(str(item.get("value", "")) for item in elements).strip():
+                flags.append(
+                    any(
+                        [_entry_estimate_flag(monologue)]
+                        + [_entry_estimate_flag(item) for item in elements]
+                    )
+                )
+        return flags
+    if vendor == "google":
+        selected_words = []
+        selected_parents = []
+        fallback = []
+        for result in data.get("results") or []:
+            best = ((result or {}).get("alternatives") or [{}])[0] or {}
+            if best.get("words"):
+                selected_words = best["words"]
+                selected_parents = [result, best]
+            elif best.get("transcript"):
+                fallback.append(any([_entry_estimate_flag(result), _entry_estimate_flag(best)]))
+        if not selected_words:
+            return fallback
+        parent_flag = any([_estimate_flag(item, "selected result") for item in selected_parents])
+        return _group_estimate_flags(
+            [
+                (
+                    item.get("word") or "",
+                    item.get("speakerTag") or item.get("speaker_tag"),
+                    any([parent_flag, _entry_estimate_flag(item)]),
+                    False,
+                )
+                for item in selected_words
+                if isinstance(item, dict)
+            ]
+        )
+    if vendor == "speechmatics":
+        items = []
+        for item in data.get("results") or []:
+            best = (item.get("alternatives") or [{}])[0]
+            items.append(
+                (
+                    best.get("content") or "",
+                    best.get("speaker"),
+                    any([_entry_estimate_flag(item), _entry_estimate_flag(best)]),
+                    item.get("type") == "punctuation",
+                )
+            )
+        return _group_estimate_flags(items)
+    if vendor == "aws":
+        results = data.get("results") or {}
+        ranges = (results.get("speaker_labels") or {}).get("segments") or []
+        items = []
+        for item in results.get("items") or []:
+            if not isinstance(item, dict):
+                continue
+            best = (item.get("alternatives") or [{}])[0] or {}
+            token = best.get("content") or ""
+            if not token:
+                continue
+            speaker = _source_speaker(item.get("speaker_label"))
+            start = _to_ms(item.get("start_time"), "seconds", "item.start", True)
+            if speaker is None and start is not None:
+                for segment in ranges:
+                    lo = _to_ms(segment.get("start_time"), "seconds", "segment.start", True)
+                    hi = _to_ms(segment.get("end_time"), "seconds", "segment.end", True)
+                    if lo is not None and hi is not None and lo <= start <= hi:
+                        speaker = _source_speaker(segment.get("speaker_label"))
+                        break
+            punctuation = item.get("type") == "punctuation"
+            if punctuation and items:
+                speaker = items[-1][1]
+            items.append(
+                (
+                    token,
+                    speaker,
+                    any([_entry_estimate_flag(item), _entry_estimate_flag(best)]),
+                    punctuation,
+                )
+            )
+        return _group_estimate_flags(items)
+    raise ValueError(f"Unsupported transcript metadata association for {vendor}.")
 
 
 def _source_timing_overrides(data: Any, vendor: str) -> list[tuple[int | None, int | None]]:
@@ -444,26 +612,6 @@ def _source_timing_overrides(data: Any, vendor: str) -> list[tuple[int | None, i
         end = start + duration if start is not None and duration is not None else None
         overrides.append((start, end))
     return overrides
-
-
-def _apply_word_estimates(turns: list[dict[str, Any]], words: list[dict[str, Any]]) -> None:
-    for word in words:
-        if not word["time_estimated"]:
-            continue
-        word_start = word["start_ms"]
-        word_end = word["end_ms"]
-        for turn in turns:
-            turn_start = turn["start_ms"]
-            turn_end = turn["end_ms"]
-            if (
-                word_start is not None
-                and word_end is not None
-                and turn_start is not None
-                and turn_end is not None
-                and word_start <= turn_end
-                and word_end >= turn_start
-            ):
-                turn["time_estimated"] = True
 
 
 def _to_ms(value: Any, unit: str, path: str, strings_allowed: bool = False) -> int | None:
@@ -531,12 +679,13 @@ def _validate_pair(start: Any, end: Any, path: str) -> tuple[int | None, int | N
 
 
 def _estimate_flag(item: dict[str, Any], path: str) -> bool:
+    flags = []
     for key in _ESTIMATE_KEYS:
         if key in item:
             if not isinstance(item[key], bool):
                 raise ValueError(f"{path}.{key} must be true or false.")
-            return item[key]
-    return False
+            flags.append(item[key])
+    return any(flags)
 
 
 def _warnings(turns: list[dict[str, Any]]) -> list[str]:

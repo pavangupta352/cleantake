@@ -1,7 +1,7 @@
 {
   "name": "cleantake-desktop",
   "productName": "CleanTake",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Recover damaged dialogue from your backup recordings.",
   "author": {
     "name": "Pavan Gupta",

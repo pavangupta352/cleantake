@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.2.1
+
+- Preserve source-marked estimated times in Azure phrases, Deepgram paragraphs,
+  AssemblyAI word groups and the other supported transcript layouts, including
+  all three estimate aliases and words with missing endpoints.
+- Associate each timing marker with its selected source entry or speaker group.
+  Adjacent or overlapping precise turns and unused recognition alternatives no
+  longer inherit another passage's uncertainty.
+- Reject malformed selected annotation containers with a useful import error.
+  Retain explicit units, raw metadata and missing endpoints. Transcript import
+  and navigation leave sample-based audio edits unchanged.
+
+The recovery engine and dependency versions are unchanged. A separate
+[natural-fault intake](eval/natural/README.md) records a publisher-documented
+candidate; it contains no evaluated audio or participant outcomes.
+
 ## 0.2.0
 
 - Bundle the browser runtime, Python processing engine, media tools and sample

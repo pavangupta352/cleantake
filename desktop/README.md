@@ -4,7 +4,8 @@ The desktop shell opens the bundled studio and owns its local audio service.
 Python, processing libraries, media tools, sample recordings, and the browser
 runtime ship with the application. End users do not install these separately.
 
-Version 0.2.0 is undergoing native release checks. See the
+Native desktop distributions are available from the
+[releases page](https://github.com/pavangupta352/cleantake/releases). See the
 [distribution specification](../docs/NATIVE-DISTRIBUTION.md) for the acceptance
 gates and [desktop guide](../docs/DESKTOP.md) for the installation experience.
 

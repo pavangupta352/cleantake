@@ -427,3 +427,356 @@ def test_conflicting_explicit_and_vendor_word_times_are_rejected(field: str, val
             "source-a",
             "captions.json",
         )
+
+
+@pytest.mark.parametrize("estimate_key", ["time_estimated", "timing_estimated", "estimated"])
+@pytest.mark.parametrize("vendor", ["azure", "deepgram", "assemblyai"])
+def test_source_estimated_timing_survives_audited_vendor_layouts(vendor, estimate_key):
+    if vendor == "azure":
+        payload = {
+            "recognizedPhrases": [
+                {
+                    "offsetInTicks": 10_000_000,
+                    "durationInTicks": 10_000_000,
+                    estimate_key: True,
+                    "nBest": [{"display": "hello"}],
+                }
+            ]
+        }
+        expected = ("hello", 1000, 2000)
+    elif vendor == "deepgram":
+        payload = {
+            "results": {
+                "channels": [
+                    {
+                        "alternatives": [
+                            {
+                                "transcript": "hello",
+                                "paragraphs": {
+                                    "transcript": "hello",
+                                    "paragraphs": [
+                                        {
+                                            "start": 1,
+                                            "end": 2,
+                                            estimate_key: True,
+                                            "sentences": [{"text": "hello", "start": 1, "end": 2}],
+                                        }
+                                    ],
+                                },
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+        expected = ("hello", 1000, 2000)
+    else:
+        payload = {
+            "id": "a",
+            "utterances": [],
+            "words": [
+                {"text": "hello", "start": 1000, estimate_key: True},
+                {"text": "there", "start": 2000, "end": 3000},
+            ],
+        }
+        expected = ("hello there", 1000, 3000)
+    raw = json.dumps(payload)
+    record = import_transcript(raw, "audit-recording", vendor + ".json")
+    assert [(t["text"], t["start_ms"], t["end_ms"]) for t in record["turns"]] == [expected]
+    assert [t["time_estimated"] for t in record["turns"]] == [True]
+    assert any("estimated" in warning for warning in record["warnings"])
+    assert record["raw_text"] == raw
+    assert record["source_id"] == "audit-recording"
+    if vendor == "assemblyai":
+        assert record["words"][0]["end_ms"] is None
+        assert record["words"][0]["raw"] == payload["words"][0]
+
+
+@pytest.mark.parametrize("precise_start", [1, 2])
+@pytest.mark.parametrize("word_bounds", [{}, {"start": 1}, {"end": 2}, {"start": 1, "end": 2}])
+def test_nested_word_estimates_belong_only_to_their_source_turn(precise_start, word_bounds):
+    payload = {
+        "segments": [
+            {
+                "text": "estimated",
+                "speaker": "A",
+                "start": 1,
+                "end": 2,
+                "words": [{"word": "estimated", "time_estimated": True, **word_bounds}],
+            },
+            {"text": "precise", "speaker": "B", "start": precise_start, "end": 3},
+        ]
+    }
+    record = import_transcript(json.dumps(payload), "source-a", "whisper.json")
+    assert [t["time_estimated"] for t in record["turns"]] == [True, False]
+    assert [(t["start_ms"], t["end_ms"]) for t in record["turns"]] == [
+        (1000, 2000),
+        (precise_start * 1000, 3000),
+    ]
+
+
+def test_word_group_estimates_follow_parser_selection_and_normalized_speakers():
+    payload = {
+        "id": "a",
+        "utterances": [],
+        "words": [
+            {"text": " ", "speaker": "skipped", "start": 0, "end": 100, "estimated": True},
+            {"text": "hello", "speaker": 0, "start": 1000, "estimated": True},
+            {"text": "", "speaker": "ignored", "start": 1500, "end": 1600},
+            {"text": "there", "speaker": "00", "start": 2000, "end": 3000},
+            {"text": "precise", "speaker": 1, "start": 1000, "end": 3000},
+        ],
+    }
+    record = import_transcript(json.dumps(payload), "source-a", "assembly.json")
+    assert record["turns"] == [
+        {
+            "text": "hello there",
+            "speaker": "SPEAKER_00",
+            "start_ms": 1000,
+            "end_ms": 3000,
+            "time_estimated": True,
+        },
+        {
+            "text": "precise",
+            "speaker": "SPEAKER_01",
+            "start_ms": 1000,
+            "end_ms": 3000,
+            "time_estimated": False,
+        },
+    ]
+
+
+def test_azure_estimates_skip_empty_phrases_and_keep_missing_duration():
+    payload = {
+        "recognizedPhrases": [
+            {
+                "offsetInTicks": 0,
+                "durationInTicks": 1_000_000,
+                "estimated": True,
+                "nBest": [{"display": " "}],
+            },
+            {
+                "offsetInTicks": 10_000_000,
+                "timing_estimated": True,
+                "nBest": [{"lexical": "uncertain"}],
+            },
+            {
+                "offsetInTicks": 20_000_000,
+                "durationInTicks": 10_000_000,
+                "nBest": [{"display": "precise"}],
+            },
+        ]
+    }
+    record = import_transcript(json.dumps(payload), "source-a", "azure.json")
+    assert [
+        (t["text"], t["start_ms"], t["end_ms"], t["time_estimated"]) for t in record["turns"]
+    ] == [("uncertain", 1000, None, True), ("precise", 2000, 3000, False)]
+
+
+def test_deepgram_selected_paragraphs_preserve_sentence_estimates_only():
+    payload = {
+        "results": {
+            "channels": [
+                {
+                    "alternatives": [
+                        {
+                            "paragraphs": {
+                                "paragraphs": [
+                                    {
+                                        "start": 0,
+                                        "end": 0.5,
+                                        "estimated": True,
+                                        "sentences": [{"text": " "}],
+                                    },
+                                    {
+                                        "sentences": [
+                                            {
+                                                "text": "uncertain",
+                                                "start": 1,
+                                                "end": 2,
+                                                "estimated": True,
+                                            }
+                                        ]
+                                    },
+                                    {"start": 2, "end": 3, "sentences": [{"text": "precise"}]},
+                                ]
+                            }
+                        },
+                        {"words": [{"word": "discarded", "start": 2, "end": 3, "estimated": True}]},
+                    ]
+                }
+            ]
+        }
+    }
+    record = import_transcript(json.dumps(payload), "source-a", "deepgram.json")
+    assert [
+        (t["text"], t["start_ms"], t["end_ms"], t["time_estimated"]) for t in record["turns"]
+    ] == [("uncertain", 1000, 2000, True), ("precise", 2000, 3000, False)]
+    assert record["words"][0]["raw"]["estimated"] is True
+
+
+def test_explicit_unit_shadow_keeps_its_estimate_association():
+    payload = {
+        "segments": [
+            {"text": " ", "content": "unused", "start_ms": 0, "end_ms": 100, "estimated": False},
+            {"content": "estimated", "start_ms": 1000, "end_ms": 2000, "estimated": True},
+            {"text": "precise", "start_ms": 2000, "end_ms": 3000},
+        ]
+    }
+    record = import_transcript(json.dumps(payload), "source-a", "whisper.json")
+    assert [(t["text"], t["time_estimated"]) for t in record["turns"]] == [
+        ("estimated", True),
+        ("precise", False),
+    ]
+
+
+@pytest.mark.parametrize("extra", [{"estimated": True}, {"timing_estimated": True}])
+def test_positive_estimate_alias_is_not_hidden_by_another_false_alias(extra):
+    record = import_transcript(
+        json.dumps(
+            [
+                {
+                    "text": "uncertain",
+                    "start_ms": 1000,
+                    "end_ms": 2000,
+                    "time_estimated": False,
+                    **extra,
+                }
+            ]
+        ),
+        "source-a",
+        "generic.json",
+    )
+    assert record["turns"][0]["time_estimated"] is True
+
+
+@pytest.mark.parametrize("estimate_key", ["time_estimated", "timing_estimated", "estimated"])
+def test_azure_estimate_alias_requires_a_boolean(estimate_key):
+    with pytest.raises(ValueError, match="true or false"):
+        import_transcript(
+            json.dumps(
+                {
+                    "recognizedPhrases": [
+                        {
+                            "offsetInTicks": 10_000_000,
+                            "durationInTicks": 10_000_000,
+                            estimate_key: "true",
+                            "nBest": [{"display": "hello"}],
+                        }
+                    ]
+                }
+            ),
+            "source-a",
+            "azure.json",
+        )
+
+
+@pytest.mark.parametrize(
+    "payload",
+    [
+        {
+            "results": {
+                "channels": [
+                    {
+                        "alternatives": [
+                            {"words": [{"word": "hello", "start": 1, "end": 2, "estimated": True}]}
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "results": [
+                {
+                    "alternatives": [
+                        {
+                            "words": [
+                                {
+                                    "word": "hello",
+                                    "startTime": "1s",
+                                    "endTime": "2s",
+                                    "estimated": True,
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "results": [
+                {
+                    "start_time": 1,
+                    "end_time": 2,
+                    "estimated": True,
+                    "alternatives": [{"content": "hello"}],
+                }
+            ]
+        },
+        {
+            "results": {
+                "items": [
+                    {
+                        "type": "pronunciation",
+                        "start_time": "1",
+                        "end_time": "2",
+                        "estimated": True,
+                        "alternatives": [{"content": "hello"}],
+                    }
+                ]
+            }
+        },
+        {
+            "monologues": [
+                {
+                    "speaker": 0,
+                    "elements": [{"value": "hello", "ts": 1, "end_ts": 2, "estimated": True}],
+                }
+            ]
+        },
+    ],
+)
+def test_other_selected_vendor_word_sources_preserve_estimates(payload):
+    record = import_transcript(json.dumps(payload), "source-a", "vendor.json")
+    assert record["turns"][0]["time_estimated"] is True
+    assert (record["turns"][0]["start_ms"], record["turns"][0]["end_ms"]) == (1000, 2000)
+
+
+def test_google_last_cumulative_result_owns_its_estimated_status():
+    payload = {
+        "results": [
+            {
+                "alternatives": [
+                    {
+                        "words": [
+                            {"word": "old", "startTime": "1s", "endTime": "2s", "estimated": True}
+                        ]
+                    }
+                ]
+            },
+            {
+                "alternatives": [
+                    {"words": [{"word": "precise", "startTime": "1s", "endTime": "2s"}]}
+                ]
+            },
+        ]
+    }
+    record = import_transcript(json.dumps(payload), "source-a", "google.json")
+    assert record["turns"] == [
+        {
+            "text": "precise",
+            "speaker": None,
+            "start_ms": 1000,
+            "end_ms": 2000,
+            "time_estimated": False,
+        }
+    ]
+    assert record["words"][0]["time_estimated"] is True
+
+
+@pytest.mark.parametrize("key", ["words", "sentences"])
+@pytest.mark.parametrize("invalid", [1, True, "invalid", {}])
+def test_selected_annotations_reject_non_list_containers(key, invalid):
+    payload = {"segments": [{"text": "hello", "start": 1, "end": 2, key: invalid}]}
+    with pytest.raises(ValueError, match=f"{key} must be a list"):
+        import_transcript(json.dumps(payload), "source-a", "whisper.json")

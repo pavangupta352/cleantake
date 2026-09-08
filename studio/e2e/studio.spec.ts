@@ -578,6 +578,97 @@ test("manual repair exports real replacement samples with source maps and reopen
   ).toHaveLength(1);
 });
 
+test("source-marked transcript estimates survive import and reopening without changing audio edits", async ({
+  page,
+  request,
+  projectName,
+}) => {
+  const name = projectName("Estimated transcript navigation");
+  await create(page, name);
+  await importRecordings(page, [
+    join(fixtures, "Headset-injected-dropout.wav"),
+    lapel,
+  ]);
+  let saved = await projectByName(request, name);
+  const sourceId = saved.sources[1].id;
+  const aligned = await request.patch(
+    `/api/projects/${saved.id}/sources/${sourceId}`,
+    {
+      headers,
+      data: {
+        alignment: { offset_seconds: 0.5, drift_ppm: 1000, polarity: 1 },
+        expected_revision: saved.revision,
+      },
+    },
+  );
+  expect(aligned.ok()).toBeTruthy();
+  saved = await aligned.json();
+  const repair = await request.post(`/api/projects/${saved.id}/repairs`, {
+    headers,
+    data: {
+      source_id: sourceId,
+      start_frame: 5 * 48000,
+      end_frame: 5.5 * 48000,
+      kind: "manual",
+      expected_revision: saved.revision,
+    },
+  });
+  expect(repair.ok()).toBeTruthy();
+  const before = await repair.json();
+  await page.reload();
+  await page.getByRole("button", { name: new RegExp(name) }).click();
+  await page.getByRole("button", { name: "Transcript", exact: true }).click();
+  const raw = JSON.stringify({
+    recognizedPhrases: [
+      {
+        offsetInTicks: 15010000,
+        durationInTicks: 10010000,
+        time_estimated: true,
+        nBest: [{ display: "Approximate passage" }],
+      },
+      {
+        offsetInTicks: 25020000,
+        durationInTicks: 10010000,
+        nBest: [{ display: "Precise adjacent passage" }],
+      },
+    ],
+  });
+  await page.getByLabel("Transcript file", { exact: true }).setInputFiles({
+    name: "estimated-azure.json",
+    mimeType: "application/json",
+    buffer: Buffer.from(raw),
+  });
+  await expect(page.getByRole("textbox", { name: "Transcript text", exact: true })).toHaveValue(raw);
+  await page.getByRole("combobox", { name: "Recording clock", exact: true }).selectOption(sourceId);
+  await page.getByRole("button", { name: "Import transcript", exact: true }).click();
+  const estimated = page.getByRole("button", { name: /Approximate passage/ });
+  const precise = page.getByRole("button", { name: /Precise adjacent passage/ });
+  await expect(estimated).toContainText("estimated");
+  await expect(precise).not.toContainText("estimated");
+  await estimated.click();
+  await expect(page.getByLabel("Playhead time")).toHaveText("00:01.000");
+  await precise.click();
+  await expect(page.getByLabel("Playhead time")).toHaveText("00:02.000");
+  const after = await projectByName(request, name);
+  expect(after.revision).toBe(before.revision + 1);
+  for (const key of ["repairs", "sources", "primary_source_id", "duration_frames", "sample_rate"]) {
+    expect(after[key], `transcript import preserves ${key}`).toEqual(before[key]);
+  }
+  expect(after.transcripts).toHaveLength(1);
+  expect(after.transcripts[0].source_id).toBe(sourceId);
+  expect(after.transcripts[0].raw_text).toBe(raw);
+  expect(after.transcripts[0].turns.map((turn: { time_estimated: boolean }) => turn.time_estimated))
+    .toEqual([true, false]);
+  await page.reload();
+  await page.getByRole("button", { name: new RegExp(name) }).click();
+  await page.getByRole("button", { name: "Transcript", exact: true }).click();
+  await expect(estimated).toContainText("estimated");
+  await expect(precise).not.toContainText("estimated");
+  await estimated.click();
+  await expect(page.getByLabel("Playhead time")).toHaveText("00:01.000");
+  expect((await projectByName(request, name)).revision).toBe(after.revision);
+});
+
 test("selecting another passage during source playback uses that passage’s donor", async ({
   page,
   request,

@@ -1,0 +1,120 @@
+{
+  "schema": 1,
+  "intake_id": "ami-natural-candidate-2026-09-08",
+  "status": "candidate_metadata_only",
+  "credit": "AMI Meeting Corpus — AMI Project Consortium",
+  "license": {
+    "spdx": "CC-BY-4.0",
+    "publisher_url": "https://groups.inf.ed.ac.uk/ami/corpus/license.shtml",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "retain": ["credit", "source_links", "license", "disclaimer_of_warranties", "modification_history"],
+    "endorsement": "None implied"
+  },
+  "split": {
+    "decided_at": "2026-09-08",
+    "candidate_development_groups": ["ES2008"],
+    "prospective_reserved_groups": ["ES2002"],
+    "excluded_previously_inspected_groups": ["ES2004", "IS1009"],
+    "reserved_audio_downloaded": false,
+    "reserved_audio_inspected": false,
+    "rule": "Keep related meetings from one group in the same split; reserve a new group after inspection or tuning on a reserved group."
+  },
+  "candidate": {
+    "meeting_id": "ES2008a",
+    "meeting_group": "ES2008",
+    "source_type": "publisher_documented_recording_incident",
+    "publisher_report": "A participant lost a lapel microphone; the headset remained usable.",
+    "publisher_report_url": "https://groups.inf.ed.ac.uk/ami/corpus/dataproblems.shtml",
+    "audio_directory_url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2008a/audio/",
+    "known_speaker_to_channel_mapping": {"A": 0, "B": 1, "C": 2, "D": 3},
+    "affected_speaker": null,
+    "affected_channel": null,
+    "fault_original_frames": null,
+    "usable_donor_original_frames": null,
+    "fault_annotation_status": "unrun",
+    "audio_inputs": [],
+    "audio_downloaded": false,
+    "audio_inspected": false,
+    "audio_modified": false,
+    "processing_status": "unrun",
+    "editor_comparison_status": "unrun",
+    "listener_comparison_status": "unrun",
+    "participant_observations": [],
+    "next_dependency": "Identify the affected participant/channel and event interval before selecting and downloading a simultaneous lapel/headset pair."
+  },
+  "metadata_evidence": [
+    {
+      "name": "ami-data-problems.html",
+      "url": "https://groups.inf.ed.ac.uk/ami/corpus/dataproblems.shtml",
+      "retrieved_at_utc": "2026-09-08T12:27:31.241274+00:00",
+      "bytes": 16713,
+      "sha256": "1bc9be5f3ff78e2b64ce4b1b8b05ebb755ea4b8c2e59cf392a7b66149e67de39"
+    },
+    {
+      "name": "ami-license.html",
+      "url": "https://groups.inf.ed.ac.uk/ami/corpus/license.shtml",
+      "retrieved_at_utc": "2026-09-08T12:27:32.384142+00:00",
+      "bytes": 30267,
+      "sha256": "2b5328846c1db44dad89e473ae74a7497ff2a637efaceb83a2d45148eb5db5a6"
+    },
+    {
+      "name": "ES2008a-audio-index.html",
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2008a/audio/",
+      "retrieved_at_utc": "2026-09-08T12:27:33.626153+00:00",
+      "bytes": 12342,
+      "sha256": "b82bdb6bdcbc534081b1feb7817d2ebe25a07360f896fa195e5082b257e0e4cf"
+    },
+    {
+      "name": "ami-signals.html",
+      "url": "https://groups.inf.ed.ac.uk/ami/corpus/signals.shtml",
+      "retrieved_at_utc": "2026-09-08T12:27:35.082815+00:00",
+      "bytes": 44246,
+      "sha256": "185bca2fa07fd0a4e99004a8fcd228058f9445874391d107ab0c0c97fcbe2abc"
+    }
+  ],
+  "annotation_evidence": {
+    "name": "ami_public_manual_1.6.2.zip",
+    "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusAnnotations/ami_public_manual_1.6.2.zip",
+    "acquisition": "Previously cached publisher archive; verified before this metadata inspection",
+    "bytes": 22887865,
+    "sha256": "b56e5babb2496b8795deeeda7e71178d7fbc9963f94276cf2a3f4b56ebbc9f9d",
+    "inspected_members": [
+      {
+        "member": "corpusResources/meetings.xml",
+        "scope": "ES2008a entry only",
+        "bytes": 119064,
+        "sha256": "8ab6cdcf03ed863e839418f31c7380392397a2eed892d73b9bc1b438c7ec520a"
+      },
+      {
+        "member": "words/ES2008a.A.words.xml",
+        "scope": "Microphone/lapel reference search",
+        "bytes": 107585,
+        "sha256": "d7da4cfff0aad97c5128147d87b4b1e9aa4fe6d3be1abc92d4c53868a9f9cf91"
+      },
+      {
+        "member": "words/ES2008a.B.words.xml",
+        "scope": "Microphone/lapel reference search",
+        "bytes": 54899,
+        "sha256": "0b2a6307c44bbca2e68c3cd74a939e4f3a05739b275957ee1f60e00d11b6b841"
+      },
+      {
+        "member": "words/ES2008a.C.words.xml",
+        "scope": "Microphone/lapel reference search",
+        "bytes": 40380,
+        "sha256": "75d03ec921e0ba69fe117948bd4a9d46b3864b7a45b48ea5b07462803c64b346"
+      },
+      {
+        "member": "words/ES2008a.D.words.xml",
+        "scope": "Microphone/lapel reference search",
+        "bytes": 40787,
+        "sha256": "947ece13237710ade850422cb71e1a10776fdcb4c061dd4b4006c0a2afda27db"
+      }
+    ],
+    "result": "The inspected metadata did not identify the lost-lapel channel or event time."
+  },
+  "acquisition_totals": {
+    "new_metadata_bytes": 103568,
+    "new_audio_bytes": 0,
+    "new_audio_files": 0
+  }
+}
