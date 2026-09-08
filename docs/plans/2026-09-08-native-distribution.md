@@ -106,12 +106,24 @@ GitHub release assets, private continuity records.
 
 - [x] Put native downloads first, with clear operating-system/architecture
   choices, actual system requirements, and advanced wheel/source alternatives.
-- [ ] Publish 0.2.0 only with verified native artifacts, source, license notices,
+- [x] Publish 0.2.0 only with verified native artifacts, source, license notices,
   complete checksums, and honest signing/platform evidence.
-- [ ] Download published assets anonymously, compare hashes, and exercise the
-  installed release. Keep 0.1.0 available as historical release evidence.
-- [ ] Reconcile the plan and memory with exact SHAs, artifact URLs, CI runs,
+- [x] Download every published asset anonymously and compare sizes and SHA-256
+  hashes against both the assembled release and public checksum list. All
+  twelve passed on September 8, 2026. Keep 0.1.0 available as historical evidence.
+- [ ] Complete the final browser-download and visible installation check on the
+  maintainer's Mac, preserving its normal first-download security checks.
+- [x] Reconcile the plan and memory with exact SHAs, artifact URLs, CI runs,
   running processes and any external signing input still required.
+
+[Release 0.2.0](https://github.com/pavangupta352/cleantake/releases/tag/v0.2.0)
+contains twelve verified assets. Native build `43ad902` passed all six target
+jobs in [run 34177076224](https://github.com/pavangupta352/cleantake/actions/runs/34177076224).
+Tag `v0.2.0` points to `1f9ddcc`, which adds the final documentation without
+changing application code. The public downloads total 1,382,005,250 bytes;
+their manifest records the qualified native build. Publisher signing remains
+unavailable, and the final visible Mac check awaits access to the unlocked
+desktop. Neither condition is reported as a completed trust check.
 
 This plan extends the already completed recovery product. It does not turn
 views, stars, universal hardware compatibility, or warning-free installation
