@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Local Python audio processing, a React and TypeScript studio served on loopback, and a command-line interface. The next distribution adds an Electron desktop window with a frozen Python runtime and bundled media tools. The maintainer explicitly requires a simple fresh-machine installation without separate developer runtimes. Keep the processing engine shared across desktop, browser and CLI clients.
+Local Python audio processing, a React and TypeScript studio served on loopback, and a command-line interface. Version 0.2.0 includes an Electron desktop window with a frozen Python runtime and bundled media tools, so supported native installations do not require separate developer runtimes. The processing engine is shared across desktop, browser and CLI clients. See the [desktop guide](docs/DESKTOP.md) for supported systems and installation steps.
 
 ## Users
 
@@ -28,7 +28,7 @@ An editor works on a computer with headphones, comparing multiple recordings of 
 
 ## Capabilities and Constraints
 
-The first complete release covers two to four simultaneous tracks, audio and video ingestion, offset and drift synchronization, conservative damage suggestions, manual repair ranges and source selection, contextual listening, undo and redo, level matching and crossfades, finished audio and editable exports. These are release requirements, not a statement of current implementation.
+The released workflow covers two to four simultaneous tracks, audio and video ingestion, offset and drift synchronization, conservative damage suggestions, manual repair ranges and source selection, contextual listening, undo and redo, level matching and crossfades, finished audio and editable exports. The [validation record](docs/VALIDATION.md) identifies the tested revisions, platforms and acceptance results.
 
 No account, cloud processing, paid API or model download is required for core recovery. Never invent missing speech. Preserve timing, interruptions, overlapping voices, breaths and laughter. Do not auto-delete silence or filler words. Mark uncertain synchronization and unrepairable damage explicitly. Transcript imports assist navigation and speaker labels; they never authorize audio cuts.
 
@@ -38,7 +38,7 @@ CleanTake is the selected working product name. Maintained by Pavan Gupta. Plain
 
 ## Evidence on Hand
 
-Dated research and source reviews inform this plan. No product benchmark or listening study has passed. Real simultaneous microphone recordings are being assembled from the AMI corpus under its stated license; controlled damage must be labeled as injected. Generated numerical fixtures support engineering checks only.
+Dated research and source reviews informed the implementation. The completed [evaluation](docs/EVALUATION.md) uses licensed simultaneous AMI recordings with explicitly injected damage, reserved evaluation spans and a separate 30-minute resource check. It records exact rendering, recovered and missed intervals, uncertain alignments and unrequested flags. These controlled results and generated numerical fixtures support engineering claims; they do not establish organic-damage recovery, independent listening preference or editor-time savings.
 
 ## Product Principles
 

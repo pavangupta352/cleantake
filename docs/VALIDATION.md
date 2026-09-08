@@ -102,7 +102,7 @@ portable demo imported two sources and one accepted repair, then exported finite
 repair. This Python package check used the host's external FFmpeg, as documented
 for that edition; native app checks used bundled tools.
 
-These results come from hosted build runners and a local package installation.
+The results above come from hosted build runners and a local package installation.
 The native app ran with developer tools absent from its search path, but the
 hosts themselves had build tools installed. This is not pristine physical-device
 certification, a test of every OS version, or proof of audible output through
@@ -112,8 +112,9 @@ runner account; consumer UAC interactions need separate observation.
 Mac signatures passed integrity checks but are **ad-hoc**, with Gatekeeper
 assessment returning **rejected**. The apps are not notarized. Windows app,
 installer and uninstaller were all **NotSigned**; Linux packages are unsigned.
-Acceptance of the final browser download under macOS quarantine or Windows
-SmartScreen/Smart App Control has not yet been established. See the
+The additional Mac browser-download check below observed successful per-app
+approval. Consumer Windows SmartScreen/Smart App Control acceptance has not
+been established. See the
 [desktop guide](DESKTOP.md) for conditional platform instructions and limits.
 
 `NATIVE-RELEASE.json` and `SHA256SUMS` accompany the installers. The native source
@@ -121,3 +122,40 @@ supplement preserves the exact component-source inventories and the runtime,
 installed-app and installer reports used by
 [release assembly](../packaging/release/README.md). Hash correspondence does not
 upgrade unsigned or ad-hoc artifacts to a verified-publisher release.
+
+### Browser download and first open on Mac
+
+On September 8, 2026, the public `CleanTake-0.2.0-mac-arm64.dmg` was downloaded
+through a browser and installed through Finder on the maintainer's Mac running
+macOS 26.5.2 ARM64. Its 188,982,117 bytes matched the published SHA-256:
+`6e6d7ec5576841ba249177bdb5c5002d179191082bfb6759d26167ec12aea3ca`.
+All 681 regular files and 14 symlinks in the Applications copy matched the
+mounted installer, and the ad-hoc signature passed integrity verification.
+
+macOS blocked the first open. The observed route was **Privacy & Security →
+Open Anyway**, a second **Open Anyway** confirmation, and an administrator
+authentication prompt. After authentication was completed outside the test
+controls, the same pending application process started normally. Download
+quarantine was retained and Gatekeeper assessments remained enabled; no global
+security setting was changed. This verifies that approval route on this Mac,
+not notarization or acceptance under every managed-device policy.
+
+The installed app preserved all nine existing project files, totaling 9,289,112
+bytes, before the sample was edited. The visible workflow then verified:
+
+- Original, Source and Repair playback with advancing audio clocks.
+- Accepting the sample repair, native Undo and native Redo, each saving exactly
+  one revision; the final project had one accepted repair at revision 6.
+- Saving WAV and portable project archive files through the native save dialogs.
+  The WAV contained 960,000 finite mono frames at 48 kHz and matched the expected
+  rendered audio exactly at FLOAT32 precision. All 936,086 frames outside the
+  repair were identical to the primary cache. The archive's five members passed
+  integrity checks and preserved both original recordings, caches and decisions.
+- Native Quit leaving no application, backend or helper processes, then ejecting
+  the installer and reopening CleanTake from Applications. The accepted repair
+  remained visible and the saved project was unchanged; no repeat trust warning
+  appeared.
+
+Only the included sample was edited. This manual check complements the six
+native CI targets; it does not certify every computer or audio device, or an
+independent listening preference.

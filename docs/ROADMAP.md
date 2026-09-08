@@ -32,13 +32,17 @@ CLI edition. All six targets have passed actual native installation checks.
 - [x] Complete frozen processing and actual installation checks on all six targets.
 - [x] Publish the verified installers, source supplement and checksums.
 - [x] Download all twelve public assets without signing in and verify their bytes.
+- [x] Verify the browser-downloaded Mac app through installation, first-open
+  approval, editing, native exports, quitting and reopening saved edits.
 
 [Version 0.2.0 is published](https://github.com/pavangupta352/cleantake/releases/tag/v0.2.0).
 All twelve downloads returned HTTP 200 on September 8, 2026, and matched the
 assembled release by size and SHA-256, including the public checksum list.
-The final browser-download and visible installation check on the maintainer's
-Mac remains pending; this is separate from the six passing native installation
-jobs and does not establish warning-free first launch.
+The browser-downloaded Apple silicon app also passed a visible installation and
+editing check on macOS 26.5.2, including per-app approval, native exports and
+reopening the saved repair after ejecting the installer. The
+[validation record](VALIDATION.md#browser-download-and-first-open-on-mac) describes
+the actual security prompts; this was not a warning-free first launch.
 
 The [desktop guide](DESKTOP.md) records installation and publisher-trust limits.
 The [distribution specification](NATIVE-DISTRIBUTION.md) defines the gates;

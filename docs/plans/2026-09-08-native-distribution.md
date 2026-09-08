@@ -111,7 +111,7 @@ GitHub release assets, private continuity records.
 - [x] Download every published asset anonymously and compare sizes and SHA-256
   hashes against both the assembled release and public checksum list. All
   twelve passed on September 8, 2026. Keep 0.1.0 available as historical evidence.
-- [ ] Complete the final browser-download and visible installation check on the
+- [x] Complete the final browser-download and visible installation check on the
   maintainer's Mac, preserving its normal first-download security checks.
 - [x] Reconcile the plan and memory with exact SHAs, artifact URLs, CI runs,
   running processes and any external signing input still required.
@@ -121,9 +121,13 @@ contains twelve verified assets. Native build `43ad902` passed all six target
 jobs in [run 34177076224](https://github.com/pavangupta352/cleantake/actions/runs/34177076224).
 Tag `v0.2.0` points to `1f9ddcc`, which adds the final documentation without
 changing application code. The public downloads total 1,382,005,250 bytes;
-their manifest records the qualified native build. Publisher signing remains
-unavailable, and the final visible Mac check awaits access to the unlocked
-desktop. Neither condition is reported as a completed trust check.
+their manifest records the qualified native build. The final visible Mac check
+passed on macOS 26.5.2 ARM64, including the system's per-app approval and
+administrator prompt, native editing and exports, clean shutdown, installer
+ejection and reopening saved edits. See the
+[first-download record](../VALIDATION.md#browser-download-and-first-open-on-mac).
+Publisher signing remains unavailable; the successful per-app approval does not
+establish notarization or a verified publisher.
 
 This plan extends the already completed recovery product. It does not turn
 views, stars, universal hardware compatibility, or warning-free installation

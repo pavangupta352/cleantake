@@ -46,10 +46,12 @@ Use this route only when the entry identifies the app you intended to install.
 This option may be unavailable on a managed Mac. See
 [Apple's instructions](https://support.apple.com/en-us/102445).
 
-This is the official conditional approval route; acceptance of the exact
-downloaded CleanTake build has not yet been verified. If the option is absent,
-or macOS reports damage or malware, stop and report the exact message through
-the [issue tracker](https://github.com/pavangupta352/cleantake/issues).
+This route was verified with the public 0.2.0 Apple silicon download on macOS
+26.5.2: macOS requested per-app approval and administrator authentication, then
+the installed app opened and retained edits after quitting and reopening. See
+the [first-download validation](VALIDATION.md#browser-download-and-first-open-on-mac).
+If the approval option is absent, or macOS reports damage or malware, stop and
+report the exact message through the [issue tracker](https://github.com/pavangupta352/cleantake/issues).
 
 ## Windows
 
