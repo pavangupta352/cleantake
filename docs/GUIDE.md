@@ -42,6 +42,17 @@ crossfade. Listen to the whole phrase, including its entry and exit. Accept the
 repair when it works, or reject it. An unaccepted suggestion leaves the primary
 unchanged in the export.
 
+Before accepting, check **Replacement details** directly above the decision. It
+shows the saved recording name, the original filename when different, and the
+passage in both project and recording time. Recording time includes the saved
+offset and drift; displayed times round to milliseconds. The source map retains
+the frame coordinates and crossfade contributors.
+
+When you edit the fields, the disclosure keeps showing the saved values until
+you choose **Save passage changes**. Missing alignment or incomplete coverage
+is explained here, and Accept stays unavailable until the saved source covers
+the passage.
+
 If a problem has no useful suggestion, create a manual repair over its time
 range and select an aligned source. CleanTake rejects accepted edits with
 overlapping ranges, unavailable donor coverage or gain that would exceed full

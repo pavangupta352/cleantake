@@ -3,7 +3,7 @@
 Set aside 10–15 minutes with the included sample. You do not need your own
 recordings, an account or paid tools.
 
-[Download the free desktop app](https://github.com/pavangupta352/cleantake/releases/tag/v0.2.1)
+[Download the free desktop app](https://github.com/pavangupta352/cleantake/releases/tag/v0.2.2)
 for your computer, install it and open CleanTake. It includes the audio tools
 and an offline sample. Read the [desktop installation guide](DESKTOP.md) for
 supported systems and the current signing limitations: Mac builds are not
@@ -20,7 +20,10 @@ Allow extra time for downloading and installation.
    the main recording; Source lets you audition the alternate microphone.
    Before accepting anything, decide: **would you use this repair, reject it,
    or are you unsure?** Note what you heard and why.
-3. Try the edit controls on this disposable sample: choose **Accept repair**,
+3. Check **Replacement details** beside Accept: the saved recording, its original
+   filename when different, and the labeled project and recording time ranges. If you changed
+   the fields, save them first. Try the edit controls on this disposable sample:
+   choose **Accept repair**,
    then listen in **Repair**. Use **Edit → Undo**, check the decision, and use
    **Edit → Redo**. This exercise is separate from your listening verdict;
    testing acceptance does not mean you liked the sound.

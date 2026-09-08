@@ -9,7 +9,7 @@ the source of every replacement visible through the final export.
 [![Checks](https://github.com/pavangupta352/cleantake/actions/workflows/ci.yml/badge.svg)](https://github.com/pavangupta352/cleantake/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-244f99)](LICENSE)
 
-**[Download the desktop app](https://github.com/pavangupta352/cleantake/releases/tag/v0.2.1)** · [Hear a repair](#hear-one-repair) · [Editing guide](docs/GUIDE.md)
+**[Download the desktop app](https://github.com/pavangupta352/cleantake/releases/tag/v0.2.2)** · [Hear a repair](#hear-one-repair) · [Editing guide](docs/GUIDE.md)
 
 <a href="https://pavangupta352.github.io/cleantake/#demo">
   <picture>
@@ -52,16 +52,16 @@ AMI Project Consortium. [Attribution and modifications](docs/assets/demo/ATTRIBU
 
 ## Download and try it
 
-**[Download CleanTake 0.2.1](https://github.com/pavangupta352/cleantake/releases/tag/v0.2.1)**
+**[Download CleanTake 0.2.2](https://github.com/pavangupta352/cleantake/releases/tag/v0.2.2)**
 
 | Computer | Download |
 |---|---|
-| Mac · Apple silicon | [Apple silicon DMG](https://github.com/pavangupta352/cleantake/releases/download/v0.2.1/CleanTake-0.2.1-mac-arm64.dmg) |
-| Mac · Intel | [Intel DMG](https://github.com/pavangupta352/cleantake/releases/download/v0.2.1/CleanTake-0.2.1-mac-x64.dmg) |
-| Windows · Intel / AMD | [Windows installer](https://github.com/pavangupta352/cleantake/releases/download/v0.2.1/CleanTake-0.2.1-win-x64.exe) |
-| Windows · ARM | [Windows ARM installer](https://github.com/pavangupta352/cleantake/releases/download/v0.2.1/CleanTake-0.2.1-win-arm64.exe) |
-| Ubuntu desktop · Intel / AMD | [Debian package](https://github.com/pavangupta352/cleantake/releases/download/v0.2.1/CleanTake-0.2.1-linux-amd64.deb) |
-| Ubuntu desktop · ARM | [ARM Debian package](https://github.com/pavangupta352/cleantake/releases/download/v0.2.1/CleanTake-0.2.1-linux-arm64.deb) |
+| Mac · Apple silicon | [Apple silicon DMG](https://github.com/pavangupta352/cleantake/releases/download/v0.2.2/CleanTake-0.2.2-mac-arm64.dmg) |
+| Mac · Intel | [Intel DMG](https://github.com/pavangupta352/cleantake/releases/download/v0.2.2/CleanTake-0.2.2-mac-x64.dmg) |
+| Windows · Intel / AMD | [Windows installer](https://github.com/pavangupta352/cleantake/releases/download/v0.2.2/CleanTake-0.2.2-win-x64.exe) |
+| Windows · ARM | [Windows ARM installer](https://github.com/pavangupta352/cleantake/releases/download/v0.2.2/CleanTake-0.2.2-win-arm64.exe) |
+| Ubuntu desktop · Intel / AMD | [Debian package](https://github.com/pavangupta352/cleantake/releases/download/v0.2.2/CleanTake-0.2.2-linux-amd64.deb) |
+| Ubuntu desktop · ARM | [ARM Debian package](https://github.com/pavangupta352/cleantake/releases/download/v0.2.2/CleanTake-0.2.2-linux-arm64.deb) |
 
 Install the matching download and open CleanTake. No separate Python, FFmpeg,
 browser, model or GPU computing driver is required. Linux's package manager
@@ -74,7 +74,8 @@ actual platform scope and signing status before downloading.
 
 The first launch opens a workspace with **Sample · recover a missing half-second**.
 Open the sample, select the passage near 17 seconds, and compare **Original**
-with **Source**. Choose **Accept repair**, listen in **Repair** mode, then export.
+with **Source**. Check the saved recording and both time ranges beside
+**Accept repair**, then accept, listen in **Repair** mode, and export.
 The included sample works offline and leaves the choice to you.
 
 [Desktop installation](docs/DESKTOP.md) · [Editing guide](docs/GUIDE.md)

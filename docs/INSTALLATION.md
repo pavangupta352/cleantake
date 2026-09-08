@@ -29,7 +29,7 @@ With [uv](https://docs.astral.sh/uv/getting-started/installation/), install the
 downloaded file in its own environment:
 
 ```sh
-uv tool install --python 3.12 ./cleantake-0.2.1-py3-none-any.whl
+uv tool install --python 3.12 ./cleantake-0.2.2-py3-none-any.whl
 cleantake doctor
 cleantake studio
 ```
@@ -42,7 +42,7 @@ python -m venv .venv
 # macOS / Linux
 source .venv/bin/activate
 # Windows PowerShell: .venv\Scripts\Activate.ps1
-python -m pip install ./cleantake-0.2.1-py3-none-any.whl
+python -m pip install ./cleantake-0.2.2-py3-none-any.whl
 cleantake doctor
 ```
 

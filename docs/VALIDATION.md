@@ -25,6 +25,45 @@ The thresholds below are chosen engineering acceptance targets, not established 
 
 Each tier answers a different question. Do not relabel tier 1 or 2 as organic damage or independent validation. Do not publish private user media without explicit permission.
 
+## Repair source disclosure · 0.2.2
+
+[Release 0.2.2](https://github.com/pavangupta352/cleantake/releases/tag/v0.2.2)
+uses source [`e9c1435328144fcaecf0b211543321174a7cb8e2`](https://github.com/pavangupta352/cleantake/commit/e9c1435328144fcaecf0b211543321174a7cb8e2). It places the saved recording name
+and original filename (when different) beside Accept, with separately labeled
+project and recording time ranges. The recording range follows the saved source
+offset and drift. Displayed times round to the nearest millisecond. Unsaved fields are marked separately; a saved, aligned source must
+cover the complete passage before acceptance is available.
+
+[Checks 34255663566](https://github.com/pavangupta352/cleantake/actions/runs/34255663566), on September 8, 2026 UTC, passed **380 Python tests in each of five environments** (Linux 3.12/3.13/3.14, Mac 3.12, Windows 3.12), with five platform or optional-runtime skips and two upstream deprecation warnings per environment. All five fresh installed-wheel smoke checks passed, and
+**33 browser cases across Chromium, Firefox and WebKit** in 6.3 minutes, followed by **11 production-bundle Chromium cases** in 1.8 minutes. The added real-server cases cover saved source
+identity; positive and negative offset/drift; unsaved source and boundary edits;
+Save/Undo/Redo; missing, uncertain and uncovered sources; long names at desktop
+and mobile widths; and an actual exported source map with the saved donor and
+transformed recording endpoints.
+
+[Native run 34255663452](https://github.com/pavangupta352/cleantake/actions/runs/34255663452), on September 8, 2026 UTC, qualified six fresh installers at the
+same commit. Each target passed **13 runtime gates and nine installed-app gates**, and retained **24 project files** through both uninstall and reinstall. The actual environments were macOS 14.8.9 (ARM64), macOS 15.7.9 (x64), Windows 11 build 26200 (ARM64), Windows Server 2025 build 26100 (x64), Ubuntu 24.04 with glibc 2.39 (ARM64), and Ubuntu 22.04 with glibc 2.35 (x64). The frozen static
+asset inventories were separately matched to this commit's bundled studio, so
+the installer evidence includes the new interface bytes.
+
+A fresh wheel installed with hash-locked dependencies outside the checkout passed the real recovery/export/archive/studio smoke. All four installed studio files matched the qualified commit. The unchanged portable demo exported 960,000 finite frames at 48 kHz with exact primary samples outside the repair. All 415 tracked source files were bound to the commit; safely extracting the source archive and rebuilding it produced a byte-identical wheel.
+
+The unchanged strict assembler accepted the six paired package/evidence inputs and the fresh Python/demo qualification. The resulting 12 public assets total 1,386,383,560 bytes. An independent whole-file check matched all 11 entries in `SHA256SUMS`, including the 292,328,180-byte native corresponding-source archive (`94abe2f568ce8f19e778359299ddefc16d3bd39d069f952794ed28d5d376dd4b`). The checksum list itself was also independently hashed. Linux portable archives were deliberately excluded; the shipped Linux packages are `.deb` installers.
+
+All 12 canonical public release assets were then downloaded anonymously (1,386,383,560 bytes), without authentication, cookies or environment proxies. Complete files matched the assembled sizes and SHA-256 hashes, the GitHub asset digests and the public checksum list. Large files used exact, complete HTTP 206 ranges; smaller files returned HTTP 200. The public native manifest retained the qualified commit and all six targets. Downloaded and assembled files were rehashed at completion.
+
+This patch changes the repair inspector and its acceptance controls. The
+recovery engine, dependency versions and saved-project format remain unchanged.
+The working demo retains its actual 0.2.1 capture and audio provenance; the separate earlier comparison retains its 0.1.0 audio provenance.
+No natural-fault or independent participant result is added.
+
+Native verification describes the recorded hosted environments and application
+search paths. It is not a claim about every clean physical computer or audio
+device. Mac builds remain ad-hoc signed and unnotarized; Windows installers are
+unsigned. The browser-download approval observed on Pavan's Mac below applies
+to 0.2.0 and is not relabeled as a 0.2.2 result. Prior releases and validation
+records remain unchanged.
+
 ## Transcript timing correction · 0.2.1
 
 [Release 0.2.1](https://github.com/pavangupta352/cleantake/releases/tag/v0.2.1)

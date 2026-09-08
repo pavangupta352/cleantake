@@ -7,16 +7,16 @@ Processing stays on your computer and the included sample works offline.
 
 ## Choose your download
 
-Download from the [CleanTake 0.2.1 release](https://github.com/pavangupta352/cleantake/releases/tag/v0.2.1).
+Download from the [CleanTake 0.2.2 release](https://github.com/pavangupta352/cleantake/releases/tag/v0.2.2).
 
 | Computer | File |
 |---|---|
-| Mac with Apple silicon | `CleanTake-0.2.1-mac-arm64.dmg` |
-| Mac with Intel processor | `CleanTake-0.2.1-mac-x64.dmg` |
-| Windows with Intel or AMD processor | `CleanTake-0.2.1-win-x64.exe` |
-| Windows with ARM processor | `CleanTake-0.2.1-win-arm64.exe` |
-| Ubuntu desktop with Intel or AMD processor | `CleanTake-0.2.1-linux-amd64.deb` |
-| Ubuntu desktop with ARM processor | `CleanTake-0.2.1-linux-arm64.deb` |
+| Mac with Apple silicon | `CleanTake-0.2.2-mac-arm64.dmg` |
+| Mac with Intel processor | `CleanTake-0.2.2-mac-x64.dmg` |
+| Windows with Intel or AMD processor | `CleanTake-0.2.2-win-x64.exe` |
+| Windows with ARM processor | `CleanTake-0.2.2-win-arm64.exe` |
+| Ubuntu desktop with Intel or AMD processor | `CleanTake-0.2.2-linux-amd64.deb` |
+| Ubuntu desktop with ARM processor | `CleanTake-0.2.2-linux-arm64.deb` |
 
 On a Mac, **Apple menu → About This Mac** shows an Apple chip or an Intel
 processor. On Windows, check **Settings → System → About → System type**.
@@ -75,13 +75,13 @@ contact its administrator. Keep your existing protections enabled. See
 Open a terminal in the folder containing your download. For Intel/AMD:
 
 ```sh
-sudo apt install ./CleanTake-0.2.1-linux-amd64.deb
+sudo apt install ./CleanTake-0.2.2-linux-amd64.deb
 ```
 
 For ARM:
 
 ```sh
-sudo apt install ./CleanTake-0.2.1-linux-arm64.deb
+sudo apt install ./CleanTake-0.2.2-linux-arm64.deb
 ```
 
 Review the package manager's prompt and confirm installation. It installs any
@@ -158,7 +158,7 @@ issues.
 ## Licenses and component source
 
 The app includes [third-party notices](../THIRD_PARTY_NOTICES.md). The matching
-release's [native source supplement](https://github.com/pavangupta352/cleantake/releases/download/v0.2.1/CleanTake-0.2.1-native-sources.tar.xz)
+release's [native source supplement](https://github.com/pavangupta352/cleantake/releases/download/v0.2.2/CleanTake-0.2.2-native-sources.tar.xz)
 contains the corresponding covered-component source and build instructions,
 including the supplement for **Electron 44.2.0 / Chromium 152.0.7977.76**, alongside
 the bundled FFmpeg and SoundFile component sources. It is for inspection and
