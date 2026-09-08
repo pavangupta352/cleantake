@@ -1,0 +1,41 @@
+{
+  "video": "cleantake-comparison.mp4",
+  "duration_seconds": 18,
+  "size": [
+    1080,
+    1080
+  ],
+  "fps": 30,
+  "timeline": {
+    "before_seconds": [
+      1,
+      7
+    ],
+    "after_seconds": [
+      8,
+      14
+    ],
+    "outro_seconds": [
+      14,
+      18
+    ]
+  },
+  "audio_gain": "No gain or loudness processing; original amplitudes mixed with silence, then AAC encoded.",
+  "visual_amplitude": "Shared linear peak scale across both actual waveform traces.",
+  "source_manifest": "../demo/manifest.json",
+  "current_desktop_release": "0.2.0",
+  "video_is_ui_recording": false,
+  "license": "CC-BY-4.0",
+  "sha256": "43bcca9c2265af06ad4686071e39a6b67fa633625c1b1981f65f7f890f5b2ed0",
+  "bytes": 488799,
+  "source_sha256": {
+    "before.wav": "51528046ffb275cafb66b506156ea0170c16c2df935f0e50819aa03194188080",
+    "after.wav": "843cce804edf7eed18dfbbb89257bbf4fdf9b7bcb3d21fd78f7d9f5ccd18715f"
+  },
+  "source_cleantake_version": "0.1.0",
+  "attribution": "ATTRIBUTION.md",
+  "credit": [
+    "AMI Project Consortium (original recordings)",
+    "Pavan Gupta (comparison graphics and video edit)"
+  ]
+}

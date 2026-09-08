@@ -16,6 +16,6 @@ Original recordings remain on disk until you explicitly delete the project. Expo
 
 ## Supported versions
 
-Security fixes target the latest 0.1.x release and the main branch. Older development
+Security fixes target the latest published release and the main branch. Older development
 snapshots should be updated before investigating a report. This is a new project;
 there is no guaranteed response time or long-term maintenance contract.

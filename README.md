@@ -19,6 +19,9 @@ there is no account or cloud upload.
 
 ## Hear one repair
 
+**[Watch the 18-second comparison](https://raw.githubusercontent.com/pavangupta352/cleantake/main/docs/assets/launch/cleantake-comparison.mp4)**
+· [Video credits](docs/assets/launch/ATTRIBUTION.md)
+
 **[Before: a half-second gap](https://raw.githubusercontent.com/pavangupta352/cleantake/main/docs/assets/demo/before.wav)**
 · **[After: speech from the lapel](https://raw.githubusercontent.com/pavangupta352/cleantake/main/docs/assets/demo/after.wav)**
 
@@ -64,6 +67,10 @@ The included sample works offline and leaves the choice to you.
 [Desktop installation](docs/DESKTOP.md) · [Editing guide](docs/GUIDE.md)
 · [CLI / browser installation](docs/INSTALLATION.md#command-line-and-browser-edition)
 · [Reproduce the sample](examples/README.md)
+
+Trying CleanTake for the first time? The [first-try guide](docs/FIRST-TRY.md)
+walks through comparing, editing, saving and reopening the sample, with a short
+list of feedback that helps improve the next release.
 
 ## The complete recovery desk
 
