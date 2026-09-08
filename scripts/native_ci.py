@@ -39,6 +39,8 @@ RUNTIME_LIB = re.compile(
     r"openblas|scipy|numpy|sndfile|gfortran|quadmath)",
     re.I,
 )
+# One-click per-user NSIS uses the package name, not the displayed product name.
+WINDOWS_INSTALL_DIRECTORY = "cleantake-desktop"
 
 
 def redact(value: str) -> str:
@@ -628,7 +630,9 @@ def install_smoke(args) -> dict:
                 mounted = False
                 executable = install_root / "Contents/MacOS/CleanTake"
             elif system == "Windows":
-                install_root = Path(os.environ["LOCALAPPDATA"]) / "Programs/CleanTake"
+                install_root = (
+                    Path(os.environ["LOCALAPPDATA"]) / "Programs" / WINDOWS_INSTALL_DIRECTORY
+                )
                 installed = True
                 run([installer, "/S"], timeout=600)
                 executable = install_root / "CleanTake.exe"
@@ -680,7 +684,9 @@ def install_smoke(args) -> dict:
             installer = artifact(args.artifacts, args.arch, suffix)
             if (
                 system == "Windows"
-                and (Path(os.environ["LOCALAPPDATA"]) / "Programs/CleanTake").exists()
+                and (
+                    Path(os.environ["LOCALAPPDATA"]) / "Programs" / WINDOWS_INSTALL_DIRECTORY
+                ).exists()
             ):
                 raise ValueError("refusing to replace a preexisting CleanTake installation")
             if system == "Linux":

@@ -3,8 +3,8 @@
 packaging/** -text
 packaging/**/licenses/** -whitespace
 packaging/python/targets/** -whitespace
-packaging/soundfile/upstream-recipes/** -whitespace
-packaging/soundfile/vcpkg-recipes/** -whitespace
-packaging/electron/upstream-metadata/** -whitespace
+packaging/soundfile/upstream-recipes/** -whitespace linguist-vendored=true
+packaging/soundfile/vcpkg-recipes/** -whitespace linguist-vendored=true
+packaging/electron/upstream-metadata/** -whitespace linguist-vendored=true
 src/cleantake/static/** linguist-generated=true
 src/cleantake/static/THIRD_PARTY_NOTICES.txt -whitespace

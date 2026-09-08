@@ -11,6 +11,7 @@ import sys
 import tarfile
 import time
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -20,6 +21,33 @@ SPEC = importlib.util.spec_from_file_location(
 assert SPEC and SPEC.loader
 ci = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(ci)
+
+
+def test_windows_installer_preserves_existing_default_package_directory(tmp_path, monkeypatch):
+    # One-click per-user NSIS uses package.json's name for its directory, while
+    # productName determines CleanTake.exe and the displayed application name.
+    existing = tmp_path / "Programs/cleantake-desktop"
+    existing.mkdir(parents=True)
+    saved = existing / "CleanTake.exe"
+    saved.write_bytes(b"existing user installation")
+    artifacts = tmp_path / "artifacts"
+    artifacts.mkdir()
+    (artifacts / "CleanTake-0.2.0-win-arm64.exe").write_bytes(b"installer fixture")
+    monkeypatch.setenv("GITHUB_ACTIONS", "true")
+    monkeypatch.setenv("LOCALAPPDATA", str(tmp_path))
+    monkeypatch.setattr(ci.platform, "system", lambda: "Windows")
+
+    def no_installer_command(*args, **kwargs):
+        raise AssertionError("A preexisting installation must stop all installer commands")
+
+    monkeypatch.setattr(ci, "run", no_installer_command)
+    args = SimpleNamespace(
+        artifacts=artifacts, desktop=tmp_path / "desktop", evidence=tmp_path / "evidence",
+        arch="arm64", signed=False, portable_policy="required",
+    )
+    with pytest.raises(ValueError, match="preexisting CleanTake installation"):
+        ci.install_smoke(args)
+    assert saved.read_bytes() == b"existing user installation"
 
 
 def test_mount_verification_uses_filesystem_identity(tmp_path):
